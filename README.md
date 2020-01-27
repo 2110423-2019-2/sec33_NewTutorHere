@@ -1,5 +1,5 @@
 # sec33_NewTutorHome
-ปิ๊ง ปลื้ม ปลื้ม ไอซ์​ โฟล์ค มิกกี้ อุ๋ยปู่ พลอย
+ปิ๊ง ปลื้ม ปลื้ม ไอซ์ โฟล์ค มิกกี้ อุ๋ยปู่ พลอย
 
 Krittanut Jirathawong 5831001921  
 Palinee Setsiripaiboon 6030373721

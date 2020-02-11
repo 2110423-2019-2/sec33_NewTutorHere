@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NewTutorHere</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
+    <!-- <link rel="shortcut icon" href="img/dog.ico" /> -->
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <!-- <script src="script.js"></script> -->
+    <!-- <script>checkStatus()</script> -->
+  </head>
+
+  <body>
+      <!-- Navigation bar -->
+      <ul class="nav-bar be-left color-green">
+        <li><a href="#">
+          <img class="nav-img-logo be-left" src="../img/logo_bg.png" style="height: 2em;" />
+        </a></li>
+        <li><a href="#">NEW TUTOR HERE</a></li>
+        <li style="float:right">
+          <ul class="nav-menu">
+            <li class="center" style="width: 7em;">
+              <a href="#">
+                <img class="nav-img-user" src="../img/user.png" style="height: 3.5em;" />              
+                <img class="nav-img-dropdown" src="../img/drop-down.png" style="height: 1em;" />
+              </a>
+              <ul class="dropdown">
+                  <li><a href="#">Profile</a></li>
+                  <li><a href="#">Log Out</a></li>
+              </ul>
+          </li>
+          <li><a href="#">Contracts</a></li>
+            <li><a href="#">Home</a></li>
+          </ul>  
+        </li>
+      </ul>
+    
+    <div class="big-bg">
+      <!-- Content -->
+      <div class="dashboard">
+
+        <!-- Search Bar -->
+        <div class="search-box color-lightgreen center" id="search-form">
+          <form class="form" id="search">
+            <span class="form-name">
+              <p>Find your tutor</p>
+            </span>
+            <div class="form-group">
+              <label class="control-label">Subject</label>
+                <div class="form-input">
+                  <input type="text" id="subject-filter" name="subject">
+                </div>
+            </div>
+            <div class="form-group">
+              <div class="half-box be-left">
+                  <label class="control-label">Education Level</label>
+                  <div class="form-input drop-down">
+                    <select id="edu-lv-filter" name="edu-lv" style="width: 100%;">
+                      <option value="0">Any Level</option>
+                      <option value="1">Pre-School</option>
+                      <option value="2">Elementary-School</option>
+                      <option value="3">Middle-School</option>
+                      <option value="4">High-School</option>
+                      <option value="5">Bachelor</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="half-box be-right">
+                  <label class="control-label">City</label>
+                  <div class="form-input">
+                      <input type="text" id="city-filter" name="city">
+                  </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="half-box be-left">
+                  <label class="control-label">Rating</label>
+                  <div class="form-input">
+                    <img class="img-star-search" src="../img/star0.png"/> 
+                    <img class="img-star-search" src="../img/star0.png"/> 
+                    <img class="img-star-search" src="../img/star0.png"/> 
+                    <img class="img-star-search" src="../img/star0.png"/> 
+                    <img class="img-star-search" src="../img/star0.png"/> 
+                  </div>
+              </div>
+              <div class="half-box be-right">
+                  <label class="control-label">Price</label>
+                  <div class="form-input">
+                    <div class="form-group">
+                      <div class="half-box be-left" style="width: 30%;">
+                        <div class="form-input">
+                          <input type="text" id="minprice-filter" name="minprice" placeholder="฿">
+                        </div>
+                      </div>
+                      <label class="control-label-price be-left">-</label>
+                      <div class="half-box be-left" style="width: 30%;">
+                          <div class="form-input">
+                              <input type="text" id="maxprice-filter" name="maxprice" placeholder="฿">
+                          </div>
+                      </div>
+                    </div>        
+                  </div>
+              </div>
+            </div>
+          </form>
+
+          <button class="submit-button search-button" onclick="search()">Search</button>
+
+          </div>
+
+        </div>
+      </div>
+
+    </body>
+
+  </html>

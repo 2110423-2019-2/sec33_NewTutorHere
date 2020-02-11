@@ -287,3 +287,62 @@ div.search-box {
 button.search-button {
     float: right;
 }
+
+/* rating star */
+.rating {
+    display: inline-block;
+}
+
+
+.rating:not(:checked) > input {
+    display:none;
+}
+
+.rating:not(:checked) > label {
+    float: right;
+    width: 28px;
+    padding: 0 4px;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 200%;
+    line-height: 1.2;
+    color: #ddd;
+    filter: saturate(0);
+    -webkit-filter: saturate(0);
+    -moz-filter: saturate(0);
+    -o-filter: saturate(0);
+    
+}
+
+.rating:not(:checked) > label:before {
+    content: url("../img/star2.png") ' ';
+}
+
+.rating > input:checked ~ label {
+    filter: saturate(1);
+    -webkit-filter: saturate(1);
+	-moz-filter: saturate(1);
+    -o-filter: saturate(1);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    filter: saturate(1);
+    -webkit-filter:saturate(1);
+	-moz-filter: saturate(1);
+    -o-filter:saturate(1);
+    
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    filter: saturate(1);
+    -webkit-filter:saturate(1);
+	-moz-filter: saturate(1);
+    -o-filter:saturate(1);
+	
+}

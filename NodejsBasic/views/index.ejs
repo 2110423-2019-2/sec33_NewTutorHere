@@ -29,7 +29,7 @@
         <div class="half be-right color-green">
             <!-- sign-in-form -->
             <div class="index-box center" id="sign-in-form">
-                <form class="form" id="sign-in">
+                <form class="form" action="/resolve" id="sign-in" method="POST">
                     <div class="form-group">
                         <label class="control-label">Username</label>
                         <div class="form-input">
@@ -42,13 +42,16 @@
                             <input type="password" id="password-signin" name="password">
                         </div>
                     </div>
+                    <button type="submit" class="submit-button sign-in-button center" onclick="signIn()">Log In</button>
                 </form>
-                <button class="submit-button sign-in-button center" onclick="signIn()">Log In</button>
+                <!-- <button class="submit-button sign-in-button center" onclick="signIn()">Log In</button> -->
                 <button class="submit-button sign-up-button center" onclick="showSignUpForm()">Sign Up</button>
 
             </div>
         </div>
     </div>
+
+
 
     <!-- sign-up-form -->
     <div class="big-bg popup" id="sign-up-form">

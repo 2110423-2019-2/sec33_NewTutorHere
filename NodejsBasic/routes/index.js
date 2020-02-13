@@ -1,23 +1,20 @@
 var express = require('express');
 var router = express.Router();
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
 const { check, validationResult } = require('express-validator');
-const monk = require('monk')
 
 // Connection URL
-const url = 'localhost:27017/TESTDB';
+const url = 'mongodb://localhost:27017';
+const dbName = 'TESTDB'
+const client = new MongoClient(url);
 
-const db = monk(url);
-
-
-db.then(() => {
-  console.log('Connected correctly to server klsdjfsldkfjldskfj')
-})
 // index page
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render('index');
 });
 
-router.post('/resolve',[
+router.post('/resolve', [
   check("username", "Enter username").not().isEmpty(),
   check("password", "Enter password").not().isEmpty()
 ], function (req, res) {
@@ -25,21 +22,25 @@ router.post('/resolve',[
   var errors = result.errors;
   if (!result.isEmpty()) {
     // username/password empty
-    
+    res.send(errors[0]['msg']);
+    // send  error.msg if error 
   } else {
-    var collection =db.get('test');
-    collection.insert([{a: 1}, {a: 2}, {a: 3}])
-    .then((docs) => {
-      // docs contains the documents inserted with added **_id** fields
-      // Inserted 3 documents into the document collection
-    }).catch((err) => {
-      // An error happened while inserting
-    }).then(() => db.close())
-    // check username and password in db
-    
-    var credential = req.body.username + ' ' + req.body.password;
-    res.send('Login attempted with credential:' + credential);
+    client.connect(function (err) {
+      assert.equal(null, err);
+      const db = client.db(dbName);
+      // dbNmae = TESTDB 
+      db.collection('test').find({
+        'username' : req.body.username,
+        'password' : req.body.password
+      }).toArray(function(err,docs){
+        assert.equal(err,null);
+        console.log(docs);
+        // print log if found
+        if(docs.length ==0) res.send("Wrong username or Password");
+        else res.render('home');
+      })
+    });
   }
 });
-  
+
 module.exports = router;

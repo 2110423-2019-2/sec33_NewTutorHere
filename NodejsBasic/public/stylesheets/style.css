@@ -402,3 +402,17 @@ button:hover.view-button {
     color: black;
     letter-spacing: 0.08em;
 }
+.name-stucontract a{
+    font-size: 0.8em;
+    color: black;
+    letter-spacing: 0.08em;
+    padding-left: 1.5em;
+}
+.name-stucontract p{
+    font-size: 1em;
+    font-weight: bold;
+    color: #4C5F21;
+    padding-bottom: 0.5em;
+    display: inline-block;
+    letter-spacing: 0.08em;
+}

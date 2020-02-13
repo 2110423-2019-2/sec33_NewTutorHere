@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator');
 
 // Connection URL
 const url = 'mongodb://localhost:27017';
-const dbName = 'TESTDB'
+const dbName = 'myproject'
 const client = new MongoClient(url);
 
 // index page
@@ -28,8 +28,8 @@ router.post('/resolve', [
     client.connect(function (err) {
       assert.equal(null, err);
       const db = client.db(dbName);
-      // dbNmae = TESTDB 
-      db.collection('test').find({
+      // dbNmae = documents 
+      db.collection('documents').find({
         'username' : req.body.username,
         'password' : req.body.password
       }).toArray(function(err,docs){

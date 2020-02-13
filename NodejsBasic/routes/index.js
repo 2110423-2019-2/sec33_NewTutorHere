@@ -4,10 +4,16 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const { check, validationResult } = require('express-validator');
 
-// Connection URL
-const url = 'mongodb://localhost:27017';
-const dbName = 'myproject'
-const client = new MongoClient(url);
+const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  //const collection = client.db("SEproject").collection("usernamePassword");
+  // perform actions on the collection object
+  console.log("Connection Pinggy success");
+  client.close();
+});
+
+ const dbName = 'SEproject'
 
 // index page
 router.get('/', function (req, res, next) {
@@ -28,8 +34,7 @@ router.post('/resolve', [
     client.connect(function (err) {
       assert.equal(null, err);
       const db = client.db(dbName);
-      // dbNmae = documents 
-      db.collection('documents').find({
+      db.collection('UsernameAndPassword').find({
         'username' : req.body.username,
         'password' : req.body.password
       }).toArray(function(err,docs){

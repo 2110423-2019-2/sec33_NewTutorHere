@@ -13,7 +13,7 @@
     margin: 0;
     padding: 0;
     font-family: 'HelveticaNeue', 'DolceVitaHeavy';
-    font-weight: 500;
+    /* font-weight: 500; */
 }
 
 body {
@@ -82,19 +82,20 @@ img.main-logo {
 h1 {
     font-family: 'DolceVitaHeavy';
     font-size: 3.5em;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #017F00;
 }
 
 div.form-group-main {
     padding: 15px 0px 15px 0px;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: white;
 }
 
 .control-label {
     font-size: 1em;
-    color: white;
+    color: black;
+    letter-spacing: 0.08em;
 }
 
 input {
@@ -115,7 +116,7 @@ button.submit-button {
     border-radius: 15px;
     color: white;
     font-size: 1em;
-    font-weight: bold;
+    /* font-weight: bold; */
     letter-spacing: 0.15em;
 
 }
@@ -146,7 +147,7 @@ div.form-bg {
 
 .form-name p{
     font-size: 2.5em;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #4C5F21;
     padding-bottom: 0.3em;
 }
@@ -218,7 +219,7 @@ ul.nav-bar li a {
     padding: 5px 5px;
     font-family: 'DolceVitaHeavy';
     font-size: 2.5em;
-    font-weight: bold;
+    /* font-weight: bold; */
     letter-spacing: 0em;
 }
 
@@ -272,7 +273,7 @@ div.search-box {
 
 .control-label-price {
     font-size: 25px;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: white;
     padding-left: 1em;
     padding-right: 0.5em;
@@ -370,11 +371,12 @@ div.blockcontract {
 }
 .name-contract p{
     font-size: 1em;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #4C5F21;
     padding-left: 1em;
     padding-bottom: 0.5em;
     display: inline-block;
+    letter-spacing: 0.08em;
 }
 button.view-button {
     width: 120pt;
@@ -387,8 +389,8 @@ button.view-button {
     border-radius: 10px;
     color: white;
     font-size: 0.8em;
-    font-weight: bold;
-    letter-spacing: 0.15em;
+    /* font-weight: bold; */
+    letter-spacing: 0.08em;
     margin-right: 2%;
 }
 
@@ -398,4 +400,5 @@ button:hover.view-button {
 .name-contract a{
     font-size: 0.8em;
     color: black;
+    letter-spacing: 0.08em;
 }

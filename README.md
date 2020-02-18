@@ -8,5 +8,3 @@
 - Anawat      Trongwattananon   6030631621
 - Itsara      Potibuatong       6030653421
 - Isaree      Jirapogchapone    6030654021
-
-HELLOOO

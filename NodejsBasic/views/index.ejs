@@ -9,106 +9,71 @@
     <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
     <!-- <link rel="shortcut icon" href="img/dog.ico" /> -->
 
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <!-- <script src="script.js"></script> -->
     <!-- <script>checkStatus()</script> -->
   </head>
 
   <body>
-    <!-- All Screen-->
-    <div class="big-bg">
-        <div class="half be-left color-white">
-            <div class="index-box center">
-                <img class="main-logo center" src="img/logo.png" />
-                <br>
-                <center><h1>NEW TUTOR HERE</h1></center>
-            </div>
-        </div>
 
-        <div class="half be-right color-green">
-            <!-- sign-in-form -->
-            <div class="index-box center" id="sign-in-form">
-                <form class="form" action="/resolve" id="sign-in" method="POST">
-                    <div class="form-group">
-                        <label class="control-label">Username</label>
-                        <div class="form-input">
-                            <input type="text" id="username-signin" name="username">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Password</label>
-                        <div class="form-input">
-                            <input type="password" id="password-signin" name="password">
-                        </div>
-                    </div>
-                    <button type="submit" class="submit-button sign-in-button center" onclick="signIn()">Log In</button>
-                </form>
-                <!-- <button class="submit-button sign-in-button center" onclick="signIn()">Log In</button> -->
-                <button class="submit-button sign-up-button center" onclick="showSignUpForm()">Sign Up</button>
-
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- sign-up-form -->
-    <div class="big-bg popup" id="sign-up-form">
-        <div class="form-bg color-lightgreen center" id="sign-up-form-bg">
-          <span class="form-name">
+<!-- sign-up-form -->
+<div class="big-bg popup" id="sign-up-form">
+    <div class="form-bg color-lightgreen center" id="sign-up-form-bg">
+        <button class="close-button"><i class="fa fa-close" onclick="closeButton()"></i></button>
+        <span class="form-name">
             <p>Create your account</p>
           </span>
           <div class="form-information-bg">
             <form class="form" action=/register id="sign-up" method="POST">
                 <div class="form-group">
-                    <input type="radio" name="position" value="student" checked><label class="control-label">Student</label>
+                    <input type="radio" name="position" value="student" checked><label
+                        class="control-label">Student</label>
                     <input type="radio" name="position" value="tutor"><label class="control-label">Tutor</label>
                 </div>
                 <div class="form-group">
                     <div class="half-box be-left">
-                        <label class="control-label">First Name</label>
                         <div class="form-input">
-                            <input type="text" id="firstname-signup" name="firstname">
+                            <input type="text" id="firstname-signup" name="firstname" placeholder="First Name">
                         </div>
                     </div>
                     <div class="half-box be-right">
-                        <label class="control-label">Last Name</label>
                         <div class="form-input">
-                            <input type="text" id="lastname-signup" name="lastname">
+                            <input type="text" id="lastname-signup" name="lastname" placeholder="Last Name">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Username</label>
+                   
                     <div class="form-input">
-                        <input type="text" id="username-signup" name="username">
+                        <input type="text" id="username-signup" name="username" placeholder="Username">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="box-left">
-                        <label class="control-label">Password</label>
+                    <div class="half-box be-left">
+                   
                         <div class="form-input">
-                            <input type="password" id="password-signup" name="password">
+                            <input type="password" id="password-signup" name="password" placeholder="Password">
                         </div>
                     </div>
-                    <div class="box-right">
-                        <label class="control-label">Re-Password</label>
+                    <div class="half-box be-right">
+                     
                         <div class="form-input">
-                            <input type="password" id="confirm-password-signup" name="password">
+                            <input type="password" id="confirm-password-signup" name="password" placeholder="Re-Password">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Telephone Number</label>
+         
                     <div class="form-input">
-                        <input type="text" id="phone-signup" name="phone">
+                        <input type="text" id="phone-signup" name="phone" placeholder="Telephone Number">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">E-mail</label>
+                
                     <div class="form-input">
-                        <input type="email" id="e-mail-signup" name="email">
+                        <input type="email" id="e-mail-signup" name="email" placeholder="E-mail">
                     </div>
                 </div>
                 <div class="form-group">
@@ -151,8 +116,48 @@
                 <p class="link-sign-in" onclick="showIndex()">Click Here</p>
             </div>
         </div>
-
     </div>
+ </div>
+    
+    <!-- All Screen-->
+    <div class="big-bg">
+        <div class="half be-left color-white">
+            <div class="index-box center">
+                <img class="main-logo center" src="img/logo.png" />
+                <br>
+                <center><h1>NEW TUTOR HERE</h1></center>
+            </div>
+        </div>
+
+        <div class="half be-right color-green">
+            <!-- sign-in-form -->
+            <div class="index-box center" id="sign-in-form">
+                <form class="form" action="/resolve" id="sign-in" method="POST">
+                    <div class="form-group">
+                        <label class="control-label">Username</label>
+                        <div class="form-input">
+                            <input type="text" id="username-signin" name="username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <div class="form-input">
+                            <input type="password" id="password-signin" name="password">
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-button sign-in-button center" onclick="signIn()">Log In</button>
+                </form>
+                <!-- <button class="submit-button sign-in-button center" onclick="signIn()">Log In</button> -->
+                <button class="submit-button sign-up-button center" onclick="showSignUpForm()">Sign Up</button>
+
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
     <script>
         var bdate = document.getElementById("bdate-signup");
         var days = "<option value=\"\" disabled selected>Day</option>";
@@ -168,7 +173,15 @@
         }
         byear.innerHTML = years;
 
-    </script>
+        function closeButton() {
+            $("#sign-up-form").css("display", "none");
+        }
+
+        function showSignUpForm() {
+            $("#sign-up-form").css("display", "flex");
+        }
+
+    </script> 
   </body>
 
 </html>

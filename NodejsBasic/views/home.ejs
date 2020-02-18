@@ -28,7 +28,6 @@
   <div class="big-bg">
     <!-- Content -->
     <div class="dashboard">
-
       <!-- Search Bar -->
       <div class="search-box color-lightgreen center" id="search-form">
         <form class="form" action=/home id="search" method="GET">
@@ -36,16 +35,15 @@
             <p>Find your tutor</p>
           </span>
           <div class="form-group">
-            <label class="control-label">Subject</label>
             <div class="form-input">
-              <input type="text" id="subject-filter" name="subject">
+              <input type="text" id="subject-filter" name="subject" placeholder="Subject">
             </div>
           </div>
           <div class="form-group">
             <div class="half-box be-left">
-              <label class="control-label">Education Level</label>
               <div class="form-input drop-down">
-                <select id="edu-lv-filter" name="edu-lv" style="width: 100%;">
+                <select id="edu-lv-filter" name="edu-lv" style="width: 100%;" >
+                  <option value="" disabled selected>Educational Level</option>
                   <option value="0">Any Level</option>
                   <option value="1">Pre-School</option>
                   <option value="2">Elementary-School</option>
@@ -56,9 +54,8 @@
               </div>
             </div>
             <div class="half-box be-right">
-              <label class="control-label">City</label>
               <div class="form-input">
-                <input type="text" id="city-filter" name="city">
+                <input type="text" id="city-filter" name="city" placeholder="City">
               </div>
             </div>
           </div>
@@ -98,8 +95,11 @@
           <button class="submit-button search-button" onclick="search()">Search</button>
         </form>
 
+      </div>
 
 
+      <div class="search-box color-lightgreen center" id="search-form">
+        
       </div>
 
     </div>

@@ -241,7 +241,7 @@ ul.nav-bar li, ul.nav-menu li {
 }
 
 ul.nav-bar li.title {
-    bottom: 3vh;
+    bottom: 1.3em;
 }
 
 ul.nav-menu li{
@@ -250,11 +250,11 @@ ul.nav-menu li{
 }
 
 ul.nav-menu li.profile {
-    top: 2vh;
+    top: 1em;
 }
 
 ul.nav-menu li.text {
-    top: 5vh;
+    top: 2.2em;
 }
 
 ul.nav-bar li a, ul.nav-menu li a {

@@ -97,9 +97,13 @@
 
       </div>
 
+      <!-- Example of how to access data in locals passed from home.js -->
+      <%if (typeof searchResults!= 'undefined') { %>
+      <%=  JSON.stringify(searchResults) %>
+      <% } %>
 
       <div class="search-box color-lightgreen center" id="search-form">
-        
+
       </div>
 
     </div>

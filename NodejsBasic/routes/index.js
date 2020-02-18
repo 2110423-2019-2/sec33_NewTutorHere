@@ -48,25 +48,6 @@ router.post('/resolve', [
 			else {
 				res.send("Wrong username or Password");
 			}
-
-			// db.collection('UserData').find({
-			// 	'username': req.body.username,
-			// 	'password': req.body.password
-			// }).toArray(function (err, docs) {
-			// 	assert.equal(err, null);
-			// 	console.log(docs);
-			// 	// print log if found
-			// 	if (docs.length == 0) res.send("Wrong username or Password");
-			// 	else {
-			// 		res.render('home');
-			// 		// Create and send token
-			// 		const jwt = require('njwt')
-			// 		const claims = { iss: 'NewTutoerHere' }
-			// 		const token = jwt.create(claims, req.body.username)
-			// 		token.setExpiration(new Date().getTime() + 60 * 1000)
-			// 		res.send(token.compact())
-			// 	}
-			// })
 		});
 	}
 });

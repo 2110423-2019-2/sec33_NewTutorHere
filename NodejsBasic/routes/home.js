@@ -32,7 +32,7 @@ router.get('/', function (req, res, next) {
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(req.body.subject, result)
-		res.render('home', result);
+		res.render('home', { searchResults: result });
 	});
 
 	//TODO: Handle db connection failed error

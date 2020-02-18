@@ -48,4 +48,34 @@ router.post('/resolve', [
   }
 });
 
+
+router.post('/register', [], function (req, res) {
+
+  //TODO: Check if the password and confirmed password match
+  //TODO: Check inputs in general
+
+
+  client.connect(function (err) {
+    //checks for connection error
+    assert.equal(null, err);
+
+    //once connected, add a doc to collection 'UserData'
+    const db = client.db(dbName);
+
+    //(For references) Sent via POST: position=student&firstname=&lastname=&username=&password=&password=&phone=&email=&gender=male
+    db.collection('UserData').insertOne({
+      position:req.body.position,
+      firstname:req.body.firstname,
+      lastname:req.body.lastname,
+      username:req.body.username,
+      password:req.body.password,
+      phone:req.body.phone,
+      email:req.body.email,
+      gender:req.body.gender
+    });
+  });
+
+  res.render('home');
+});
+
 module.exports = router;

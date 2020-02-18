@@ -38,9 +38,11 @@ router.post('/resolve', [
 				'username': req.body.username,
 				'password': req.body.password
 			});
-			if (user == null) res.send("Wrong username or Password");
-			else {
+			if (user) {
 				res.render('home');
+			}
+			else {
+				res.send("Wrong username or Password");
 			}
 
 			// db.collection('UserData').find({

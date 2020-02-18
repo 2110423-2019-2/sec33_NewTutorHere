@@ -8,7 +8,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var homeRouter = require('./routes/home');
 
+var favicon = require('serve-favicon');
+
 var app = express();
+
+// favicon
+app.use(favicon(path.join(__dirname, 'public', 'img', 'favicon.ico')))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

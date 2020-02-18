@@ -39,7 +39,11 @@ router.post('/resolve', [
 				'password': req.body.password
 			});
 			if (user) {
-				res.render('home');
+				console.log(user)
+
+				//TODO: Change from storing just the username as a login token to jwt
+				res.cookie('auth', user.username)
+				res.render('home', {name:user.firstname});
 			}
 			else {
 				res.send("Wrong username or Password");
@@ -66,9 +70,6 @@ router.post('/resolve', [
 		});
 	}
 });
-
-
-
 
 router.post('/register', [], function (req, res) {
 

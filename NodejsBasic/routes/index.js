@@ -9,7 +9,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   //const collection = client.db("SEproject").collection("usernamePassword");
   // perform actions on the collection object
-  console.log("Connection Pinggy success");
+  console.log("Successfully connected to online database");
   client.close();
 });
 
@@ -34,7 +34,7 @@ router.post('/resolve', [
     client.connect(function (err) {
       assert.equal(null, err);
       const db = client.db(dbName);
-      db.collection('UsernameAndPassword').find({
+      db.collection('UserData').find({
         'username' : req.body.username,
         'password' : req.body.password
       }).toArray(function(err,docs){
@@ -42,7 +42,9 @@ router.post('/resolve', [
         console.log(docs);
         // print log if found
         if(docs.length ==0) res.send("Wrong username or Password");
-        else res.render('home');
+        else {
+          res.render('home');
+        }
       })
     });
   }
@@ -54,7 +56,6 @@ router.post('/register', [], function (req, res) {
   //TODO: Check if the password and confirmed password match
   //TODO: Check inputs in general
 
-
   client.connect(function (err) {
     //checks for connection error
     assert.equal(null, err);
@@ -62,7 +63,6 @@ router.post('/register', [], function (req, res) {
     //once connected, add a doc to collection 'UserData'
     const db = client.db(dbName);
 
-    //(For references) Sent via POST: position=student&firstname=&lastname=&username=&password=&password=&phone=&email=&gender=male
     db.collection('UserData').insertOne({
       position:req.body.position,
       firstname:req.body.firstname,

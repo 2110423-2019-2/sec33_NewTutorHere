@@ -39,7 +39,7 @@ router.post('/resolve', [
 				'password': req.body.password
 			});
 			if (user) {
-				console.log(user)
+				// console.log(user)
 
 				//TODO: Change from storing just the username as a login token to jwt
 				res.cookie('auth', user.username)

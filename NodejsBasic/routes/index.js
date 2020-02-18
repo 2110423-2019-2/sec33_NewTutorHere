@@ -31,24 +31,41 @@ router.post('/resolve', [
 		res.send(errors[0]['msg']);
 		// send  error.msg if error 
 	} else {
-		client.connect(function (err) {
+		client.connect(async function (err) {
 			assert.equal(null, err);
 			const db = client.db(dbName);
-			db.collection('UserData').find({
+			const user = await db.collection('UserData').findOne({
 				'username': req.body.username,
 				'password': req.body.password
-			}).toArray(function (err, docs) {
-				assert.equal(err, null);
-				console.log(docs);
-				// print log if found
-				if (docs.length == 0) res.send("Wrong username or Password");
-				else {
-					res.render('home');
-				}
-			})
+			});
+			if (user == null) res.send("Wrong username or Password");
+			else {
+				res.render('home');
+			}
+
+			// db.collection('UserData').find({
+			// 	'username': req.body.username,
+			// 	'password': req.body.password
+			// }).toArray(function (err, docs) {
+			// 	assert.equal(err, null);
+			// 	console.log(docs);
+			// 	// print log if found
+			// 	if (docs.length == 0) res.send("Wrong username or Password");
+			// 	else {
+			// 		res.render('home');
+			// 		// Create and send token
+			// 		const jwt = require('njwt')
+			// 		const claims = { iss: 'NewTutoerHere' }
+			// 		const token = jwt.create(claims, req.body.username)
+			// 		token.setExpiration(new Date().getTime() + 60 * 1000)
+			// 		res.send(token.compact())
+			// 	}
+			// })
 		});
 	}
 });
+
+
 
 
 router.post('/register', [], function (req, res) {

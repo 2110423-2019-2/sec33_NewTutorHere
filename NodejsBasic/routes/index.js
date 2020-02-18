@@ -42,7 +42,7 @@ router.post('/resolve', [
 				// console.log(user)
 
 				//TODO: Change from storing just the username as a login token to jwt
-				res.cookie('auth', user.username)
+				res.cookie('auth', user.username)  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 				res.render('home', {name:user.firstname});
 			}
 			else {
@@ -55,7 +55,7 @@ router.post('/resolve', [
 router.post('/register', [], function (req, res) {
 
 	//TODO: Check if the password and confirmed password match
-	//TODO: Check inputs in general
+	//TODO: Check inputs in general (blank, invalid, etc.) It should also be able to configure from the frontend side.
 
 	client.connect(function (err) {
 		//checks for connection error

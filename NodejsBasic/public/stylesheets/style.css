@@ -240,9 +240,21 @@ ul.nav-bar li, ul.nav-menu li {
     text-align: left;
 }
 
+ul.nav-bar li.title {
+    bottom: 3vh;
+}
+
 ul.nav-menu li{
     line-height: auto;
     float: right;
+}
+
+ul.nav-menu li.profile {
+    top: 2vh;
+}
+
+ul.nav-menu li.text {
+    top: 5vh;
 }
 
 ul.nav-bar li a, ul.nav-menu li a {

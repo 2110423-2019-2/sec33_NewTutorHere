@@ -28,11 +28,12 @@
               <div class="pfdetail-box be-right">
                   <span class="name-contract">
                       <button class="editpf-button be-right" onclick="showEditProfileForm()">Edit Profile</button>
-                      <p>Palinee Setsiripaiboon</p>
+                      
+                      <p><%= pf.firstname%>  <%=pf.lastname %></p>
                       <img class="nav-img-user" src="/img/placeholder.png" style="height: 1.1em;" /><a>Bangkok, Thailand</a><br />
-                      <b>Email</b><a>abc@gmail.com</a><br />
-                      <b>Phone Number</b><a>XXX-XXX-XXXX</a><br />
-                      <b>Gender</b><a>Female</a><br />
+                      <b>Email</b><a><%= pf.email %></a><br />
+                      <b>Phone Number</b><a><%= pf.phone %></a><br />
+                      <b>Gender</b><a><%= pf.gender %></a><br />
                       <b>Bio</b><a>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</a>
                   </span>
               </div>

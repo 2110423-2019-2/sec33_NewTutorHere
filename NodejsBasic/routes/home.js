@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 //connect to allFunction.js
-var allFunction = require('./allFunction');
+var testFunction = require('./allFunction');
 
 const assert = require('assert');
 
@@ -57,12 +57,29 @@ router.get('/students_contract', function (req, res, next) {
 
 // profile page
 router.get('/profile', function (req, res, next) {
-	res.render('profile');
+	
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		var query = {
+			"username" : req.cookies.auth
+		};
+		//TODO: This search uses RegEx, consider changing it to something else later.
+		// ** Not completed due to time constraints
+		// Look into col.find() and how to use its find operators
+		const result = await db.collection('UserData').find(query).limit(1).toArray();
+
+		// The search added the results to the locals, access them in home.ejs and show the results there
+		console.log( result);
+		res.render('profile', { pf: result[0] });
+	});
+	
 });
 
 // edit-profile-form
 router.post('/profile/edit_profile', [], function (req, res) {
-
+	
+	//if(req.cookies.auth == req.body.username)
 	client.connect(function (err) {
 		//checks for connection error
 		assert.equal(null, err);
@@ -75,14 +92,14 @@ router.post('/profile/edit_profile', [], function (req, res) {
 				username: test	//find the user you wanna change here
 			},
 			update: {
-				position: req.body.position,
-				firstname: req.body.firstname,
-				lastname: req.body.lastname,
-				username: req.body.username,
-				password: req.body.password,
-				phone: req.body.phone,
-				email: req.body.email,
-				gender: req.body.gender
+				'position': req.body.position,
+				'firstname': req.body.firstname,
+				'lastname': req.body.lastname,
+				'username': req.body.username,
+				'password': req.body.password,
+				'phone': req.body.phone,
+				'email': req.body.email,
+				'gender': req.body.gender
 			}
 		}
 		);
@@ -93,7 +110,7 @@ router.post('/profile/edit_profile', [], function (req, res) {
 
 router.get('/testfunction', function(req, res, next) {
 	//use function like this
-	testFunction.data.myTestFunction(req,res);
+	testFunction.data.checkcookie(req,res);
   });
 
 

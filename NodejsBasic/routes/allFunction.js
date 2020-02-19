@@ -1,7 +1,7 @@
 var methods = {};
 
-methods.myTestFunction = function(req ,res ){
-    res.send('TestFunction');
+methods.checkcookie = function(req ,res ){
+    res.send(req.cookies.auth);
 }
 
 exports.data = methods;

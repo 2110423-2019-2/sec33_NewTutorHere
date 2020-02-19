@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+//connect to allFunction.js
+var allFunction = require('./allFunction');
 
 const assert = require('assert');
 
@@ -88,5 +90,11 @@ router.post('/profile/edit_profile', [], function (req, res) {
 
 	res.render('profile');
 });
+
+router.get('/testfunction', function(req, res, next) {
+	//use function like this
+	testFunction.data.myTestFunction(req,res);
+  });
+
 
 module.exports = router;

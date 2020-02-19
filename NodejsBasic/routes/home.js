@@ -22,13 +22,18 @@ router.get('/', function (req, res, next) {
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
-
+		var query = {
+			'subject' : new RegExp(req.query.subject),
+			'level' : new RegExp(req.query.level),
+			'city' : new RegExp(req.query.city),
+			'rating' : new RegExp(req.query.rating),
+			'price' : new RegExp(req.query.price),
+			'tutor_id' : new RegExp(req.query.tutor_id)
+		};
 		//TODO: This search uses RegEx, consider changing it to something else later.
 		// ** Not completed due to time constraints
 		// Look into col.find() and how to use its find operators
-		const result = await db.collection('CourseData').find({
-			'subject': new RegExp(req.query.subject)
-		}).limit(10).toArray();
+		const result = await db.collection('CourseData').find(query).limit(10).toArray();
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(req.body.subject, result)
@@ -46,6 +51,37 @@ router.get('/tutors_contract', function (req, res, next) {
 // student's contract page
 router.get('/students_contract', function (req, res, next) {
 	res.render('students_contract');
+});
+
+// profile page
+router.get('/profile', function (req, res, next) {
+	res.render('profile');
+});
+
+// edit-profile-form
+router.post('/profile/edit_profile', [], function (req, res) {
+
+	client.connect(function (err) {
+		//checks for connection error
+		assert.equal(null, err);
+
+		//once connected, add a doc to collection 'UserData'
+		const db = client.db(dbName);
+
+		//ต้องเปลี่ยนเป็น update ข้อมูล
+		db.collection('UserData').insertOne({
+			position: req.body.position,
+			firstname: req.body.firstname,
+			lastname: req.body.lastname,
+			username: req.body.username,
+			password: req.body.password,
+			phone: req.body.phone,
+			email: req.body.email,
+			gender: req.body.gender
+		});
+	});
+
+	res.render('profile');
 });
 
 module.exports = router;

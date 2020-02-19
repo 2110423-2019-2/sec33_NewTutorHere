@@ -540,7 +540,10 @@ button:hover.view-button {
     right: -2px;
     height: 80%;
     border-left: 2px solid rgba(0, 0, 0, 0.025);
+<<<<<<< HEAD
     
+=======
+>>>>>>> 5f99b74d5e7625213d15d5be92cb1bbf097af17d
 }
 
 .card .additional .user-card .level,
@@ -654,3 +657,113 @@ button:hover.view-button {
     font-size: 0.9em;
 }
 
+/*profile*/
+div.profile-box {
+    width: 70%;
+    height: 45em;
+    border: none;
+    padding: 30px 5% 0px 5%;
+}
+.pf-box {
+    /*padding: 0px 0px 10px 0px;*/
+    width: 100%;
+    height: 28%;
+    background-color: white;
+}
+.pfphoto-box{
+    width: 20%;
+    height: 30%;
+    padding-top: 1%;
+}
+.pfdetail-box{
+    width: 80%;
+    height: 35%;
+    margin-top: -4.5%;
+}
+.name-contract b{
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #4C5F21;
+    padding-left: 2em;
+    padding-right: 1.2em;
+    padding-bottom: 0.4em;
+    display: inline-block;
+}
+button.editpf-button {
+    width: 20%;
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    margin-right: 2%;
+}
+
+button:hover.editpf-button {
+    background-color: #879437;
+}
+.ratesum-box{
+    margin-top: 2%;
+    width: 48%;
+    height: 30%;
+    background-color: white;
+    display: inline-block;
+}
+.name-contract c{
+    font-size: 1em;
+    font-weight: bold;
+    color: #4C5F21;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1.2em;
+    padding-bottom: 0.4em;
+    display: inline-block;
+}
+.qual-box{
+    margin-top: 2%;
+    width: 48%;
+    height: 63%;
+    background-color: white;
+}
+button.edit-button {
+    width: 25%;
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    margin-right: 2%;
+    margin-top: inherit;
+}
+
+button:hover.edit-button {
+    background-color: #879437;
+}
+
+/*tutor box after search click*/
+.tt-box {
+    /*padding: 0px 0px 10px 0px;*/
+    width: 100%;
+    height: 10em;
+    background-color: white;
+    margin-bottom: 1em;
+}
+div.tutorse-box {
+    width: 70%;
+    height: auto;
+    border: none;
+    border-radius: 40px;
+    padding: 30px 5% 30px 5%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+textarea {
+  width: 100%;
+  color: #879437;
+}

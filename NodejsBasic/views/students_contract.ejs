@@ -13,30 +13,29 @@
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <!-- <script src="script.js"></script> -->
     <!-- <script>checkStatus()</script> -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../public/scripts/mustache.js"></script>
+    <script type="text/javascript" src="../public/scripts/modal.js"></script>
+    <script type="text/javascript" src="../public/scripts/custom.js"></script>
   </head>
+
   <body>
     <%- include navbar %>
     <div class="big-bg">
         <!-- Content -->
       <div class="dashboard">
+
           <div class="contract-box color-lightgreen center" id="contract-form">
-              <form class="form" id="contract">s
-                  <img class="nav-img-user" src="/img/user.png" style="height: 5em;" />
-                  <div class="c-box be-right">
-                      <div class="blockcontract">
-                          <span class="name-stucontract">
-                              
-                              <a>sends a contract to</a>
-                              <p>Palinee Setsiripaiboon</p> 
-                          </span>
-                          <br />
-                          <button class="view-button search-button be-right" >Cancel a contract</button>
-                          <button class="view-button search-button be-right" >View a contract</button>
-                      </div>
-                  </div>   
-              </form>
+              <!-- Begin of contract list -->
           </div>
+
       </div>
     </div>
+
+    <script>
+      generateContract();
+     
+    </script>
+
   </body>
 </html>

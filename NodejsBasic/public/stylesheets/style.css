@@ -775,3 +775,118 @@ textarea {
   width: 100%;
   color: #879437;
 }
+
+
+
+
+.my-modal {
+    color: #000000;
+    position: fixed;
+    display: none;
+    height: 100vh;
+    width: 100%;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.my-modal .my-modal-body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: auto;
+    min-height: 256px;
+    width: 75%;
+    max-width: 1024px;
+    background: white;
+    border-radius: 1.5em;
+    padding: 1.5em;
+}
+
+.my-modal .my-modal-body .my-modal-head {
+    font-size: 1.8em;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 0.2em;
+}
+
+.my-modal .my-modal-body .my-modal-content {
+    width: 100%;
+    height: auto;
+    max-height: 40vh;
+    overflow-y: auto;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.my-modal .my-modal-body .my-modal-inline {
+    display: none;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.my-modal .my-modal-body .my-modal-button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    padding: 0.1em 1.2em;
+    margin-top: 1em;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    color: white;
+    border-radius: 1.2em;
+}
+
+.my-modal .my-modal-body .my-modal-button.my-modal-green {
+    background: #69DADA;
+}
+
+.my-modal .my-modal-body .my-modal-button.my-modal-red {
+    background: #EC006C;
+}
+
+.my-modal hr {
+    display: block;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 0.1em solid #D4145A;
+    border-color: #D4145A;
+    border-style: inset;
+    width: 80%;
+}

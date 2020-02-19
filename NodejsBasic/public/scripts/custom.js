@@ -29,3 +29,16 @@ function generateContract() {
         $("#contract-form").append(html);
     }
 }
+
+
+
+module.exports = {
+    signIn: function () {
+        if ($.trim($('#username-signin').val()).length <= 0) {
+            Modal_alert('Alert!', "Please Enter Username");
+        } else if ($.trim($('#password-signin').val()).length <= 0) {
+            Modal_alert('Alert!', "Please Enter Password");
+        } 
+    }
+
+};

@@ -26,10 +26,13 @@ router.post('/resolve', [
 ], function (req, res) {
 	const result = validationResult(req);
 	var errors = result.errors;
+	var custom = require('./custom.js')
+	
 	if (!result.isEmpty()) {
 		// username/password empty
 		res.send(errors[0]['msg']);
 		// send  error.msg if error 
+		//custom.signIn();
 	} else {
 		client.connect(async function (err) {
 			assert.equal(null, err);

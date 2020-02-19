@@ -26,11 +26,11 @@ router.get('/', function (req, res, next) {
 		const db = client.db(dbName);
 		var query = {
 			'subject': new RegExp(req.query.subject),
-			'level': new RegExp(req.query.level),
+			'educational_level': new RegExp(req.query.level),
 			'city': new RegExp(req.query.city),
 			'rating': new RegExp(req.query.rating),
 			'price': new RegExp(req.query.price), //Change this to price range please
-			'tutor_id': new RegExp(req.query.tutor_id)
+			//'tutor_id': new RegExp(req.query.tutor_id)
 		};
 		//TODO: This search uses RegEx, consider changing it to something else later.
 		// ** Not completed due to time constraints

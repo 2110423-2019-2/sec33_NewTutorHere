@@ -58,4 +58,30 @@ router.get('/profile', function (req, res, next) {
 	res.render('profile');
 });
 
+// edit-profile-form
+router.post('/profile/edit_profile', [], function (req, res) {
+
+	client.connect(function (err) {
+		//checks for connection error
+		assert.equal(null, err);
+
+		//once connected, add a doc to collection 'UserData'
+		const db = client.db(dbName);
+
+		//ต้องเปลี่ยนเป็น update ข้อมูล
+		db.collection('UserData').insertOne({
+			position: req.body.position,
+			firstname: req.body.firstname,
+			lastname: req.body.lastname,
+			username: req.body.username,
+			password: req.body.password,
+			phone: req.body.phone,
+			email: req.body.email,
+			gender: req.body.gender
+		});
+	});
+
+	res.render('profile');
+});
+
 module.exports = router;

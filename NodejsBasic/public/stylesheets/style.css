@@ -759,3 +759,7 @@ div.tutorse-box {
     margin-top: 1em;
     margin-bottom: 1em;
 }
+textarea {
+  width: 100%;
+  color: #879437;
+}

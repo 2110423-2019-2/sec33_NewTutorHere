@@ -12,12 +12,36 @@
                     <img class="nav-img-dropdown" src="/img/drop-down.png" style="height: 1em;" />
                 </a>
                 <ul class="dropdown">
-                    <li><a href="/home/profile">Profile</a></li>
+                    <li><a href="/home/profile" onclick="clickedd()">Profile</a></li>
                     <li><a href="/">Log Out</a></li>
                 </ul>
             </li>
             <li class='text'><a href="/home/tutors_contract">Contracts</a></li>
-            <li class='text'><a href="/home">Home</a></li>
+            <li class='text'><a href="/home" onclick="reset()">Home</a></li>
         </ul>
     </li>
 </ul>
+<script> function clickedd() {
+   document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+   document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+   document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+   var name = "auth=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      var next =  c.substring(name.length, c.length);
+    }
+  }
+   // document.cookie = "nextpf= " + next ;
+    //alert("ASDASD");
+}
+function reset(){
+    document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    alert("reset");
+}
+</script>

@@ -26,7 +26,7 @@ router.post('/resolve', [
 ], function (req, res) {
 	const result = validationResult(req);
 	var errors = result.errors;
-	var custom = require('./custom.js')
+	//var custom = require('./custom.js')
 	
 	if (!result.isEmpty()) {
 		// username/password empty

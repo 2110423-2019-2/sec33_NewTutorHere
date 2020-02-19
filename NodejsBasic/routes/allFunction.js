@@ -1,7 +1,12 @@
 var methods = {};
 
-methods.checkcookie = function(req ,res ){
+methods.myTestFunction = function(req ,res ){
     res.send(req.cookies.auth);
+    
 }
+methods.createCookie = function(req ,res ){
+    res.cookie('nextpf', req.result.tutor_username);
+}
+
 
 exports.data = methods;

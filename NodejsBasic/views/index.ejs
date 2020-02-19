@@ -11,52 +11,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js"
-        integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"
-        integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
-
-    <script type="text/javascript" src="/scripts/modal.js"></script>
-    <script type="text/javascript" src="/scripts/custom.js"></script>
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <!-- <script src="script.js"></script> -->
     <!-- <script>checkStatus()</script> -->
 </head>
 
 <body>
-
-
-<!-- The Modal 
-    <div class="my-modal" id="my-modal">
-        <div class="my-modal-body" id="my-modal-body">
-
-             For Content
-            <div class="my-modal-head" id="my-modal-head">Heading</div>
-            <hr>
-            <div class="my-modal-content">
-                <p id="my-modal-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa enim harum fuga illum alias quo doloribus explicabo, saepe voluptates, eligendi molestias tempore asperiores assumenda reiciendis, vel ducimus animi ad quis.</p>
-            </div>
-
-            For OK Modal 
-            <div class="my-modal-inline" id="my-modal-button-one">
-                <div class="my-modal-button my-modal-green my-hidden" id="my-modal-button-ok">
-                    <p>OK</p>
-                </div>
-            </div>
-            For Yes/No Modal
-            <div class="my-modal-inline" id="my-modal-button-two">
-                <div class="my-modal-button my-modal-red" id="my-modal-button-no">
-                    <p>No</p>
-                </div>
-                <div class="my-modal-button my-modal-green" id="my-modal-button-yes">
-                    <p>Yes</p>
-                </div>
-            </div>
-        </div>
-    </div> 
--->
-
-
 
     <!-- sign-up-form -->
     <div class="big-bg popup" id="sign-up-form">
@@ -190,22 +150,6 @@
                     </div>
                     <button type="submit" class="submit-button sign-in-button center" onclick="signIn()">Log In</button>
                 </form>
-                <!-- <div class="form" action="/resolve" id="sign-in" method="POST">
-                    <div class="form-group">
-                        <label class="control-label">Username</label>
-                        <div class="form-input">
-                            <input type="text" id="username-signin" name="username">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Password</label>
-                        <div class="form-input">
-                            <input type="password" id="password-signin" name="password">
-                        </div>
-                    </div>
-                    <button type="submit" class="submit-button sign-in-button center" onclick="signIn()">Log In</button>
-                </div> -->
-
                 <!-- <button class="submit-button sign-in-button center" onclick="signIn()">Log In</button> -->
                 <button class="submit-button sign-up-button center" onclick="showSignUpForm()">Sign Up</button>
 
@@ -235,25 +179,6 @@
         function showSignUpForm() {
             $("#sign-up-form").css("display", "flex");
         }
-
-        function Animation(reverse = false) {
-            const tl = new TimelineLite({
-                ease: Expo.easeOut
-            });
-            const logo = document.querySelector('.logo-container');
-            const header = document.querySelector('.header');
-            const subheader = document.querySelector('.sub-header');
-            const button = document.querySelector('.button-container');
-            tl.fromTo([logo, header, subheader, button], 1, {
-                opacity: 0,
-                y: 50
-                }, {
-                    opacity: 1,
-                    y: 0
-            })
-        }
-            Animation();
-
     </script>
 </body>
 

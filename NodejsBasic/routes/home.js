@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
 			'educational_level': new RegExp(req.query.level),
 			'city': new RegExp(req.query.city),
 			'rating': new RegExp(req.query.rating),
-			'price': new RegExp(req.query.price), //Change this to price range please
+			'price': new RegExp(req.query.minprice), //Change this to price range please
 			//'tutor_id': new RegExp(req.query.tutor_id)
 		};
 		//TODO: This search uses RegEx, consider changing it to something else later.
@@ -39,7 +39,7 @@ router.get('/', function (req, res, next) {
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(req.body.subject, result)
-		res.render('home', { searchResults: result });
+		res.render('home', { searchResults: result});
 	});
 
 	//TODO: Handle db connection failed error
@@ -57,12 +57,13 @@ router.get('/students_contract', function (req, res, next) {
 
 // profile page
 router.get('/profile', function (req, res, next) {
-	
+	var use = req.cookies.auth;
+	if(typeof req.cookies.nextpf != 'undefined') {use = req.cookies.nextpf;}
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
 		var query = {
-			"username" : req.cookies.auth
+			"username" : use
 		};
 		//TODO: This search uses RegEx, consider changing it to something else later.
 		// ** Not completed due to time constraints

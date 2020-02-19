@@ -23,12 +23,12 @@ router.get('/', function (req, res, next) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
 		var query = {
-			'subject' : new RegExp(req.query.subject),
-			'level' : new RegExp(req.query.level),
-			'city' : new RegExp(req.query.city),
-			'rating' : new RegExp(req.query.rating),
-			'price' : new RegExp(req.query.price),
-			'tutor_id' : new RegExp(req.query.tutor_id)
+			'subject': new RegExp(req.query.subject),
+			'level': new RegExp(req.query.level),
+			'city': new RegExp(req.query.city),
+			'rating': new RegExp(req.query.rating),
+			'price': new RegExp(req.query.price), //Change this to price range please
+			'tutor_id': new RegExp(req.query.tutor_id)
 		};
 		//TODO: This search uses RegEx, consider changing it to something else later.
 		// ** Not completed due to time constraints
@@ -68,17 +68,22 @@ router.post('/profile/edit_profile', [], function (req, res) {
 		//once connected, add a doc to collection 'UserData'
 		const db = client.db(dbName);
 
-		//ต้องเปลี่ยนเป็น update ข้อมูล
-		db.collection('UserData').insertOne({
-			position: req.body.position,
-			firstname: req.body.firstname,
-			lastname: req.body.lastname,
-			username: req.body.username,
-			password: req.body.password,
-			phone: req.body.phone,
-			email: req.body.email,
-			gender: req.body.gender
-		});
+		db.collection('UserData').findOneAndUpdate({
+			query: {
+				username: test	//find the user you wanna change here
+			},
+			update: {
+				position: req.body.position,
+				firstname: req.body.firstname,
+				lastname: req.body.lastname,
+				username: req.body.username,
+				password: req.body.password,
+				phone: req.body.phone,
+				email: req.body.email,
+				gender: req.body.gender
+			}
+		}
+		);
 	});
 
 	res.render('profile');

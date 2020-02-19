@@ -48,4 +48,9 @@ router.get('/students_contract', function (req, res, next) {
 	res.render('students_contract');
 });
 
+// profile page
+router.get('/profile', function (req, res, next) {
+	res.render('profile');
+});
+
 module.exports = router;

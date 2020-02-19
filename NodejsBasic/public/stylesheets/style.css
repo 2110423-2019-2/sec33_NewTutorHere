@@ -163,6 +163,18 @@ button:hover.submit-button {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+#edit-profile-form {
+    display: none;
+    z-index: 100;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+}
+
 div.form-bg {
     width: 40%;
     height: 80%;
@@ -540,10 +552,6 @@ button:hover.view-button {
     right: -2px;
     height: 80%;
     border-left: 2px solid rgba(0, 0, 0, 0.025);
-<<<<<<< HEAD
-    
-=======
->>>>>>> 5f99b74d5e7625213d15d5be92cb1bbf097af17d
 }
 
 .card .additional .user-card .level,

@@ -79,18 +79,12 @@
               </br>
             </div>
             <div class="half-box be-right">
-              <label class="control-label">Price</label>
+              <label class="control-label">Minimum Price</label>
               <div class="form-input">
                 <div class="form-group">
                   <div class="half-box be-left" style="width: 30%;">
                     <div class="form-input">
                       <input type="text" id="minprice-filter" name="minprice" placeholder="฿">
-                    </div>
-                  </div>
-                  <label class="control-label-price be-left">-</label>
-                  <div class="half-box be-left" style="width: 30%;">
-                    <div class="form-input">
-                      <input type="text" id="maxprice-filter" name="maxprice" placeholder="฿">
                     </div>
                   </div>
                 </div>
@@ -145,7 +139,7 @@
                     <b>Subject</b><a><%= result.subject %></a><br />
                     <b>Educational Level</b><a><%= result.level %></a><br />
                     <b>Price</b><a>฿<%= result.price %> per hour</a><br />
-                    <button class="editpf-button be-right" onclick="clicked('<%= result.tutor_username %>');" href="/home/tutors_contract"> View this Tutor</button>
+                    <button class="editpf-button be-right" onclick="clicked('<%= result.tutor_username %>')" href="/home/tutors_contract"> View this Tutor</button>
                 </form>                                      
             </div>
           </div>

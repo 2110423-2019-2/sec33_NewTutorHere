@@ -705,7 +705,7 @@ button.editpf-button {
     border-radius: 10px;
     color: white;
     font-size: 0.8em;
-    font-weight: bold;
+    /* font-weight: bold; */
     letter-spacing: 0.15em;
     margin-right: 2%;
 }
@@ -744,7 +744,7 @@ button.edit-button {
     border-radius: 10px;
     color: white;
     font-size: 0.8em;
-    font-weight: bold;
+    /* font-weight: bold; */
     letter-spacing: 0.15em;
     margin-right: 2%;
     margin-top: inherit;

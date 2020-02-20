@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
 			'educational_level': new RegExp(req.query.level),
 			'city': new RegExp(req.query.city),
 			'rating': new RegExp(req.query.rating),
-			'price': new RegExp(req.query.price), //Change this to price range please
+			'price': new RegExp(req.query.minprice), //Change this to price range please
 			//'tutor_id': new RegExp(req.query.tutor_id)
 		};
 		//TODO: This search uses RegEx, consider changing it to something else later.
@@ -39,7 +39,7 @@ router.get('/', function (req, res, next) {
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(req.body.subject, result)
-		res.render('home', { searchResults: result });
+		res.render('home', { searchResults: result});
 	});
 
 	//TODO: Handle db connection failed error
@@ -57,21 +57,22 @@ router.get('/students_contract', function (req, res, next) {
 
 // profile page
 router.get('/profile', function (req, res, next) {
-	
+	var use = req.cookies.auth;
+	if(typeof req.cookies.nextpf != 'undefined') {use = req.cookies.nextpf;}
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
 		var query = {
-			"username" : req.cookies.auth
+			"username" : use
 		};
 		//TODO: This search uses RegEx, consider changing it to something else later.
 		// ** Not completed due to time constraints
 		// Look into col.find() and how to use its find operators
-		const result = await db.collection('UserData').find(query).limit(1).toArray();
+		const resultt = await db.collection('UserData').find(query).limit(1).toArray();
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		console.log( result);
-		res.render('profile', { pf: result[0] });
+		console.log( resultt);
+		res.render('profile', { pf: resultt[0] });
 	});
 	
 });
@@ -80,32 +81,34 @@ router.get('/profile', function (req, res, next) {
 router.post('/profile/edit_profile', [], function (req, res) {
 	
 	//if(req.cookies.auth == req.body.username)
-	client.connect(function (err) {
+	console.log("IN PROFILE EDIT");
+	client.connect(async function (err) {
 		//checks for connection error
 		assert.equal(null, err);
 
 		//once connected, add a doc to collection 'UserData'
 		const db = client.db(dbName);
 
-		db.collection('UserData').findOneAndUpdate({
-			query: {
-				username: test	//find the user you wanna change here
+		db.collection('UserData').update(
+			{
+				username: req.cookies.auth	//find the user you wanna change here
 			},
-			update: {
-				'position': req.body.position,
+			{
+				$set: {
 				'firstname': req.body.firstname,
 				'lastname': req.body.lastname,
-				'username': req.body.username,
-				'password': req.body.password,
 				'phone': req.body.phone,
 				'email': req.body.email,
-				'gender': req.body.gender
+				'gender': req.body.gender,
+				'bio' : req.body.bio
+				}
 			}
-		}
 		);
+		const result = await db.collection('UserData').find({username : req.cookies.auth}).limit(1).toArray();
+		console.log( result);
+		res.render('profile',{ pf: result[0] });
 	});
 
-	res.render('profile');
 });
 
 router.get('/testfunction', function(req, res, next) {

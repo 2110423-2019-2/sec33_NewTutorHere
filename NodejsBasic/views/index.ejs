@@ -11,12 +11,15 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<<<<<<< HEAD
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js"
         integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"
         integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/scripts/modal.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
+=======
+>>>>>>> d88df0b878f706f6c3ca7b02b90cecc15f437488
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <!-- <script src="script.js"></script> -->
     <!-- <script>checkStatus()</script> -->
@@ -24,6 +27,7 @@
 
 <body>
 
+<<<<<<< HEAD
 
     <!--The Modal--> 
     <div class="my-modal" id="my-modal">
@@ -57,6 +61,8 @@
 
 
 
+=======
+>>>>>>> d88df0b878f706f6c3ca7b02b90cecc15f437488
     <!-- sign-up-form -->
     <div class="big-bg popup" id="sign-up-form">
         <div class="form-bg color-lightgreen center" id="sign-up-form-bg">
@@ -189,6 +195,7 @@
                     </div>
                     <button type="submit" class="submit-button sign-in-button center" onclick="signIn()">Log In</button>
                 </form>
+<<<<<<< HEAD
                 <!-- <div class="form" id="sign-in">
                     <div class="form-group">
                         <label class="control-label">Username</label>
@@ -205,6 +212,8 @@
                     <button type="submit" class="submit-button sign-in-button center" onclick="signIn()">Log In</button>
                 </div> -->
 
+=======
+>>>>>>> d88df0b878f706f6c3ca7b02b90cecc15f437488
                 <!-- <button class="submit-button sign-in-button center" onclick="signIn()">Log In</button> -->
                 <button class="submit-button sign-up-button center" onclick="showSignUpForm()">Sign Up</button>
 
@@ -234,25 +243,6 @@
         function showSignUpForm() {
             $("#sign-up-form").css("display", "flex");
         }
-
-        function Animation(reverse = false) {
-            const tl = new TimelineLite({
-                ease: Expo.easeOut
-            });
-            const logo = document.querySelector('.logo-container');
-            const header = document.querySelector('.header');
-            const subheader = document.querySelector('.sub-header');
-            const button = document.querySelector('.button-container');
-            tl.fromTo([logo, header, subheader, button], 1, {
-                opacity: 0,
-                y: 50
-                }, {
-                    opacity: 1,
-                    y: 0
-            })
-        }
-            Animation();
-
     </script>
 </body>
 

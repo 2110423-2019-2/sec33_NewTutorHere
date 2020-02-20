@@ -17,6 +17,7 @@
  <script type="text/javascript" src="/scripts/mustache.js"></script>
  <script type="text/javascript" src="/scripts/modal.js"></script>
  <script type="text/javascript" src="/scripts/custom.js"></script>
+ <script type="text/javascript" src="/routes/allFunction.js"></script>
 </head>
 
 <body>
@@ -78,18 +79,12 @@
               </br>
             </div>
             <div class="half-box be-right">
-              <label class="control-label">Price</label>
+              <label class="control-label">Minimum Price</label>
               <div class="form-input">
                 <div class="form-group">
                   <div class="half-box be-left" style="width: 30%;">
                     <div class="form-input">
                       <input type="text" id="minprice-filter" name="minprice" placeholder="฿">
-                    </div>
-                  </div>
-                  <label class="control-label-price be-left">-</label>
-                  <div class="half-box be-left" style="width: 30%;">
-                    <div class="form-input">
-                      <input type="text" id="maxprice-filter" name="maxprice" placeholder="฿">
                     </div>
                   </div>
                 </div>
@@ -127,39 +122,41 @@
 
    
       <div class="tutorse-box color-lightgreen center">
-
+        
 
         <%if (typeof searchResults!= 'undefined') { %>
           <%for(result of searchResults) {%>
     
-          <div class="tt-box center">
+          <div class="tt-box center" >
             <div class="pfphoto-box">
                 <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
             </div>
-            <div class="pfdetail-box be-right">
-                <span class="name-contract">
+            <div class="pfdetail-box be-right" >
+                <form class="name-contract" action = "/home/profile" method = "GET">
                     
-                    <p>NAMENAMENAME</p>
-                    <img class="nav-img-user" src="../img/placeholder.png" style="height: 1.1em;" /><a>Bangkok, Thailand</a><br />
+                    <p ><%= result.tutor_username %></p>
+                    <img class="nav-img-user" src="../img/placeholder.png" style="height: 1.1em;" /><a><%= result.city%></a><br />
                     <b>Subject</b><a><%= result.subject %></a><br />
                     <b>Educational Level</b><a><%= result.level %></a><br />
                     <b>Price</b><a>฿<%= result.price %> per hour</a><br />
-                    <button class="editpf-button be-right" >View this Tutor</button>
-                </span>
+                    <button class="editpf-button be-right" onclick="clicked('<%= result.tutor_username %>')" href="/home/tutors_contract"> View this Tutor</button>
+                </form>                                      
             </div>
           </div>
-    
           <% }} %>
 
 
+    
       </div>
-
     </div>
   </div>
 
   
 
-
+<script> function clicked(name) {
+      document.cookie = "nextpf= " +name;
+      //alert("AAAAAAAA");
+}</script>
 </body>
 
 </html>

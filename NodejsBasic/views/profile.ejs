@@ -111,9 +111,9 @@
               </div>
               <div class="pfdetail-box be-right">
                   <span class="name-contract">
-                      <button class="editpf-button be-right" onclick="showEditProfileForm()">Edit Profile</button>
+                      <button class="editpf-button be-right" id="editbut" onclick="showEditProfileForm()">Edit Profile</button>
                       
-                      <p><%= pf.firstname%>  <%=pf.lastname %></p>
+                      <p id="name"> <%= pf.firstname%> </p>  <p><%=pf.lastname %></p>
                       <img class="nav-img-user" src="/img/placeholder.png" style="height: 1.1em;" /><a>   <%= pf.location %></a><br />
                       <b>Email</b><a><%= pf.email %></a><br />
                       <b>Phone Number</b><a><%= pf.phone %></a><br />
@@ -144,8 +144,32 @@
       </div>
     </div>
     </div>
-
+    
     <script>
+
+    var names = "firstn=";
+    var tod ;
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+        c = c.substring(1,c.length);
+        }
+        if (c.indexOf(names) == 0) {
+      tod=  c.substring(names.length, c.length);
+    }
+  }
+   // alert(tod);
+   //alert(document.getElementById("name").innerText);
+    if(tod != document.getElementById("name").innerText){
+        $("#editbut").css("display", "none");
+       // alert("1");
+    }
+    else{
+        $("#editbut").css("display", "flex");
+        //alert("2");
+    }
+
         var bdate = document.getElementById("bdate-editpf");
         var days = "<option value=\"\" disabled selected>Day</option>";
         for (let i = 1; i <= 31; i++) {

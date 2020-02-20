@@ -26,6 +26,10 @@ router.post('/resolve', [
 ], function (req, res) {
 	const result = validationResult(req);
 	var errors = result.errors;
+<<<<<<< HEAD
+=======
+	//var custom = require('./custom.js')
+>>>>>>> d88df0b878f706f6c3ca7b02b90cecc15f437488
 	
 	if (!result.isEmpty()) {
 		// username/password empty
@@ -43,7 +47,8 @@ router.post('/resolve', [
 				// console.log(user)
 				console.log('connect to user');
 				//TODO: Change from storing just the username as a login token to jwt
-				res.cookie('auth', user.username)  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
+				res.cookie('auth', user.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
+				res.cookie('firstn', user.firstname);
 				res.render('home', {name:req.cookies.auth});
 			}
 			else {

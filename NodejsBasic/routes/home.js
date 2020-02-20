@@ -81,7 +81,7 @@ router.get('/profile', function (req, res, next) {
 router.post('/profile/edit_profile', [], function (req, res) {
 	
 	//if(req.cookies.auth == req.body.username)
-	
+	console.log("IN PROFILE EDIT");
 	client.connect(async function (err) {
 		//checks for connection error
 		assert.equal(null, err);

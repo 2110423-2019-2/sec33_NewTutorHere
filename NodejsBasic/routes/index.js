@@ -45,7 +45,8 @@ router.post('/resolve', [
 				// console.log(user)
 
 				//TODO: Change from storing just the username as a login token to jwt
-				res.cookie('auth', user.username)  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
+				res.cookie('auth', user.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
+				res.cookie('firstn', user.firstname);
 				res.render('home', {name:req.cookies.auth});
 			}
 			else {

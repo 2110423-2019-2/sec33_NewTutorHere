@@ -32,13 +32,25 @@ function generateContract() {
 
 
 
-module.exports = {
-    signIn: function () {
-        if ($.trim($('#username-signin').val()).length <= 0) {
-            Modal_alert('Alert!', "Please Enter Username");
-        } else if ($.trim($('#password-signin').val()).length <= 0) {
-            Modal_alert('Alert!', "Please Enter Password");
-        } 
-    }
+// function signIn() {
+//     if ($.trim($('#username-signin').val()).length <= 0) {
+//         Modal_alert('Alert!', "Please Enter Username");
+//     } else if ($.trim($('#password-signin').val()).length <= 0) {
+//         Modal_alert('Alert!', "Please Enter Password");
+//     } else {
 
-};
+//         $.ajax({
+//             type: "post",
+//             url: "/resolve",
+            
+//             success: function () {
+//                 console.log('success');
+//             },
+//             error: function () {
+//                 console.log('error');
+//             }
+//         });
+
+//     }
+// }
+

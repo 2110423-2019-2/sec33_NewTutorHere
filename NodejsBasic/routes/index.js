@@ -26,13 +26,11 @@ router.post('/resolve', [
 ], function (req, res) {
 	const result = validationResult(req);
 	var errors = result.errors;
-	var custom = require('./custom.js')
 	
 	if (!result.isEmpty()) {
 		// username/password empty
 		res.send(errors[0]['msg']);
 		// send  error.msg if error 
-		//custom.signIn();
 	} else {
 		client.connect(async function (err) {
 			assert.equal(null, err);
@@ -43,7 +41,7 @@ router.post('/resolve', [
 			});
 			if (user) {
 				// console.log(user)
-
+				console.log('connect to user');
 				//TODO: Change from storing just the username as a login token to jwt
 				res.cookie('auth', user.username)  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 				res.render('home', {name:req.cookies.auth});
@@ -81,5 +79,6 @@ router.post('/register', [], function (req, res) {
 
 	res.render('home');
 });
+
 
 module.exports = router;

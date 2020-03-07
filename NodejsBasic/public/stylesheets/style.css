@@ -716,9 +716,10 @@ button:hover.editpf-button {
 .ratesum-box{
     margin-top: 2%;
     width: 48%;
-    height: 30%;
+    height: auto;
     background-color: white;
     display: inline-block;
+    padding-bottom: 1%;
 }
 .name-contract c{
     font-size: 1em;
@@ -737,7 +738,7 @@ button:hover.editpf-button {
     background-color: white;
 }
 button.edit-button {
-    width: 25%;
+    width: 27%;
     background-color: #86916E;
     padding: 5px 0px 5px 0px;
     border: none;
@@ -889,4 +890,28 @@ textarea {
     border-color: #D4145A;
     border-style: inset;
     width: 80%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.7em;
+}
+.qual-item{
+    width: 70%;
+    height: auto;
+    background-color: #ddd;
+    border: none;
+    border-radius: 13px;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-top: 2%;
+    margin-left: 15%;
 }

@@ -411,10 +411,17 @@ button.search-button {
 
 /*Contract*/
 div.contract-box {
-    width: 60%;
+    width: 56%;
     height: 40em;
     border: none;
-    padding: 30px 10% 0px 10%;
+    padding: 30px 7% 0px 7%;
+}
+div.contractlog-box {
+    width: 26%;
+    height: 40em;
+    border: none;
+    padding: 30px 2% 0px 2%;
+    display: inline;
 }
 div.blockcontract {
     width: 100%;
@@ -941,4 +948,35 @@ th, td {
     padding-bottom: 2%;
     margin-top: 2%;
     margin-left: 15%;
+}
+.conlog-item{
+    width: 85%;
+    height: 3em;
+    background-color: #ddd;
+    border: none;
+    border-radius: 13px;
+    /*text-align: center;*/
+    padding-top: 3%;
+    padding-bottom: 2%;
+    margin-top: 2%;
+    margin-left: 5%;
+}
+button.view2-button {
+    width: 30%;
+    /*height: 32pt;*/
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    /*margin-top: 10px;
+    margin-bottom: 20px;*/
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    /* font-weight: bold; */
+    letter-spacing: 0.08em;
+    margin-right: 2%;
+}
+
+button:hover.view2-button {
+    background-color: #879437;
 }

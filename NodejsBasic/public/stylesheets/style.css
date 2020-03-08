@@ -668,14 +668,22 @@ button:hover.view-button {
 /*profile*/
 div.profile-box {
     width: 70%;
-    height: 45em;
+    height: 70em;
     border: none;
     padding: 30px 5% 0px 5%;
 }
 .pf-box {
     /*padding: 0px 0px 10px 0px;*/
     width: 100%;
-    height: 28%;
+    height: 20%;
+    background-color: white;
+}
+.review-box {
+    /*padding: 0px 0px 10px 0px;*/
+    width: 100%;
+    height: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
     background-color: white;
 }
 .pfphoto-box{
@@ -734,8 +742,10 @@ button:hover.editpf-button {
 .qual-box{
     margin-top: 2%;
     width: 48%;
-    height: 63%;
+    /*height: 63%;*/
+    height: auto;
     background-color: white;
+    padding-bottom: 1%;
 }
 button.edit-button {
     width: 27%;
@@ -752,6 +762,23 @@ button.edit-button {
 }
 
 button:hover.edit-button {
+    background-color: #879437;
+}
+button.sendcontract-button {
+    width: 17%;
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    /* font-weight: bold; */
+    letter-spacing: 0.15em;
+    margin-right: 2%;
+    margin-top: inherit;
+}
+
+button:hover.sendcontract-button {
     background-color: #879437;
 }
 

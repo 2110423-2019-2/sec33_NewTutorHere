@@ -116,5 +116,9 @@ router.get('/testfunction', function(req, res, next) {
 	testFunction.data.checkcookie(req,res);
   });
 
+// profile page
+router.get('/students_profile', function (req, res, next) {
+	res.render('students_profile');
+});
 
 module.exports = router;

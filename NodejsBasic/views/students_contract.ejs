@@ -23,11 +23,63 @@
     <%- include navbar %>
     <div class="big-bg">
         <!-- Content -->
-      <div class="dashboard">
-
-          <div class="contract-box color-lightgreen center" id="contract-form">
-              <!-- Begin of contract list -->
+        <div class="contractlog-box be-left">
+          <span class="name-stucontract">
+            <p>Contract Log</p>
+          </span>
+          <div class="conlog-item">
+            <span class="name-stucontract">
+              <a>Tutor One</a>
+            </span>
+            <br />
+            <button class="view2-button search-button be-right">Terminate</button>
+            <button class="view2-button search-button be-right">View</button>
           </div>
+  
+          <div class="conlog-item">
+            <span class="name-stucontract">
+              <a>Tutor Two</a>
+            </span>
+            <br />
+            <button class="view2-button search-button be-right">Terminate</button>
+            <button class="view2-button search-button be-right">View</button>
+          </div>
+        </div>
+
+          <div class="contract-box color-lightgreen be-right" id="contract-form">
+              <!-- Begin of contract list -->
+              <form class="form" id="contract">
+                <img class="nav-img-user" src="/img/user.png" style="height: 5em;" />
+                <div class="c-box be-right">
+                    <div class="blockcontract">
+                        <span class="name-stucontract">
+                            
+                            <a>sends a contract to</a>
+                            <p>Palinee Setsiripaiboon</p>
+                        </span>
+                        <br />
+                        <button class="view-button search-button be-right" >Cancel a contract</button>
+                        <button class="view-button search-button be-right" >View a contract</button>
+                    </div>
+                    
+                </div>  
+                
+                <img class="nav-img-user" src="/img/user.png" style="height: 5em;" />
+                <div class="c-box be-right">
+                    <div class="blockcontract">
+                        <span class="name-stucontract">
+                            
+                            <a>sends a contract to</a>
+                            <p>Isaree Jirapogchapone</p>
+                        </span>
+                        <br />
+                        <button class="view-button search-button be-right" >Cancel a contract</button>
+                        <button class="view-button search-button be-right" >View a contract</button>
+                    </div>
+                    
+                </div>
+            </form>
+        
 
       </div>
     </div>

@@ -55,6 +55,11 @@ router.get('/students_contract', function (req, res, next) {
 	res.render('students_contract');
 });
 
+// schedule page
+router.get('/schedule', function (req, res, next) {
+	res.render('schedule');
+});
+
 // profile page
 router.get('/profile', function (req, res, next) {
 	var use = req.cookies.auth;
@@ -120,5 +125,6 @@ router.get('/testfunction', function(req, res, next) {
 router.get('/students_profile', function (req, res, next) {
 	res.render('students_profile');
 });
+
 
 module.exports = router;

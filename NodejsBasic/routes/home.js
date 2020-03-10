@@ -39,7 +39,7 @@ router.get('/', function (req, res, next) {
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(req.body.subject, result)
-		res.render('home', { searchResults: result});
+		res.render('home', { searchResults: result });
 	});
 
 	//TODO: Handle db connection failed error
@@ -57,34 +57,52 @@ router.get('/students_contract', function (req, res, next) {
 
 // schedule page
 router.get('/schedule', function (req, res, next) {
-	res.render('schedule');
+	// res.render('schedule'); 
+
+	var use = req.cookies.auth;
+	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		const weekday = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+		var results = [];
+		for (i = 0; i < 7; i++) {
+			var query = {
+				"class_day": weekday[i],
+				"tutor_username": use,
+				"status": 'accepted',
+			};
+			results.push(await db.collection('ContractData').find(query).toArray());
+		}
+		console.log(results);
+		res.render('schedule', { schedule: results });
+		
+	});
 });
 
 // profile page
 router.get('/profile', function (req, res, next) {
 	var use = req.cookies.auth;
-	if(typeof req.cookies.nextpf != 'undefined') {use = req.cookies.nextpf;}
+	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
 		var query = {
-			"username" : use
+			"username": use
 		};
-		//TODO: This search uses RegEx, consider changing it to something else later.
-		// ** Not completed due to time constraints
-		// Look into col.find() and how to use its find operators
+
 		const resultt = await db.collection('UserData').find(query).limit(1).toArray();
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		console.log( resultt);
+		console.log(resultt);
 		res.render('profile', { pf: resultt[0] });
 	});
-	
+
 });
 
 // edit-profile-form
 router.post('/profile/edit_profile', [], function (req, res) {
-	
+
 	//if(req.cookies.auth == req.body.username)
 	console.log("IN PROFILE EDIT");
 	client.connect(async function (err) {
@@ -100,26 +118,26 @@ router.post('/profile/edit_profile', [], function (req, res) {
 			},
 			{
 				$set: {
-				'firstname': req.body.firstname,
-				'lastname': req.body.lastname,
-				'phone': req.body.phone,
-				'email': req.body.email,
-				'gender': req.body.gender,
-				'bio' : req.body.bio
+					'firstname': req.body.firstname,
+					'lastname': req.body.lastname,
+					'phone': req.body.phone,
+					'email': req.body.email,
+					'gender': req.body.gender,
+					'bio': req.body.bio
 				}
 			}
 		);
-		const result = await db.collection('UserData').find({username : req.cookies.auth}).limit(1).toArray();
-		console.log( result);
-		res.render('profile',{ pf: result[0] });
+		const result = await db.collection('UserData').find({ username: req.cookies.auth }).limit(1).toArray();
+		console.log(result);
+		res.render('profile', { pf: result[0] });
 	});
 
 });
 
-router.get('/testfunction', function(req, res, next) {
+router.get('/testfunction', function (req, res, next) {
 	//use function like this
-	testFunction.data.checkcookie(req,res);
-  });
+	testFunction.data.checkcookie(req, res);
+});
 
 // profile page
 router.get('/students_profile', function (req, res, next) {

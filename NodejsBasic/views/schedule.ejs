@@ -13,10 +13,10 @@
 </head>
 
 <body>
+
     <header class="cd-main-header text-center flex flex-column flex-center">
         <h1 class="text-xl">Schedule</h1>
     </header>
-
     <div class="cd-schedule cd-schedule--loading margin-top-lg margin-bottom-lg js-cd-schedule">
         <div class="cd-schedule__timeline">
             <ul>
@@ -56,28 +56,33 @@
                     <div class="cd-schedule__top-info"><span>Monday</span></div>
                     <ul>
 
+                        <% schedule[0].forEach(element => { %>
 
                         <li class="cd-schedule__event">
-                            <a data-start="09:30" data-end="10:30" data-content="user1" data-event="event-1" href="#0">
-                                <em class="cd-schedule__name">User1</em>
+                            <a data-start="<%= element.class_start %>" data-end="<%= element.class_end %>"
+                                data-content="<%= element.course_name %>" data-event="event-1" href="#0">
+                                <em class="cd-schedule__name"><%= element.course_name %></em>
                             </a>
                         </li>
+                        <% }) %>
 
-
-                        <li class="cd-schedule__event">
-                            <a data-start="14:00" data-end="15:15" data-content="user2" data-event="event-3" href="#0">
-                                <em class="cd-schedule__name">User2</em>
-                            </a>
-                        </li>
                     </ul>
                 </li>
 
                 <li class="cd-schedule__group">
                     <div class="cd-schedule__top-info"><span>Tuesday</span></div>
                     <ul>
-
+                        <% schedule[1].forEach(element => { %>
 
                         <li class="cd-schedule__event">
+                            <a data-start="<%= element.class_start %>" data-end="<%= element.class_end %>"
+                                data-content="<%= element.course_name %>" data-event="event-1" href="#0">
+                                <em class="cd-schedule__name"><%= element.course_name %></em>
+                            </a>
+                        </li>
+                        <% }) %>
+
+                        <!-- <li class="cd-schedule__event">
                             <a data-start="10:00" data-end="11:00" data-content="user4" data-event="event-2" href="#0">
                                 <em class="cd-schedule__name">User4</em>
                             </a>
@@ -87,7 +92,7 @@
                             <a data-start="11:30" data-end="13:00" data-content="user3" data-event="event-4" href="#0">
                                 <em class="cd-schedule__name">User3</em>
                             </a>
-                        </li>
+                        </li> -->
 
 
                     </ul>
@@ -97,12 +102,21 @@
                     <div class="cd-schedule__top-info"><span>Wednesday</span></div>
 
                     <ul>
+                        <% schedule[2].forEach(element => { %>
 
                         <li class="cd-schedule__event">
+                            <a data-start="<%= element.class_start %>" data-end="<%= element.class_end %>"
+                                data-content="<%= element.course_name %>" data-event="event-1" href="#0">
+                                <em class="cd-schedule__name"><%= element.course_name %></em>
+                            </a>
+                        </li>
+                        <% }) %>
+
+                        <!-- <li class="cd-schedule__event">
                             <a data-start="09:00" data-end="10:15" data-content="user3" data-event="event-4" href="#0">
                                 <em class="cd-schedule__name">User3</em>
                             </a>
-                        </li>
+                        </li> -->
 
 
                     </ul>
@@ -112,12 +126,20 @@
                     <div class="cd-schedule__top-info"><span>Thursday</span></div>
                     <ul>
 
+                        <% schedule[3].forEach(element => { %>
 
                         <li class="cd-schedule__event">
+                            <a data-start="<%= element.class_start %>" data-end="<%= element.class_end %>"
+                                data-content="<%= element.course_name %>" data-event="event-1" href="#0">
+                                <em class="cd-schedule__name"><%= element.course_name %></em>
+                            </a>
+                        </li>
+                        <% }) %>
+                        <!-- <li class="cd-schedule__event">
                             <a data-start="17:00" data-end="18:30" data-content="user4" data-event="event-2" href="#0">
                                 <em class="cd-schedule__name">User4</em>
                             </a>
-                        </li>
+                        </li> -->
 
 
                     </ul>
@@ -127,13 +149,21 @@
                     <div class="cd-schedule__top-info"><span>Friday</span></div>
                     <ul>
 
-
+                        <% schedule[4].forEach(element => { %>
 
                         <li class="cd-schedule__event">
+                            <a data-start="<%= element.class_start %>" data-end="<%= element.class_end %>"
+                                data-content="<%= element.course_name %>" data-event="event-1" href="#0">
+                                <em class="cd-schedule__name"><%= element.course_name %></em>
+                            </a>
+                        </li>
+                        <% }) %>
+
+                        <!-- <li class="cd-schedule__event">
                             <a data-start="12:30" data-end="14:00" data-content="user1" data-event="event-1" href="#0">
                                 <em class="cd-schedule__name">User1</em>
                             </a>
-                        </li>
+                        </li> -->
 
 
 
@@ -144,13 +174,21 @@
                     <div class="cd-schedule__top-info"><span>Saturday</span></div>
                     <ul>
 
-
+                        <% schedule[5].forEach(element => { %>
 
                         <li class="cd-schedule__event">
+                            <a data-start="<%= element.class_start %>" data-end="<%= element.class_end %>"
+                                data-content="<%= element.course_name %>" data-event="event-1" href="#0">
+                                <em class="cd-schedule__name"><%= element.course_name %></em>
+                            </a>
+                        </li>
+                        <% }) %>
+
+                        <!-- <li class="cd-schedule__event">
                             <a data-start="8:30" data-end="10:00" data-content="user1" data-event="event-1" href="#0">
                                 <em class="cd-schedule__name">User1</em>
                             </a>
-                        </li>
+                        </li> -->
 
 
 
@@ -161,13 +199,21 @@
                     <div class="cd-schedule__top-info"><span>Sunday</span></div>
                     <ul>
 
-
+                        <% schedule[6].forEach(element => { %>
 
                         <li class="cd-schedule__event">
+                            <a data-start="<%= element.class_start %>" data-end="<%= element.class_end %>"
+                                data-content="<%= element.course_name %>" data-event="event-1" href="#0">
+                                <em class="cd-schedule__name"><%= element.course_name %></em>
+                            </a>
+                        </li>
+                        <% }) %>
+
+                        <!-- <li class="cd-schedule__event">
                             <a data-start="14:30" data-end="16:00" data-content="user1" data-event="event-1" href="#0">
                                 <em class="cd-schedule__name">User1</em>
                             </a>
-                        </li>
+                        </li> -->
 
 
 

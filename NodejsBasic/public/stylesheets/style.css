@@ -692,6 +692,8 @@ div.profile-box {
     margin-top: 2%;
     margin-bottom: 2%;
     background-color: white;
+    display: inline-block;
+    padding-bottom: 1%;
 }
 .pfphoto-box{
     width: 20%;
@@ -754,7 +756,7 @@ button:hover.editpf-button {
     background-color: white;
     padding-bottom: 1%;
 }
-button.edit-button {
+button.editCourse-button {
     width: 27%;
     background-color: #86916E;
     padding: 5px 0px 5px 0px;
@@ -768,9 +770,64 @@ button.edit-button {
     margin-top: inherit;
 }
 
-button:hover.edit-button {
+button:hover.editCourse-button {
     background-color: #879437;
 }
+
+button.addCourse-button {
+    width: 27%;
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    /* font-weight: bold; */
+    letter-spacing: 0.15em;
+    margin-right: 2%;
+    margin-top: inherit;
+}
+
+button:hover.addCourse-button {
+    background-color: #879437;
+}
+
+button.verifyDoc-button {
+    width: 27%;
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    /* font-weight: bold; */
+    letter-spacing: 0.15em;
+    margin-right: 2%;
+    margin-top: inherit;
+}
+
+button:hover.verifyDoc-button {
+    background-color: #879437;
+}
+
+button.editAva-button {
+    width: 27%;
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    /* font-weight: bold; */
+    letter-spacing: 0.15em;
+    margin-right: 2%;
+    margin-top: inherit;
+}
+
+button:hover.editAva-button {
+    background-color: #879437;
+}
+
 button.sendcontract-button {
     width: 17%;
     background-color: #86916E;

@@ -2,451 +2,113 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NewTutorHere</title>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
-  <!-- <link rel="shortcut icon" href="img/dog.ico" /> -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NewTutorHere</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
+    <!-- <link rel="shortcut icon" href="img/dog.ico" /> -->
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
-  <!-- <script src="script.js"></script> -->
-  <!-- <script>checkStatus()</script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <!-- <script src="script.js"></script> -->
+    <!-- <script>checkStatus()</script> -->
 </head>
 
 <body>
-  <%- include navbar %>
+    <%- include navbar %>
 
-  <!-- edit-profile-form -->
-  <div class="big-bg popup" id="edit-profile-form">
-      <div class="form-bg color-lightgreen center" id="edit-profile-form-bg">
-          <button class="close-button"><i class="fa fa-close" onclick="closeEditButton()"></i></button>
-          <span class="form-name">
-              <p>Edit your profile</p>
-          </span>
-          <div class="form-information-bg">
-              <form class="form" action=/home/profile/edit_profile id="edit-profile" method="POST">
-                  <div class="form-group">
-                      <div class="half-box be-left">
-                          <div class="form-input">
-                              <input type="text" id="firstname-editpf" name="firstname" placeholder="First Name">
-                          </div>
-                      </div>
-                      <div class="half-box be-right">
-                          <div class="form-input">
-                              <input type="text" id="lastname-editpf" name="lastname" placeholder="Last Name">
-                          </div>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <div class="form-input">
-                          <input type="email" id="e-mail-editpf" name="email" placeholder="E-mail">
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <div class="form-input">
-                          <input type="text" id="phone-editpf" name="phone" placeholder="Telephone Number">
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <div class="form-input">
-                          <input type="text" id="location-editpf" name="location" placeholder="Location">
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <div class="form-input">
-                          <div class="textwrapper"><textarea id="bio-editpf" name="bio" cols="2" rows="6"
-                                  placeholder="  Bio"></textarea></div>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="control-label">Date Of Birth</label>
-                      <div class="form-input drop-down">
-                          <select id="bdate-editpf" name="bdate"></select>
-                          <select id="bmonth-editpf" name="bmonth">
-                              <option value="" disabled selected>Month</option>
-                              <option value="1">January</option>
-                              <option value="2">February</option>
-                              <option value="3">March</option>
-                              <option value="4">April</option>
-                              <option value="5">May</option>
-                              <option value="6">June</option>
-                              <option value="7">July</option>
-                              <option value="8">August</option>
-                              <option value="9">September</option>
-                              <option value="10">October</option>
-                              <option value="11">November</option>
-                              <option value="12">December</option>
-                          </select>
-                          <select id="byear-editpf" name="byear"></select>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="control-label">Gender</label>
-                      <div class="form-input drop-down">
-                          <select id="gender-editpf" name="gender">
-                              <option value="male">Male</option>
-                              <option value="female">Female</option>
-                              <option value="others">Not Specified</option>
-                          </select>
-                      </div>
-                  </div>
-                  <button class="submit-button sign-up-button center">Save</button>
-              </form>
-          </div>
-      </div>
-  </div>
-
-  <!-- contract-form -->
-  <div class="big-bg popup" id="contract-form-popup">
-      <div class="form-bg color-lightgreen center" id="contract-form-popup-bg">
-          <button class="close-button"><i class="fa fa-close" onclick="closeContractButton()"></i></button>
-          <span class="form-name">
-              <p>Contract</p>
-          </span><br>
-          <div class="form-information-bg">
-              <form class="form" action=/home/profile id="contract-form" method="POST">
-                  <div class="form-group">
-                      <div class="form-input">
-                          <input type="text" id="subject-contactf" name="subject" placeholder="Subject">
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="control-label">Educational Level</label>
-                      <div class="form-input drop-down">
-                          <select id="level-filter" name="level" style="width: 100%;">
-                              <option value="" disabled selected>Educational Level</option>
-                              <option value="0">Any Level</option>
-                              <option value="1">Pre-School</option>
-                              <option value="2">Elementary-School</option>
-                              <option value="3">Middle-School</option>
-                              <option value="4">High-School</option>
-                              <option value="5">Bachelor</option>
-                          </select>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <div class="half-box be-left">
-                          <label class="control-label">Day</label>
-                          <div class="form-input drop-down">
-                              <select id="day-contactf" name="day" style="width: 100%;">
-                                  <option value="" disabled selected>Day</option>
-                                  <option value="0">Sunday</option>
-                                  <option value="1">Monday</option>
-                                  <option value="2">Tuesday</option>
-                                  <option value="3">Wednesday</option>
-                                  <option value="4">Thursday</option>
-                                  <option value="5">Friday</option>
-                                  <option value="6">Saturday</option>
-                              </select>
-                          </div>
-                      </div>
-                      <div class="half-box be-right">
-                          <label class="control-label">Time</label>
-                          <div class="form-input drop-down">
-                              <select id="time-contactf" name="time" style="width: 100%;">
-                                  <option value="" disabled selected>Time</option>
-                                  <option value="0">Morning</option>
-                                  <option value="1">Afternoon</option>
-                                  <option value="2">After School</option>
-                                  <option value="3">Evening</option>
-                              </select>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <div class="form-input">
-                          <div class="textwrapper"><textarea id="bio-editpf" name="bio" cols="2" rows="6"
-                                  placeholder="  Message"></textarea></div>
-                      </div>
-                  </div>
-
-                  <button class="submit-button sign-up-button center">Submit</button>
-              </form>
-          </div>
-      </div>
-  </div>
-  
-  
-
-  <div class="big-bg">
-    <!-- Content -->
-  <div class="dashboard">
-      <div class="profile-box color-lightgreen center" id="contract-form">
-          <div class="pf-box center">
-              <div class="pfphoto-box">
-                  <img class="nav-img-user center" src="/img/user.png" style="height: 7em;" />
-              </div>
-              <div class="pfdetail-box be-right">
-                  <span class="name-contract">
-                      <button class="editpf-button be-right" id="editbut" onclick="showEditProfileForm()">Edit Profile</button>
-                      
-                      <p id="name"> <%= pf.firstname%> </p>  <p><%=pf.lastname %></p>
-                      <img class="nav-img-user" src="/img/placeholder.png" style="height: 1.1em;" /><a>   <%= pf.location %></a><br />
-                      <b>Email</b><a><%= pf.email %></a><br />
-                      <b>Phone Number</b><a><%= pf.phone %></a><br />
-                      <b>Gender</b><a><%= pf.gender %></a><br />
-                      <b>Bio</b><a><%= pf.bio %></a>
-                  </span>
-              </div>
-          </div>
-          <div class="ratesum-box">
-              <span class="name-contract">
-                  <c>Rate Summary</c>
-                  <b>฿200 to ฿500 per hour</b>
-              </span>
-              <table id='courses-table'>
-                <tr>
-                    <th></th>
-                    <th>PRIMARY</th>
-                    <th>KS3</th>
-                    <th>GCSE</th>
-                    <th>A-LEVEL</th>
-                    <th>DEGREE</th>
-                </tr>
-                <tr>
-                  <td>English</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td><button class="deleteCourse-button"><i class="fa fa-trash" 
-                            onclick="removeCourse(this)"></i></button>
-                  </td>
-                </tr>
-            
-                <tr>
-                  <td>Maths</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td><button class="deleteCourse-button"><i class="fa fa-trash"
-                              onclick="removeCourse(this)"></i></button>
-                  </td>
-                </tr>
-                
-              </table>
-              
-              <button class="editCourse-button be-right" >Edit courses</button>
-              <button class="addCourse-button be-right" onclick="addCourse()">Add courses</button>
-
-          </div>
-          <div class="qual-box be-right">
-              <span class="name-contract">
-                  <c>Qualifications</c>
-              </span>
-              <div class="qual-item">
-                  <span class="name-contract">
-                    <a>XXXXXXXXXXXXXX</a><br />
-                    <a>XXXXXXXXXXXXXX</a>
-                  </span>
-              </div>
-              <div class="qual-item">
-                <span class="name-contract">
-                  <a>XXXXXXXXXXXXXX</a><br />
-                  <a>XXXXXXXXXXXXXX</a>
-                </span>
-            </div>
-            <div class="qual-item">
-                <span class="name-contract">
-                    <a>XXXXXXXXXXXXXX</a><br />
-                    <a>XXXXXXXXXXXXXX</a>
-                </span>
-            </div>
-            <div class="qual-item">
-                <span class="name-contract">
-                    <a>XXXXXXXXXXXXXX</a><br />
-                    <a>XXXXXXXXXXXXXX</a>
-                </span>
-            </div>
-              <button class="verifyDoc-button be-right" >Verify documents</button>
-          </div><br />
-          <div class="ratesum-box">
-              <span class="name-contract">
-                  <c>Availability</c>
-              </span>
-              <table>
-                <tr>
-                    <th></th>
-                    <th>MO</th>
-                    <th>TU</th>
-                    <th>WE</th>
-                    <th>TH</th>
-                    <th>FR</th>
-                    <th>SA</th>
-                    <th>SU</th>
-                </tr>
-                <tr>
-                  <td>Morning</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                    <td>Afternoon</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>After school</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>Evening</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                
-              </table>
-              <button class="editAva-button be-right" >Edit availability</button>
-          </div>
-          <div class="review-box center">
-            <span class="name-contract">
-                <c>Reviews</c>
+    <!-- edit-profile-form -->
+    <div class="big-bg popup" id="edit-profile-form">
+        <div class="form-bg color-lightgreen center" id="edit-profile-form-bg">
+            <button class="close-button"><i class="fa fa-close" onclick="closeEditButton()"></i></button>
+            <span class="form-name">
+                <p>Edit your profile</p>
             </span>
-            
-            <div class="qual-item">
-                <span class="name-contract">
-                  <a>XXXXXXXXXXXXXX</a><br />
-                  <a>XXXXXXXXXXXXXX</a>
-                </span>
+            <div class="form-information-bg">
+                <form class="form" action=/home/profile/edit_profile id="edit-profile" method="POST">
+                    <div class="form-group">
+                        <div class="half-box be-left">
+                            <div class="form-input">
+                                <input type="text" id="firstname-editpf" name="firstname" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="half-box be-right">
+                            <div class="form-input">
+                                <input type="text" id="lastname-editpf" name="lastname" placeholder="Last Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="email" id="e-mail-editpf" name="email" placeholder="E-mail">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="phone-editpf" name="phone" placeholder="Telephone Number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="location-editpf" name="location" placeholder="Location">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-input">
+                            <div class="textwrapper"><textarea id="bio-editpf" name="bio" cols="2" rows="6"
+                                    placeholder="  Bio"></textarea></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Date Of Birth</label>
+                        <div class="form-input drop-down">
+                            <select id="bdate-editpf" name="bdate"></select>
+                            <select id="bmonth-editpf" name="bmonth">
+                                <option value="" disabled selected>Month</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select id="byear-editpf" name="byear"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Gender</label>
+                        <div class="form-input drop-down">
+                            <select id="gender-editpf" name="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="others">Not Specified</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="submit-button sign-up-button center">Save</button>
+                </form>
             </div>
-            
-            
-            <div class="qual-item">
-              <span class="name-contract">
-                <a>XXXXXXXXXXXXXX</a><br />
-                <a>XXXXXXXXXXXXXX</a>
-              </span>
-          </div>
-          <button class="sendcontract-button be-right" onclick="showSentContract()">Send a contract</button>
-      </div>
+        </div>
     </div>
-    </div>
-    
-    <script>
-
-    var names = "firstn=";
-    var tod ;
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-        c = c.substring(1,c.length);
-        }
-        if (c.indexOf(names) == 0) {
-      tod=  c.substring(names.length, c.length);
-    }
-  }
-   // alert(tod);
-   //alert(document.getElementById("name").innerText);
-    if(tod != document.getElementById("name").innerText){
-        $("#editbut").css("display", "none");
-       // alert("1");
-    }
-    else{
-        $("#editbut").css("display", "block");
-        //alert("2");
-    }
-
-        var bdate = document.getElementById("bdate-editpf");
-        var days = "<option value=\"\" disabled selected>Day</option>";
-        for (let i = 1; i <= 31; i++) {
-            days += "<option value=\"" + i + "\">" + i + "</option>";
-        }
-        bdate.innerHTML = days;
-
-        var byear = document.getElementById("byear-editpf");
-        var years = "<option value=\"\" disabled selected>Year</option>";
-        for (let i = 1960; i <= 2020; i++) {
-            years += "<option value=\"" + i + "\">" + i + "</option>";
-        }
-        byear.innerHTML = years;
-
-        function closeEditButton() {
-            $("#edit-profile-form").css("display", "none");
-        }
-        function showEditProfileForm() {
-            $("#edit-profile-form").css("display", "flex");
-        }
-        
-        function closeContractButton() {
-            $("#contract-form-popup").css("display", "none");
-        }
-
-        function showSentContract() {
-            $("#contract-form-popup").css("display", "flex");
-        }
-
-        // remove course
-        function removeCourse(item) {
-            console.log('A');
-            item.closest('tr').remove()
-        }
-
-        //add course
-        //format : sub - - - - - deleteBut
-        function addCourse() {
-            var table = document.getElementById("courses-table");
-            var row = table.insertRow(table.rows.length);
-            var cell0 = row.insertCell(0);
-            cell0.innerHTML = "Science";
-
-            var cell1 = row.insertCell(1);
-            var cell2 = row.insertCell(2);
-            var cell3 = row.insertCell(3);
-            var cell4 = row.insertCell(4);
-            var cell5 = row.insertCell(5);
-            cell1.innerHTML = "-";
-            cell2.innerHTML = "-";
-            cell3.innerHTML = "-";
-            cell4.innerHTML = "-";
-            cell5.innerHTML = "-";
-            
-            
-            var cell6 = row.insertCell(6);
-            cell6.innerHTML = '<td><button class="deleteCourse-button"><i class="fa fa-trash"onclick="removeCourse(this)"></i></button></td>';
-
-        }
-        
-
-    </script>
 
     <!-- contract-form -->
-    <div class="big-bg popup" id="contract-form">
-        <div class="form-bg color-lightgreen center" id="contract-form-bg">
-            <button class="close-button"><i class="fa fa-close" onclick="closeButton()"></i></button>
+    <div class="big-bg popup" id="contract-form-popup">
+        <div class="form-bg color-lightgreen center" id="contract-form-popup-bg">
+            <button class="close-button"><i class="fa fa-close" onclick="closeContractButton()"></i></button>
             <span class="form-name">
                 <p>Contract</p>
             </span><br>
             <div class="form-information-bg">
-                <form class="form" action=/home/profile/sendcontract id="contract-form" method="POST">
+                <form class="form" action=/home/profile id="contract-form" method="POST">
                     <div class="form-group">
                         <div class="form-input">
                             <input type="text" id="subject-contactf" name="subject" placeholder="Subject">
@@ -463,7 +125,7 @@
                                 <option value="3">Middle-School</option>
                                 <option value="4">High-School</option>
                                 <option value="5">Bachelor</option>
-                              </select>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -501,7 +163,7 @@
                                     placeholder="  Message"></textarea></div>
                         </div>
                     </div>
-                
+
                     <button class="submit-button sign-up-button center">Submit</button>
                 </form>
             </div>
@@ -509,6 +171,275 @@
     </div>
 
 
+
+    <div class="big-bg">
+        <!-- Content -->
+        <div class="dashboard">
+            <div class="profile-box color-lightgreen center" id="contract-form">
+                <div class="pf-box center">
+                    <div class="pfphoto-box">
+                        <img class="nav-img-user center" src="/img/user.png" style="height: 7em;" />
+                    </div>
+                    <div class="pfdetail-box be-right">
+                        <span class="name-contract">
+                            <button class="editpf-button be-right" id="editbut" onclick="showEditProfileForm()">Edit
+                                Profile</button>
+
+                            <p id="name"> <%= pf.firstname%> </p>
+                            <p><%=pf.lastname %></p>
+                            <img class="nav-img-user" src="/img/placeholder.png" style="height: 1.1em;" /><a>
+                                <%= pf.location %></a><br />
+                            <b>Email</b><a><%= pf.email %></a><br />
+                            <b>Phone Number</b><a><%= pf.phone %></a><br />
+                            <b>Gender</b><a><%= pf.gender %></a><br />
+                            <b>Bio</b><a><%= pf.bio %></a>
+                        </span>
+                    </div>
+                </div>
+                <div class="ratesum-box">
+                    <span class="name-contract">
+                        <c>Rate Summary</c>
+                        <b>฿200 to ฿500 per hour</b>
+                    </span>
+                    <table id='courses-table'>
+                        <tr>
+                            <th></th>
+                            <th>PRIMARY</th>
+                            <th>KS3</th>
+                            <th>GCSE</th>
+                            <th>A-LEVEL</th>
+                            <th>DEGREE</th>
+                        </tr>
+                        <tr>
+                            <td>English</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><button class="deleteCourse-button"><i class="fa fa-trash"
+                                        onclick="removeCourse(this)"></i></button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Maths</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td><button class="deleteCourse-button"><i class="fa fa-trash"
+                                        onclick="removeCourse(this)"></i></button>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <button class="editCourse-button be-right">Edit courses</button>
+                    <button class="addCourse-button be-right" onclick="addCourse()">Add courses</button>
+
+                </div>
+                <div class="qual-box be-right">
+                    <span class="name-contract">
+                        <c>Qualifications</c>
+                    </span>
+                    <div class="qual-item">
+                        <span class="name-contract">
+                            <a>XXXXXXXXXXXXXX</a><br />
+                            <a>XXXXXXXXXXXXXX</a>
+                        </span>
+                    </div>
+                    <div class="qual-item">
+                        <span class="name-contract">
+                            <a>XXXXXXXXXXXXXX</a><br />
+                            <a>XXXXXXXXXXXXXX</a>
+                        </span>
+                    </div>
+                    <div class="qual-item">
+                        <span class="name-contract">
+                            <a>XXXXXXXXXXXXXX</a><br />
+                            <a>XXXXXXXXXXXXXX</a>
+                        </span>
+                    </div>
+                    <div class="qual-item">
+                        <span class="name-contract">
+                            <a>XXXXXXXXXXXXXX</a><br />
+                            <a>XXXXXXXXXXXXXX</a>
+                        </span>
+                    </div>
+                    <button class="verifyDoc-button be-right">Verify documents</button>
+                </div><br />
+                <div class="ratesum-box">
+                    <span class="name-contract">
+                        <c>Availability</c>
+                    </span>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th>MO</th>
+                            <th>TU</th>
+                            <th>WE</th>
+                            <th>TH</th>
+                            <th>FR</th>
+                            <th>SA</th>
+                            <th>SU</th>
+                        </tr>
+                        <tr>
+                            <td>Morning</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Afternoon</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>After school</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Evening</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+
+                    </table>
+                    <button class="editAva-button be-right">Edit availability</button>
+                </div>
+                <div class="review-box center">
+                    <span class="name-contract">
+                        <c>Reviews</c>
+                    </span>
+
+                    <div class="qual-item">
+                        <span class="name-contract">
+                            <a>XXXXXXXXXXXXXX</a><br />
+                            <a>XXXXXXXXXXXXXX</a>
+                        </span>
+                    </div>
+
+
+                    <div class="qual-item">
+                        <span class="name-contract">
+                            <a>XXXXXXXXXXXXXX</a><br />
+                            <a>XXXXXXXXXXXXXX</a>
+                        </span>
+                    </div>
+                    <button class="sendcontract-button be-right" onclick="showSentContract()">Send a contract</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            var names = "firstn=";
+            var tod;
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1, c.length);
+                }
+                if (c.indexOf(names) == 0) {
+                    tod = c.substring(names.length, c.length);
+                }
+            }
+            // alert(tod);
+            //alert(document.getElementById("name").innerText);
+            if (tod != document.getElementById("name").innerText) {
+                $("#editbut").css("display", "none");
+                // alert("1");
+            }
+            else {
+                $("#editbut").css("display", "block");
+                //alert("2");
+            }
+
+            var bdate = document.getElementById("bdate-editpf");
+            var days = "<option value=\"\" disabled selected>Day</option>";
+            for (let i = 1; i <= 31; i++) {
+                days += "<option value=\"" + i + "\">" + i + "</option>";
+            }
+            bdate.innerHTML = days;
+
+            var byear = document.getElementById("byear-editpf");
+            var years = "<option value=\"\" disabled selected>Year</option>";
+            for (let i = 1960; i <= 2020; i++) {
+                years += "<option value=\"" + i + "\">" + i + "</option>";
+            }
+            byear.innerHTML = years;
+
+            function closeEditButton() {
+                $("#edit-profile-form").css("display", "none");
+            }
+            function showEditProfileForm() {
+                $("#edit-profile-form").css("display", "flex");
+            }
+
+            function closeContractButton() {
+                $("#contract-form-popup").css("display", "none");
+            }
+
+            function showSentContract() {
+                $("#contract-form-popup").css("display", "flex");
+            }
+
+            // remove course
+            function removeCourse(item) {
+                console.log('A');
+                item.closest('tr').remove()
+            }
+
+            //add course
+            //format : sub - - - - - deleteBut
+            function addCourse() {
+                var table = document.getElementById("courses-table");
+                var row = table.insertRow(table.rows.length);
+                var cell0 = row.insertCell(0);
+                cell0.innerHTML = "Science";
+
+                var cell1 = row.insertCell(1);
+                var cell2 = row.insertCell(2);
+                var cell3 = row.insertCell(3);
+                var cell4 = row.insertCell(4);
+                var cell5 = row.insertCell(5);
+                cell1.innerHTML = "-";
+                cell2.innerHTML = "-";
+                cell3.innerHTML = "-";
+                cell4.innerHTML = "-";
+                cell5.innerHTML = "-";
+
+
+                var cell6 = row.insertCell(6);
+                cell6.innerHTML = '<td><button class="deleteCourse-button"><i class="fa fa-trash"onclick="removeCourse(this)"></i></button></td>';
+
+            }
+
+
+        </script>
 
 </body>
 

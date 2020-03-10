@@ -153,9 +153,7 @@ router.post('/profile/sendcontract', [], function (req, res) {
 	//if(req.cookies.auth == req.body.username)
 	console.log("IN SendconTract!");
 	
-	client.connect(async function (err) {
-		//checks for connection error
-		assert.equal(null, err);
+
 		client.connect(async function (err) {
 			//checks for connection error
 			assert.equal(null, err);
@@ -181,7 +179,6 @@ router.post('/profile/sendcontract', [], function (req, res) {
 		res.render('profile', { pf: resultt[0] });
 		});
 		
-	});
 
 });
 

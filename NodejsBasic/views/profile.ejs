@@ -360,6 +360,79 @@
 
     </script>
 
+    <!-- contract-form -->
+    <div class="big-bg popup" id="contract-form">
+        <div class="form-bg color-lightgreen center" id="contract-form-bg">
+            <button class="close-button"><i class="fa fa-close" onclick="closeButton()"></i></button>
+            <span class="form-name">
+                <p>Contract</p>
+            </span><br>
+            <div class="form-information-bg">
+                <form class="form" action=/home/profile id="contract-form" method="POST">
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="subject-contactf" name="subject" placeholder="Subject">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Educational Level</label>
+                        <div class="form-input drop-down">
+                            <select id="level-filter" name="level" style="width: 100%;">
+                                <option value="" disabled selected>Educational Level</option>
+                                <option value="0">Any Level</option>
+                                <option value="1">Pre-School</option>
+                                <option value="2">Elementary-School</option>
+                                <option value="3">Middle-School</option>
+                                <option value="4">High-School</option>
+                                <option value="5">Bachelor</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="half-box be-left">
+                            <label class="control-label">Day</label>
+                            <div class="form-input drop-down">
+                                <select id="day-contactf" name="day" style="width: 100%;">
+                                    <option value="" disabled selected>Day</option>
+                                    <option value="0">Sunday</option>
+                                    <option value="1">Monday</option>
+                                    <option value="2">Tuesday</option>
+                                    <option value="3">Wednesday</option>
+                                    <option value="4">Thursday</option>
+                                    <option value="5">Friday</option>
+                                    <option value="6">Saturday</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="half-box be-right">
+                            <label class="control-label">Time</label>
+                            <div class="form-input drop-down">
+                                <select id="time-contactf" name="time" style="width: 100%;">
+                                    <option value="" disabled selected>Time</option>
+                                    <option value="0">Morning</option>
+                                    <option value="1">Afternoon</option>
+                                    <option value="2">After School</option>
+                                    <option value="3">Evening</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-input">
+                            <div class="textwrapper"><textarea id="bio-editpf" name="bio" cols="2" rows="6"
+                                    placeholder="  Message"></textarea></div>
+                        </div>
+                    </div>
+                
+                    <button class="submit-button sign-up-button center">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
 </body>
 
 </html>

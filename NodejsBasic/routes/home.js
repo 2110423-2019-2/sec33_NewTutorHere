@@ -144,5 +144,4 @@ router.get('/students_profile', function (req, res, next) {
 	res.render('students_profile');
 });
 
-
 module.exports = router;

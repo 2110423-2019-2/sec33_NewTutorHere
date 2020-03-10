@@ -482,7 +482,7 @@ button:hover.view-button {
     background-color: #879437;
 }
 .name-contract a{
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: black;
     letter-spacing: 0.08em;
 }
@@ -723,12 +723,13 @@ div.profile-box {
 }
 .name-contract b{
     font-size: 0.9em;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #4C5F21;
     padding-left: 2em;
     padding-right: 1.2em;
     padding-bottom: 0.4em;
     display: inline-block;
+    letter-spacing: 0.08em;
 }
 button.editpf-button {
     width: 20%;
@@ -756,7 +757,7 @@ button:hover.editpf-button {
 }
 .name-contract c{
     font-size: 1em;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #4C5F21;
     padding-top: 1em;
     padding-left: 1em;

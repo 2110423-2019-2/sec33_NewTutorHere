@@ -47,12 +47,26 @@ router.get('/', function (req, res, next) {
 
 // tutor's contract page
 router.get('/tutors_contract', function (req, res, next) {
-	res.render('tutors_contract');
+	var use = req.cookies.auth;
+	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		var query = {
+			"tutor_username": use,
+			"status": 'requested',
+		};
+		results = await db.collection('ContractData').find(query).toArray();
+		console.log(results);
+		res.render('tutors_contract', { tutor_contract: results });
+
+	});
 });
 
 // student's contract page
 router.get('/students_contract', function (req, res, next) {
 	res.render('students_contract');
+	
 });
 
 // schedule page
@@ -76,7 +90,7 @@ router.get('/schedule', function (req, res, next) {
 		}
 		console.log(results);
 		res.render('schedule', { schedule: results });
-		
+
 	});
 });
 

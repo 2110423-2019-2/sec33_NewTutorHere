@@ -48,36 +48,27 @@
       </div>
       <div class="contract-box color-lightgreen be-right" id="contract-form">
         <!-- Begin of contract list -->
-        <form class="form" id="contract">
-          <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
-          <div class="c-box be-right">
-              <div class="blockcontract">
-                  <span class="name-contract">
-                      <p>Student Three</p>
-                      <a>sends you a contract.</a>
-                  </span>
-                  <br />
-                  <button class="view-button search-button be-right" >View a contract</button>
-                  <button class="view-button search-button be-right" >View profile</button>
-              </div>
-          </div>
 
-        </form>
+        <% tutor_contract.forEach(element => { %>
 
-        <form class="form" id="contract">
-          <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
-          <div class="c-box be-right">
-            <div class="blockcontract">
-                <span class="name-contract">
-                    <p>Student Four</p>
-                    <a>sends you a contract.</a>
-                </span>
-                <br />
-                <button class="view-button search-button be-right" >View a contract</button>
-                <button class="view-button search-button be-right" >View profile</button>
+          <form class="form" id="contract">
+            <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
+            <div class="c-box be-right">
+                <div class="blockcontract">
+                    <span class="name-contract">
+                        <p><%= element.student_username %> </p>
+                        <a>sends you a contract.</a>
+                    </span>
+                    <br />
+                    <button class="view-button search-button be-right" >View a contract</button>
+                    <button class="view-button search-button be-right" >View profile</button>
+                </div>
             </div>
-          </div>
-        </form>
+  
+          </form>
+         
+        <% }) %>
+        
       </div>
 
     

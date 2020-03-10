@@ -103,7 +103,7 @@
   <!-- contract-form -->
   <div class="big-bg popup" id="contract-form-popup">
       <div class="form-bg color-lightgreen center" id="contract-form-popup-bg">
-          <button class="close-button"><i class="fa fa-close" onclick="closeCourseButton()"></i></button>
+          <button class="close-button"><i class="fa fa-close" onclick="closeContractButton()"></i></button>
           <span class="form-name">
               <p>Contract</p>
           </span><br>
@@ -234,7 +234,7 @@
               </table>
               
               <button class="editCourse-button be-right" >Edit courses</button>
-              <button class="addCourse-button be-right" onclick="showAddCourse()">Add courses</button>
+              <button class="addCourse-button be-right" onclick="addCourse()">Add courses</button>
 
           </div>
           <div class="qual-box be-right">
@@ -345,7 +345,7 @@
                 <a>XXXXXXXXXXXXXX</a>
               </span>
           </div>
-          <button class="sendcontract-button be-right" >Send a contract</button>
+          <button class="sendcontract-button be-right" onclick="showSentContract()">Send a contract</button>
       </div>
     </div>
     </div>
@@ -396,11 +396,11 @@
             $("#edit-profile-form").css("display", "flex");
         }
         
-        function closeCourseButton() {
+        function closeContractButton() {
             $("#contract-form-popup").css("display", "none");
         }
 
-        function showAddCourse() {
+        function showSentContract() {
             $("#contract-form-popup").css("display", "flex");
         }
 

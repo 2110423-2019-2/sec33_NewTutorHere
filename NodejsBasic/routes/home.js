@@ -66,7 +66,7 @@ router.get('/schedule', function (req, res, next) {
 		const db = client.db(dbName);
 		const weekday = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 		var results = [];
-		for (i = 0; i < 7; i++) {
+		for (i = 0; i < weekday.length; i++) {
 			var query = {
 				"class_day": weekday[i],
 				"tutor_username": use,

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NewTutorHere</title>
+    <script>
+        document.getElementsByTagName("html")[0].className += " js";
+    </script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+
+</head>
+
+<body>
+
+    <!-- edit-contact-form -->
+    <div class="big-bg popup" id="edit-contact-form">
+        <div class="form-bg color-lightgreen center" id="edit-contact-form-bg">
+            <button class="close-button"><i class="fa fa-close" onclick="closeButton()"></i></button>
+            <span class="form-name">
+                <p>Contract</p>
+            </span>
+            <div class="form-information-bg">
+                <form class="form" action=/home/profile/edit_profile id="edit-profile" method="POST">
+                    <div class="form-group">
+                        <div class="half-box be-left">
+                            <div class="form-input">
+                                <input type="text" id="firstname-editpf" name="firstname" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="half-box be-right">
+                            <div class="form-input">
+                                <input type="text" id="lastname-editpf" name="lastname" placeholder="Last Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="email" id="e-mail-editpf" name="email" placeholder="E-mail">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="phone-editpf" name="phone" placeholder="Telephone Number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="location-editpf" name="location" placeholder="Location">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-input">
+                            <div class="textwrapper"><textarea id="bio-editpf" name="bio" cols="2" rows="6"
+                                    placeholder="  Bio"></textarea></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Date Of Birth</label>
+                        <div class="form-input drop-down">
+                            <select id="bdate-editpf" name="bdate"></select>
+                            <select id="bmonth-editpf" name="bmonth">
+                                <option value="" disabled selected>Month</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select id="byear-editpf" name="byear"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Gender</label>
+                        <div class="form-input drop-down">
+                            <select id="gender-editpf" name="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="others">Not Specified</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="submit-button sign-up-button center">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+
+

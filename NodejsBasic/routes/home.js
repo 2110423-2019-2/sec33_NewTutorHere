@@ -71,7 +71,8 @@ router.get('/students_contract', function (req, res, next) {
 
 // schedule page
 router.get('/schedule', function (req, res, next) {
-	// res.render('schedule'); 
+	// res.render('schedule');
+	 
 
 	var use = req.cookies.auth;
 	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
@@ -94,8 +95,9 @@ router.get('/schedule', function (req, res, next) {
 	});
 });
 
-// profile page
+// profile page sendcontract
 router.get('/profile', function (req, res, next) {
+	console.log("profile!!");
 	var use = req.cookies.auth;
 	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	client.connect(async function (err) {
@@ -110,6 +112,44 @@ router.get('/profile', function (req, res, next) {
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(resultt);
 		res.render('profile', { pf: resultt[0] });
+	});
+
+});
+
+//sendContract
+router.post('/profile/sendcontract', [], function (req, res) {
+	var use = req.cookies.nextpf;
+	//if(req.cookies.auth == req.body.username)
+	console.log("IN SendconTract!");
+	
+	client.connect(async function (err) {
+		//checks for connection error
+		assert.equal(null, err);
+		client.connect(async function (err) {
+			//checks for connection error
+			assert.equal(null, err);
+	
+			//once connected, add a doc to collection 'UserData'
+			const db = client.db(dbName);
+			db.collection('ContractData').insertOne({
+				tutor_username : req.cookies.nextpf,
+				student_username: req.cookies.auth,
+				course_name : req.body.subject,
+				educational_level : req.body.educational_level,
+				class_day :  req.body.day,
+				class_time :  req.body.time,
+				status : "requested",
+				message : req.body.bio
+
+			});
+			
+		// The search added the results to the locals, access them in home.ejs and show the results there
+		
+		const resultt = await db.collection('UserData').find({username: req.cookies.auth }).limit(1).toArray();
+		console.log(resultt);
+		res.render('profile', { pf: resultt[0] });
+		});
+		
 	});
 
 });

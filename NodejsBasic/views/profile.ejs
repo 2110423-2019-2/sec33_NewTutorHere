@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NewTutorHere</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
   <!-- <link rel="shortcut icon" href="img/dog.ico" /> -->
 
@@ -127,7 +128,7 @@
                   <c>Rate Summary</c>
                   <b>฿200 to ฿500 per hour</b>
               </span>
-              <table>
+              <table id='courses-table'>
                 <tr>
                     <th></th>
                     <th>PRIMARY</th>
@@ -143,7 +144,11 @@
                   <td>-</td>
                   <td>-</td>
                   <td>-</td>
+                  <td><button class="deleteCourse-button"><i class="fa fa-trash" 
+                            onclick="removeCourse(this)"></i></button>
+                  </td>
                 </tr>
+            
                 <tr>
                   <td>Maths</td>
                   <td>-</td>
@@ -151,6 +156,9 @@
                   <td>-</td>
                   <td>-</td>
                   <td>-</td>
+                  <td><button class="deleteCourse-button"><i class="fa fa-trash"
+                              onclick="removeCourse(this)"></i></button>
+                  </td>
                 </tr>
                 
               </table>
@@ -317,6 +325,13 @@
         function showEditProfileForm() {
             $("#edit-profile-form").css("display", "flex");
         }
+        
+        // remove course
+        function removeCourse(item) {
+            console.log('A');
+            item.closest('tr').remove()
+        }
+        
 
     </script>
 

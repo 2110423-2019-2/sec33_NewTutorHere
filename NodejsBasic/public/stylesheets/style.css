@@ -98,6 +98,21 @@ img.main-logo {
     background-color: gray;
 }
 
+.deleteCourse-button {
+    background-color: transparent;
+    border: none;
+    padding: 7px 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 0.2em;
+    right: 21em;
+    top: 1.5em;
+}
+
+.deleteCourse-button:hover {
+    background-color: gray;
+}
+
 h1 {
     font-family: 'DolceVitaHeavy';
     font-size: 3.5em;

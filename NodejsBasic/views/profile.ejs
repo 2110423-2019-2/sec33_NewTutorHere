@@ -164,7 +164,7 @@
               </table>
               
               <button class="editCourse-button be-right" >Edit courses</button>
-              <button class="addCourse-button be-right">Add courses</button>
+              <button class="addCourse-button be-right" onclick="addCourse()">Add courses</button>
 
           </div>
           <div class="qual-box be-right">
@@ -330,6 +330,31 @@
         function removeCourse(item) {
             console.log('A');
             item.closest('tr').remove()
+        }
+
+        //add course
+        //format : sub - - - - - deleteBut
+        function addCourse() {
+            var table = document.getElementById("courses-table");
+            var row = table.insertRow(table.rows.length);
+            var cell0 = row.insertCell(0);
+            cell0.innerHTML = "Science";
+
+            var cell1 = row.insertCell(1);
+            var cell2 = row.insertCell(2);
+            var cell3 = row.insertCell(3);
+            var cell4 = row.insertCell(4);
+            var cell5 = row.insertCell(5);
+            cell1.innerHTML = "-";
+            cell2.innerHTML = "-";
+            cell3.innerHTML = "-";
+            cell4.innerHTML = "-";
+            cell5.innerHTML = "-";
+            
+            
+            var cell6 = row.insertCell(6);
+            cell6.innerHTML = '<td><button class="deleteCourse-button"><i class="fa fa-trash"onclick="removeCourse(this)"></i></button></td>';
+
         }
         
 

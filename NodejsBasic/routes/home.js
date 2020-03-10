@@ -66,7 +66,7 @@ router.get('/tutors_contract', function (req, res, next) {
 		accepted = await db.collection('ContractData').find(query).toArray();
 		console.log(accepted);
 
-		
+
 		res.render('tutors_contract', { requested: requested, accepted: accepted });
 
 	});
@@ -74,7 +74,29 @@ router.get('/tutors_contract', function (req, res, next) {
 
 // student's contract page
 router.get('/students_contract', function (req, res, next) {
-	res.render('students_contract');
+	var use = req.cookies.auth;
+	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		var query = {
+			"student_username": use,
+			"status": 'requested',
+		};
+		requested = await db.collection('ContractData').find(query).toArray();
+		console.log(requested);
+
+		query = {
+			"student_username": use,
+			"status": 'accepted',
+		};
+		accepted = await db.collection('ContractData').find(query).toArray();
+		console.log(accepted);
+
+		
+		res.render('students_contract', { requested: requested, accepted: accepted });
+
+	});
 	
 });
 

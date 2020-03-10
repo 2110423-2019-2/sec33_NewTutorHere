@@ -28,28 +28,25 @@
         <span class="name-stucontract">
           <p>Contract Log</p>
         </span>
-        <div class="conlog-item">
-          <span class="name-stucontract">
-            <a>Student One</a>
-          </span>
-          <br />
-          <button class="view2-button search-button be-right">Terminate</button>
-          <button class="view2-button search-button be-right">View</button>
-        </div>
-
-        <div class="conlog-item">
-          <span class="name-stucontract">
-            <a>Student Two</a>
-          </span>
-          <br />
-          <button class="view2-button search-button be-right">Terminate</button>
-          <button class="view2-button search-button be-right">View</button>
-        </div>
+        
+        <% accepted.forEach(element => { %>
+          <div class="conlog-item">
+            <span class="name-stucontract">
+              <a><%= element.student_username %> </a>
+            </span>
+            <br />
+            <button class="view2-button search-button be-right">Terminate</button>
+            <button class="view2-button search-button be-right">View</button>
+          </div>
+        <% }) %>
+        
       </div>
+
+
       <div class="contract-box color-lightgreen be-right" id="contract-form">
         <!-- Begin of contract list -->
 
-        <% tutor_contract.forEach(element => { %>
+        <% requested.forEach(element => { %>
 
           <form class="form" id="contract">
             <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
@@ -68,7 +65,7 @@
           </form>
          
         <% }) %>
-        
+
       </div>
 
     

@@ -56,9 +56,18 @@ router.get('/tutors_contract', function (req, res, next) {
 			"tutor_username": use,
 			"status": 'requested',
 		};
-		results = await db.collection('ContractData').find(query).toArray();
-		console.log(results);
-		res.render('tutors_contract', { tutor_contract: results });
+		requested = await db.collection('ContractData').find(query).toArray();
+		console.log(requested);
+
+		query = {
+			"tutor_username": use,
+			"status": 'accepted',
+		};
+		accepted = await db.collection('ContractData').find(query).toArray();
+		console.log(accepted);
+
+		
+		res.render('tutors_contract', { requested: requested, accepted: accepted });
 
 	});
 });

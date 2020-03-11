@@ -21,7 +21,7 @@
 
 <body>
   <%- include navbar %>
-
+<script>var student_username;</script>
   <!-- contract -->
   <div class="big-bg popup" id="contract-popup" >
     <div class="form-bg color-lightgreen center" id="contract-popup-bg">
@@ -31,7 +31,6 @@
       </span><br>
       <div class="form-information-bg">
         <form class="form" id="contract" >
-
           <b>Subject</b> <a> </a><br />
           <b>Educational Level</b><a> </a><br />
           <b>Day</b><a> </a><br />
@@ -81,7 +80,7 @@
               <a>sends you a contract.</a>
             </span>
             <br />
-            <a class="view2-button search-button be-right" onclick="showContractPopup()">View a contract</a>
+            <a class="view2-button search-button be-right" onclick="showContractPopup('<%= element.tutor_username %>')">View a contract</a>
             <a class="view2-button search-button be-right">View profile</a>
           </div>
         </div>
@@ -99,11 +98,11 @@
     // generateContract();
     function closeContractPopupButton() {
       $("#contract-popup").css("display", "none");
-      alert("!!!!");
+    
     }
-    function showContractPopup() {
+    function showContractPopup(tmp) {
       $("#contract-popup").css("display", "flex");
-      alert("1111");
+       student_username = tmp;
     }
     function acceptContractPopupButton() {
       $("#contract-popup").css("display", "none");

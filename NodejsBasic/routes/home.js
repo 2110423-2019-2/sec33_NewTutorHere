@@ -93,31 +93,38 @@ router.get('/students_contract', function (req, res, next) {
 		accepted = await db.collection('ContractData').find(query).toArray();
 		console.log(accepted);
 
-		
+
 		res.render('students_contract', { requested: requested, accepted: accepted });
 
 	});
-	
+
 });
 
 
-router.get('/remove_contract/:id', function (req, res, next) {
-	// client.connect(async function (err) {
-	// 	assert.equal(null, err);
-	// 	const db = client.db(dbName);
-	// 	var query = {
-	// 		"_id": new ObjectId(req.body.id)
-	// 	};
-	// 	await db.collection('ContractData').deleteOne(query);
-	// });
-	res.render('tutors_contract');
+var ObjectID = require('mongodb').ObjectID;
+
+router.get('/terminate_contract/:id', function (req, res, next) {
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		console.log("terminating " + req.params.id);
+		var query = {
+			"_id": ObjectID(req.params.id)
+		};
+		await db.collection('ContractData').updateOne(query, {
+			$set: {
+				"status": "terminated"
+			}
+		});
+		res.redirect('/home/tutors_contract');
+	})
 });
 
 
 // schedule page
 router.get('/schedule', function (req, res, next) {
 	// res.render('schedule');
-	 
+
 
 	var use = req.cookies.auth;
 	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
@@ -153,18 +160,18 @@ router.get('/profile', function (req, res, next) {
 		};
 		var query_tutor_username = {
 			"tutor_username": use
-			
+
 		};
 		var query_tutor_availability = {
-			"tutor_username": use ,
-			"status":"accepted"
+			"tutor_username": use,
+			"status": "accepted"
 		};
 		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
 		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
 		const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(result_availability);
-		res.render('profile', { pf: result_user[0] , searchCourse: result_course , searchAvailability: result_availability });
+		res.render('profile', { pf: result_user[0], searchCourse: result_course, searchAvailability: result_availability });
 	});
 
 });
@@ -175,46 +182,46 @@ router.post('/profile', [], function (req, res) {
 	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	//if(req.cookies.auth == req.body.username)
 	console.log("IN SendconTract!");
-	
 
-		client.connect(async function (err) {
-			//checks for connection error
-			assert.equal(null, err);
-	
-			//once connected, add a doc to collection 'UserData'
-			const db = client.db(dbName);
-			var query_username = {
-				"username": use
-			};
-			var query_tutor_username = {
-				"tutor_username": use
-				
-			};
-			var query_tutor_availability = {
-				"tutor_username": use ,
-				"status":"accepted"
-			};
-			db.collection('ContractData').insertOne({
-				tutor_username : req.cookies.nextpf,
-				student_username: req.cookies.auth,
-				course_name : req.body.subject,
-				educational_level : req.body.level,
-				class_day :  req.body.day,
-				class_time :  req.body.time,
-				status : "requested",
-				message : req.body.bio
 
-			});
-			
-		// The search added the results to the locals, access them in home.ejs and show the results there
-		
-			const result_user = await db.collection('UserData').find({username: req.cookies.nextpf }).limit(1).toArray();
-			const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
-			const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
-			res.render('profile', { pf: result_user[0] , searchCourse: result_course , searchAvailability: result_availability });
+	client.connect(async function (err) {
+		//checks for connection error
+		assert.equal(null, err);
+
+		//once connected, add a doc to collection 'UserData'
+		const db = client.db(dbName);
+		var query_username = {
+			"username": use
+		};
+		var query_tutor_username = {
+			"tutor_username": use
+
+		};
+		var query_tutor_availability = {
+			"tutor_username": use,
+			"status": "accepted"
+		};
+		db.collection('ContractData').insertOne({
+			tutor_username: req.cookies.nextpf,
+			student_username: req.cookies.auth,
+			course_name: req.body.subject,
+			educational_level: req.body.level,
+			class_day: req.body.day,
+			class_time: req.body.time,
+			status: "requested",
+			message: req.body.bio
 
 		});
-		
+
+		// The search added the results to the locals, access them in home.ejs and show the results there
+
+		const result_user = await db.collection('UserData').find({ username: req.cookies.nextpf }).limit(1).toArray();
+		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
+		const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
+		res.render('profile', { pf: result_user[0], searchCourse: result_course, searchAvailability: result_availability });
+
+	});
+
 
 });
 

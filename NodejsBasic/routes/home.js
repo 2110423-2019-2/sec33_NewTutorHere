@@ -134,7 +134,7 @@ router.get('/accept_contract', function (req, res, next) {
 				"status": "accepted"
 			}
 		});
-		res.redirect('/home/tutors_contract');
+		res.redirect('/home');
 	})
 });
 router.get('/reject_contract', function (req, res, next) {
@@ -152,7 +152,7 @@ router.get('/reject_contract', function (req, res, next) {
 				"status": "rejected"
 			}
 		});
-		res.redirect('/home/tutors_contract');
+		res.redirect('/home');
 	})
 });
 router.post('/delete_course', function (req, res, next) {

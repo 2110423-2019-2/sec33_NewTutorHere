@@ -1,77 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NewTutorHere</title>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-    <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
-    <!-- <link rel="shortcut icon" href="img/dog.ico" /> -->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NewTutorHere</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
+  <!-- <link rel="shortcut icon" href="img/dog.ico" /> -->
 
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
-    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
-    <!-- <script src="script.js"></script> -->
-    <!-- <script>checkStatus()</script> -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="../public/scripts/mustache.js"></script>
-    <script type="text/javascript" src="../public/scripts/modal.js"></script>
-    <script type="text/javascript" src="../public/scripts/custom.js"></script>
-  </head>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
+  <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+  <!-- <script src="script.js"></script> -->
+  <!-- <script>checkStatus()</script> -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/scripts/mustache.js"></script>
+  <script type="text/javascript" src="/scripts/modal.js"></script>
+  <script type="text/javascript" src="/scripts/custom.js"></script>
+</head>
 
-  <body>
-    <%- include navbar %>
-    <div class="big-bg">
-        <!-- Content -->
-        <div class="contractlog-box be-left">
-          <span class="name-stucontract">
-            <p>Contract Log</p>
-          </span>
+<body>
+  <%- include navbar %>
+<script>var student_username;</script>
+  <!-- contract -->
+  <div class="big-bg popup" id="contract-popup" >
+    <div class="form-bg color-lightgreen center" id="contract-popup-bg">
+      <button class="close-button"><i class="fa fa-close" onclick="closeContractPopupButton()"></i></button>
+      <span class="form-name">
+        <p>Contract</p>
+      </span><br>
+      <div class="form-information-bg">
+        <form class="form" id="contract" >
+          <b>Subject: </b> <element id="subject"></element> <br />
+          <b>Educational Level: </b><element id="eduLevel"></element><br />
+          <b>Day: </b><element id="classDay"></element><br />
+          <b>Time: </b><element id="classTime"></element><br />
+          <b>Message: </b><element id="message"></element>
           
-          <% accepted.forEach(element => { %>
-            <div class="conlog-item">
-              <span class="name-stucontract">
-                <a><%= element.tutor_username %> </a>
-              </span>
-              <br />
-              <a class="view2-button search-button be-right" href="terminate_contract/<%= element._id %>" >Terminate</a>
-              <button class="view2-button search-button be-right">View</button>
-            </div>
-          <% }) %>
-
-
-        </div>
-
-          <div class="contract-box color-lightgreen be-right" id="contract-form">
-              <!-- Begin of contract list -->
-              <% requested.forEach(element => { %>
-
-                <form class="form" id="contract">
-                  <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
-                  <div class="c-box be-right">
-                      <div class="blockcontract">
-                          <span class="name-contract">
-                              <a>You sent a contract to </a>
-                              <p><%= element.tutor_username %> </p>
-                          </span>
-                          <br />
-                          <button class="view-button search-button be-right" >View a contract</button>
-                          <button class="view-button search-button be-right" >View profile</button>
-                      </div>
-                  </div>
-        
-                </form>
-               
-              <% }) %>
-        
-
+          <!-- <a class="view2-button search-button be-right" href="accept_contract/" >Accept</a> -->
+          <a class="view2-button search-button be-right" href="reject_contract/" >Decline</a>
+        </form>
       </div>
     </div>
+  </div>
 
-    <script>
-      generateContract();
-     
-    </script>
+  <div class="big-bg">
+    <!-- Content -->
 
-  </body>
+    <div class="contractlog-box be-left">
+      <span class="name-stucontract">
+        <p>Contract Log</p>
+      </span>
+
+      <% accepted.forEach(element => { %>
+      <div class="conlog-item">
+        <span class="name-stucontract">
+          <a><%= element.tutor_username %> </a>
+        </span>
+        <br />
+        <a class="view2-button search-button be-right" href="terminate_contract/<%= element._id %>" >Terminate</a>
+        <a class="view2-button search-button be-right">View</a>
+      </div>
+      <% }) %>
+
+    </div>
+
+
+    <div class="contract-box color-lightgreen be-right" id="contract-form">
+      <!-- Begin of contract list -->
+
+      <% let idx = 0 %> 
+      <% requested.forEach(element => { %>
+        
+      <form class="form" id="contract">
+        <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
+        <div class="c-box be-right">
+          <div class="blockcontract">
+            <span class="name-contract">
+              <a>you send a contract to</a>
+              <p><%= element.tutor_username %> </p>
+            </span>
+            <br />
+            <a class="view2-button search-button be-right" onclick="showContractPopup('<%- idx %>')">View a contract</a>
+            <a class="view2-button search-button be-right">View profile</a>
+          </div>
+        </div>
+
+      </form>
+      <% idx++; %> 
+      <% }) %>
+
+    </div>
+
+
+  </div>
+
+  <script>
+
+    var r = <%- JSON.stringify(requested) %>;
+    console.log("tmp")
+
+    // generateContract();
+    function closeContractPopupButton() {
+      $("#contract-popup").css("display", "none");
+    
+    }
+    function showContractPopup(tmp) {
+      $("#contract-popup").css("display", "flex");
+      document.getElementById("subject").innerHTML = r[tmp].course_name;
+      document.getElementById("eduLevel").innerHTML = r[tmp].edu_level;
+      document.getElementById("classDay").innerHTML = r[tmp].class_day;
+      document.getElementById("classTime").innerHTML = r[tmp].class_time;
+      document.getElementById("message").innerHTML = r[tmp].message;
+      // document.getElementById("id").innerHTML = r[tmp]._id;
+      document.cookie = "_id= " + r[tmp]._id;
+    }
+    function acceptContractPopupButton() {
+      $("#contract-popup").css("display", "none");
+    }
+    function rejectContractPopupButton() {
+      $("#contract-popup").css("display", "none");
+    }
+  </script>
+
+</body>
+
 </html>

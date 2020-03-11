@@ -445,7 +445,7 @@ button.search-button {
 }
 
 .rating:not(:checked) > label:before {
-    content: url("../img/star2.png");
+    content: url("../img/star2.png") ' ';
 }
 
 .rating > input:checked ~ label {

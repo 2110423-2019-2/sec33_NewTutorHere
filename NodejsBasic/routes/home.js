@@ -134,15 +134,18 @@ router.get('/profile', function (req, res, next) {
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
-		var query = {
+		var query_username = {
 			"username": use
 		};
+		var query_tutor_username = {
+			"tutor_username": use
+		};
 
-		const resultt = await db.collection('UserData').find(query).limit(1).toArray();
-
+		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
+		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		console.log(resultt);
-		res.render('profile', { pf: resultt[0] });
+		console.log(result_course);
+		res.render('profile', { pf: result_user[0] , searchCourse: result_course });
 	});
 
 });

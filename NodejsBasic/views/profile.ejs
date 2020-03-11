@@ -211,8 +211,10 @@
                             <th>A-LEVEL</th>
                             <th>DEGREE</th>
                         </tr>
+                        <%if (typeof searchCourse!= 'undefined') { %>
+                            <%for(result of searchCourse) {%>
                         <tr>
-                            <td>English</td>
+                            <td><%=result.subject%></td>
                             <td>-</td>
                             <td>-</td>
                             <td>-</td>
@@ -222,18 +224,8 @@
                                         onclick="removeCourse(this)"></i></button>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>Maths</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td><button class="deleteCourse-button"><i class="fa fa-trash"
-                                        onclick="removeCourse(this)"></i></button>
-                            </td>
-                        </tr>
+                        <% }} %>
+                        
 
                     </table>
 

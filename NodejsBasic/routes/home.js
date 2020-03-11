@@ -119,6 +119,42 @@ router.get('/terminate_contract/:id', function (req, res, next) {
 		res.redirect('/home/tutors_contract');
 	})
 });
+router.get('/accept_contract', function (req, res, next) {
+	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		console.log("accepting " );
+		console.log(req.cookies._id);
+		var query = {
+			"_id": ObjectID(req.cookies._id)
+		};
+		await db.collection('ContractData').updateOne(query, {
+			$set: {
+				"status": "accepted"
+			}
+		});
+		res.redirect('/home/tutors_contract');
+	})
+});
+router.get('/reject_contract', function (req, res, next) {
+	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		console.log("rejecting" );
+		console.log(req.cookies._id);
+		var query = {
+			"_id": ObjectID(req.cookies._id)
+		};
+		await db.collection('ContractData').updateOne(query, {
+			$set: {
+				"status": "rejected"
+			}
+		});
+		res.redirect('/home/tutors_contract');
+	})
+});
 router.post('/delete_course', function (req, res, next) {
 	
 	client.connect(async function (err) {
@@ -310,6 +346,7 @@ router.post('/profile/add_course', [], function (req, res) {
 
 	});
 });
+
 router.get('/testfunction', function (req, res, next) {
 	//use function like this
 	testFunction.data.checkcookie(req, res);

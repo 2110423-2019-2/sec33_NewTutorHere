@@ -36,9 +36,9 @@
           <b>Day: </b><element id="classDay"></element><br />
           <b>Time: </b><element id="classTime"></element><br />
           <b>Message: </b><element id="message"></element>
-
-          <button class="submit-button sign-up-button center" onclick="acceptContractPopupButton()">Accept</button>
-          <button class="submit-button sign-up-button center" onclick="rejectContractPopupButton()">Reject</button>
+          
+          <a class="view2-button search-button be-right" href="accept_contract/" >Accept</a>
+          <a class="view2-button search-button be-right" href="reject_contract/" >Reject</a>
         </form>
       </div>
     </div>
@@ -81,7 +81,7 @@
               <a>sends you a contract.</a>
             </span>
             <br />
-            <a class="view2-button search-button be-right" onclick="showContractPopup(<%- idx %>)">View a contract</a>
+            <a class="view2-button search-button be-right" onclick="showContractPopup('<%- idx %>')">View a contract</a>
             <a class="view2-button search-button be-right">View profile</a>
           </div>
         </div>
@@ -112,6 +112,8 @@
       document.getElementById("classDay").innerHTML = r[tmp].class_day;
       document.getElementById("classTime").innerHTML = r[tmp].class_time;
       document.getElementById("message").innerHTML = r[tmp].message;
+      // document.getElementById("id").innerHTML = r[tmp]._id;
+      document.cookie = "_id= " + r[tmp]._id;
     }
     function acceptContractPopupButton() {
       $("#contract-popup").css("display", "none");

@@ -139,20 +139,26 @@ router.get('/profile', function (req, res, next) {
 		};
 		var query_tutor_username = {
 			"tutor_username": use
+			
 		};
-
+		var query_tutor_availability = {
+			"tutor_username": use ,
+			"status":"accepted"
+		};
 		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
 		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
+		const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		console.log(result_course);
-		res.render('profile', { pf: result_user[0] , searchCourse: result_course });
+		console.log(result_availability);
+		res.render('profile', { pf: result_user[0] , searchCourse: result_course , searchAvailability: result_availability });
 	});
 
 });
 
 //sendContract
 router.post('/profile', [], function (req, res) {
-	var use = req.cookies.nextpf;
+	var use = req.cookies.auth;
+	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	//if(req.cookies.auth == req.body.username)
 	console.log("IN SendconTract!");
 	
@@ -163,6 +169,17 @@ router.post('/profile', [], function (req, res) {
 	
 			//once connected, add a doc to collection 'UserData'
 			const db = client.db(dbName);
+			var query_username = {
+				"username": use
+			};
+			var query_tutor_username = {
+				"tutor_username": use
+				
+			};
+			var query_tutor_availability = {
+				"tutor_username": use ,
+				"status":"accepted"
+			};
 			db.collection('ContractData').insertOne({
 				tutor_username : req.cookies.nextpf,
 				student_username: req.cookies.auth,
@@ -177,9 +194,11 @@ router.post('/profile', [], function (req, res) {
 			
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		
-		const resultt = await db.collection('UserData').find({username: req.cookies.nextpf }).limit(1).toArray();
-		console.log(resultt);
-		res.render('profile', { pf: resultt[0] });
+			const result_user = await db.collection('UserData').find({username: req.cookies.nextpf }).limit(1).toArray();
+			const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
+			const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
+			res.render('profile', { pf: result_user[0] , searchCourse: result_course , searchAvailability: result_availability });
+
 		});
 		
 

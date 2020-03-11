@@ -133,6 +133,12 @@ div.form-group-main {
     letter-spacing: 0.06em;
 }
 
+.control-label-index {
+    font-size: 1em;
+    color: white;
+    letter-spacing: 0.06em;
+}
+
 input {
     width: 100%;
     height: 25pt;
@@ -144,7 +150,8 @@ input {
 }
 
 ::placeholder {
-    color: #C1D29F;
+    color: #86916E;
+    font-size: 1em;
 }
 
 button.submit-button {
@@ -159,7 +166,7 @@ button.submit-button {
     color: white;
     font-size: 1em;
     /* font-weight: bold; */
-    letter-spacing: 0.15em;
+    letter-spacing: 0.08em;
 
 }
 
@@ -770,10 +777,11 @@ div.profile-box {
     /* font-weight: bold; */
     color: #4C5F21;
     padding-left: 2em;
-    padding-right: 1.2em;
-    padding-bottom: 0.4em;
+    padding-right: 1.5em;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
     display: inline-block;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
 }
 button.editpf-button {
     width: 20%;

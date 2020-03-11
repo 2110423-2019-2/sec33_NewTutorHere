@@ -126,7 +126,7 @@ router.get('/schedule', function (req, res, next) {
 	});
 });
 
-// profile page sendcontract
+// profile page
 router.get('/profile', function (req, res, next) {
 	console.log("profile!!");
 	var use = req.cookies.auth;
@@ -148,7 +148,7 @@ router.get('/profile', function (req, res, next) {
 });
 
 //sendContract
-router.post('/profile/sendcontract', [], function (req, res) {
+router.post('/profile', [], function (req, res) {
 	var use = req.cookies.nextpf;
 	//if(req.cookies.auth == req.body.username)
 	console.log("IN SendconTract!");
@@ -164,7 +164,7 @@ router.post('/profile/sendcontract', [], function (req, res) {
 				tutor_username : req.cookies.nextpf,
 				student_username: req.cookies.auth,
 				course_name : req.body.subject,
-				educational_level : req.body.educational_level,
+				educational_level : req.body.level,
 				class_day :  req.body.day,
 				class_time :  req.body.time,
 				status : "requested",
@@ -174,7 +174,7 @@ router.post('/profile/sendcontract', [], function (req, res) {
 			
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		
-		const resultt = await db.collection('UserData').find({username: req.cookies.auth }).limit(1).toArray();
+		const resultt = await db.collection('UserData').find({username: req.cookies.nextpf }).limit(1).toArray();
 		console.log(resultt);
 		res.render('profile', { pf: resultt[0] });
 		});

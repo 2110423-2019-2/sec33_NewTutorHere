@@ -23,7 +23,7 @@
 
     <!-- edit-profile-form -->
     <div class="big-bg popup" id="edit-profile-form">
-        <div class="form-bg color-lightgreen center" id="edit-profile-form-bg">
+        <div class="form-bg color-lightgreen center" >
             <button class="close-button"><i class="fa fa-close" onclick="closeEditButton()"></i></button>
             <span class="form-name">
                 <p>Edit your profile</p>
@@ -103,7 +103,7 @@
 
     <!-- contract-form -->
     <div class="big-bg popup" id="contract-form-popup">
-        <div class="form-bg color-lightgreen center" id="contract-form-popup-bg">
+        <div class="form-bg color-lightgreen center" >
             <button class="close-button"><i class="fa fa-close" onclick="closeContractButton()"></i></button>
             <span class="form-name">
                 <p>Contract</p>
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Educational Level</label>
+                        
                         <div class="form-input drop-down">
                             <select id="level-filter" name="level" style="width: 100%;">
                                 <option value="" disabled selected>Educational Level</option>
@@ -131,7 +131,7 @@
                     </div>
                     <div class="form-group">
                         <div class="half-box be-left">
-                            <label class="control-label">Day</label>
+                           
                             <div class="form-input drop-down">
                                 <select id="day-contactf" name="day" style="width: 100%;">
                                     <option value="" disabled selected>Day</option>
@@ -146,7 +146,6 @@
                             </div>
                         </div>
                         <div class="half-box be-right">
-                            <label class="control-label">Time</label>
                             <div class="form-input drop-down">
                                 <select id="time-contactf" name="time" style="width: 100%;">
                                     <option value="" disabled selected>Time</option>
@@ -170,6 +169,47 @@
             </div>
         </div>
     </div>
+
+    <!-- addCourse-form -->
+    <div class="big-bg popup" id="addCourse-form">
+        <div class="form-bg color-lightgreen center" id="">
+            <button class="close-button"><i class="fa fa-close" onclick="closeAddCourseButton()"></i></button>
+            <span class="form-name">
+                <p>Add New Course</p>
+            </span><br>
+            <div class="form-information-bg">
+                <form class="form" action=/home/profile method="POST" id="contract-form">
+                    
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="addCourse-subject" name="subject" placeholder="Subject">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="addCourse-city" name="city" placeholder="City">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="addCourse-rating" name="rating" placeholder="Rating">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="addCourse-price" name="price" placeholder="Price">
+                        </div>
+                    </div>
+
+                    <button class="submit-button sign-up-button center">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 
 
@@ -206,7 +246,7 @@
                             <th></th>
                             <th>City</th>
                             <th>Rating</th>
-                            <th>price</th>
+                            <th>Price</th>
                         </tr>
                         <%if (typeof searchCourse!= 'undefined') { %>
                             <%for(result of searchCourse) {%>
@@ -225,7 +265,7 @@
                     </table>
 
                     <button class="editCourse-button be-right">Edit courses</button>
-                    <button class="addCourse-button be-right" onclick="addCourse()">Add courses</button>
+                    <button class="addCourse-button be-right" onclick="showAddCourse()">Add courses</button>
 
                 </div>
                 <div class="qual-box be-right">
@@ -395,36 +435,31 @@
                 $("#contract-form-popup").css("display", "flex");
             }
 
+            function closeAddCourseButton() {
+                $("#addCourse-form").css("display", "none");
+            }
+
+            function showAddCourse() {
+                $("#addCourse-form").css("display", "flex");
+            }
+
+
+
             // remove course
             function removeCourse(item) {
-                console.log('A');
+                console.log('remove course successful');
                 item.closest('tr').remove()
             }
-
+            
             //add course
-            //format : sub - - - - - deleteBut
-            function addCourse() {
-                var table = document.getElementById("courses-table");
-                var row = table.insertRow(table.rows.length);
-                var cell0 = row.insertCell(0);
-                cell0.innerHTML = "Science";
-
-                var cell1 = row.insertCell(1);
-                var cell2 = row.insertCell(2);
-                var cell3 = row.insertCell(3);
-                var cell4 = row.insertCell(4);
-                var cell5 = row.insertCell(5);
-                cell1.innerHTML = "-";
-                cell2.innerHTML = "-";
-                cell3.innerHTML = "-";
-                cell4.innerHTML = "-";
-                cell5.innerHTML = "-";
-
-
-                var cell6 = row.insertCell(6);
-                cell6.innerHTML = '<td><button class="deleteCourse-button"><i class="fa fa-trash"onclick="removeCourse(this)"></i></button></td>';
-
-            }
+            //function addCourse() {
+                //var table = document.getElementById("courses-table");
+                //var row = table.insertRow(table.rows.length);
+                //var cell0 = row.insertCell(0);
+                //cell0.innerHTML = "Science";
+                //var cell6 = row.insertCell(6);
+                //cell6.innerHTML = '<td><button class="deleteCourse-button"><i class="fa fa-trash"onclick="removeCourse(this)"></i></button></td>';
+           // }
 
 
         </script>

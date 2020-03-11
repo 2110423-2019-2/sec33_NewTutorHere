@@ -390,6 +390,26 @@ button.search-button {
     float: right;
 }
 
+
+.tutor-rating {
+    display: inline-block;
+    padding-left: 1.7vw;
+    padding-top: 0.7vh;
+}
+
+.greyStar {
+    content: url("../img/star2.png");
+    filter: saturate(0);
+    -webkit-filter: saturate(0);
+    -moz-filter: saturate(0);
+    -o-filter: saturate(0);
+}
+
+.yellowStar {
+    content: url("../img/star2.png");
+}
+
+
 /* rating star */
 .rating {
     display: inline-block;
@@ -418,7 +438,7 @@ button.search-button {
 }
 
 .rating:not(:checked) > label:before {
-    content: url("../img/star2.png") ' ';
+    content: url("../img/star2.png");
 }
 
 .rating > input:checked ~ label {

@@ -119,7 +119,21 @@ router.get('/terminate_contract/:id', function (req, res, next) {
 		res.redirect('/home/tutors_contract');
 	})
 });
-
+router.post('/delete_course', function (req, res, next) {
+	
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		var query = {
+			"tutor_username" : req.cookies.auth,
+			"subject": req.cookies.sub
+		};
+		
+		await db.collection('CourseData').remove(query);
+		
+		res.redirect('/home/profile');
+	})
+});
 
 // schedule page
 router.get('/schedule', function (req, res, next) {

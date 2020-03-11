@@ -221,10 +221,7 @@ router.post('/profile', [], function (req, res) {
 		res.render('profile', { pf: result_user[0], searchCourse: result_course, searchAvailability: result_availability });
 
 	});
-
-
 });
-
 // edit-profile-form
 router.post('/profile/edit_profile', [], function (req, res) {
 
@@ -258,7 +255,46 @@ router.post('/profile/edit_profile', [], function (req, res) {
 	});
 
 });
+router.post('/profile/add_course', [], function (req, res) {
+	var use = req.cookies.auth;
+	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 
+	client.connect(async function (err) {
+		//checks for connection error
+		assert.equal(null, err);
+
+		//once connected, add a doc to collection 'UserData'
+		const db = client.db(dbName);
+		var query_username = {
+			"username": use
+		};
+		var query_tutor_username = {
+			"tutor_username": use
+
+		};
+		var query_tutor_availability = {
+			"tutor_username": use,
+			"status": "accepted"
+		};
+		db.collection('CourseData').insertOne({
+			'subject': req.body.subject,
+			'educational_level': req.body.level,
+			'city': req.body.city,
+			'rating': req.body.rating,
+			'price': req.body.price,
+			'tutor_username' : req.cookies.auth
+
+		});
+
+		// The search added the results to the locals, access them in home.ejs and show the results there
+
+		const result_user = await db.collection('UserData').find({ username: req.cookies.nextpf }).limit(1).toArray();
+		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
+		const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
+		res.render('profile', { pf: result_user[0], searchCourse: result_course, searchAvailability: result_availability });
+
+	});
+});
 router.get('/testfunction', function (req, res, next) {
 	//use function like this
 	testFunction.data.checkcookie(req, res);

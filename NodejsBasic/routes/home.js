@@ -263,6 +263,7 @@ router.post('/profile/edit_profile', [], function (req, res) {
 				}
 			}
 		);
+		res.cookie('firstn', req.body.firstname);
 		const result = await db.collection('UserData').find({ username: req.cookies.auth }).limit(1).toArray();
 		console.log(result);
 		res.render('profile', { pf: result[0] });

@@ -307,55 +307,38 @@
                     <table>
                         <tr>
                             <th></th>
-                            <th>MO</th>
-                            <th>TU</th>
-                            <th>WE</th>
-                            <th>TH</th>
-                            <th>FR</th>
-                            <th>SA</th>
-                            <th>SU</th>
+                            <th>MON</th>
+                            <th>TUE</th>
+                            <th>WED</th>
+                            <th>THU</th>
+                            <th>FRI</th>
+                            <th>SAT</th>
+                            <th>SUN</th>
                         </tr>
+                    <% var day = ["Morning","Afternoon","After school","Evening"]%>
+                    <%var tmp = false %>
+                    <% searchAvailability.forEach(element => { %>
+                    <% }) %>
+                    <% for(var i=0; i<4; i++) {%>
                         <tr>
-                            <td>Morning</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
+                        <% for(var j=0; j<8; j++) {%>
+                            <%if (j == 0 ) { %>
+                               <th><%= day[i]%></th> 
+                               <% tmp = true%>
+                                <% } %>
+                        <% searchAvailability.forEach(element => { %>
+                            <%if ( element.class_day == j-1 && element.class_time == i) { %>
+                                <th> X </th> 
+                                <% tmp = true %>
+                                 <% } %>
+                            <% }) %> 
+                            <% if(!tmp){ %>
+                                <th> - </th>
+                            <% }%>
+                            <%tmp = false %>
+                        <% } %>
                         </tr>
-                        <tr>
-                            <td>Afternoon</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>After school</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Evening</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-
+                    <% } %>
                     </table>
                     <button class="editAva-button be-right" id='editAvailButton'>Edit availability</button>
                 </div><br />

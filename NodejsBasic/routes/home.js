@@ -272,7 +272,7 @@ router.post('/profile/edit_profile', [], function (req, res) {
 });
 router.post('/profile/add_course', [], function (req, res) {
 	var use = req.cookies.auth;
-	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 
 	client.connect(async function (err) {
 		//checks for connection error
@@ -303,10 +303,10 @@ router.post('/profile/add_course', [], function (req, res) {
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 
-		const result_user = await db.collection('UserData').find({ username: req.cookies.nextpf }).limit(1).toArray();
+		const result_user = await db.collection('UserData').find({ username: req.cookies.auth}).limit(1).toArray();
 		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
 		const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
-		res.render('profile', { pf: result_user[0], searchCourse: result_course, searchAvailability: result_availability });
+		res.redirect('/home/profile');
 
 	});
 });

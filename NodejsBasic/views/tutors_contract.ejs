@@ -31,11 +31,11 @@
       </span><br>
       <div class="form-information-bg">
         <form class="form" id="contract" >
-          <b>Subject</b> <a> </a><br />
-          <b>Educational Level</b><a> </a><br />
-          <b>Day</b><a> </a><br />
-          <b>Time</b><a> </a><br />
-          <b>Message</b><a> </a>
+          <b>Subject: </b> <element id="subject"></element> <br />
+          <b>Educational Level: </b><element id="eduLevel"></element><br />
+          <b>Day: </b><element id="classDay"></element><br />
+          <b>Time: </b><element id="classTime"></element><br />
+          <b>Message: </b><element id="message"></element>
 
           <button class="submit-button sign-up-button center" onclick="acceptContractPopupButton()">Accept</button>
           <button class="submit-button sign-up-button center" onclick="rejectContractPopupButton()">Reject</button>
@@ -69,8 +69,9 @@
     <div class="contract-box color-lightgreen be-right" id="contract-form">
       <!-- Begin of contract list -->
 
+      <% let idx = 0 %> 
       <% requested.forEach(element => { %>
-
+        
       <form class="form" id="contract">
         <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
         <div class="c-box be-right">
@@ -80,13 +81,13 @@
               <a>sends you a contract.</a>
             </span>
             <br />
-            <a class="view2-button search-button be-right" onclick="showContractPopup('<%= element.tutor_username %>')">View a contract</a>
+            <a class="view2-button search-button be-right" onclick="showContractPopup(<%- idx %>)">View a contract</a>
             <a class="view2-button search-button be-right">View profile</a>
           </div>
         </div>
 
       </form>
-
+      <% idx++; %> 
       <% }) %>
 
     </div>
@@ -95,6 +96,10 @@
   </div>
 
   <script>
+
+    var r = <%- JSON.stringify(requested) %>;
+    console.log("tmp")
+
     // generateContract();
     function closeContractPopupButton() {
       $("#contract-popup").css("display", "none");
@@ -102,7 +107,11 @@
     }
     function showContractPopup(tmp) {
       $("#contract-popup").css("display", "flex");
-       student_username = tmp;
+      document.getElementById("subject").innerHTML = r[tmp].course_name;
+      document.getElementById("eduLevel").innerHTML = r[tmp].edu_level;
+      document.getElementById("classDay").innerHTML = r[tmp].class_day;
+      document.getElementById("classTime").innerHTML = r[tmp].class_time;
+      document.getElementById("message").innerHTML = r[tmp].message;
     }
     function acceptContractPopupButton() {
       $("#contract-popup").css("display", "none");

@@ -199,27 +199,22 @@
                 </div>
                 <div class="ratesum-box">
                     <span class="name-contract">
-                        <c>Rate Summary</c>
-                        <b>฿200 to ฿500 per hour</b>
+                        <c>Teaches</c>
                     </span>
                     <table id='courses-table'>
                         <tr>
                             <th></th>
-                            <th>PRIMARY</th>
-                            <th>KS3</th>
-                            <th>GCSE</th>
-                            <th>A-LEVEL</th>
-                            <th>DEGREE</th>
+                            <th>City</th>
+                            <th>Rating</th>
+                            <th>price</th>
                         </tr>
                         <%if (typeof searchCourse!= 'undefined') { %>
                             <%for(result of searchCourse) {%>
                         <tr>
                             <td><%=result.subject%></td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
+                            <td><%=result.city%></td>
+                            <td><%=result.rating%></td>
+                            <td><%=result.price%></td>
                             <td><button class="deleteCourse-button"><i class="fa fa-trash"
                                         onclick="removeCourse(this)"></i></button>
                             </td>

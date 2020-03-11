@@ -129,8 +129,8 @@ div.form-group-main {
 
 .control-label {
     font-size: 1em;
-    color: white;
-    letter-spacing: 0.08em;
+    color: #69765A;
+    letter-spacing: 0.06em;
 }
 
 input {
@@ -893,8 +893,11 @@ div.tutorse-box {
     margin-bottom: 1em;
 }
 textarea {
-  width: 100%;
-  color: #879437;
+    width: 100%;
+    font-size: 1em;
+    color: black;
+    letter-spacing: 0.06em;
+    padding: 5px 8px 5px 8px;
 }
 
 

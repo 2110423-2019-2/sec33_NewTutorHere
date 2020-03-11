@@ -278,7 +278,6 @@
                         </tr>
                         <%if (typeof searchCourse!= 'undefined') { %>
                             <%for(result of searchCourse) {%>
-<<<<<<< HEAD
                         <form action="/home/delete_course" method="POST">
                             <tr>
                                 <td><%=result.subject%></td>
@@ -290,27 +289,6 @@
                                 </td>
                             </tr>
                         </form>
-||||||| fb74739
-                        <tr>
-                            <td><%=result.subject%></td>
-                            <td><%=result.city%></td>
-                            <td><%=result.rating%></td>
-                            <td><%=result.price%></td>
-                            <td><button class="deleteCourse-button"><i class="fa fa-trash"
-                                        onclick="removeCourse(this)"></i></button>
-                            </td>
-                        </tr>
-=======
-                        <tr>
-                            <td><%=result.subject%></td>
-                            <td><%=result.city%></td>
-                            <td><%=result.rating%></td>
-                            <td><%=result.price%></td>
-                            <td><button class="deleteCourse-button" id='deleteCourseButton'><i class="fa fa-trash"
-                                        onclick="removeCourse(this)"></i></button>
-                            </td>
-                        </tr>
->>>>>>> 5dc94704dfc261ee2c30f9aa909a7204638c9633
                         <% }} %>
                         
 

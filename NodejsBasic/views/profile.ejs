@@ -187,16 +187,36 @@
                     </div>
 
                     <div class="form-group">
+                        <select id="level-filter" name="level" style="width: 100%;">
+                            <option value="" disabled selected>Educational Level</option>
+                            <option value="0">Any Level</option>
+                            <option value="1">Pre-School</option>
+                            <option value="2">Elementary-School</option>
+                            <option value="3">Middle-School</option>
+                            <option value="4">High-School</option>
+                            <option value="5">Bachelor</option>
+                          </select>
+                    </div>
+                    
+                    <div class="form-group">
                         <div class="form-input">
                             <input type="text" id="addCourse-city" name="city" placeholder="City">
                         </div>
 
                     </div>
-                    <div class="form-group">
-                        <div class="form-input">
-                            <input type="text" id="addCourse-rating" name="rating" placeholder="Rating">
+                    <div class="half-box be-left">
+                        <label class="control-label">Rating</label>
+                        <br>
+                        <div class="rating">
+                          <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="Great">5 stars</label>
+                          <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good">4 stars</label>
+                          <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Okay">3 stars</label>
+                          <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Bad">2 stars</label>
+                          <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="Very Bad">1
+                            star</label>
                         </div>
-                    </div>
+                        </br>
+                      </div>
 
                     <div class="form-group">
                         <div class="form-input">

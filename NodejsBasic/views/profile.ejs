@@ -101,6 +101,71 @@
         </div>
     </div>
 
+    <!-- addCourse-form -->
+    <div class="big-bg popup" id="addCourse-form">
+        <div class="form-bg color-lightgreen center" id="">
+            <button class="close-button"><i class="fa fa-close" onclick="closeAddCourseButton()"></i></button>
+            <span class="form-name">
+                <p>Add New Course</p>
+            </span><br>
+            <div class="form-information-bg">
+                <form class="form" action=/home/profile/add_course method="POST" id="contract-form">
+
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="addCourse-subject" name="subject" placeholder="Subject">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="level-filter" name="level" style="width: 100%;">
+                            <option value="" disabled selected>Educational Level</option>
+                            <option value="0">Any Level</option>
+                            <option value="1">Pre-School</option>
+                            <option value="2">Elementary-School</option>
+                            <option value="3">Middle-School</option>
+                            <option value="4">High-School</option>
+                            <option value="5">Bachelor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="addCourse-city" name="city" placeholder="City">
+                        </div>
+
+                    </div>
+                    <div class="half-box be-left">
+                        <label class="control-label">Rating</label>
+                        <br>
+                        <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="Great">
+                                </label>
+                            <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good">
+                                </label>
+                            <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Okay">
+                                </label>
+                            <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Bad">
+                                </label>
+                            <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="Very Bad">
+                                </label>
+                        </div>
+                        </br>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-input">
+                            <input type="text" id="addCourse-price" name="price" placeholder="Price">
+                        </div>
+                    </div>
+
+                    <button class="submit-button sign-up-button center">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <!-- contract-form -->
     <div class="big-bg popup" id="contract-form-popup">
         <div class="form-bg color-lightgreen center" id="contract-form-popup-bg">
@@ -183,8 +248,7 @@
                     </div>
                     <div class="pfdetail-box be-right">
                         <span class="name-contract">
-                            <button class="editpf-button be-right" id="editbut" onclick="showEditProfileForm()">Edit
-                                Profile</button>
+                            <button class="editpf-button be-right" id="editbut" onclick="showEditProfileForm()">Edit Profile</button>
 
                             <p id="profile-firstname"> <%= pf.firstname%> </p>
                             <p id="profile-lastname"><%=pf.lastname %></p>
@@ -391,7 +455,7 @@
                 document.getElementById("location-editpf").value = '<%= pf.location %>';
                 document.getElementById("bio-editpf").value = '<%= pf.bio %>';
                 document.getElementById("gender-editpf").value = '<%= pf.gender %>';
-                
+
             }
 
             function closeContractButton() {
@@ -402,37 +466,30 @@
                 $("#contract-form-popup").css("display", "flex");
             }
 
+            function closeAddCourseButton() {
+                $("#addCourse-form").css("display", "none");
+            }
+            function showAddCourse() {
+                $("#addCourse-form").css("display", "flex");
+            }
+
+
             // remove course
             function removeCourse(item) {
-                console.log('A');
+                console.log('remove course successful');
                 item.closest('tr').remove()
             }
 
-            //add course
-            //format : sub - - - - - deleteBut
-            function addCourse() {
-                var table = document.getElementById("courses-table");
-                var row = table.insertRow(table.rows.length);
-                var cell0 = row.insertCell(0);
-                cell0.innerHTML = "Science";
-
-                var cell1 = row.insertCell(1);
-                var cell2 = row.insertCell(2);
-                var cell3 = row.insertCell(3);
-                var cell4 = row.insertCell(4);
-                var cell5 = row.insertCell(5);
-                cell1.innerHTML = "-";
-                cell2.innerHTML = "-";
-                cell3.innerHTML = "-";
-                cell4.innerHTML = "-";
-                cell5.innerHTML = "-";
-
-
-                var cell6 = row.insertCell(6);
-                cell6.innerHTML = '<td><button class="deleteCourse-button"><i class="fa fa-trash"onclick="removeCourse(this)"></i></button></td>';
+           
+            
+            function clicked(subject) {
+            document.cookie = "sub= " + subject;
 
             }
-
+            function delete_cookie( name ) {
+            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            }
 
         </script>
 

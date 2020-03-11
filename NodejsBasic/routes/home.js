@@ -164,7 +164,7 @@ router.post('/profile/sendcontract', [], function (req, res) {
 				tutor_username : req.cookies.nextpf,
 				student_username: req.cookies.auth,
 				course_name : req.body.subject,
-				educational_level : req.body.educational_level,
+				educational_level : req.body.level,
 				class_day :  req.body.day,
 				class_time :  req.body.time,
 				status : "requested",

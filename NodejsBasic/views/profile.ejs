@@ -12,8 +12,14 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<<<<<<< HEAD
     <script type="text/javascript" src="/routes/allFunction.js"></script>
     <script> delete_cookie('sub')</script>
+||||||| fb74739
+    <script type="text/javascript" src="/routes/allFunction.js"></script>
+=======
+    <!-- <script type="text/javascript" src="/routes/allFunction.js"></script> -->
+>>>>>>> 5dc94704dfc261ee2c30f9aa909a7204638c9633
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <!-- <script src="script.js"></script> -->
     <!-- <script>checkStatus()</script> -->
@@ -107,7 +113,7 @@
         <div class="form-bg color-lightgreen center" >
             <button class="close-button"><i class="fa fa-close" onclick="closeContractButton()"></i></button>
             <span class="form-name">
-                <p>Contract</p>
+                <p>Sent Contract</p>
             </span><br>
             <div class="form-information-bg">
                 <form class="form"  action=/home/profile method="POST" id="contract-form" >
@@ -160,7 +166,7 @@
                     </div>
                     <div class="form-group">
                         <div class="form-input">
-                            <div class="textwrapper"><textarea id="bio-editpf" name="bio" cols="2" rows="6"
+                            <div class="textwrapper"><textarea id="message-contactf" name="bio" cols="2" rows="6"
                                     placeholder="  Message"></textarea></div>
                         </div>
                     </div>
@@ -244,17 +250,20 @@
                     </div>
                     <div class="pfdetail-box be-right">
                         <span class="name-contract">
-                            <button class="editpf-button be-right" id="editbut" onclick="showEditProfileForm()">Edit
-                                Profile</button>
+                            <button class="editpf-button be-right" id="editbut" onclick="showEditProfileForm()">Edit Profile</button>
 
-                            <p id="name"> <%= pf.firstname%> </p>
-                            <p><%=pf.lastname %></p>
-                            <img class="nav-img-user" src="/img/placeholder.png" style="height: 1.1em;" /><a>
-                                <%= pf.location %></a><br />
-                            <b>Email</b><a><%= pf.email %></a><br />
-                            <b>Phone Number</b><a><%= pf.phone %></a><br />
-                            <b>Gender</b><a><%= pf.gender %></a><br />
-                            <b>Bio</b><a><%= pf.bio %></a>
+                            <p id="profile-firstname"> <%= pf.firstname%> </p>
+                            <p id="profile-lastname"><%=pf.lastname %></p>
+                            <img class="nav-img-user" src="/img/placeholder.png" style="height: 1.1em;" />
+                            <a id='profile-location'><%= pf.location %></a>
+                            <br />
+                            <b id='profile-email'>Email</b><a><%= pf.email %></a>
+                            <br />
+                            <b id='profile-phoneNumber'>Phone Number</b><a><%= pf.phone %></a>
+                            <br />
+                            <b id='profile-gender'>Gender</b><a><%= pf.gender %></a>
+                            <br />
+                            <b id='profile-bio'>Bio</b><a><%= pf.bio %></a>
                         </span>
                     </div>
                 </div>
@@ -271,6 +280,7 @@
                         </tr>
                         <%if (typeof searchCourse!= 'undefined') { %>
                             <%for(result of searchCourse) {%>
+<<<<<<< HEAD
                         <form action="/home/delete_course" method="POST">
                             <tr>
                                 <td><%=result.subject%></td>
@@ -282,13 +292,34 @@
                                 </td>
                             </tr>
                         </form>
+||||||| fb74739
+                        <tr>
+                            <td><%=result.subject%></td>
+                            <td><%=result.city%></td>
+                            <td><%=result.rating%></td>
+                            <td><%=result.price%></td>
+                            <td><button class="deleteCourse-button"><i class="fa fa-trash"
+                                        onclick="removeCourse(this)"></i></button>
+                            </td>
+                        </tr>
+=======
+                        <tr>
+                            <td><%=result.subject%></td>
+                            <td><%=result.city%></td>
+                            <td><%=result.rating%></td>
+                            <td><%=result.price%></td>
+                            <td><button class="deleteCourse-button" id='deleteCourseButton'><i class="fa fa-trash"
+                                        onclick="removeCourse(this)"></i></button>
+                            </td>
+                        </tr>
+>>>>>>> 5dc94704dfc261ee2c30f9aa909a7204638c9633
                         <% }} %>
                         
 
                     </table>
 
-                    <button class="editCourse-button be-right">Edit courses</button>
-                    <button class="addCourse-button be-right" onclick="showAddCourse()">Add courses</button>
+                    <button class="editCourse-button be-right" id='editCourseButton'>Edit courses</button>
+                    <button class="addCourse-button be-right" id='addCourseButton' onclick="showAddCourse()">Add courses</button>
 
                 </div>
                 <div class="qual-box be-right">
@@ -319,7 +350,7 @@
                             <a>XXXXXXXXXXXXXX</a>
                         </span>
                     </div>
-                    <button class="verifyDoc-button be-right">Verify documents</button>
+                    <button class="verifyDoc-button be-right" id='verifyDocButton'>Verify documents</button>
                 </div><br />
                 <div class="ratesum-box">
                     <span class="name-contract">
@@ -378,7 +409,7 @@
                         </tr>
 
                     </table>
-                    <button class="editAva-button be-right">Edit availability</button>
+                    <button class="editAva-button be-right" id='editAvailButton'>Edit availability</button>
                 </div>
                 <div class="review-box center">
                     <span class="name-contract">
@@ -399,7 +430,7 @@
                             <a>XXXXXXXXXXXXXX</a>
                         </span>
                     </div>
-                    <button class="sendcontract-button be-right" onclick="showSentContract()">Send a contract</button>
+                    <button class="sendcontract-button be-right" id='sentContractButton' onclick="showSentContract()">Send a contract</button>
                 </div>
             </div>
         </div>
@@ -420,12 +451,33 @@
             }
             // alert(tod);
             //alert(document.getElementById("name").innerText);
-            if (tod != document.getElementById("name").innerText) {
+
+            // is viewer
+            if (tod != document.getElementById("profile-firstname").innerText) {
                 $("#editbut").css("display", "none");
+                $("#addCourseButton").css("display", "none");
+                $("#editCourseButton").css("display", "none");
+                $("#deleteCourseButton").css("display", "none");
+                $("#verifyDocButton").css("display", "none");
+                $("#editAvailButton").css("display", "none");
+
+                $("#sentContractButton").css("display", "block");
+                
+                
+                
                 // alert("1");
             }
+
+            // is owner
             else {
                 $("#editbut").css("display", "block");
+                $("#addCourseButton").css("display", "block");
+                $("#editCourseButton").css("display", "block");
+                $("#deleteCourseButton").css("display", "block");
+                $("#verifyDocButton").css("display", "block");
+                $("#editAvailButton").css("display", "block");
+
+                $("#sentContractButton").css("display", "none");
                 //alert("2");
             }
 
@@ -448,6 +500,15 @@
             }
             function showEditProfileForm() {
                 $("#edit-profile-form").css("display", "flex");
+                
+                //set initial value
+                document.getElementById("firstname-editpf").value = '<%= pf.firstname%>' ;
+                document.getElementById("lastname-editpf").value = '<%=pf.lastname %>';
+                document.getElementById("e-mail-editpf").value = '<%= pf.email %>';
+                document.getElementById("phone-editpf").value = '<%= pf.phone %>';
+                document.getElementById("location-editpf").value = '<%= pf.location %>';
+                document.getElementById("bio-editpf").value = '<%= pf.bio %>';
+                document.getElementById("gender-editpf").value = '<%= pf.gender %>';
             }
 
             function closeContractButton() {

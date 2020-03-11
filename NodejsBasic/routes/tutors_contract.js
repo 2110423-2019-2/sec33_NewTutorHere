@@ -17,6 +17,17 @@ client.connect(err => {
 
 const dbName = 'SEproject'
 
-router.get('/remove/:id', function (req, res, next) {
-	res.render('index');
+router.get('/remove/:id', function (req, res) {
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		var query = {
+			"_id": new ObjectId(id);
+		};
+		await db.collection('ContractData').deleteOne(query);
+	});
+	res.render('tutors_contract');
 });
+
+
+module.exports = router;

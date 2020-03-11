@@ -100,6 +100,20 @@ router.get('/students_contract', function (req, res, next) {
 	
 });
 
+
+router.get('/remove_contract/:id', function (req, res, next) {
+	// client.connect(async function (err) {
+	// 	assert.equal(null, err);
+	// 	const db = client.db(dbName);
+	// 	var query = {
+	// 		"_id": new ObjectId(req.body.id)
+	// 	};
+	// 	await db.collection('ContractData').deleteOne(query);
+	// });
+	res.render('tutors_contract');
+});
+
+
 // schedule page
 router.get('/schedule', function (req, res, next) {
 	// res.render('schedule');

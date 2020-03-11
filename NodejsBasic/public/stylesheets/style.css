@@ -1069,3 +1069,16 @@ button.view2-button {
 button:hover.view2-button {
     background-color: #879437;
 }
+
+/* view contract */
+#contract-popup {
+    display: none;
+    z-index: 100;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}

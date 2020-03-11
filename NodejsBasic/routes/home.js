@@ -48,7 +48,7 @@ router.get('/', function (req, res, next) {
 // tutor's contract page
 router.get('/tutors_contract', function (req, res, next) {
 	var use = req.cookies.auth;
-	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
@@ -75,7 +75,7 @@ router.get('/tutors_contract', function (req, res, next) {
 // student's contract page
 router.get('/students_contract', function (req, res, next) {
 	var use = req.cookies.auth;
-	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);

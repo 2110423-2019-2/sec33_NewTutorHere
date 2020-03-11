@@ -48,7 +48,7 @@ router.get('/', function (req, res, next) {
 // tutor's contract page
 router.get('/tutors_contract', function (req, res, next) {
 	var use = req.cookies.auth;
-	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
@@ -75,7 +75,7 @@ router.get('/tutors_contract', function (req, res, next) {
 // student's contract page
 router.get('/students_contract', function (req, res, next) {
 	var use = req.cookies.auth;
-	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
@@ -140,7 +140,7 @@ router.get('/schedule', function (req, res, next) {
 	});
 });
 
-// profile page sendcontract
+// profile page
 router.get('/profile', function (req, res, next) {
 	console.log("profile!!");
 	var use = req.cookies.auth;
@@ -148,22 +148,31 @@ router.get('/profile', function (req, res, next) {
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
-		var query = {
+		var query_username = {
 			"username": use
 		};
-
-		const resultt = await db.collection('UserData').find(query).limit(1).toArray();
-
+		var query_tutor_username = {
+			"tutor_username": use
+			
+		};
+		var query_tutor_availability = {
+			"tutor_username": use ,
+			"status":"accepted"
+		};
+		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
+		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
+		const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		console.log(resultt);
-		res.render('profile', { pf: resultt[0] });
+		console.log(result_availability);
+		res.render('profile', { pf: result_user[0] , searchCourse: result_course , searchAvailability: result_availability });
 	});
 
 });
 
 //sendContract
-router.post('/profile/sendcontract', [], function (req, res) {
-	var use = req.cookies.nextpf;
+router.post('/profile', [], function (req, res) {
+	var use = req.cookies.auth;
+	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	//if(req.cookies.auth == req.body.username)
 	console.log("IN SendconTract!");
 	
@@ -174,11 +183,22 @@ router.post('/profile/sendcontract', [], function (req, res) {
 	
 			//once connected, add a doc to collection 'UserData'
 			const db = client.db(dbName);
+			var query_username = {
+				"username": use
+			};
+			var query_tutor_username = {
+				"tutor_username": use
+				
+			};
+			var query_tutor_availability = {
+				"tutor_username": use ,
+				"status":"accepted"
+			};
 			db.collection('ContractData').insertOne({
 				tutor_username : req.cookies.nextpf,
 				student_username: req.cookies.auth,
 				course_name : req.body.subject,
-				educational_level : req.body.educational_level,
+				educational_level : req.body.level,
 				class_day :  req.body.day,
 				class_time :  req.body.time,
 				status : "requested",
@@ -188,9 +208,11 @@ router.post('/profile/sendcontract', [], function (req, res) {
 			
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		
-		const resultt = await db.collection('UserData').find({username: req.cookies.auth }).limit(1).toArray();
-		console.log(resultt);
-		res.render('profile', { pf: resultt[0] });
+			const result_user = await db.collection('UserData').find({username: req.cookies.nextpf }).limit(1).toArray();
+			const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
+			const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
+			res.render('profile', { pf: result_user[0] , searchCourse: result_course , searchAvailability: result_availability });
+
 		});
 		
 

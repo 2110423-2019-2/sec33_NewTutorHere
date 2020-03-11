@@ -21,59 +21,97 @@
 
 <body>
   <%- include navbar %>
-  <div class="big-bg">
-    <!-- Content -->
-    
-      <div class="contractlog-box be-left">
-        <span class="name-stucontract">
-          <p>Contract Log</p>
-        </span>
-        
-        <% accepted.forEach(element => { %>
-          <div class="conlog-item">
-            <span class="name-stucontract">
-              <a><%= element.student_username %> </a>
-            </span>
-            <br />
-            <a class="view2-button search-button be-right" href="remove_contract/<%= element._id %>" >Terminate</a>
-            <button class="view2-button search-button be-right">View</button>
-          </div>
-        <% }) %>
-        
+
+  <!-- contract -->
+  <div class="big-bg popup" id="contract-popup" >
+    <div class="form-bg color-lightgreen center" id="contract-popup-bg">
+      <button class="close-button"><i class="fa fa-close" onclick="closeContractPopupButton()"></i></button>
+      <span class="form-name">
+        <p>Contract</p>
+      </span><br>
+      <div class="form-information-bg">
+        <form class="form" id="contract" >
+
+          <b>Subject</b> <a> </a><br />
+          <b>Educational Level</b><a> </a><br />
+          <b>Day</b><a> </a><br />
+          <b>Time</b><a> </a><br />
+          <b>Message</b><a> </a>
+
+          <button class="submit-button sign-up-button center" onclick="acceptContractPopupButton()">Accept</button>
+          <button class="submit-button sign-up-button center" onclick="rejectContractPopupButton()">Reject</button>
+        </form>
       </div>
-
-
-      <div class="contract-box color-lightgreen be-right" id="contract-form">
-        <!-- Begin of contract list -->
-
-        <% requested.forEach(element => { %>
-
-          <form class="form" id="contract">
-            <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
-            <div class="c-box be-right">
-                <div class="blockcontract">
-                    <span class="name-contract">
-                        <p><%= element.student_username %> </p>
-                        <a>sends you a contract.</a>
-                    </span>
-                    <br />
-                    <button class="view-button search-button be-right" >View a contract</button>
-                    <button class="view-button search-button be-right" >View profile</button>
-                </div>
-            </div>
-  
-          </form>
-         
-        <% }) %>
-
-      </div>
-
-    
+    </div>
   </div>
 
-  <!-- <script>
-    generateContract();
-  </script> -->
+  <div class="big-bg">
+    <!-- Content -->
+
+    <div class="contractlog-box be-left">
+      <span class="name-stucontract">
+        <p>Contract Log</p>
+      </span>
+
+      <% accepted.forEach(element => { %>
+      <div class="conlog-item">
+        <span class="name-stucontract">
+          <a><%= element.student_username %> </a>
+        </span>
+        <br />
+        <button class="view2-button search-button be-right">Terminate</button>
+        <button class="view2-button search-button be-right">View</button>
+      </div>
+      <% }) %>
+
+    </div>
+
+
+    <div class="contract-box color-lightgreen be-right" id="contract-form">
+      <!-- Begin of contract list -->
+
+      <% requested.forEach(element => { %>
+
+      <form class="form" id="contract">
+        <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
+        <div class="c-box be-right">
+          <div class="blockcontract">
+            <span class="name-contract">
+              <p><%= element.student_username %> </p>
+              <a>sends you a contract.</a>
+            </span>
+            <br />
+            <button class="view-button search-button be-right" onclick="showContractPopup()">View a contract</button>
+            <button class="view-button search-button be-right">View profile</button>
+          </div>
+        </div>
+
+      </form>
+
+      <% }) %>
+
+    </div>
+
+
+  </div>
+
+  <script>
+    // generateContract();
+    function closeContractPopupButton() {
+      $("#contract-popup").css("display", "none");
+      alert("!!!!");
+    }
+    function showContractPopup() {
+      $("#contract-popup").css("display", "flex");
+      alert("1111");
+    }
+    function acceptContractPopupButton() {
+      $("#contract-popup").css("display", "none");
+    }
+    function rejectContractPopupButton() {
+      $("#contract-popup").css("display", "none");
+    }
+  </script>
 
 </body>
 

@@ -150,7 +150,7 @@ input {
 }
 
 ::placeholder {
-    color: #ADBE91;
+    color: #86916E;
     font-size: 1em;
 }
 
@@ -271,9 +271,8 @@ select{
     height: 25pt;
     border: none;
     padding-left: 10px;
-    color: #ADBE91;
+    color: #C1D29F;
     background-color: white;
-    font-size: 1em;
 }
 
 

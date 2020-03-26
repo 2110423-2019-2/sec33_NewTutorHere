@@ -1,0 +1,55 @@
+<!-- Navigation bar -->
+<ul class="nav-bar be-left color-green">
+    <li><a href="/home">
+            <img class="nav-img-logo be-left" src="/img/logo_bg.png" style="height: 2em;" />
+        </a></li>
+    <li class='title'><a href="/home" onclick="reset()">NEW TUTOR HERE</a></li>
+    <li style="float:right">
+        <ul class="nav-menu">
+            <li class="profile center" style="width: 7em;">
+                <a href="#">
+                    <img class="nav-img-user" src="/img/user.png" style="height: 3.5em;" onclick="reset()"/>
+                    <img class="nav-img-dropdown" src="/img/drop-down.png" style="height: 1em;" />
+                </a>
+                <ul class="dropdown">
+                    <li><a href="/home/profile" onclick="clickedd()">Profile</a></li>
+                    <li><a href="/" onclick="out()">Log Out</a></li>
+                </ul>
+            </li>
+            <li class='text'><a href="/home/schedule">Schedule</a></li>
+            <li class='text'><a href="/home/tutors_contract">Tutor Contracts</a></li>
+            <li class='text'><a href="/home/students_contract">Student Contracts</a></li>
+            <li class='text'><a href="/home" onclick="reset()">Home</a></li>
+        </ul>
+    </li>
+</ul>
+<script> function clickedd() {
+   document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+   document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+   document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+   var name = "auth=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      var next =  c.substring(name.length, c.length);
+    }
+  }
+   // document.cookie = "nextpf= " + next ;
+    //alert("ASDASD");
+}
+function reset(){
+    document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    //alert("reset");
+}
+function out(){
+    document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "nextpf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    //alert("out");
+}
+</script>

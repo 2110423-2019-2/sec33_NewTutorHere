@@ -352,9 +352,15 @@ router.get('/testfunction', function (req, res, next) {
 	testFunction.data.checkcookie(req, res);
 });
 
-// profile page
-router.get('/students_profile', function (req, res, next) {
-	res.render('students_profile');
+// premium
+router.get('/premium', function (req, res, next) {
+	res.render('premium');
+});
+
+/* admin part */
+// admin home
+router.get('/home_admin', function (req, res, next) {
+	res.render('home_admin');
 });
 
 module.exports = router;

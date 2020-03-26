@@ -127,11 +127,12 @@
     
           <div class="tt-box center" >
             <div class="pfphoto-box">
-                <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
-                <div class="tutor-rating"></div>
-                <script>
-                  showStars('<%= result.rating %>');
-                </script>
+              <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
+              <div class="tutor-rating">
+                  <script>
+                    showStars('<%= result.rating %>');
+                  </script>
+              </div>
             </div>
             <div class="pfdetail-box be-right" >
                 <form class="name-contract" action = "/home/profile" method = "GET">

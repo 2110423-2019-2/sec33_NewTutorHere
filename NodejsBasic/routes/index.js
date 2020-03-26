@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var crypto = require('crypto');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const { check, validationResult } = require('express-validator');
@@ -20,6 +21,44 @@ router.get('/', function (req, res, next) {
 	res.render('index');
 });
 
+/**
+ * generates random string of characters i.e salt
+ * @function
+ * @param {number} length - Length of the random string.
+ */
+var genRandomString = function(length){
+    return crypto.randomBytes(Math.ceil(length/2))
+            .toString('hex') /** convert to hexadecimal format */
+            .slice(0,length);   /** return required number of characters */
+};
+
+/**
+ * hash password with sha512.
+ * @function
+ * @param {string} password - List of required fields.
+ * @param {string} salt - Data to be validated.
+ */
+var sha512 = function(password, salt){
+    var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
+    hash.update(password);
+    var value = hash.digest('hex');
+    return {
+        salt:salt,
+        passwordHash:value
+    };
+};
+
+function saltHashPassword(userpassword) {
+    var salt = genRandomString(16); /** Gives us salt of length 16 */
+    var passwordData = sha512(userpassword, salt);
+    console.log('UserPassword = '+userpassword);
+    console.log('Passwordhash = '+passwordData.passwordHash);
+	console.log('nSalt = '+passwordData.salt);
+	return {
+		salt:salt,
+		passwordHash:passwordData.passwordHash
+	};
+}
 router.post('/', [
 	check("username", "Enter username").not().isEmpty(),
 	check("password", "Enter password").not().isEmpty(),
@@ -40,9 +79,14 @@ router.post('/', [
 		client.connect(async function (err) {
 			assert.equal(null, err);
 			const db = client.db(dbName);
+			
+			const validate = await db.collection('UserData').findOne({
+				'username': req.body.username,
+			});
+			var passwordData = sha512(req.body.password, validate.salt);
 			const user = await db.collection('UserData').findOne({
 				'username': req.body.username,
-				'password': req.body.password
+				'password': passwordData.passwordHash
 			});
 			if (user) {
 				// console.log(user)
@@ -63,7 +107,7 @@ router.post('/register', [], function (req, res) {
 
 	//TODO: Check if the password and confirmed password match
 	//TODO: Check inputs in general (blank, invalid, etc.) It should also be able to configure from the frontend side.
-
+	password = saltHashPassword(req.body.password);
 	client.connect(function (err) {
 		//checks for connection error
 		assert.equal(null, err);
@@ -76,7 +120,8 @@ router.post('/register', [], function (req, res) {
 			firstname: req.body.firstname,
 			lastname: req.body.lastname,
 			username: req.body.username,
-			password: req.body.password,
+			password: password.passwordHash,
+			salt : password.salt,
 			phone: req.body.phone,
 			email: req.body.email,
 			gender: req.body.gender

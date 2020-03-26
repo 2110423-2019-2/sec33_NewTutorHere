@@ -397,6 +397,7 @@ button.search-button {
     display: inline-block;
     padding-left: 1.7vw;
     padding-top: 0.7vh;
+    /* position: fixed; */
 }
 
 .greyStar {

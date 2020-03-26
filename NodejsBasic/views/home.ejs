@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NewTutorHere</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-  <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
-  <!-- <link rel="shortcut icon" href="img/dog.ico" /> -->
 
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
   <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
@@ -17,7 +15,8 @@
  <script type="text/javascript" src="/scripts/mustache.js"></script>
  <script type="text/javascript" src="/scripts/modal.js"></script>
  <script type="text/javascript" src="/scripts/custom.js"></script>
- <!-- <script type="text/javascript" src="/routes/allFunction.js"></script> -->
+ <script type="text/javascript" src="/scripts/function.js"></script>
+ 
 </head>
 
 <body>
@@ -129,19 +128,16 @@
           <div class="tt-box center" >
             <div class="pfphoto-box">
                 <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
-                <div class="tutor-rating">
-                  <label class='greyStar'></label>
-                  <label class='greyStar'></label>
-                  <label class='greyStar'></label>
-                  <label class='greyStar'></label>
-                  <label class='greyStar'></label>
-                </div>
+                <div class="tutor-rating"></div>
+                <script>
+                  showStars('<%= result.rating %>');
+                </script>
             </div>
             <div class="pfdetail-box be-right" >
                 <form class="name-contract" action = "/home/profile" method = "GET">
                     
-                    <p ><%= result.tutor_username %></p>
-                    <img class="nav-img-user" src="../img/placeholder.png" style="height: 1.1em;" /><a><%= result.city%></a><br />
+                    <p ><%= result.tutor_username %>&nbsp</p>
+                    <img class="nav-img-user" src="../img/placeholder.png" style="height: 1.1em;" /><a> <%= result.city%></a><br />
                     <b>Subject</b><a><%= result.subject %></a><br />
                     <b>Educational Level</b><a><%= result.level %></a><br />
                     <b>Price</b><a>฿<%= result.price %> per hour</a><br />
@@ -151,18 +147,19 @@
           </div>
           <% }} %>
 
-
     
       </div>
     </div>
   </div>
 
-  
+  <script> 
 
-<script> function clicked(name) {
+    function clicked(name) {
       document.cookie = "nextpf= " +name;
-      //alert("AAAAAAAA");
-}</script>
+    }
+
+  </script>
+
 </body>
 
 </html>

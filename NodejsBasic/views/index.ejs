@@ -190,6 +190,10 @@
                             <input type="password" id="password-signin" name="password">
                         </div>
                     </div>
+                    <%if (typeof wrong != 'undefined') { %>
+                     <%= wrong %>
+                        <% } %>
+                   
                     <button type="submit" class="submit-button sign-in-button center" onclick="signIn()">Log In</button>
                 </form>
 

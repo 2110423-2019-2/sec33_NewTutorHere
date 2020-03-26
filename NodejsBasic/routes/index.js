@@ -22,7 +22,9 @@ router.get('/', function (req, res, next) {
 
 router.post('/', [
 	check("username", "Enter username").not().isEmpty(),
-	check("password", "Enter password").not().isEmpty()
+	check("password", "Enter password").not().isEmpty(),
+	check('password').isLength({ min: 5 }),
+	check('username').isLength({ min: 6 })
 ], function (req, res) {
 	const result = validationResult(req);
 	var errors = result.errors;
@@ -31,7 +33,8 @@ router.post('/', [
 	
 	if (!result.isEmpty()) {
 		// username/password empty
-		res.send(errors[0]['msg']);
+		//res.send(errors[0]['msg']);
+		res.render('index', {wrong: errors[0].param +" is invalid"});
 		// send  error.msg if error 
 	} else {
 		client.connect(async function (err) {
@@ -50,7 +53,7 @@ router.post('/', [
 				res.render('home', {name:req.cookies.auth});
 			}
 			else {
-				res.send("Wrong username or Password");
+				res.render('index', {wrong: "Wrong username or passwrod"});
 			}
 		});
 	}

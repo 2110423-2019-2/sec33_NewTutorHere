@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 //connect to allFunction.js
-var testFunction = require('./allFunction');
 
 const assert = require('assert');
 

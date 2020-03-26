@@ -361,5 +361,29 @@ router.get('/premium', function (req, res, next) {
 router.get('/home_admin', function (req, res, next) {
 	res.render('home_admin');
 });
+router.get('/view_contract/:id', function (req, res, next) {
+    var use = req.params.id;
+    client.connect(async function (err) {
+        assert.equal(null, err);
+        const db = client.db(dbName);
+        var query_username = {
+            "username": use
+        };
+        var query_tutor_username = {
+            "tutor_username": use
+ 
+        };
+        var query_tutor_availability = {
+            "tutor_username": use,
+            "status": "accepted"
+        };
+        const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
+        const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
+        const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
+        // The search added the results to the locals, access them in home.ejs and show the results there
+        console.log(result_availability);
+        res.render('profile', { pf: result_user[0], searchCourse: result_course, searchAvailability: result_availability });
+    });
+});
 
 module.exports = router;

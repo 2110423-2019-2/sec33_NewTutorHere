@@ -12,7 +12,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="/routes/allFunction.js"></script>
+    <script type="text/javascript" src="/scripts/function.js"></script>
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <!-- <script src="script.js"></script> -->
     <!-- <script>checkStatus()</script> -->
@@ -251,9 +251,10 @@
                 <p>please write to us below.</p>
             </span><br>
 
+            <!-- TODO add comment to db -->
             <div class="form-information-bg">
-                <form class="form" action=/home/profile method="POST" id="addComment-form">
-
+                <!-- <form class="form" action=/home/profile method="POST" id="addComment-form"> -->
+                <form class="form" id="addComment-form"></form>
 
                     <div class="rating">
                         <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="Great"></label>
@@ -272,7 +273,7 @@
                         </div>
                     </div>
 
-                    <button class="submit-button sign-up-button center" onclick="">Submit</button>
+                    <button class="submit-button sign-up-button center" onclick="addComment()">Submit</button>
                 </form>
             </div>
         </div>
@@ -390,20 +391,42 @@
                         <c>Reviews</c>
                     </span>
 
-                    <div class="qual-item">
-                        <span class="name-contract">
-                            <a>XXXXXXXXXXXXXX</a><br />
-                            <a>XXXXXXXXXXXXXX</a>
-                        </span>
+                    <div class="comment-box center">
+                        <div class="pfphoto-box">
+                            <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
+                            <div class="profile-rating">
+                                <script>
+                                    showStars('5');
+                                </script>
+                            </div>
+                        </div>
+
+                        <div class="qual-item">
+                            <span class="comment">
+                                <p>เยี่ยมยอด</p>
+                            </span>
+                        </div>
+
                     </div>
 
+                    <div class="comment-box center">
+                        <div class="pfphoto-box">
+                            <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
+                            <div class="profile-rating">
+                                <script>
+                                    showStars('5');
+                                </script>
+                            </div>
+                        </div>
 
-                    <div class="qual-item">
-                        <span class="name-contract">
-                            <a>XXXXXXXXXXXXXX</a><br />
-                            <a>XXXXXXXXXXXXXX</a>
-                        </span>
+                        <div class="qual-item">
+                            <span class="comment">
+                                <p>อาจารย์หล่อ</p>
+                            </span>
+                        </div>
+
                     </div>
+
                     <button class="addComment-button be-right" id='addComment' onclick="showAddComment()">Add comment</button>
                     <button class="sendcontract-button be-right" id='sentContractButton' onclick="showSentContract()">Send a contract</button>
                 </div>
@@ -513,6 +536,11 @@
                 item.closest('tr').remove()
             }
 
+            function addComment() {
+
+                console.log('add comment successful');
+        
+            }
            
             
             function clicked(subject) {

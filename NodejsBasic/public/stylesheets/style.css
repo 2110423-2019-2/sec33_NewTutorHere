@@ -1140,3 +1140,28 @@ button:hover.view2-button {
     background-color: rgba(0, 0, 0, 0.5);
 
 }
+/*premium*/
+div.premium-box {
+    width: 70%;
+    height: 40em;
+    border: none;
+    padding: 30px 5% 0px 5%;
+}
+div.blockpremi {
+    width: 50%;
+    height: 30em;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 0% 0px 0%;
+    background-color: #ddd;
+    margin-top: 3%;
+}
+.premi p{
+    font-size: 1.2em;
+    /* font-weight: bold; */
+    color: #4C5F21;
+    padding-left: 1em;
+    padding-bottom: 0.5em;
+    display: inline-block;
+    letter-spacing: 0.08em;
+}

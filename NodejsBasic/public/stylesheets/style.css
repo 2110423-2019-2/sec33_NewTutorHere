@@ -207,6 +207,18 @@ button:hover.submit-button {
 
 }
 
+#addComment-form-popup {
+    display: none;
+    z-index: 100;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
 #addCourse-form {
     display: none;
     z-index: 100;
@@ -236,6 +248,13 @@ div.form-bg {
 
 .form-name p{
     font-size: 2.5em;
+    color: #4C5F21;
+    padding-bottom: 0.3em;
+    text-align: center;
+}
+
+.form-sub p {
+    font-size: 1em;
     color: #4C5F21;
     padding-bottom: 0.3em;
 }
@@ -396,6 +415,12 @@ button.search-button {
 .tutor-rating {
     display: inline-block;
     padding-left: 1.0vw;
+    padding-top: 0.7vh;
+}
+
+.profile-rating {
+    display: inline-block;
+    padding-left: 0.3vw;
     padding-top: 0.7vh;
 }
 
@@ -898,6 +923,35 @@ button.sendcontract-button {
     margin-top: inherit;
 }
 
+button.addComment-button {
+    width: 17%;
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
+    margin-right: 2%;
+    margin-top: inherit;
+}
+
+.comment-box {
+    display: flex;
+    width: 100%;
+    height: 10em;
+    background-color: white;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.comment  {
+    font-size: 0.9em;
+    color: black;
+    letter-spacing: 0.08em;
+    width: 80%;
+}
+
 button:hover.sendcontract-button {
     background-color: #879437;
 }
@@ -1055,16 +1109,18 @@ th, td {
     letter-spacing: 0.08em;
 }
 .qual-item{
-    width: 70%;
+    width: 80%;
     height: auto;
     background-color: #ddd;
     border: none;
     border-radius: 13px;
-    text-align: center;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    text-align: left;
+    /* padding-top: 2%;
+    padding-bottom: 2%; */
+    padding: 2% 5% 2% 5% ;
     margin-top: 2%;
-    margin-left: 15%;
+    margin-bottom: 2%;
+    margin-right: 2vw;
 }
 .conlog-item{
     width: 85%;

@@ -12,7 +12,12 @@
 * {
     margin: 0;
     padding: 0;
+<<<<<<< HEAD
     font-family: 'HelveticaNeue';
+=======
+    /* font-weight: 500; */
+    font-family: 'HelveticaNeue'
+>>>>>>> d224cd68444a5acef7502309bf70c3514c03fc50
 }
 
 body {

@@ -304,7 +304,7 @@ router.post('/profile/edit_profile', [], function (req, res) {
 		res.cookie('firstn', req.body.firstname);
 		const result = await db.collection('UserData').find({ username: req.cookies.auth }).limit(1).toArray();
 		console.log(result);
-		res.render('profile', { pf: result[0] });
+		res.redirect('/home/profile');
 	});
 
 });
@@ -391,6 +391,17 @@ router.get('/testfunction', function (req, res, next) {
 router.get('/premium', function (req, res, next) {
 	res.render('premium');
 });
+
+// profile_tutor
+router.get('/profile_tutor', function (req, res, next) {
+	res.render('profile_tutor');
+});
+
+// profile_student
+router.get('/profile_student', function (req, res, next) {
+	res.render('profile_student');
+});
+
 
 /* admin part */
 // admin home

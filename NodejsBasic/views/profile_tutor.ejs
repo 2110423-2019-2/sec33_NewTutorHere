@@ -237,7 +237,7 @@
     </div>
 
     <!-- add comment-form -->
-    <div class="big-bg popup" id="addComment-form-popup" >
+    <div class="big-bg popup" id="addComment-form-popup">
         <div class="form-bg color-lightgreen center" id="addComment-form-popup-bg">
             <button class="close-button"><i class="fa fa-close" onclick="closeAddCommentButton()"></i></button>
 
@@ -254,7 +254,7 @@
             <!-- TODO add comment to db -->
             <div class="form-information-bg">
                 <!-- <form class="form" action=/home/profile method="POST" id="addComment-form"> -->
-                <form class="form" id="addComment-form" action=/home/profile/add_comment method="POST"></form>
+                <form class="form" id="addComment-form"></form>
 
                     <div class="rating">
                         <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="Great"></label>
@@ -295,8 +295,6 @@
 
                             <p id="profile-firstname"> <%= pf.firstname%> </p>
                             <p id="profile-lastname"><%=pf.lastname %></p>
-                            <img class="nav-img-user" src="/img/crown.png" style="height: 1.2em;" />
-                            <br />
                             <img class="nav-img-user" src="/img/placeholder.png" style="height: 1.1em;" />
                             <a id='profile-location'><%= pf.location %></a>
                             <br />
@@ -312,7 +310,7 @@
                 </div>
                 <div class="ratesum-box">
                     <span class="name-contract">
-                        <c>Courses</c>
+                        <c>Teaches</c>
                     </span>
                     <table id='courses-table'>
                         <tr>
@@ -340,7 +338,9 @@
 
                     </table>
 
-                    <button class="addCourse-button be-right" id='addCourseButton' onclick="showAddCourse()">Add courses</button>
+                    <button class="editCourse-button be-right" id='editCourseButton'>Edit courses</button>
+                    <button class="addCourse-button be-right" id='addCourseButton' onclick="showAddCourse()">Add
+                        courses</button>
 
                 </div>
                 <div class="qual-box be-right">
@@ -428,8 +428,8 @@
                     </div>
 
                     <button class="addComment-button be-right" id='addComment' onclick="showAddComment()">Add comment</button>
+                    <button class="sendcontract-button be-right" id='sentContractButton' onclick="showSentContract()">Send a contract</button>
                 </div>
-                <button class="sendcontract-button be-right" id='sentContractButton' onclick="showSentContract()">Send a contract</button>
             </div>
         </div>
 

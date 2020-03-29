@@ -20,8 +20,8 @@
 </head>
 
 <body>
-  <%- include navbar_admin %>
-<script>var student_username;</script>
+  <%- include navbar_admin %> 
+  <script>var student_username;</script>
   <!-- contract -->
 
   <div class="big-bg">
@@ -31,9 +31,9 @@
       <!-- Begin of contract list -->
 
       <% let idx = 0 %> 
-      <% requested.forEach(element => { %>
+      <% all.forEach(element => { %>
         
-      <form class="form" id="user">
+      <form class="form" id="user" >
         <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
         <div class="c-box center">
           <div class="blockcontract">
@@ -41,10 +41,9 @@
               <h2><%= element.tutor_username %> </h2>
             </span>
             <br />
-            <a class="view2-button search-button be-right" href="view_contract/<%= element.tutor_username%>">View profile</a>
+            <a class="view2-button search-button be-right" href="home/view_contract/<%= element.tutor_username%>">View profile</a>
           </div>
         </div>
-
       </form>
       <% idx++; %> 
       <% }) %>
@@ -55,10 +54,8 @@
   </div>
 
   <script>
-
-    var r = <%- JSON.stringify(requested) %>;
+    var r = `<%- JSON.stringify(all) %>`;
     console.log("tmp")
-
   </script>
 
 </body>

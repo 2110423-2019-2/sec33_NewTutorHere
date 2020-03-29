@@ -94,7 +94,16 @@ router.post('/', [
 				//TODO: Change from storing just the username as a login token to jwt
 				res.cookie('auth', user.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 				res.cookie('firstn', user.firstname);
-				res.render('home', {name:req.cookies.auth});
+				res.cookie('role', user.position);
+				if(user.position == 'admin') console.log(user.position);
+				if(user.position == 'admin'){
+					const UserData = await db.collection('UserData').find({}).toArray();
+					console.log(UserData);
+					res.render('home_admin', {all:UserData});
+				}
+				else{
+					res.render('home', {name:req.cookies.auth});
+				}
 			}
 			else {
 				res.render('index', {wrong: "Wrong username or passwrod"});
@@ -128,6 +137,7 @@ router.post('/register', [], function (req, res) {
 		});
 		res.cookie('auth', req.body.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 		res.cookie('firstn', req.body.firstname);
+		res.cookie('role', req.body.position);
 		res.render('home', {name:req.cookies.auth});
 	});
 

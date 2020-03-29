@@ -329,21 +329,21 @@ router.post('/profile/add_course', [], function (req, res) {
 			"tutor_username": use,
 			"status": "accepted"
 		};
+		const result_user = await db.collection('UserData').find({ username: req.cookies.auth}).limit(1).toArray();
 		db.collection('CourseData').insertOne({
 			'subject': req.body.subject,
 			'educational_level': req.body.level,
 			'city': req.body.city,
 			'rating': req.body.rating,
 			'price': req.body.price,
-			'tutor_username' : req.cookies.auth
+			'tutor_username' : req.cookies.auth,
+			'is_premium' : result_user[0]['is_premium']
 
 		});
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 
-		const result_user = await db.collection('UserData').find({ username: req.cookies.auth}).limit(1).toArray();
-		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
-		const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
+		
 		res.redirect('/home/profile');
 
 	});
@@ -351,7 +351,6 @@ router.post('/profile/add_course', [], function (req, res) {
 router.post('/profile/add_comment', [], function (req, res) {
 	var use = req.cookies.auth;
 	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
-
 	client.connect(async function (err) {
 		//checks for connection error
 		assert.equal(null, err);

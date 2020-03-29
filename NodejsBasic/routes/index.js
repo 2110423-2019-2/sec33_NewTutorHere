@@ -133,7 +133,8 @@ router.post('/register', [], function (req, res) {
 			salt : password.salt,
 			phone: req.body.phone,
 			email: req.body.email,
-			gender: req.body.gender
+			gender: req.body.gender,
+			is_premium : 'no'
 		});
 		res.cookie('auth', req.body.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 		res.cookie('firstn', req.body.firstname);

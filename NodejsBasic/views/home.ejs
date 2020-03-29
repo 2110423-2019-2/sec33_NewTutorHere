@@ -135,7 +135,9 @@
             </div>
             <div class="pfdetail-box be-right" >
                 <form class="name-contract" action = "/home/profile" method = "GET">
-                    
+                  <% if (result.is_premium == 'yes') {%>
+                    <img class="nav-img-user" src="/img/crown.png" style="height: 1.2em;" />
+                  <% }%> 
                     <p ><%= result.tutor_username %>&nbsp</p>
                     <img class="nav-img-user" src="../img/placeholder.png" style="height: 1.1em;" /><a> <%= result.city%></a><br />
                     <b>Subject</b><a><%= result.subject %></a><br />

@@ -95,7 +95,15 @@ router.post('/', [
 				res.cookie('auth', user.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 				res.cookie('firstn', user.firstname);
 				res.cookie('role', user.position);
-				res.render('home', {name:req.cookies.auth});
+				if(user.position == 'admin') console.log(user.position);
+				if(user.position == 'admin'){
+					const UserData = await db.collection('UserData').find({}).toArray();
+					console.log(UserData);
+					res.render('home_admin', {all:UserData});
+				}
+				else{
+					res.render('home', {name:req.cookies.auth});
+				}
 			}
 			else {
 				res.render('index', {wrong: "Wrong username or passwrod"});

@@ -249,7 +249,7 @@ div.form-bg {
     font-size: 2.5em;
     color: #4C5F21;
     padding-bottom: 0.3em;
-    text-align: center;
+    text-align: left;
 }
 
 .form-sub p {
@@ -791,7 +791,6 @@ div.profile-box {
 }
 .name-contract b{
     font-size: 0.9em;
-    /* font-weight: bold; */
     color: #4C5F21;
     padding-left: 2em;
     padding-right: 1.5em;
@@ -1242,4 +1241,16 @@ button.prem-button {
 
 button:hover.prem-button {
     background-color: #879437;
+}
+
+/* Admin */
+
+div.search-user-box {
+    width: 60%;
+    height: 10em;
+    border: none;
+    border-radius: 0px;
+    padding: 30px 10% 0px 10%;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }

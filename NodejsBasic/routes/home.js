@@ -376,7 +376,7 @@ router.post('/profile/add_comment', [], function (req, res) {
 		console.log("Comment!!!");
 		// The search added the results to the locals, access them in home.ejs and show the results there
 
-		const result_user = await db.collection('Comment_Controller').find({ commentatee: req.cookies.nextpf}).toArray();
+		
 		res.redirect('/home/profile');
 
 	});

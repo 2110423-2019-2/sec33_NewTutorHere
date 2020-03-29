@@ -20,8 +20,8 @@
 </head>
 
 <body>
-  <%- include navbar_admin %>
-<script>var student_username;</script>
+  <%- include navbar_admin %> 
+  <script>var student_username;</script>
   <!-- contract -->
 
   <div class="big-bg">
@@ -44,7 +44,6 @@
             <a class="view2-button search-button be-right" href="view_contract/<%= element.tutor_username%>">View profile</a>
           </div>
         </div>
-
       </form>
       <% idx++; %> 
       <% }) %>
@@ -55,10 +54,8 @@
   </div>
 
   <script>
-
-    var r = <%- JSON.stringify(requested) %>;
+    var r = `<%- JSON.stringify(requested) %>`;
     console.log("tmp")
-
   </script>
 
 </body>

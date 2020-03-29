@@ -94,6 +94,7 @@ router.post('/', [
 				//TODO: Change from storing just the username as a login token to jwt
 				res.cookie('auth', user.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 				res.cookie('firstn', user.firstname);
+				res.cookie('role', user.position);
 				res.render('home', {name:req.cookies.auth});
 			}
 			else {
@@ -128,6 +129,7 @@ router.post('/register', [], function (req, res) {
 		});
 		res.cookie('auth', req.body.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 		res.cookie('firstn', req.body.firstname);
+		res.cookie('role', req.body.position);
 		res.render('home', {name:req.cookies.auth});
 	});
 

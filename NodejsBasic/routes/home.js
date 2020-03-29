@@ -356,6 +356,17 @@ router.get('/premium', function (req, res, next) {
 	res.render('premium');
 });
 
+// profile_tutor
+router.get('/profile_tutor', function (req, res, next) {
+	res.render('profile_tutor');
+});
+
+// profile_student
+router.get('/profile_student', function (req, res, next) {
+	res.render('profile_student');
+});
+
+
 /* admin part */
 // admin home
 router.get('/home_admin', function (req, res, next) {

@@ -16,15 +16,7 @@
 </head>
 
 <body>
-  <%if (typeof role!= 'undefined') { %>
-    <% if (role == 'student') { %>
-      <%- include navbar_student %>
-    <% } else if (role == 'tutor') {%>
-      <%- include navbar_tutor %>
-    <% } else if (role == 'admin') {%>
-      <%- include navbar_admin %>
-    <% } %> 
-  <% } %>
+    <%- include navbar_admin %>
 
   <div style="float:right">
   </div>

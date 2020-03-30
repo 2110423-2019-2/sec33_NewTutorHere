@@ -409,7 +409,7 @@ router.post('/premium', function (req, res, next) {
 				}
 			}
 		);
-		db.collection('CourseData').update(
+		db.collection('CourseData').updateMany(
 			{
 				'tutor_username': req.cookies.auth	//find the user you wanna change here
 			},

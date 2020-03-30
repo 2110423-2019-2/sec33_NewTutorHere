@@ -378,6 +378,7 @@ router.post('/profile/add_comment', [], function (req, res) {
 		db.collection('CommentController').insertOne({
 			'commentator': use,
 			'commentatee': req.cookies.nextpf,
+			'rating' : req.body.ratingcomment,
 			'comment': req.body.comment
 		});
 		console.log("Comment!!!");
@@ -468,6 +469,7 @@ router.get('/view_contract/:id', function (req, res, next) {
 		var comment = {
 			"commentatee": use,
 		};
+		res.cookie('nextpf', result_user[0]["username"]);
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
         // The search added the results to the locals, access them in home.ejs and show the results there
         console.log(result_availability);

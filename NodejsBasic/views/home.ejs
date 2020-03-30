@@ -20,13 +20,15 @@
 </head>
 
 <body>
-  <%- include navbar %>
-
-  <div style="float:right">
-    <%if (typeof name!= 'undefined') { %>
-    Welcome, <%= name %>
-    <% } %>
-  </div>
+  <%if (typeof role!= 'undefined') { %>
+    <% if (role == 'student') { %>
+      <%- include navbar_student %>
+    <% } else if (role == 'tutor') {%>
+      <%- include navbar_tutor %>
+    <% } else if (role == 'admin') {%>
+      <%- include navbar_admin %>
+    <% } %> 
+  <% } %>
 
   <div class="big-bg">
     <!-- Content -->
@@ -183,6 +185,8 @@
     function clicked(name) {
       document.cookie = "nextpf= " +name;
     }
+
+    
 
   </script>
 

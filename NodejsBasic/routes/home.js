@@ -47,7 +47,7 @@ router.get('/', function (req, res, next) {
 		const result_premium = await db.collection('CourseData').find(premium).limit(10).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(result_premium);
-		res.render('home', { searchResults: result , searchPremium: result_premium});
+		res.render('home', { searchResults: result , searchPremium: result_premium, role:req.cookies.role});
 	});
 
 	//TODO: Handle db connection failed error
@@ -75,7 +75,7 @@ router.get('/tutors_contract', function (req, res, next) {
 		console.log(accepted);
 
 
-		res.render('tutors_contract', { requested: requested, accepted: accepted });
+		res.render('tutors_contract', { requested: requested, accepted: accepted, role: req.cookies.role });
 
 	});
 });
@@ -102,7 +102,7 @@ router.get('/students_contract', function (req, res, next) {
 		console.log(accepted);
 
 
-		res.render('students_contract', { requested: requested, accepted: accepted });
+		res.render('students_contract', { requested: requested, accepted: accepted, role:req.cookies.role });
 
 	});
 
@@ -233,7 +233,8 @@ router.get('/profile', function (req, res, next) {
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(result_availability);
-		res.render('profile', { pf: result_user[0], searchCourse: result_course, searchAvailability: result_availability ,comment:result_comment});
+		res.render('profile', { pf: result_user[0], searchCourse: result_course,
+			 searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
 	});
 
 });
@@ -277,9 +278,6 @@ router.post('/profile', [], function (req, res) {
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 
-		const result_user = await db.collection('UserData').find({ username: req.cookies.nextpf }).limit(1).toArray();
-		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
-		const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
 		res.redirect('/home/profile');
 	});
 });
@@ -397,7 +395,7 @@ router.get('/testfunction', function (req, res, next) {
 
 // premium
 router.get('/premium', function (req, res, next) {
-	res.render('premium');
+	res.render('premium' ,{role:req.cookies.role});
 });
 router.post('/premium', function (req, res, next) {
 	console.log("Haaaaaaaaaaaaaaaaaaaaaaaa");
@@ -446,7 +444,7 @@ router.get('/profile_student', function (req, res, next) {
 /* admin part */
 // admin home
 router.get('/home_admin', function (req, res, next) {
-	res.render('home_admin');
+	res.render('home_admin',{role:req.cookies.role});
 });
 router.get('/view_contract/:id', function (req, res, next) {
     var use = req.params.id;
@@ -473,7 +471,8 @@ router.get('/view_contract/:id', function (req, res, next) {
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
         // The search added the results to the locals, access them in home.ejs and show the results there
         console.log(result_availability);
-        res.render('profile', { pf: result_user[0], searchCourse: result_course, searchAvailability: result_availability,comment:result_comment});
+		res.render('profile', { pf: result_user[0], searchCourse: result_course, 
+			searchAvailability: result_availability,comment:result_comment,role:req.cookies.role});
     });
 });
 

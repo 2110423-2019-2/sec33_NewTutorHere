@@ -99,10 +99,10 @@ router.post('/', [
 				if(user.position == 'admin'){
 					const UserData = await db.collection('UserData').find({}).toArray();
 					console.log(UserData);
-					res.render('home_admin', {all:UserData});
+					res.render('home_admin', {all:UserData, role:req.cookies.role});
 				}
 				else{
-					res.render('home', {name:req.cookies.auth});
+					res.render('home', {name:req.cookies.auth, role:req.cookies.role});
 				}
 			}
 			else {
@@ -139,7 +139,7 @@ router.post('/register', [], function (req, res) {
 		res.cookie('auth', req.body.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 		res.cookie('firstn', req.body.firstname);
 		res.cookie('role', req.body.position);
-		res.render('home', {name:req.cookies.auth});
+		res.render('home', {name:req.cookies.auth, role:req.cookies.role});
 	});
 
 	

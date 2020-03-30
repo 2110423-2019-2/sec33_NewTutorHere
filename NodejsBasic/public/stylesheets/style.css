@@ -393,6 +393,16 @@ div.search-box {
     margin-bottom: 1em;
 }
 
+div.search-admin-box {
+    width: 60%;
+    height: 12em;
+    border: none;
+    border-radius: 40px;
+    padding: 30px 10% 0px 10%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
 .control-label-price {
     font-size: 25px;
     color: white;

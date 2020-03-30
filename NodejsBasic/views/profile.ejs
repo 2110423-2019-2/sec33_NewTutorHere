@@ -445,15 +445,20 @@
             }
             
             // is viewer
+            // var cols = document.getElementsByClassName("deleteCourse-button");
             if (tod != document.getElementById("profile-firstname").innerText) {
 
                 $("#editbut").css("display", "none");
                 $("#addCourseButton").css("display", "none");
                 $("#editCourseButton").css("display", "none");
-                $("#deleteCourseButton").css("display", "none");
+                //$("#deleteCourseButton").css("display", "none");
                 $("#verifyDocButton").css("display", "none");
-                $("#editAvailButton").css("display", "none");
-
+                 $("#editAvailButton").css("display", "none");
+                var cols = document.getElementsByClassName("deleteCourse-button");
+                for(i=0; i<cols.length; i++) {
+                 // cols[i].style.backgroundColor = color;
+                 cols[i].style.visibility = "hidden";
+                 }
                 $("#sentContractButton").css("display", "block");
 
             }

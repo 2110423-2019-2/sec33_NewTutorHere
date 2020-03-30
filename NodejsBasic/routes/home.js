@@ -29,16 +29,25 @@ router.get('/', function (req, res, next) {
 			'city': new RegExp(req.query.city),
 			'rating': new RegExp(req.query.rating),
 			'price': new RegExp(req.query.minprice), //Change this to price range please
+			'is_premium' : 'no'
 			//'tutor_id': new RegExp(req.query.tutor_id)
 		};
+		var premium = {
+			'subject': new RegExp(req.query.subject),
+			'educational_level': new RegExp(req.query.level),
+			'city': new RegExp(req.query.city),
+			'rating': new RegExp(req.query.rating),
+			'price': new RegExp(req.query.minprice),
+			'is_premium' : 'yes'
+		}
 		//TODO: This search uses RegEx, consider changing it to something else later.
 		// ** Not completed due to time constraints
 		// Look into col.find() and how to use its find operators
 		const result = await db.collection('CourseData').find(query).limit(10).toArray();
-
+		const result_premium = await db.collection('CourseData').find(premium).limit(10).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		console.log(req.body.subject, result)
-		res.render('home', { searchResults: result });
+		console.log(result_premium);
+		res.render('home', { searchResults: result , searchPremium: result_premium});
 	});
 
 	//TODO: Handle db connection failed error

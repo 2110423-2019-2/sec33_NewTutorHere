@@ -119,10 +119,9 @@
 
    
       <div class="tutorse-box color-lightgreen center">
-        
-
-        <%if (typeof searchResults!= 'undefined') { %>
-          <%for(result of searchResults) {%>
+        <% var i = 0%>
+        <%if (typeof searchPremium!= 'undefined') { %>
+          <%for(result of searchPremium) {%>
     
           <div class="tt-box center" >
             <div class="pfphoto-box">
@@ -135,9 +134,7 @@
             </div>
             <div class="pfdetail-box be-right" >
                 <form class="name-contract" action = "/home/profile" method = "GET">
-                  <% if (result.is_premium == 'yes') {%>
-                    <img class="nav-img-user" src="/img/crown.png" style="height: 1.2em;" />
-                  <% }%> 
+                    <img class="nav-img-user" src="/img/crown.png" style="height: 1.2em;" />  
                     <p ><%= result.tutor_username %>&nbsp</p>
                     <img class="nav-img-user" src="../img/placeholder.png" style="height: 1.1em;" /><a> <%= result.city%></a><br />
                     <b>Subject</b><a><%= result.subject %></a><br />
@@ -147,6 +144,33 @@
                 </form>                                      
             </div>
           </div>
+          <% i+=1%>
+          <% }} %>
+        <%if (typeof searchResults!= 'undefined') { %>
+          <%for(result of searchResults) {%>
+            <% if (i < 10) {%>
+          <div class="tt-box center" >
+            <div class="pfphoto-box">
+              <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
+              <div class="tutor-rating">
+                  <script>
+                    showStars('<%= result.rating %>');
+                  </script>
+              </div>
+            </div>
+            <div class="pfdetail-box be-right" >
+                <form class="name-contract" action = "/home/profile" method = "GET">
+                    <p ><%= result.tutor_username %>&nbsp</p>
+                    <img class="nav-img-user" src="../img/placeholder.png" style="height: 1.1em;" /><a> <%= result.city%></a><br />
+                    <b>Subject</b><a><%= result.subject %></a><br />
+                    <b>Educational Level</b><a><%= result.level %></a><br />
+                    <b>Price</b><a>฿<%= result.price %> per hour</a><br />
+                    <button class="editpf-button be-right" onclick="clicked('<%= result.tutor_username %>')" href="/home/tutors_contract"> View this Tutor</button>
+                </form>                                      
+            </div>
+          </div>
+              <% i+=1 %>
+            <% } %>
           <% }} %>
 
     

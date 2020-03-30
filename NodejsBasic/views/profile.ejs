@@ -16,6 +16,11 @@
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <!-- <script src="script.js"></script> -->
     <!-- <script>checkStatus()</script> -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/mustache.js"></script>
+    <script type="text/javascript" src="/scripts/modal.js"></script>
+    <script type="text/javascript" src="/scripts/custom.js"></script>
+    <script type="text/javascript" src="/scripts/function.js"></script>
 </head>
 
 <body>
@@ -146,17 +151,14 @@
                     <div class="half-box be-left">
                         <label class="control-label">Rating</label>
                         <br>
-                        <div class="rating">
-                            <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="Great">5
-                                stars</label>
-                            <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good">4
-                                stars</label>
-                            <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Okay">3
-                                stars</label>
-                            <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Bad">2
-                                stars</label>
-                            <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="Very Bad">1
-                                star</label>
+                        <div class="form-group">
+                            <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="Great">5 stars</label>
+                                <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good">4 stars</label>
+                                <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Okay">3 stars</label>
+                                <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Bad">2 stars</label>
+                                <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="Very Bad">1 star</label>
+                            </div>
                         </div>
                         </br>
                     </div>
@@ -263,16 +265,15 @@
             <div class="form-information-bg">
                 <!-- <form class="form" action=/home/profile method="POST" id="addComment-form"> -->
                 <form class="form" id="addComment-form" action=/home/profile/add_comment method="POST">
-
-                    <div class="rating">
-                        <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="Great"></label>
-                        <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good"></label>
-                        <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Okay"></label>
-                        <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Bad"></label>
-                        <input type="radio" id="star1" name="rating" value="1"><label for="star1"
-                            title="Very Bad"></label>
-                    </div>
                     
+                    <div class="rating">
+                        <input type="radio" id="star-5" name="rating" value="5"><label for="star-5" title="Great">5 stars</label>
+                        <input type="radio" id="star-4" name="rating" value="4"><label for="star-4" title="Good">4 stars</label>
+                        <input type="radio" id="star-3" name="rating" value="3"><label for="star-3" title="Okay">3 stars</label>
+                        <input type="radio" id="star-2" name="rating" value="2"><label for="star-2" title="Bad">2 stars</label>
+                        <input type="radio" id="star-1" name="rating" value="1"><label for="star-1" title="Very Bad">1 star</label>
+                    </div>
+                    <br><br>
                     
                     <div class="form-group">
                         <div class="form-input">

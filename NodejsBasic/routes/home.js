@@ -390,6 +390,38 @@ router.get('/testfunction', function (req, res, next) {
 router.get('/premium', function (req, res, next) {
 	res.render('premium');
 });
+router.post('/premium', function (req, res, next) {
+	console.log("Haaaaaaaaaaaaaaaaaaaaaaaa");
+	client.connect(async function (err) {
+		//checks for connection error
+		assert.equal(null, err);
+
+		//once connected, add a doc to collection 'UserData'
+		const db = client.db(dbName);
+
+		db.collection('UserData').update(
+			{
+				username: req.cookies.auth	//find the user you wanna change here
+			},
+			{
+				$set: {
+					'is_premium': 'yes'
+				}
+			}
+		);
+		db.collection('CourseData').update(
+			{
+				'tutor_username': req.cookies.auth	//find the user you wanna change here
+			},
+			{
+				$set: {
+					'is_premium': 'yes'
+				}
+			}
+		);
+		res.redirect('/home/profile');
+	});
+});
 
 // profile_tutor
 router.get('/profile_tutor', function (req, res, next) {

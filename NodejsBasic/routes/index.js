@@ -102,7 +102,7 @@ router.post('/', [
 					res.render('home_admin', {all:UserData, role:req.cookies.role});
 				}
 				else{
-					res.render('home', {name:req.cookies.auth, role:req.cookies.role});
+					res.redirect('/home');
 				}
 			}
 			else {

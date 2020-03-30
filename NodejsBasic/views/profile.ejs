@@ -400,42 +400,27 @@
                     <span class="name-contract">
                         <c>Reviews</c>
                     </span>
+                    <%if (typeof comment!= 'undefined') { %>
+                        <%for( each of comment) {%>
+                            <div class="comment-box center">
+                                <div class="pfphoto-box">
+                                    <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
+                                    <div class="profile-rating">
+                                        <script>
+                                           showStars('<%= each.rating %>');
+                                        </script>
+                                    </div>
+                                </div>
 
-                    <div class="comment-box center">
-                        <div class="pfphoto-box">
-                            <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
-                            <div class="profile-rating">
-                                <script>
-                                    showStars('5');
-                                </script>
+                                <div class="qual-item">
+                                    <span class="comment">
+                                        <p><%=each.comment%></p>
+                                    </span>
+                                </div>
+
                             </div>
-                        </div>
-
-                        <div class="qual-item">
-                            <span class="comment">
-                                <p>เยี่ยมยอด</p>
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <div class="comment-box center">
-                        <div class="pfphoto-box">
-                            <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
-                            <div class="profile-rating">
-                                <script>
-                                    showStars('5');
-                                </script>
-                            </div>
-                        </div>
-
-                        <div class="qual-item">
-                            <span class="comment">
-                                <p>อาจารย์หล่อ</p>
-                            </span>
-                        </div>
-
-                    </div>
+                    <% }} %>
+        
 
                     <button class="addComment-button be-right" id='addComment' onclick="showAddComment()">Add comment</button>
                 </div>

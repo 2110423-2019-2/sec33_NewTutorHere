@@ -35,7 +35,7 @@
   <!-- contract popup -->
   <div class="big-bg popup" id="contract-popup" >
     <div class="form-bg color-lightgreen center" id="contract-popup-bg">
-      <button class="close-button"><i class="fa fa-close" onclick="closeContractPopupButton()"></i></button>
+      <button class="close-button be-right"><i class="fa fa-close" onclick="closeContractPopupButton()"></i></button>
       <span class="form-name">
         <p>Contract</p>
       </span><br>
@@ -48,6 +48,7 @@
           <b>Message: </b><element id="message"></element>
           
           <!-- <a class="view2-button search-button be-right" href="accept_contract/" >Accept</a> -->
+          <br /><br />
           <a class="view2-button search-button be-right" href="reject_contract/" >Decline</a>
         </form>
       </div>
@@ -129,7 +130,7 @@
         <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
         <div class="c-box be-right">
           <div class="blockcontract">
-            <span class="name-contract">
+            <span class="name-stucontract">
               <a>you send a contract to</a>
               <p><%= element.tutor_username %> </p>
             </span>

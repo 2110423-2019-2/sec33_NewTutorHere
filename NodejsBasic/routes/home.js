@@ -302,6 +302,7 @@ router.post('/profile/edit_profile', [], function (req, res) {
 					'firstname': req.body.firstname,
 					'lastname': req.body.lastname,
 					'phone': req.body.phone,
+					'location':req.body.location,
 					'email': req.body.email,
 					'gender': req.body.gender,
 					'bio': req.body.bio
@@ -441,12 +442,6 @@ router.get('/profile_student', function (req, res, next) {
 	res.render('profile_student');
 });
 
-
-/* admin part */
-// admin home
-router.get('/home_admin', function (req, res, next) {
-	res.render('home_admin',{role:req.cookies.role});
-});
 router.get('/view_contract/:id', function (req, res, next) {
     var use = req.params.id;
     client.connect(async function (err) {

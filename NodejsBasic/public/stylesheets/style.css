@@ -112,6 +112,23 @@ img.main-logo {
     background-color: gray;
 }
 
+.deleteComment-button {
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 0.2em;
+    margin-right: 0.5vw;
+    height: 30%;
+    width: auto;
+    align-self: center;
+}
+
+.deleteComment-button:hover {
+    background-color: gray;
+}
+
 h1 {
     font-family: 'DolceVitaHeavy';
     font-size: 3.5em;
@@ -1131,7 +1148,7 @@ th, td {
     padding: 2% 5% 2% 5% ;
     margin-top: 2%;
     margin-bottom: 2%;
-    margin-right: 2vw;
+    margin-right: 0.5vw;
 }
 .conlog-item{
     width: 85%;

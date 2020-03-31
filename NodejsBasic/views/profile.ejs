@@ -342,7 +342,7 @@
                                 <td><%=result.rating%></td>
                                 <td><%=result.price%></td>
                                 <td><button class="deleteCourse-button" id='deleteCourseButton'><i class="fa fa-trash"
-                                    onclick="clicked('<%= result.subject %>')"></i></button>
+                                    onclick="deleteCourse('<%= result.subject %>')"></i></button>
                                 </td>
                             </tr>
                         </form>
@@ -419,16 +419,20 @@
                                     </span>
                                 </div>
 
+                                <button class="deleteComment-button"><i class="fa fa-trash"
+                                    onclick="deleteComment('<%= result.subject %>')"></i></button>
+
                             </div>
                     <% }} %>
-        
-
-                    <button class="addComment-button be-right" id='addComment' onclick="showAddComment()">Add comment</button>
                 </div>
                 <button class="sendcontract-button" id='sentContractButton' onclick="showSentContract()">Send a contract</button>
             </div>
         </div>
 
+        <!-- Animation library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
+        
         <script>
 
             var names = "firstn=";
@@ -445,13 +449,10 @@
             }
             
             // is viewer
-            // var cols = document.getElementsByClassName("deleteCourse-button");
             if (tod != document.getElementById("profile-firstname").innerText) {
 
                 $("#editbut").css("display", "none");
                 $("#addCourseButton").css("display", "none");
-                $("#editCourseButton").css("display", "none");
-                //$("#deleteCourseButton").css("display", "none");
                 $("#verifyDocButton").css("display", "none");
                  $("#editAvailButton").css("display", "none");
                 var cols = document.getElementsByClassName("deleteCourse-button");
@@ -468,8 +469,7 @@
 
                $("#editbut").css("display", "block");
                $("#addCourseButton").css("display", "block");
-               $("#editCourseButton").css("display", "block");
-               $("#deleteCourseButton").css("display", "block");
+               $(".deleteCourse-button").css("display", "block");
                $("#verifyDocButton").css("display", "block");
                $("#editAvailButton").css("display", "block");
 
@@ -531,27 +531,53 @@
             }
 
 
-            // remove course
-            function removeCourse(item) {
-                console.log('remove course successful');
-                item.closest('tr').remove()
-            }
-
-            function addComment() {
-
-                console.log('add comment successful');
-        
-            }
-           
-            
-            function clicked(subject) {
+            // delete course
+            function deleteCourse(subject) {
                 document.cookie = "sub= " + subject;
 
             }
+
+            // TODO delete comment
+            //function deleteComment(subject) {
+            //    document.cookie = "sub= " + subject;
+
+            //}
+
+            //TODO check comment owner
+            //if (not owner of this comment) {
+            //    $(".deleteComment-button").css("display", "none");
+            //    $(".qual-item").css("margin-right", "1vw");
+            //}
+            //else if (is owner of this comment) {
+            //    $(".deleteComment-button").css("display", "flex");
+            //}
+
             function delete_cookie( name ) {
                 document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
                 document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
             }
+
+            //Animation page
+            function Animation(reverse = false) {
+                const tl = new TimelineLite({
+                    ease: Expo.easeOut
+                });
+                const logo = document.querySelector('.main-logo');
+                const header = document.querySelector('.header');
+                const username = document.querySelector('.username');
+                const password = document.querySelector('.password');
+                const signinButton = document.querySelector('.sign-in-button');
+                const signupButton = document.querySelector('.sign-up-button');
+                const message = document.querySelector('.message');
+                tl.fromTo([logo, header, username, password, signinButton, signupButton, message], 1, {
+                    opacity: 0,
+                    y: 50
+                }, {
+                    opacity: 1,
+                    y: 0
+                })
+            }
+            Animation();
 
         </script>
 

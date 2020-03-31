@@ -148,7 +148,7 @@ div.form-group-main {
 }
 
 .control-label-index {
-    font-family: 'HelveticaNeue';
+    font-family: 'Kanit';
     font-size: 1em;
     color: white;
     letter-spacing: 0.06em;
@@ -181,7 +181,7 @@ button.submit-button {
     color: white;
     font-size: 1em;
     letter-spacing: 0.06em;
-    font-family: 'HelveticaNeue';
+    font-family: 'Kanit';
 }
 
 button:hover.submit-button {

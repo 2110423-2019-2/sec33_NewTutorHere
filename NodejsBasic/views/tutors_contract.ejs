@@ -188,29 +188,51 @@
       AddCommentModalAnimation();
     }
 
+    //Animation page
+    function Animation(reverse = false) {
+      const tl = new TimelineLite({
+        ease: Expo.easeOut
+      });
+      const contractBox = document.querySelector('.contract-box');
+      const contractlogBox = document.querySelector('.contractlog-box');
+
+      tl.fromTo([contractBox, contractlogBox], 1.5, {
+        opacity: 0,
+        y: -40
+      }, {
+        opacity: 1,
+        y: 0
+      })
+    }
+    Animation();
+
     //Animation view contract modal
     function ViewContractModalAnimationReversed() {
-    ViewContractModalAnimation(true);
+      ViewContractModalAnimation(true);
     }
 
     function ViewContractModalAnimation(reversed = false) {
-    const modal = document.getElementById('viewContract-popup');
-    const modal_body = document.getElementById('viewContract-popup-bg');
-    const tl2 = new TimelineLite({ easeIn: Power3.easeOut });
-    tl2.fromTo(modal, 0.20, { opacity: 0 }, { opacity: 1 }, 0)
-    tl2.fromTo(modal_body, 0.20, {
-    scale: 0,
-    opacity: 0
-    }, {
-    scale: 1,
-    opacity: 1
-    }, 0);
-    if (reversed) {
-    tl2.reverse(0.3);
-    setTimeout(function () {
-    $("#viewContract-popup").css("display", "none");
-    }, 500);
-    }
+      const modal = document.getElementById('viewContract-popup');
+      const modal_body = document.getElementById('viewContract-popup-bg');
+      const tl2 = new TimelineLite({ easeIn: Power3.easeOut });
+      tl2.fromTo(modal, 0.20, { 
+        opacity: 0 
+      }, { 
+        opacity: 1 
+      }, 0)
+      tl2.fromTo(modal_body, 0.20, {
+        scale: 0,
+        opacity: 0
+      }, {
+        scale: 1,
+        opacity: 1
+      }, 0);
+      if (reversed) {
+        tl2.reverse(0.3);
+        setTimeout(function () {
+          $("#viewContract-popup").css("display", "none");
+        }, 500);
+      }
     }
 
     //Animation add comment modal

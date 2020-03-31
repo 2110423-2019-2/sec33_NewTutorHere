@@ -190,6 +190,27 @@
       AddCommentModalAnimation();
     }
 
+
+
+    //Animation page
+    function Animation(reverse = false) {
+      const tl = new TimelineLite({
+        ease: Expo.easeOut
+      });
+      const contractBox = document.querySelector('.contract-box');
+      const contractlogBox = document.querySelector('.contractlog-box');
+
+      tl.fromTo([contractBox, contractlogBox], 1.5, {
+        opacity: 0,
+        y: -40
+      }, {
+        opacity: 1,
+        y: 0
+      })
+    }
+    Animation();
+
+
     //Animation add comment modal
     function AddCommentModalAnimationReversed() {
       AddCommentModalAnimation(true);

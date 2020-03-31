@@ -99,7 +99,7 @@ router.post('/', [
 				if(user.position == 'admin'){
 					const UserData = await db.collection('UserData').find({}).toArray();
 					console.log(UserData);
-					res.render('home_admin', {all:UserData, role:req.cookies.role});
+					res.redirect('/home_admin');
 				}
 				else{
 					res.redirect('/home');

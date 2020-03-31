@@ -441,12 +441,6 @@ router.get('/profile_student', function (req, res, next) {
 	res.render('profile_student');
 });
 
-
-/* admin part */
-// admin home
-router.get('/home_admin', function (req, res, next) {
-	res.render('home_admin',{role:req.cookies.role});
-});
 router.get('/view_contract/:id', function (req, res, next) {
     var use = req.params.id;
     client.connect(async function (err) {

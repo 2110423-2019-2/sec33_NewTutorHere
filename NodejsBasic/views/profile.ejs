@@ -118,7 +118,7 @@
 
     <!-- addCourse-form -->
     <div class="big-bg popup" id="addCourse-form">
-        <div class="form-bg color-lightgreen center" id="">
+        <div class="form-bg color-lightgreen center" id="addCourse-form-bg">
             <button class="close-button"><i class="fa fa-close" onclick="closeAddCourseButton()"></i></button>
             <span class="form-name">
                 <p>Add New Course</p>
@@ -430,8 +430,9 @@
                 <button class="sendcontract-button" id='sentContractButton' onclick="showSentContract()">Send a contract</button>
             </div>
         </div>
+    </div>
 
-        <!-- Animation library -->
+       <!-- Animation library -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
         
@@ -499,10 +500,11 @@
             byear.innerHTML = years;
 
             function closeEditButton() {
-                $("#edit-profile-form").css("display", "none");
+                EditProfileModalAnimationReversed();
             }
             function showEditProfileForm() {
                 $("#edit-profile-form").css("display", "flex");
+                EditProfileModalAnimation();
 
                 //set initial value
                 document.getElementById("firstname-editpf").value = '<%= pf.firstname%>' ;
@@ -516,18 +518,20 @@
             }
 
             function closeContractButton() {
-                $("#contract-form-popup").css("display", "none");
+                SentContractModalAnimationReversed();
             }
 
             function showSentContract() {
                 $("#contract-form-popup").css("display", "flex");
+                SentContractModalAnimation();
             }
 
             function closeAddCourseButton() {
-                $("#addCourse-form").css("display", "none");
+                AddCourseModalAnimationReversed();
             }
             function showAddCourse() {
                 $("#addCourse-form").css("display", "flex");
+                AddCourseModalAnimation();
             }
 
             function closeAddCommentButton() {
@@ -580,6 +584,82 @@
                 })
             }
             Animation();
+
+            //Animation edit profile modal
+            function EditProfileModalAnimationReversed() {
+                    EditProfileModalAnimation(true);
+                }
+
+            function EditProfileModalAnimation(reversed = false) {
+                const modal = document.getElementById('edit-profile-form');
+                const modal_body = document.getElementById('edit-profile-form-bg');
+                const tl = new TimelineLite({ easeIn: Power3.easeOut });
+                tl.fromTo(modal, 0.20, { opacity: 0 }, { opacity: 1 }, 0)
+                tl.fromTo(modal_body, 0.20, {
+                    scale: 0,
+                    opacity: 0
+                }, {
+                    scale: 1,
+                    opacity: 1
+                }, 0);
+                if (reversed) {
+                    console.log("close edit profle modal");
+                    tl.reverse(0.3);
+                    setTimeout(function () {
+                        $("#edit-profile-form").css("display", "none");
+                    }, 500);
+                }
+            }
+
+            //Animation add course modal
+            function AddCourseModalAnimationReversed() {
+                    AddCourseModalAnimation(true);
+                }
+
+            function AddCourseModalAnimation(reversed = false) {
+                const modal = document.getElementById('addCourse-form');
+                const modal_body = document.getElementById('addCourse-form-bg');
+                const tl2 = new TimelineLite({ easeIn: Power3.easeOut });
+                tl2.fromTo(modal, 0.20, { opacity: 0 }, { opacity: 1 }, 0)
+                tl2.fromTo(modal_body, 0.20, {
+                    scale: 0,
+                    opacity: 0
+                }, {
+                    scale: 1,
+                    opacity: 1
+                }, 0);
+                if (reversed) {
+                    tl2.reverse(0.3);
+                    setTimeout(function () {
+                        $("#addCourse-form").css("display", "none");
+                    }, 500);
+                }
+            }
+
+            //Animation sent contract modal
+            function SentContractModalAnimationReversed() {
+                    SentContractModalAnimation(true);
+                }
+
+            function SentContractModalAnimation(reversed = false) {
+                const modal = document.getElementById('contract-form-popup');
+                const modal_body = document.getElementById('contract-form-popup-bg');
+                const tl2 = new TimelineLite({ easeIn: Power3.easeOut });
+                tl2.fromTo(modal, 0.20, { opacity: 0 }, { opacity: 1 }, 0)
+                tl2.fromTo(modal_body, 0.20, {
+                    scale: 0,
+                    opacity: 0
+                }, {
+                    scale: 1,
+                    opacity: 1
+                }, 0);
+                if (reversed) {
+                    tl2.reverse(0.3);
+                    setTimeout(function () {
+                        $("#contract-form-popup").css("display", "none");
+                    }, 500);
+                }
+            }
 
         </script>
 

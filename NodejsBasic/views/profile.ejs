@@ -289,6 +289,65 @@
         </div>
     </div>
 
+    <!-- edit-availability-form -->
+    <div class="big-bg popup" id="edit-avai-form-popup">
+        <div class="form-bg color-lightgreen center" id="edit-avai-form-bg">
+            <button class="close-button be-right"><i class="fa fa-close" onclick="closeEditAvaiButton()"></i></button>
+            <br>
+            <span class="form-name">
+                <p>Edit Availability</p>
+            </span>
+            <br><br>
+            <div class="form-information-bg">
+                <form class="form" action=/home/profile/edit_availability method="POST" id="edit-availability-form">
+
+                    <div class="form-group">
+                        <div class="form-input">
+                            <table>
+                                <tr>
+                                    <th></th>
+                                    <th>SUN</th>
+                                    <th>MON</th>
+                                    <th>TUE</th>
+                                    <th>WED</th>
+                                    <th>THU</th>
+                                    <th>FRI</th>
+                                    <th>SAT</th>
+                                </tr>
+                            <% var day = ["Morning","Afternoon","After school","Evening"]%>
+                            <% var tmp = false %>
+                            <% searchAvailability.forEach(element => { %>
+                            <% }) %>
+                            <% for(var i=0; i<4; i++) {%>
+                                <tr>
+                                <% for(var j=0; j<8; j++) {%>
+                                    <%if (j == 0 ) { %>
+                                       <th><%= day[i]%></th> 
+                                       <% tmp = true%>
+                                        <% } %>
+                                <% searchAvailability.forEach(element => { %>
+                                    <%if ( element.class_day == j-1 && element.class_time == i) { %>
+                                        <th><input type="checkbox" id="check-avai" name="check-avai" checked></th>
+                                        <% tmp = true %>
+                                         <% } %>
+                                    <% }) %> 
+                                    <% if(!tmp){ %>
+                                        <th><input type="checkbox" id="check-avai" name="check-avai"></th>
+                                    <% }%>
+                                    <%tmp = false %>
+                                <% } %>
+                                </tr>
+                            <% } %>
+                            </table>
+                        </div>
+                    </div>
+                    <br>
+                    <button class="submit-button sign-up-button center">Edit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 
     <div class="big-bg">
@@ -396,7 +455,7 @@
                         </tr>
                     <% } %>
                     </table>
-                    <button class="editAva-button be-right" id='editAvailButton'>Edit availability</button>
+                    <button class="editAva-button be-right" id='editAvailButton' onclick="showEditAvai()">Edit availability</button>
                 </div><br />
                 
                 <div class="review-box center">
@@ -520,7 +579,6 @@
             function closeContractButton() {
                 SentContractModalAnimationReversed();
             }
-
             function showSentContract() {
                 $("#contract-form-popup").css("display", "flex");
                 SentContractModalAnimation();
@@ -539,6 +597,13 @@
             }
             function showAddComment() {
             $("#addComment-form-popup").css("display", "flex");
+            }
+
+            function closeEditAvaiButton() {
+            $("#edit-avai-form-popup").css("display", "none");
+            }
+            function showEditAvai() {
+            $("#edit-avai-form-popup").css("display", "flex");
             }
 
 

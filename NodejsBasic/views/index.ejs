@@ -151,7 +151,7 @@
                             </select>
                         </div>
                     </div>
-                    <button class="submit-button sign-up-button center" onclick="signUp()">Register</button>
+                    <button class="submit-button center">Register</button>
                 </form>
 
                 <div class='text-sign-in'>
@@ -169,7 +169,7 @@
                 <img class="main-logo center" src="img/logo.png" />
                 <br>
                 <center>
-                    <h1>NEW TUTOR HERE</h1>
+                    <h1 class="header">NEW TUTOR HERE</h1>
                 </center>
             </div>
         </div>
@@ -178,21 +178,23 @@
             <!-- sign-in-form -->
             <div class="index-box center" id="sign-in-form">
                 <form class="form" action="/" id="sign-in" method="POST">
-                    <div class="form-group">
+                    <div class="form-group username">
                         <label class="control-label-index">Username</label>
                         <div class="form-input">
                             <input type="text" id="username-signin" name="username">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group password">
                         <label class="control-label-index">Password</label>
                         <div class="form-input">
                             <input type="password" id="password-signin" name="password">
                         </div>
                     </div>
-                    <%if (typeof wrong != 'undefined') { %>
-                     <%= wrong %>
+                    <div class="message" style="color: red;">
+                        <%if (typeof wrong != 'undefined') { %>
+                            <%= wrong %>
                         <% } %>
+                    </div>
                    
                     <button type="submit" class="submit-button sign-in-button center">Log In</button>
                 </form>
@@ -220,6 +222,10 @@
             </div>
         </div>
     </div>
+
+    <!-- Animation library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
     
     <script>
         var bdate = document.getElementById("bdate-signup");
@@ -237,11 +243,59 @@
         byear.innerHTML = years;
 
         function closeButton() {
-            $("#sign-up-form").css("display", "none");
+            ModalAnimationReversed();
         }
 
         function showSignUpForm() {
             $("#sign-up-form").css("display", "flex");
+            ModalAnimation();
+        }
+
+        //Animation page
+        function Animation(reverse = false) {
+                const tl = new TimelineLite({
+                    ease: Expo.easeOut
+                });
+                const logo = document.querySelector('.main-logo');
+                const header = document.querySelector('.header');
+                const username = document.querySelector('.username');
+                const password = document.querySelector('.password');
+                const signinButton = document.querySelector('.sign-in-button');
+                const signupButton = document.querySelector('.sign-up-button');
+                const message = document.querySelector('.message');
+                tl.fromTo([logo, header, username, password, signinButton, signupButton, message], 1, {
+                    opacity: 0,
+                    y: 50
+                }, {
+                    opacity: 1,
+                    y: 0
+                })
+            }
+        Animation();
+
+        //Animation modal
+        function ModalAnimationReversed() {
+                ModalAnimation(true);
+            }
+
+        function ModalAnimation(reversed = false) {
+            const modal = document.getElementById('sign-up-form');
+            const modal_body = document.getElementById('sign-up-form-bg');
+            const tl = new TimelineLite({ easeIn: Power3.easeOut });
+            tl.fromTo(modal, 0.20, { opacity: 0 }, { opacity: 1 }, 0)
+            tl.fromTo(modal_body, 0.20, {
+                scale: 0,
+                opacity: 0
+            }, {
+                scale: 1,
+                opacity: 1
+            }, 0);
+            if (reversed) {
+                tl.reverse(0.3);
+                setTimeout(function () {
+                    $("#sign-up-form").css("display", "none");
+                }, 500);
+            }
         }
     </script>
 </body>

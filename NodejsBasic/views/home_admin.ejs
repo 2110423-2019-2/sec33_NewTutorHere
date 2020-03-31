@@ -60,7 +60,7 @@
 
         <%if (typeof searchResults!= 'undefined') { %>
           <%for(result of searchResults) {%>
-        <form class="form" id="user">
+        <form class="form" action = "/home/profile" method = "GET">
           <img class="nav-img-user" src="../img/user.png" style="height: 5em;" />
           <div class="c-box be-right">
             <div class="blockcontract">
@@ -68,16 +68,20 @@
                 <h2> <%= result.username %></h2>
               </span>
               <br />
-              <a class="view2-button search-button be-right">View profile</a>
+              <button class="editpf-button be-right" onclick="clicked('<%= result.username %>')">View profile</button>
             </div>
           </div>
         </form>
         <% }} %>
 
 
-
       </div>
 
+<script>
+    function clicked(name) {
+      document.cookie = "nextpf= " +name;
+    }
+</script>
 
 
 

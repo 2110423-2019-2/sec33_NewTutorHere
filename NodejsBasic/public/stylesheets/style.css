@@ -1,10 +1,10 @@
 /* style for All background and nav-bar  */
 @import url('https://fonts.googleapis.com/css?family=Kanit&display=swap');
 
-@font-face {
+/* @font-face {
     font-family: 'HelveticaNeue';
     src: url('../fonts/HelveticaNeue.ttf') format('truetype');
-}
+} */
 @font-face {
     font-family: 'DolceVitaHeavy';
     src: url('../fonts/DolceVitaHeavy.ttf') format('truetype');
@@ -348,7 +348,7 @@ ul.nav-bar li a {
 
 ul.nav-menu li a {
     padding: 5px 15px 5px 15px;
-    font-family: 'HelveticaNeue';
+    font-family: 'Kanit';
     font-size: 1em;
     letter-spacing: 0.08em;
 }

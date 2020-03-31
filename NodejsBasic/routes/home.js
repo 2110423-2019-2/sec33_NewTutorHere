@@ -224,12 +224,23 @@ router.get('/profile', function (req, res, next) {
 			"tutor_username": use,
 			"status": "accepted"
 		};
+		var query_student_availability = {
+			"student_username": use,
+			"status": "accepted"
+		};
 		var comment = {
 			"commentatee": use,
 		};
 		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
+		var result_availability ;
+		if(result_user[0]["position"] =="student"){
+		    result_availability = await db.collection('ContractData').find(query_student_availability).toArray();
+		}
+		else{
+			result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
+		}
 		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
-		const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
+		
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(result_availability);

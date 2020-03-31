@@ -441,12 +441,12 @@
                                 <% } %>
                         <% searchAvailability.forEach(element => { %>
                             <%if ( element.class_day == j-1 && element.class_time == i) { %>
-                                <th> X </th> 
+                                <th><img class="nav-img-user center" src="../img/notavailable_.png" style="height: 1.5em;"></th> 
                                 <% tmp = true %>
                                  <% } %>
                             <% }) %> 
                             <% if(!tmp){ %>
-                                <th> - </th>
+                                <th><img class="nav-img-user center" src="../img/available_.png" style="height: 1.5em;"></th>
                             <% }%>
                             <%tmp = false %>
                         <% } %>

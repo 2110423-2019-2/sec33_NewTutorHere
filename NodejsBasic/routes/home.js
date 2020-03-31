@@ -111,7 +111,7 @@ router.get('/students_contract', function (req, res, next) {
 
 var ObjectID = require('mongodb').ObjectID;
 
-router.get('/terminate_contract/:id', function (req, res, next) {
+router.post('/terminate_contract/:id', function (req, res, next) {
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
@@ -123,6 +123,16 @@ router.get('/terminate_contract/:id', function (req, res, next) {
 			$set: {
 				"status": "terminated"
 			}
+		});
+
+		tutor = await db.collection('ContractData').find(query).toArray();
+		commentator = tutor[0]['tutor_username'];
+		commentatee = tutor[0]['student_username'];
+		db.collection('CommentController').insertOne({
+			'commentator': commentator,
+			'commentatee': commentatee,
+			'rating' : req.body.ratingcomment,
+			'comment': req.body.comment
 		});
 		res.redirect('/home/tutors_contract');
 	})
@@ -367,40 +377,7 @@ router.post('/profile/add_course', [], function (req, res) {
 
 	});
 });
-router.post('/profile/add_comment', [], function (req, res) {
-	var use = req.cookies.auth;
-	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
-	client.connect(async function (err) {
-		//checks for connection error
-		assert.equal(null, err);
 
-		//once connected, add a doc to collection 'UserData'
-		const db = client.db(dbName);
-		var query_username = {
-			"username": use
-		};
-		var query_tutor_username = {
-			"tutor_username": use
-
-		};
-		var query_tutor_availability = {
-			"tutor_username": use,
-			"status": "accepted"
-		};
-		db.collection('CommentController').insertOne({
-			'commentator': use,
-			'commentatee': req.cookies.nextpf,
-			'rating' : req.body.ratingcomment,
-			'comment': req.body.comment
-		});
-		console.log("Comment!!!");
-		// The search added the results to the locals, access them in home.ejs and show the results there
-
-		
-		res.redirect('/home/profile');
-
-	});
-});
 router.get('/testfunction', function (req, res, next) {
 	//use function like this
 	testFunction.data.checkcookie(req, res);

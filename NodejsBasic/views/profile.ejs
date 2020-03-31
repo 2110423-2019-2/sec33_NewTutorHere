@@ -24,15 +24,17 @@
 </head>
 
 <body>
+    <div class="nav-container">
     <%if (typeof role!= 'undefined') { %>
-        <% if (role == 'student') { %>
-          <%- include navbar_student %>
-        <% } else if (role == 'tutor') {%>
-          <%- include navbar_tutor %>
-        <% } else if (role == 'admin') {%>
-          <%- include navbar_admin %>
-        <% } %> 
-      <% } %>
+      <% if (role == 'student') { %>
+        <%- include navbar_student %>
+      <% } else if (role == 'tutor') {%>
+        <%- include navbar_tutor %>
+      <% } else if (role == 'admin') {%>
+        <%- include navbar_admin %>
+      <% } %> 
+    <% } %>
+  </div>
 
     <!-- edit-profile-form -->
     <div class="big-bg popup" id="edit-profile-form">
@@ -562,16 +564,11 @@
                 const tl = new TimelineLite({
                     ease: Expo.easeOut
                 });
-                const logo = document.querySelector('.main-logo');
-                const header = document.querySelector('.header');
-                const username = document.querySelector('.username');
-                const password = document.querySelector('.password');
-                const signinButton = document.querySelector('.sign-in-button');
-                const signupButton = document.querySelector('.sign-up-button');
-                const message = document.querySelector('.message');
-                tl.fromTo([logo, header, username, password, signinButton, signupButton, message], 1, {
+                const profileBox = document.querySelector('.profile-box');
+
+                tl.fromTo(profileBox, 1.5, {
                     opacity: 0,
-                    y: 50
+                    y: -40
                 }, {
                     opacity: 1,
                     y: 0

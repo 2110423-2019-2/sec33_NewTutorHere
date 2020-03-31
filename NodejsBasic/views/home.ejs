@@ -196,17 +196,10 @@
       const tl = new TimelineLite({
         ease: Expo.easeOut
       });
-      const nav = document.querySelector('.nav-container');
       const searchBox = document.querySelector('.search-box');
       const tutorsBox = document.querySelector('.tutors-box');
       const tutor = document.querySelectorAll('.tt-box');
-      tl.fromTo(nav, 1.5, {
-        opacity: 0,
-        y: -40
-      }, {
-        opacity: 1,
-        y: 0
-      }, '-=0.6').fromTo([searchBox, tutorsBox], 1, {
+      tl.fromTo([searchBox, tutorsBox], 1.5, {
         opacity: 0,
         y: 50
       }, {

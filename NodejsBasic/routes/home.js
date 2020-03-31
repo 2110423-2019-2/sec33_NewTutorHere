@@ -302,6 +302,7 @@ router.post('/profile/edit_profile', [], function (req, res) {
 					'firstname': req.body.firstname,
 					'lastname': req.body.lastname,
 					'phone': req.body.phone,
+					'location':req.body.location,
 					'email': req.body.email,
 					'gender': req.body.gender,
 					'bio': req.body.bio

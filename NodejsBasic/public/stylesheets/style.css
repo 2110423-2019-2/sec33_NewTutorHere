@@ -1,10 +1,10 @@
 /* style for All background and nav-bar  */
 @import url('https://fonts.googleapis.com/css?family=Kanit&display=swap');
 
-/* @font-face {
+@font-face {
     font-family: 'HelveticaNeue';
     src: url('../fonts/HelveticaNeue.ttf') format('truetype');
-} */
+}
 @font-face {
     font-family: 'DolceVitaHeavy';
     src: url('../fonts/DolceVitaHeavy.ttf') format('truetype');
@@ -87,7 +87,7 @@ img.main-logo {
     padding: 7px 10px;
     font-size: 20px;
     cursor: pointer;
-    position: absolute;
+    /* position: absolute; */
     border-radius: 0.2em;
     right: 21em;
     top: 1.5em;
@@ -148,7 +148,7 @@ div.form-group-main {
 }
 
 .control-label-index {
-    font-family: 'DolceVitaHeavy';
+    font-family: 'Kanit';
     font-size: 1em;
     color: white;
     letter-spacing: 0.06em;
@@ -181,7 +181,7 @@ button.submit-button {
     color: white;
     font-size: 1em;
     letter-spacing: 0.06em;
-    font-family: 'DolceVitaHeavy';
+    font-family: 'Kanit';
 }
 
 button:hover.submit-button {
@@ -948,7 +948,7 @@ button.sendcontract-button {
     margin-right: auto;
     margin-left: auto;
     margin-top: 4vh;
-    font-family: "DolceVitaHeavy";
+    font-family: "HelveticaNeue";
 }
 
 button.addComment-button {

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NewTutorHere</title>
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
   <!-- <link rel="shortcut icon" href="img/dog.ico" /> -->
 
@@ -30,9 +31,9 @@
     <% } %> 
   <% } %>
 <script>var student_username;</script>
-  <!-- contract -->
-  <div class="big-bg popup" id="contract-popup" >
-    <div class="form-bg color-lightgreen center" id="contract-popup-bg">
+  <!-- view contract -->
+  <div class="big-bg popup" id="viewContract-popup" >
+    <div class="form-bg color-lightgreen center" id="viewContract-popup-bg">
       <button class="close-button"><i class="fa fa-close" onclick="closeContractPopupButton()"></i></button>
       <span class="form-name">
         <p>Contract</p>
@@ -44,7 +45,6 @@
           <b>Day: </b><element id="classDay"></element><br />
           <b>Time: </b><element id="classTime"></element><br />
           <b>Message: </b><element id="message"></element>
-          
           <a class="view2-button search-button be-right" href="accept_contract/" >Accept</a>
           <a class="view2-button search-button be-right" href="reject_contract/" >Reject</a>
         </form>
@@ -52,9 +52,49 @@
     </div>
   </div>
 
+  <!-- add comment-form -->
+  <div class="big-bg popup" id="addComment-form-popup" >
+      <div class="form-bg color-lightgreen center" id="addComment-form-popup-bg">
+          <button class="close-button"><i class="fa fa-close" onclick="closeAddCommentButton()"></i></button>
+
+          <span class="form-name">
+              <p>Thank you!</p>
+          </span><br>
+
+          <span class="form-sub">
+              <p>We hope you have enjoyed our course.</p>
+              <p>For comments, compliments or suggestions,</p>
+              <p>please write to us below.</p>
+          </span><br>
+
+          <!-- TODO add comment to db -->
+          <div class="form-information-bg">
+              <!-- <form class="form" action=/home/profile method="POST" id="addComment-form"> -->
+              <form class="form" id="addComment-form" action=/home/profile/add_comment method="POST">
+                    
+                  <div class="rating">
+                      <input type="radio" id="star-5" name="ratingcomment" value="5"><label for="star-5" title="Great">5 stars</label>
+                      <input type="radio" id="star-4" name="ratingcomment" value="4"><label for="star-4" title="Good">4 stars</label>
+                      <input type="radio" id="star-3" name="ratingcomment" value="3"><label for="star-3" title="Okay">3 stars</label>
+                      <input type="radio" id="star-2" name="ratingcomment" value="2"><label for="star-2" title="Bad">2 stars</label>
+                      <input type="radio" id="star-1" name="ratingcomment" value="1"><label for="star-1" title="Very Bad">1 star</label>
+                  </div>
+                  <br><br>
+                    
+                  <div class="form-group">
+                      <div class="form-input">
+                          <div class="textwrapper"><textarea id="comment" name="comment" cols="2" rows="6"
+                              placeholder=" Comment"></textarea></div>
+                      <button class="submit-button sign-up-button center" onclick="addComment()">Submit</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+
   <div class="big-bg">
     <!-- Content -->
-
     <div class="contractlog-box be-left">
       <span class="name-stucontract">
         <p>Contract Log</p>
@@ -66,7 +106,9 @@
           <a><%= element.student_username %> </a>
         </span>
         <br />
-        <a class="view2-button search-button be-right" href="terminate_contract/<%= element._id %>" >Terminate</a>
+        <!-- <button class="addComment-button be-right" id='addComment' onclick="showAddComment()">Add comment</button> -->
+        <!-- <a class="view2-button search-button be-right" href="terminate_contract/<%= element._id %>" >Terminate</a> -->
+        <button class="view2-button search-button be-right" id='addComment' onclick="showAddComment()">Terminate</button>
         <a class="view2-button search-button be-right" href="view_contract/<%= element.student_username %>">View</a>
       </div>
       <% }) %>
@@ -103,6 +145,10 @@
 
   </div>
 
+  <!-- Animation library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
+
   <script>
 
     var r = <%- JSON.stringify(requested) %>;
@@ -110,11 +156,13 @@
 
     // generateContract();
     function closeContractPopupButton() {
-      $("#contract-popup").css("display", "none");
+      ViewContractModalAnimationReversed();
     
     }
     function showContractPopup(tmp) {
-      $("#contract-popup").css("display", "flex");
+      $("#viewContract-popup").css("display", "flex");
+      ViewContractModalAnimation();
+
       document.getElementById("subject").innerHTML = r[tmp].course_name;
       document.getElementById("eduLevel").innerHTML = r[tmp].edu_level;
       document.getElementById("classDay").innerHTML = r[tmp].class_day;
@@ -124,11 +172,71 @@
       document.cookie = "_id= " + r[tmp]._id;
     }
     function acceptContractPopupButton() {
-      $("#contract-popup").css("display", "none");
+      ViewContractModalAnimationReversed();
     }
     function rejectContractPopupButton() {
-      $("#contract-popup").css("display", "none");
+      ViewContractModalAnimationReversed();
     }
+
+    function closeAddCommentButton() {
+      AddCommentModalAnimationReversed();
+    }
+
+    function showAddComment(url) {
+      $("#addComment-form-popup").css("display", "flex");
+      AddCommentModalAnimation();
+    }
+
+    //Animation view contract modal
+    function ViewContractModalAnimationReversed() {
+    ViewContractModalAnimation(true);
+    }
+
+    function ViewContractModalAnimation(reversed = false) {
+    const modal = document.getElementById('viewContract-popup');
+    const modal_body = document.getElementById('viewContract-popup-bg');
+    const tl2 = new TimelineLite({ easeIn: Power3.easeOut });
+    tl2.fromTo(modal, 0.20, { opacity: 0 }, { opacity: 1 }, 0)
+    tl2.fromTo(modal_body, 0.20, {
+    scale: 0,
+    opacity: 0
+    }, {
+    scale: 1,
+    opacity: 1
+    }, 0);
+    if (reversed) {
+    tl2.reverse(0.3);
+    setTimeout(function () {
+    $("#viewContract-popup").css("display", "none");
+    }, 500);
+    }
+    }
+
+    //Animation add comment modal
+    function AddCommentModalAnimationReversed() {
+      AddCommentModalAnimation(true);
+    }
+
+    function AddCommentModalAnimation(reversed = false) {
+      const modal = document.getElementById('addComment-form-popup');
+      const modal_body = document.getElementById('addComment-form-popup-bg');
+      const tl2 = new TimelineLite({ easeIn: Power3.easeOut });
+      tl2.fromTo(modal, 0.20, { opacity: 0 }, { opacity: 1 }, 0)
+      tl2.fromTo(modal_body, 0.20, {
+        scale: 0,
+        opacity: 0
+      }, {
+        scale: 1,
+        opacity: 1
+      }, 0);
+      if (reversed) {
+        tl2.reverse(0.3);
+        setTimeout(function () {
+          $("#addComment-form-popup").css("display", "none");
+        }, 500);
+      }
+    }
+
   </script>
 
 </body>

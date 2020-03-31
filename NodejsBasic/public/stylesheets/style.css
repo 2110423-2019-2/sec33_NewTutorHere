@@ -1199,7 +1199,7 @@ button:hover.view2-button {
 }
 
 /* view contract */
-#contract-popup {
+#viewContract-popup {
     display: none;
     z-index: 100;
     width: 100%;

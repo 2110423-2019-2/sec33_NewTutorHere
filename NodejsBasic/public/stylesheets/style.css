@@ -1243,7 +1243,7 @@ div.premium-box {
     padding: 30px 5% 0px 5%;
 }
 div.blockpremi {
-    width: 50%;
+    width: 22em;
     height: 30em;
     border: none;
     border-radius: 25px;
@@ -1281,7 +1281,7 @@ div.blockpremi .premi-detail{
     width: 70%;
     height: 8em;
     border: none;
-    margin-left: 24%;
+    margin-left: 18%;
 }
 button.prem-button {
     width: 50%;

@@ -130,9 +130,18 @@ router.post('/profile_admin/:username/edit_availability', [], function (req, res
 });
 
 
-router.post('/profile_admin/:commentid/delete_comment', [], function (req, res) {
+var ObjectID = require('mongodb').ObjectID;
 
-
+router.get('/profile_admin/:id/delete_comment', [], function (req, res) {
+    client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		console.log("deleting " + req.params.id);
+		var query = {
+			"_id": ObjectID(req.params.id)
+		};
+		await db.collection('CommentController').findOneAndDelete(query, {});
+	})
     res.redirect('back');
 });
 

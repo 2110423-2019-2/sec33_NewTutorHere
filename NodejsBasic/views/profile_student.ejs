@@ -434,7 +434,10 @@
 
     <script>
         var names = "firstn=";
+        var usernamex = "auth=";
         var tod;
+        var username;
+        // get first name
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
             var c = ca[i];
@@ -443,6 +446,18 @@
             }
             if (c.indexOf(names) == 0) {
                 tod = c.substring(names.length, c.length);
+            }
+        }
+
+        // get username
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1, c.length);
+            }
+            if (c.indexOf(usernamex) == 0) {
+                username = c.substring(usernamex.length, c.length);
             }
         }
 
@@ -478,6 +493,15 @@
 
             $("#sentContractButton").css("display", "none");
 
+        }
+
+        //is owner of this comment
+        if (document.getElementById(username) != null) {
+            console.log("display owner comment bin");
+            var comment = document.getElementById(username.concat("Comment"));
+            var deleteButton = document.getElementById(username.concat("DeleteButton"));
+            comment.css("margin-right", "0.5vw")
+            deleteButton.css("display", "flex")
         }
 
         var bdate = document.getElementById("bdate-editpf");
@@ -545,21 +569,6 @@
             document.cookie = "sub= " + subject;
 
         }
-
-        // TODO delete comment
-        //function deleteComment(subject) {
-        //    document.cookie = "sub= " + subject;
-
-        //}
-
-        //TODO check comment owner
-        //if (not owner of this comment) {
-        //    $(".deleteComment-button").css("display", "none");
-        //    $(".qual-item").css("margin-right", "1vw");
-        //}
-        //else if (is owner of this comment) {
-        //    $(".deleteComment-button").css("display", "flex");
-        //}
 
         function delete_cookie(name) {
             document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";

@@ -29,7 +29,11 @@
         <% } %> 
       <% } %>
     <div class="big-bg">
-        <form action="/home/premium" method="POST">
+        <% if(pf.is_premium == 'no'){%>
+        <form action="/home/buy_premium" method="POST">
+            <% }else{  %>
+                <form action="/home/cancel_premium" method="POST">
+                <%}%>
             <div class="dashboard">
                 <div class="premium-box color-lightgreen center" id="contract-form" >
                     <div class="blockpremi center">
@@ -53,7 +57,11 @@
                                 <p3>Cancel any time</p3>
                             </div>
                         </span><br>
+                        <% if(pf.is_premium == 'no'){%>
                         <button class="prem-button center">Get Premium</button>
+                        <% }else{  %>
+                        <button class="prem-button center">Cancel Premium</button>
+                        <%}%>
                     </div>
                 </div>
             </div>

@@ -42,4 +42,8 @@ router.get('/', function (req, res, next) {
     }
 });
 
+router.get('/profile_admin/:username', function (req, res, next){
+    res.send(req.params.username + "'s profile_admin")
+});
+
 module.exports = router;

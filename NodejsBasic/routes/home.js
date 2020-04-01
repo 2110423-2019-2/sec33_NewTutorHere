@@ -259,9 +259,14 @@ router.get('/profile', function (req, res, next) {
 		
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		console.log(result_availability);
-		res.render('profile', { pf: result_user[0], searchCourse: result_course,
-			 searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
+		if(result_user[0]['position'] == 'tutor'){
+			res.render('profile_tutor', { pf: result_user[0], searchCourse: result_course,
+				searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
+		}
+		else {
+			res.render('profile_student', { pf: result_user[0], searchCourse: result_course,
+				searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
+		}
 	});
 
 });
@@ -338,7 +343,7 @@ router.post('/profile', [], function (req, res) {
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 
-		res.redirect('/home/profile');
+		res.redirect('/home/profile_tutor');
 	});
 });
 // edit-profile-form
@@ -495,8 +500,14 @@ router.get('/view_contract/:id', function (req, res, next) {
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
         // The search added the results to the locals, access them in home.ejs and show the results there
         console.log(result_availability);
-		res.render('profile', { pf: result_user[0], searchCourse: result_course, 
-			searchAvailability: result_availability,comment:result_comment,role:req.cookies.role});
+		if(result_user[0]['position'] == 'tutor'){
+			res.render('profile_tutor', { pf: result_user[0], searchCourse: result_course,
+				searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
+		}
+		else {
+			res.render('profile_student', { pf: result_user[0], searchCourse: result_course,
+				searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
+		}
     });
 });
 

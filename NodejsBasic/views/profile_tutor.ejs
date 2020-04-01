@@ -262,8 +262,8 @@
             </span>
             <br><br>
             <div class="form-information-bg">
-                <form class="form" action=/home/profile/edit_availability method="POST" id="edit-availability-form">
-
+                <form class="form" action="/home/profile/edit_availability/<%=pf.username%>" method="POST"
+                    id="edit-availability-form">
                     <div class="form-group">
                         <div class="form-input">
                             <table>
@@ -284,22 +284,22 @@
                                 <%  avail = [element.sunMor,element.monMor,element.tueMor,element.wedMor,element.thuMor,element.friMor,element.satMor,element.sunAf,element.monAf,element.tueAf,element.wedAf,element.thuAf,element.friAf,element.satAf,element.sunAfSc,element.monAfSc,element.tueAfSc,element.wedAfSc,element.thuAfSc,element.friAfSc,element.satAfSc,element.sunEv,element.monEv,element.tueEv,element.wedEv,element.thuEv,element.friEv,element.satEv]%>
                                 <% }) %>
                                 <% for(var i=0; i<4; i++) {%>
-                                    <tr>
-                                        <th><%= day[i]%></th> 
+                                <tr>
+                                    <th><%= day[i]%></th>
                                     <% for(var j=0; j<7; j++) {%>
                                     <% searchAvailability.forEach(element => { %>
-                                        <%if ( avail[i*7+j] == "yes") { %>
-                                            <th><input type="checkbox" id="check-avai" name="av" checked></th>
-                                            <% tmp = true %>
-                                             <% } %>
-                                        <% }) %> 
-                                        <% if(!tmp){ %>
-                                            
-                                            <th><input type="checkbox" id="check-avai" name="av"></th>
-                                        <% }%>
-                                        <%tmp = false %>
+                                    <%if ( avail[i*7+j] == "yes") { %>
+                                    <th><input type="checkbox" id="check-avai" name="av" checked></th>
+                                    <% tmp = true %>
                                     <% } %>
-                                    </tr>
+                                    <% }) %>
+                                    <% if(!tmp){ %>
+
+                                    <th><input type="checkbox" id="check-avai" name="av"></th>
+                                    <% }%>
+                                    <%tmp = false %>
+                                    <% } %>
+                                </tr>
                                 <% } %>
                             </table>
                         </div>
@@ -403,22 +403,23 @@
                         <%  avail = [element.sunMor,element.monMor,element.tueMor,element.wedMor,element.thuMor,element.friMor,element.satMor,element.sunAf,element.monAf,element.tueAf,element.wedAf,element.thuAf,element.friAf,element.satAf,element.sunAfSc,element.monAfSc,element.tueAfSc,element.wedAfSc,element.thuAfSc,element.friAfSc,element.satAfSc,element.sunEv,element.monEv,element.tueEv,element.wedEv,element.thuEv,element.friEv,element.satEv]%>
                         <% }) %>
                         <% for(var i=0; i<4; i++) {%>
-                            <tr>
-                                <th><%= day[i]%></th> 
+                        <tr>
+                            <th><%= day[i]%></th>
                             <% for(var j=0; j<7; j++) {%>
                             <% searchAvailability.forEach(element => { %>
-                                <%if ( avail[i*7+j] == "yes") { %>
-                                    <th><img class="nav-img-user center" src="/img/notavailable.png" style="height: 1.5em;"></th> 
-                                    <% tmp = true %>
-                                     <% } %>
-                                <% }) %> 
-                                <% if(!tmp){ %>
-                                    <th><img class="nav-img-user center" src="/img/available.png" style="height: 1.5em;"></th>
-                                <% }%>
-                                <%tmp = false %>
+                            <%if ( avail[i*7+j] == "yes") { %>
+                            <th><img class="nav-img-user center" src="/img/notavailable.png" style="height: 1.5em;">
+                            </th>
+                            <% tmp = true %>
                             <% } %>
-                            </tr>
+                            <% }) %>
+                            <% if(!tmp){ %>
+                            <th><img class="nav-img-user center" src="/img/available.png" style="height: 1.5em;"></th>
+                            <% }%>
+                            <%tmp = false %>
                             <% } %>
+                        </tr>
+                        <% } %>
                     </table>
                     <button class="editAva-button be-right" id='editAvailButton' onclick="showEditAvai()">Edit
                         availability</button>
@@ -694,7 +695,23 @@
         function SentContractModalAnimationReversed() {
             SentContractModalAnimation(true);
         }
+        $("form").submit(function () {
 
+            var this_master = $(this);
+
+            this_master.find('input[type="checkbox"]').each(function () {
+                var checkbox_this = $(this);
+
+
+                if (checkbox_this.is(":checked") == true) {
+                    checkbox_this.attr('value', '1');
+                } else {
+                    checkbox_this.prop('checked', true);
+                    //DONT' ITS JUST CHECK THE CHECKBOX TO SUBMIT FORM DATA    
+                    checkbox_this.attr('value', '0');
+                }
+            })
+        })
         function SentContractModalAnimation(reversed = false) {
             const modal = document.getElementById('contract-form-popup');
             const modal_body = document.getElementById('contract-form-popup-bg');

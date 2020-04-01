@@ -383,7 +383,7 @@ router.post('/profile', [], function (req, res) {
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 
-		res.redirect('/home/profile_tutor');
+		res.redirect('/home/profile');
 	});
 });
 // edit-profile-form

@@ -533,6 +533,7 @@ button.search-button {
 div.rating-box {
     width: 100%;
     text-align: center;
+    background-color: black;
 }
 
 /*Contract*/
@@ -1218,6 +1219,11 @@ button:hover.view2-button {
     padding-top: 1em;
     padding-bottom: 1em;
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-information-bg b {
+    letter-spacing: 0.03em;
+    color: #4C5F21; 
 }
 
 /* premium */

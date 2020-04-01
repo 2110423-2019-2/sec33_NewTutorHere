@@ -11,28 +11,34 @@
     <!-- <link rel="shortcut icon" href="img/dog.ico" /> -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="/scripts/function.js"></script>
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <!-- <script src="script.js"></script> -->
     <!-- <script>checkStatus()</script> -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/mustache.js"></script>
+    <script type="text/javascript" src="/scripts/modal.js"></script>
+    <script type="text/javascript" src="/scripts/custom.js"></script>
+    <script type="text/javascript" src="/scripts/function.js"></script>
 </head>
 
 <body>
-    <%if (typeof role!= 'undefined') { %>
+    <div class="nav-container">
+        <%if (typeof role!= 'undefined') { %>
         <% if (role == 'student') { %>
-          <%- include navbar_student %>
+        <%- include navbar_student %>
         <% } else if (role == 'tutor') {%>
-          <%- include navbar_tutor %>
+        <%- include navbar_tutor %>
         <% } else if (role == 'admin') {%>
-          <%- include navbar_admin %>
-        <% } %> 
-      <% } %>
+        <%- include navbar_admin %>
+        <% } %>
+        <% } %>
+    </div>
 
     <!-- edit-profile-form -->
     <div class="big-bg popup" id="edit-profile-form">
         <div class="form-bg color-lightgreen center" id="edit-profile-form-bg">
-            <button class="close-button"><i class="fa fa-close" onclick="closeEditButton()"></i></button>
+            <button class="close-button be-right"><i class="fa fa-close" onclick="closeEditButton()"></i></button>
             <span class="form-name">
                 <p>Edit your profile</p>
             </span>
@@ -111,8 +117,8 @@
 
     <!-- addCourse-form -->
     <div class="big-bg popup" id="addCourse-form">
-        <div class="form-bg color-lightgreen center" id="">
-            <button class="close-button"><i class="fa fa-close" onclick="closeAddCourseButton()"></i></button>
+        <div class="form-bg color-lightgreen center" id="addCourse-form-bg">
+            <button class="close-button be-right"><i class="fa fa-close" onclick="closeAddCourseButton()"></i></button>
             <span class="form-name">
                 <p>Add New Course</p>
             </span><br>
@@ -146,17 +152,19 @@
                     <div class="half-box be-left">
                         <label class="control-label">Rating</label>
                         <br>
-                        <div class="rating">
-                            <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="Great">5
-                                stars</label>
-                            <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good">4
-                                stars</label>
-                            <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Okay">3
-                                stars</label>
-                            <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Bad">2
-                                stars</label>
-                            <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="Very Bad">1
-                                star</label>
+                        <div class="form-group">
+                            <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"
+                                    title="Great">5 stars</label>
+                                <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good">4
+                                    stars</label>
+                                <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Okay">3
+                                    stars</label>
+                                <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Bad">2
+                                    stars</label>
+                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"
+                                    title="Very Bad">1 star</label>
+                            </div>
                         </div>
                         </br>
                     </div>
@@ -177,12 +185,12 @@
     <!-- sent contract-form -->
     <div class="big-bg popup" id="contract-form-popup">
         <div class="form-bg color-lightgreen center" id="contract-form-popup-bg">
-            <button class="close-button"><i class="fa fa-close" onclick="closeContractButton()"></i></button>
+            <button class="close-button be-right"><i class="fa fa-close" onclick="closeContractButton()"></i></button>
             <span class="form-name">
                 <p>Sent Contract</p>
             </span><br>
             <div class="form-information-bg">
-                <form class="form"  action=/home/profile method="POST" id="contract-form" >
+                <form class="form" action=/home/profile method="POST" id="contract-form">
                     <div class="form-group">
                         <div class="form-input">
                             <input type="text" id="subject-contactf" name="subject" placeholder="Subject">
@@ -244,44 +252,61 @@
         </div>
     </div>
 
-    <!-- add comment-form -->
-    <div class="big-bg popup" id="addComment-form-popup">
-        <div class="form-bg color-lightgreen center" id="addComment-form-popup-bg">
-            <button class="close-button"><i class="fa fa-close" onclick="closeAddCommentButton()"></i></button>
-
+    <!-- edit-availability-form -->
+    <div class="big-bg popup" id="edit-avai-form-popup">
+        <div class="form-bg color-lightgreen center" id="edit-avai-form-bg">
+            <button class="close-button be-right"><i class="fa fa-close" onclick="closeEditAvaiButton()"></i></button>
+            <br>
             <span class="form-name">
-                <p>Thank you!</p>
-            </span><br>
-
-            <span class="form-sub">
-                <p>We hope you have enjoyed our course.</p>
-                <p>For comments, compliments or suggestions,</p>
-                <p>please write to us below.</p>
-            </span><br>
-
-            <!-- TODO add comment to db -->
+                <p>Edit Availability</p>
+            </span>
+            <br><br>
             <div class="form-information-bg">
-                <!-- <form class="form" action=/home/profile method="POST" id="addComment-form"> -->
-                <form class="form" id="addComment-form"></form>
+                <form class="form" action=/home/profile/edit_availability method="POST" id="edit-availability-form">
 
-                    <div class="rating">
-                        <input type="radio" id="star5" name="rating" value="5"><label for="star5" title="Great"></label>
-                        <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good"></label>
-                        <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Okay"></label>
-                        <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Bad"></label>
-                        <input type="radio" id="star1" name="rating" value="1"><label for="star1"
-                            title="Very Bad"></label>
-                    </div>
-                    
-                    
                     <div class="form-group">
                         <div class="form-input">
-                            <div class="textwrapper"><textarea id="comment" name="comment" cols="2" rows="6"
-                                placeholder=" Comment"></textarea></div>
+                            <table>
+                                <tr>
+                                    <th></th>
+                                    <th>SUN</th>
+                                    <th>MON</th>
+                                    <th>TUE</th>
+                                    <th>WED</th>
+                                    <th>THU</th>
+                                    <th>FRI</th>
+                                    <th>SAT</th>
+                                </tr>
+                                <% var day = ["Morning","Afternoon","After school","Evening"]%>
+                                <% var tmp = false %>
+                                <% searchAvailability.forEach(element => { %>
+                                <% }) %>
+                                <% for(var i=0; i<4; i++) {%>
+                                <tr>
+                                    <% for(var j=0; j<8; j++) {%>
+                                    <%if (j == 0 ) { %>
+                                    <th><%= day[i]%></th>
+                                    <% tmp = true%>
+                                    <% } %>
+                                    <% searchAvailability.forEach(element => { %>
+                                    <%if ( element.class_day == j-1 && element.class_time == i) { %>
+                                    <th><img class="nav-img-user center" src="../img/notavailable.png"
+                                            style="height: 1.5em;" align="left"></th>
+                                    <% tmp = true %>
+                                    <% } %>
+                                    <% }) %>
+                                    <% if(!tmp){ %>
+                                    <th><input type="checkbox" id="check-avai" name="check-avai"></th>
+                                    <% }%>
+                                    <%tmp = false %>
+                                    <% } %>
+                                </tr>
+                                <% } %>
+                            </table>
                         </div>
                     </div>
-
-                    <button class="submit-button sign-up-button center" onclick="addComment()">Submit</button>
+                    <br>
+                    <button class="submit-button sign-up-button center">Edit</button>
                 </form>
             </div>
         </div>
@@ -292,17 +317,23 @@
     <div class="big-bg">
         <!-- Content -->
         <div class="dashboard">
-            <div class="profile-box color-lightgreen center" id="contract-form" >
+            <div class="profile-box color-lightgreen center" id="contract-form">
                 <div class="pf-box center">
                     <div class="pfphoto-box">
                         <img class="nav-img-user center" src="/img/user.png" style="height: 7em;" />
                     </div>
                     <div class="pfdetail-box be-right">
                         <span class="name-contract">
-                            <button class="editpf-button be-right" id="editbut" onclick="showEditProfileForm()">Edit Profile</button>
+                            <button class="editpf-button be-right" id="editbut" onclick="showEditProfileForm()">Edit
+                                Profile</button>
+                            <p id="profile-firstname"> <%= pf.firstname%></p>
+                            <p id="profile-lastname"><%=pf.lastname %>&nbsp;&nbsp;</p>
+                            <% if (pf.is_premium == 'yes') {%>
+                            <img class="nav-img-user" src="/img/crown.png" style="height: 1.2em;" />
+                            <% }%>
 
-                            <p id="profile-firstname"> <%= pf.firstname%> </p>
-                            <p id="profile-lastname"><%=pf.lastname %></p>
+                            <br />
+                            <p>&nbsp;&nbsp;&nbsp;</p>
                             <img class="nav-img-user" src="/img/placeholder.png" style="height: 1.1em;" />
                             <a id='profile-location'><%= pf.location %></a>
                             <br />
@@ -316,42 +347,8 @@
                         </span>
                     </div>
                 </div>
-                <div class="ratesum-box">
-                    <span class="name-contract">
-                        <c>Teaches</c>
-                    </span>
-                    <table id='courses-table'>
-                        <tr>
-                            <th></th>
-                            <th>City</th>
-                            <th>Rating</th>
-                            <th>Price</th>
-                        </tr>
-                    
-                        <%if (typeof searchCourse!= 'undefined') { %>
-                            <%for(result of searchCourse) {%>
-                        <form action="/home/delete_course" method="POST">
-                            <tr>
-                                <td><%=result.subject%></td>
-                                <td><%=result.city%></td>
-                                <td><%=result.rating%></td>
-                                <td><%=result.price%></td>
-                                <td><button class="deleteCourse-button" id='deleteCourseButton'><i class="fa fa-trash"
-                                    onclick="clicked('<%= result.subject %>')"></i></button>
-                                </td>
-                            </tr>
-                        </form>
-                        <% }} %>
-                        
 
-                    </table>
-
-                    <button class="editCourse-button be-right" id='editCourseButton'>Edit courses</button>
-                    <button class="addCourse-button be-right" id='addCourseButton' onclick="showAddCourse()">Add
-                        courses</button>
-
-                </div>
-                <div class="qual-box be-right">
+                <div class="studentqual-box center">
                     <span class="name-contract">
                         <c>Availability</c>
                     </span>
@@ -366,201 +363,324 @@
                             <th>FRI</th>
                             <th>SAT</th>
                         </tr>
-                    <% var day = ["Morning","Afternoon","After school","Evening"]%>
-                    <%var tmp = false %>
-                    <% searchAvailability.forEach(element => { %>
-                    <% }) %>
-                    <% for(var i=0; i<4; i++) {%>
-                        <tr>
-                        <% for(var j=0; j<8; j++) {%>
-                            <%if (j == 0 ) { %>
-                               <th><%= day[i]%></th> 
-                               <% tmp = true%>
-                                <% } %>
+                        <% var day = ["Morning","Afternoon","After school","Evening"]%>
+                        <%var tmp = false %>
                         <% searchAvailability.forEach(element => { %>
+                        <% }) %>
+                        <% for(var i=0; i<4; i++) {%>
+                        <tr>
+                            <% for(var j=0; j<8; j++) {%>
+                            <%if (j == 0 ) { %>
+                            <th><%= day[i]%></th>
+                            <% tmp = true%>
+                            <% } %>
+                            <% searchAvailability.forEach(element => { %>
                             <%if ( element.class_day == j-1 && element.class_time == i) { %>
-                                <th> X </th> 
-                                <% tmp = true %>
-                                 <% } %>
-                            <% }) %> 
+                            <th><img class="nav-img-user center" src="/img/notavailable.png" style="height: 1.5em;">
+                            </th>
+                            <% tmp = true %>
+                            <% } %>
+                            <% }) %>
                             <% if(!tmp){ %>
-                                <th> - </th>
+                            <th><img class="nav-img-user center" src="/img/available.png" style="height: 1.5em;"></th>
                             <% }%>
                             <%tmp = false %>
-                        <% } %>
+                            <% } %>
                         </tr>
-                    <% } %>
+                        <% } %>
                     </table>
-                    <button class="editAva-button be-right" id='editAvailButton'>Edit availability</button>
+                    <button class="editAva-button be-right" id='editAvailButton' onclick="showEditAvai()">Edit
+                        availability</button>
                 </div><br />
-                
+
                 <div class="review-box center">
                     <span class="name-contract">
                         <c>Reviews</c>
                     </span>
-
+                    <%if (typeof comment!= 'undefined') { %>
+                    <%for( each of comment) {%>
                     <div class="comment-box center">
                         <div class="pfphoto-box">
-                            <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
+                            <img class="nav-img-user center" src="/img/user.png" style="height: 6em;" />
                             <div class="profile-rating">
                                 <script>
-                                    showStars('5');
+                                    showStars('<%= each.rating %>');
                                 </script>
                             </div>
                         </div>
 
                         <div class="qual-item">
                             <span class="comment">
-                                <p>เยี่ยมยอด</p>
+                                <p><%=each.comment%></p>
                             </span>
                         </div>
 
-                    </div>
-
-                    <div class="comment-box center">
-                        <div class="pfphoto-box">
-                            <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
-                            <div class="profile-rating">
-                                <script>
-                                    showStars('5');
-                                </script>
-                            </div>
-                        </div>
-
-                        <div class="qual-item">
-                            <span class="comment">
-                                <p>อาจารย์หล่อ</p>
-                            </span>
-                        </div>
+                        <button class="deleteComment-button" id="deleteCommentButton"><i class="fa fa-trash"
+                                onclick="deleteComment('<%= each.subject %>')"></i></button>
 
                     </div>
-
-                    <button class="addComment-button be-right" id='addComment' onclick="showAddComment()">Add comment</button>
-                    <button class="sendcontract-button be-right" id='sentContractButton' onclick="showSentContract()">Send a contract</button>
+                    <% }} %>
                 </div>
+                <button class="sendcontract-button" id='sentContractButton' onclick="showSentContract()">Send a
+                    contract</button>
+                <br><br>
             </div>
         </div>
+    </div>
 
-        <script>
+    <!-- Animation library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js"
+        integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"
+        integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
 
-            var names = "firstn=";
-            var tod;
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1, c.length);
-                }
-                if (c.indexOf(names) == 0) {
-                    tod = c.substring(names.length, c.length);
-                }
+
+
+    <script>
+        var names = "firstn=";
+        var tod;
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1, c.length);
             }
-            
-            // is viewer
-            if (tod != document.getElementById("profile-firstname").innerText) {
-
-                $("#editbut").css("display", "none");
-                $("#addCourseButton").css("display", "none");
-                $("#editCourseButton").css("display", "none");
-                $("#deleteCourseButton").css("display", "none");
-                $("#verifyDocButton").css("display", "none");
-                $("#editAvailButton").css("display", "none");
-
-                $("#sentContractButton").css("display", "block");
-
+            if (c.indexOf(names) == 0) {
+                tod = c.substring(names.length, c.length);
             }
+        }
 
-            // is owner
-            else {
+        // is viewer
+        if (tod != document.getElementById("profile-firstname").innerText) {
 
-               $("#editbut").css("display", "block");
-               $("#addCourseButton").css("display", "block");
-               $("#editCourseButton").css("display", "block");
-               $("#deleteCourseButton").css("display", "block");
-               $("#verifyDocButton").css("display", "block");
-               $("#editAvailButton").css("display", "block");
-
-               $("#sentContractButton").css("display", "none");
-                
+            $("#editbut").css("display", "none");
+            $("#addCourseButton").css("display", "none");
+            $("#verifyDocButton").css("display", "none");
+            $("#editAvailButton").css("display", "none");
+            var cols = document.getElementsByClassName("deleteCourse-button");
+            for (i = 0; i < cols.length; i++) {
+                // cols[i].style.backgroundColor = color;
+                cols[i].style.visibility = "hidden";
             }
-
-            var bdate = document.getElementById("bdate-editpf");
-            var days = "<option value=\"\" disabled selected>Day</option>";
-            for (let i = 1; i <= 31; i++) {
-                days += "<option value=\"" + i + "\">" + i + "</option>";
+            var comment = document.getElementsByClassName("deleteComment-button");
+            for (i = 0; i < comment.length; i++) {
+                // cols[i].style.backgroundColor = color;
+                comment[i].style.visibility = "hidden";
             }
-            bdate.innerHTML = days;
+            $("#sentContractButton").css("display", "block");
 
-            var byear = document.getElementById("byear-editpf");
-            var years = "<option value=\"\" disabled selected>Year</option>";
-            for (let i = 1960; i <= 2020; i++) {
-                years += "<option value=\"" + i + "\">" + i + "</option>";
+        }
+
+        // is owner
+        else {
+
+            $("#editbut").css("display", "block");
+            $("#addCourseButton").css("display", "block");
+            $(".deleteCourse-button").css("display", "block");
+            $("#verifyDocButton").css("display", "block");
+            $("#editAvailButton").css("display", "block");
+
+            $("#sentContractButton").css("display", "none");
+
+        }
+
+        var bdate = document.getElementById("bdate-editpf");
+        var days = "<option value=\"\" disabled selected>Day</option>";
+        for (let i = 1; i <= 31; i++) {
+            days += "<option value=\"" + i + "\">" + i + "</option>";
+        }
+        bdate.innerHTML = days;
+
+        var byear = document.getElementById("byear-editpf");
+        var years = "<option value=\"\" disabled selected>Year</option>";
+        for (let i = 1960; i <= 2020; i++) {
+            years += "<option value=\"" + i + "\">" + i + "</option>";
+        }
+        byear.innerHTML = years;
+
+        function closeEditButton() {
+            EditProfileModalAnimationReversed();
+        }
+
+        function showEditProfileForm() {
+            $("#edit-profile-form").css("display", "flex");
+            EditProfileModalAnimation();
+
+            //set initial value
+            document.getElementById("firstname-editpf").value = '<%= pf.firstname%>';
+            document.getElementById("lastname-editpf").value = '<%=pf.lastname %>';
+            document.getElementById("e-mail-editpf").value = '<%= pf.email %>';
+            document.getElementById("phone-editpf").value = '<%= pf.phone %>';
+            document.getElementById("location-editpf").value = '<%= pf.location %>';
+            document.getElementById("bio-editpf").value = '<%= pf.bio %>';
+            document.getElementById("gender-editpf").value = '<%= pf.gender %>';
+
+        }
+
+        function closeContractButton() {
+            SentContractModalAnimationReversed();
+        }
+
+        function showSentContract() {
+            $("#contract-form-popup").css("display", "flex");
+            SentContractModalAnimation();
+        }
+
+        function closeAddCourseButton() {
+            AddCourseModalAnimationReversed();
+        }
+
+        function showAddCourse() {
+            $("#addCourse-form").css("display", "flex");
+            AddCourseModalAnimation();
+        }
+
+        function closeEditAvaiButton() {
+            $("#edit-avai-form-popup").css("display", "none");
+        }
+
+        function showEditAvai() {
+            $("#edit-avai-form-popup").css("display", "flex");
+        }
+
+
+        // delete course
+        function deleteCourse(subject) {
+            document.cookie = "sub= " + subject;
+
+        }
+
+        // TODO delete comment
+        //function deleteComment(subject) {
+        //    document.cookie = "sub= " + subject;
+
+        //}
+
+        //TODO check comment owner
+        //if (not owner of this comment) {
+        //    $(".deleteComment-button").css("display", "none");
+        //    $(".qual-item").css("margin-right", "1vw");
+        //}
+        //else if (is owner of this comment) {
+        //    $(".deleteComment-button").css("display", "flex");
+        //}
+
+        function delete_cookie(name) {
+            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        }
+
+        //Animation page
+        function Animation(reverse = false) {
+            const tl = new TimelineLite({
+                ease: Expo.easeOut
+            });
+            const profileBox = document.querySelector('.profile-box');
+
+            tl.fromTo(profileBox, 1.5, {
+                opacity: 0,
+                y: -40
+            }, {
+                opacity: 1,
+                y: 0
+            })
+        }
+        Animation();
+
+        //Animation edit profile modal
+        function EditProfileModalAnimationReversed() {
+            EditProfileModalAnimation(true);
+        }
+
+        function EditProfileModalAnimation(reversed = false) {
+            const modal = document.getElementById('edit-profile-form');
+            const modal_body = document.getElementById('edit-profile-form-bg');
+            const tl = new TimelineLite({
+                easeIn: Power3.easeOut
+            });
+            tl.fromTo(modal, 0.20, {
+                opacity: 0
+            }, {
+                opacity: 1
+            }, 0)
+            tl.fromTo(modal_body, 0.20, {
+                scale: 0,
+                opacity: 0
+            }, {
+                scale: 1,
+                opacity: 1
+            }, 0);
+            if (reversed) {
+                console.log("close edit profle modal");
+                tl.reverse(0.3);
+                setTimeout(function () {
+                    $("#edit-profile-form").css("display", "none");
+                }, 500);
             }
-            byear.innerHTML = years;
+        }
 
-            function closeEditButton() {
-                $("#edit-profile-form").css("display", "none");
+        //Animation add course modal
+        function AddCourseModalAnimationReversed() {
+            AddCourseModalAnimation(true);
+        }
+
+        function AddCourseModalAnimation(reversed = false) {
+            const modal = document.getElementById('addCourse-form');
+            const modal_body = document.getElementById('addCourse-form-bg');
+            const tl2 = new TimelineLite({
+                easeIn: Power3.easeOut
+            });
+            tl2.fromTo(modal, 0.20, {
+                opacity: 0
+            }, {
+                opacity: 1
+            }, 0)
+            tl2.fromTo(modal_body, 0.20, {
+                scale: 0,
+                opacity: 0
+            }, {
+                scale: 1,
+                opacity: 1
+            }, 0);
+            if (reversed) {
+                tl2.reverse(0.3);
+                setTimeout(function () {
+                    $("#addCourse-form").css("display", "none");
+                }, 500);
             }
-            function showEditProfileForm() {
-                $("#edit-profile-form").css("display", "flex");
+        }
 
-                //set initial value
-                document.getElementById("firstname-editpf").value = '<%= pf.firstname%>' ;
-                document.getElementById("lastname-editpf").value = '<%=pf.lastname %>';
-                document.getElementById("e-mail-editpf").value = '<%= pf.email %>';
-                document.getElementById("phone-editpf").value = '<%= pf.phone %>';
-                document.getElementById("location-editpf").value = '<%= pf.location %>';
-                document.getElementById("bio-editpf").value = '<%= pf.bio %>';
-                document.getElementById("gender-editpf").value = '<%= pf.gender %>';
+        //Animation sent contract modal
+        function SentContractModalAnimationReversed() {
+            SentContractModalAnimation(true);
+        }
 
+        function SentContractModalAnimation(reversed = false) {
+            const modal = document.getElementById('contract-form-popup');
+            const modal_body = document.getElementById('contract-form-popup-bg');
+            const tl2 = new TimelineLite({
+                easeIn: Power3.easeOut
+            });
+            tl2.fromTo(modal, 0.20, {
+                opacity: 0
+            }, {
+                opacity: 1
+            }, 0)
+            tl2.fromTo(modal_body, 0.20, {
+                scale: 0,
+                opacity: 0
+            }, {
+                scale: 1,
+                opacity: 1
+            }, 0);
+            if (reversed) {
+                tl2.reverse(0.3);
+                setTimeout(function () {
+                    $("#contract-form-popup").css("display", "none");
+                }, 500);
             }
-
-            function closeContractButton() {
-                $("#contract-form-popup").css("display", "none");
-            }
-
-            function showSentContract() {
-                $("#contract-form-popup").css("display", "flex");
-            }
-
-            function closeAddCourseButton() {
-                $("#addCourse-form").css("display", "none");
-            }
-            function showAddCourse() {
-                $("#addCourse-form").css("display", "flex");
-            }
-
-            function closeAddCommentButton() {
-            $("#addComment-form-popup").css("display", "none");
-            }
-            function showAddComment() {
-            $("#addComment-form-popup").css("display", "flex");
-            }
-
-
-            // remove course
-            function removeCourse(item) {
-                console.log('remove course successful');
-                item.closest('tr').remove()
-            }
-
-            function addComment() {
-
-                console.log('add comment successful');
-        
-            }
-           
-            
-            function clicked(subject) {
-                document.cookie = "sub= " + subject;
-
-            }
-            function delete_cookie( name ) {
-                document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-                document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-            }
-
-        </script>
+        }
+    </script>
 
 </body>
 

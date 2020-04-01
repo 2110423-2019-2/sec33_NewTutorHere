@@ -224,7 +224,7 @@ button:hover.submit-button {
 
 }
 
-#addComment-form-popup {
+.addComment-form-popup {
     display: none;
     z-index: 100;
     width: 100%;
@@ -949,19 +949,6 @@ button.sendcontract-button {
     margin-left: auto;
     margin-top: 4vh;
     font-family: "HelveticaNeue";
-}
-
-button.addComment-button {
-    width: 17%;
-    background-color: #86916E;
-    padding: 5px 0px 5px 0px;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-size: 0.8em;
-    letter-spacing: 0.05em;
-    margin-right: 2%;
-    margin-top: inherit;
 }
 
 .comment-box {

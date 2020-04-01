@@ -328,6 +328,7 @@ router.post('/profile/edit_availability/:id', [], function (req, res) {
 		var username = {
 			"username": req.params.id
 		};
+		console.log(test + " WtF is going on here");
 		for(var i = 0;i<28;i++){
 		if(test[i]== 1){
 		db.collection('AvailabilityController').update(
@@ -479,9 +480,22 @@ router.get('/testfunction', function (req, res, next) {
 
 // premium
 router.get('/premium', function (req, res, next) {
-	res.render('premium' ,{role:req.cookies.role});
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		var query_username = {
+			"username": req.cookies.auth
+		};
+	
+		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
+
+		
+		// The search added the results to the locals, access them in home.ejs and show the results there
+		res.render('premium' ,{role:req.cookies.role , pf : result_user[0]});
+	});
+	
 });
-router.post('/premium', function (req, res, next) {
+router.post('/buy_premium', function (req, res, next) {
 	console.log("Haaaaaaaaaaaaaaaaaaaaaaaa");
 	client.connect(async function (err) {
 		//checks for connection error
@@ -507,6 +521,38 @@ router.post('/premium', function (req, res, next) {
 			{
 				$set: {
 					'is_premium': 'yes'
+				}
+			}
+		);
+		res.redirect('/home/profile');
+	});
+});
+router.post('/cancel_premium', function (req, res, next) {
+	console.log("Haaaaaaaaaaaaaaaaaaaaaaaa");
+	client.connect(async function (err) {
+		//checks for connection error
+		assert.equal(null, err);
+
+		//once connected, add a doc to collection 'UserData'
+		const db = client.db(dbName);
+
+		db.collection('UserData').update(
+			{
+				username: req.cookies.auth	//find the user you wanna change here
+			},
+			{
+				$set: {
+					'is_premium': 'no'
+				}
+			}
+		);
+		db.collection('CourseData').updateMany(
+			{
+				'tutor_username': req.cookies.auth	//find the user you wanna change here
+			},
+			{
+				$set: {
+					'is_premium': 'no'
 				}
 			}
 		);

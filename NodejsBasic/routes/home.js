@@ -124,8 +124,28 @@ router.post('/terminate_contract/:id', function (req, res, next) {
 				"status": "terminated"
 			}
 		});
-
+		
 		tutor = await db.collection('ContractData').find(query).toArray();
+		accepted = await db.collection('ContractData').find(query).toArray();
+		var query1  = {
+			"username": accepted[0].tutor_username
+		}
+		var query2  = {
+			"username": accepted[0].student_username
+		}
+		var day = ["sunMor","monMor","tueMor","wedMor","thuMor","friMor","satMor","sunAf","monAf","tueAf","wedAf","thuAf","friAf","satAf","sunAfSc","monAfSc","tueAfSc","wedAfSc","thuAfSc","friAfSc","satAfSc","sunEv","monEv","tueEv","wedEv","thuEv","friEv","satEv"];
+		var time = parseInt(accepted[0].class_time) * 7 + parseInt(accepted[0].class_day);
+		const tmp  = day[time];
+		await db.collection('AvailabilityController').updateOne(query1, {
+			$set: {
+				[tmp] : "no"
+			}
+		});
+		await db.collection('AvailabilityController').updateOne(query2, {
+			$set: {
+				[tmp] : "no"
+			}
+		});
 		commentator = tutor[0]['tutor_username'];
 		commentatee = tutor[0]['student_username'];
 		db.collection('CommentController').insertOne({

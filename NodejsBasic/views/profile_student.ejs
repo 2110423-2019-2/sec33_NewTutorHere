@@ -262,8 +262,7 @@
             </span>
             <br><br>
             <div class="form-information-bg">
-                <form class="form" action=/home/profile/edit_availability method="POST" id="edit-availability-form">
-
+                <form class="form" action= "/home/profile/edit_availability/<%=pf.username%>" method="POST" id="edit-availability-form">
                     <div class="form-group">
                         <div class="form-input">
                             <table>
@@ -289,12 +288,13 @@
                                     <% for(var j=0; j<7; j++) {%>
                                     <% searchAvailability.forEach(element => { %>
                                         <%if ( avail[i*7+j] == "yes") { %>
-                                            <th><img class="nav-img-user center" src="../img/notavailable.png" style="height: 1.5em;" align="left"></th>
+                                            <th><input type="checkbox" id="check-avai" name="av" checked></th>
                                             <% tmp = true %>
                                              <% } %>
                                         <% }) %> 
                                         <% if(!tmp){ %>
-                                            <th><input type="checkbox" id="check-avai" name="check-avai"></th>
+                                            
+                                            <th><input type="checkbox" id="check-avai" name="av"></th>
                                         <% }%>
                                         <%tmp = false %>
                                     <% } %>
@@ -650,7 +650,23 @@
         function SentContractModalAnimationReversed() {
             SentContractModalAnimation(true);
         }
+        $("form").submit(function () {
 
+        var this_master = $(this);
+
+        this_master.find('input[type="checkbox"]').each( function () {
+        var checkbox_this = $(this);
+
+
+         if( checkbox_this.is(":checked") == true ) {
+        checkbox_this.attr('value','1');
+        } else {
+        checkbox_this.prop('checked',true);
+        //DONT' ITS JUST CHECK THE CHECKBOX TO SUBMIT FORM DATA    
+        checkbox_this.attr('value','0');
+    }
+})
+})
         function SentContractModalAnimation(reversed = false) {
             const modal = document.getElementById('contract-form-popup');
             const modal_body = document.getElementById('contract-form-popup-bg');

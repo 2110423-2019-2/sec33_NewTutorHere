@@ -310,36 +310,46 @@ router.get('/profile', function (req, res, next) {
 	});
 
 });
-router.post('/profile/edit_availability ', [], function (req, res) {
+router.post('/profile/edit_availability/:id', [], function (req, res) {
 
 	//if(req.cookies.auth == req.body.username)
 	console.log("IN AVAILABILITY EDIT");
+	var test = req.body.av;
+	var day = ["sunMor","monMor","tueMor","wedMor","thuMor","friMor","satMor",
+	"sunAf","monAf","tueAf","wedAf","thuAf","friAf",
+	"satAf","sunAfSc","monAfSc","tueAfSc","wedAfSc","thuAfSc","friAfSc","satAfSc","sunEv",
+	"monEv","tueEv","wedEv","thuEv","friEv","satEv"];
+
 	client.connect(async function (err) {
 		//checks for connection error
 		assert.equal(null, err);
-
 		//once connected, add a doc to collection 'UserData'
 		const db = client.db(dbName);
-
-		db.collection('UserData').update(
-			{
-				username: req.cookies.auth	//find the user you wanna change here
-			},
+		var username = {
+			"username": req.params.id
+		};
+		for(var i = 0;i<28;i++){
+		if(test[i]== 1){
+		db.collection('AvailabilityController').update(
+			username,
 			{
 				$set: {
-					'firstname': req.body.firstname,
-					'lastname': req.body.lastname,
-					'phone': req.body.phone,
-					'location':req.body.location,
-					'email': req.body.email,
-					'gender': req.body.gender,
-					'bio': req.body.bio
+					[day[i]] : "yes"
 				}
 			}
-		);
-		res.cookie('firstn', req.body.firstname);
-		const result = await db.collection('UserData').find({ username: req.cookies.auth }).limit(1).toArray();
-		console.log(result);
+		);	
+		}
+		else{
+			db.collection('AvailabilityController').update(
+				username,
+				{
+					$set: {
+						[day[i]] : "no"
+					}
+				}
+			);	
+		}
+	}
 		res.redirect('/home/profile');
 	});
 

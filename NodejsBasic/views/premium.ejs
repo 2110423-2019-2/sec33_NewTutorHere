@@ -53,7 +53,12 @@
                                 <p3>Cancel any time</p3>
                             </div>
                         </span>
+                        <% if (pf.is_premium == 'no') {%>
                         <button class="prem-button center">Get Premium</button>
+                        <% } %>
+                        <% else { %>
+                        <button class="prem-button center">Cancel Premium</button>
+                        <%}%>
                     </div>
                 </div>
             </div>

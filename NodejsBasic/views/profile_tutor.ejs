@@ -431,7 +431,7 @@
                     </span>
                     <%if (typeof comment!= 'undefined') { %>
                     <%for( each of comment) {%>
-                    <div id="<%= each.commentator %>" class="comment-box center">
+                    <div class="comment-box center <%= each.commentator %>">
                         <div class="pfphoto-box">
                             <img class="nav-img-user center" src="/img/user.png" style="height: 6em;" />
                             <div class="profile-rating">
@@ -441,13 +441,13 @@
                             </div>
                         </div>
 
-                        <div id="<%= each.commentator %>Comment" class="qual-item">
+                        <div class="qual-item <%= each.commentator %>Comment">
                             <span class="comment">
                                 <p><%=each.comment%></p>
                             </span>
                         </div>
 
-                        <button class="deleteComment-button" id="<%= each.commentator %>DeleteButton"><i class="fa fa-trash"
+                        <button class="deleteComment-button <%= each.commentator %>DeleteButton"><i class="fa fa-trash"
                                 onclick="deleteComment('<%= each.subject %>')"></i></button>
 
                     </div>
@@ -532,12 +532,14 @@
         }
 
         //is owner of this comment
-        if (document.getElementById(username) != null) {
+        if (document.getElementsByClassName(username) != null) {
             console.log("display owner comment bin");
             var comment = document.getElementById(username.concat("Comment"));
             var deleteButton = document.getElementById(username.concat("DeleteButton"));
-            comment.css("margin-right", "0.5vw")
-            deleteButton.css("display", "flex")
+            //comment.css("margin-right", "0.5vw")
+            //deleteButton.css("display", "flex")
+            $((".".concat(username,"Comment"))).css("margin-right", "0.5vw")
+            $((".".concat(username,"DeleteButton"))).css("display", "flex")
         }
 
         var bdate = document.getElementById("bdate-editpf");

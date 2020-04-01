@@ -129,4 +129,11 @@ router.post('/profile_admin/:username/edit_availability', [], function (req, res
     res.redirect('back');
 });
 
+
+router.post('/profile_admin/:commentid/delete_comment', [], function (req, res) {
+
+
+    res.redirect('back');
+});
+
 module.exports = router;

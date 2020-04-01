@@ -107,72 +107,6 @@
         </div>
     </div>
 
-    <!-- addCourse-form -->
-    <div class="big-bg popup" id="addCourse-form">
-        <div class="form-bg color-lightgreen center" id="addCourse-form-bg">
-            <button class="close-button be-right"><i class="fa fa-close" onclick="closeAddCourseButton()"></i></button>
-            <span class="form-name">
-                <p>Add New Course</p>
-            </span><br>
-            <div class="form-information-bg">
-                <form class="form" action=/home/profile/add_course method="POST" id="contract-form">
-
-                    <div class="form-group">
-                        <div class="form-input">
-                            <input type="text" id="addCourse-subject" name="subject" placeholder="Subject">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <select id="level-filter" name="level" style="width: 100%;">
-                            <option value="" disabled selected>Educational Level</option>
-                            <option value="0">Any Level</option>
-                            <option value="1">Pre-School</option>
-                            <option value="2">Elementary-School</option>
-                            <option value="3">Middle-School</option>
-                            <option value="4">High-School</option>
-                            <option value="5">Bachelor</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-input">
-                            <input type="text" id="addCourse-city" name="city" placeholder="City">
-                        </div>
-
-                    </div>
-                    <div class="half-box be-left">
-                        <label class="control-label">Rating</label>
-                        <br>
-                        <div class="form-group">
-                            <div class="rating">
-                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"
-                                    title="Great">5 stars</label>
-                                <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good">4
-                                    stars</label>
-                                <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Okay">3
-                                    stars</label>
-                                <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Bad">2
-                                    stars</label>
-                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"
-                                    title="Very Bad">1 star</label>
-                            </div>
-                        </div>
-                        </br>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-input">
-                            <input type="text" id="addCourse-price" name="price" placeholder="Price">
-                        </div>
-                    </div>
-
-                    <button class="submit-button sign-up-button center">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
 
     <!-- edit-availability-form -->
     <div class="big-bg popup" id="edit-avai-form-popup">
@@ -186,54 +120,52 @@
             <div class="form-information-bg">
                 <form class="form" action="<%= pf.username %>/edit_availability" method="POST"
                     id="edit-availability-form">
-
                     <div class="form-group">
-                        <div class="form-input"></div>
-                        <table>
-                            <tr>
-                                <th></th>
-                                <th>SUN</th>
-                                <th>MON</th>
-                                <th>TUE</th>
-                                <th>WED</th>
-                                <th>THU</th>
-                                <th>FRI</th>
-                                <th>SAT</th>
-                            </tr>
-                            <% var day = ["Morning","Afternoon","After school","Evening"]%>
-                            <% var tmp = false %>
-                            <% searchAvailability.forEach(element => { %>
-                            <% }) %>
-                            <% for(var i=0; i<4; i++) {%>
-                            <tr>
-                                <% for(var j=0; j<8; j++) {%>
-                                <%if (j == 0 ) { %>
-                                <th><%= day[i]%></th>
-                                <% tmp = true%>
-                                <% } %>
+                        <div class="form-input">
+                            <table>
+                                <tr>
+                                    <th></th>
+                                    <th>SUN</th>
+                                    <th>MON</th>
+                                    <th>TUE</th>
+                                    <th>WED</th>
+                                    <th>THU</th>
+                                    <th>FRI</th>
+                                    <th>SAT</th>
+                                </tr>
+                                <% var day = ["Morning","Afternoon","After school","Evening"]%>
+                                <% var tmp = false %>
+                                <% var avail  %>
                                 <% searchAvailability.forEach(element => { %>
-                                <%if ( element.class_day == j-1 && element.class_time == i) { %>
-                                <th><input type="checkbox" id="check-avai" name="av" checked></th>
-                                <% tmp = true %>
-                                <% } %>
+                                <%  avail = [element.sunMor,element.monMor,element.tueMor,element.wedMor,element.thuMor,element.friMor,element.satMor,element.sunAf,element.monAf,element.tueAf,element.wedAf,element.thuAf,element.friAf,element.satAf,element.sunAfSc,element.monAfSc,element.tueAfSc,element.wedAfSc,element.thuAfSc,element.friAfSc,element.satAfSc,element.sunEv,element.monEv,element.tueEv,element.wedEv,element.thuEv,element.friEv,element.satEv]%>
                                 <% }) %>
-                                <% if(!tmp){ %>
-                                <th><input type="checkbox" id="check-avai" name="av"></th>
-                                <% }%>
-                                <%tmp = false %>
+                                <% for(var i=0; i<4; i++) {%>
+                                <tr>
+                                    <th><%= day[i]%></th>
+                                    <% for(var j=0; j<7; j++) {%>
+                                    <% searchAvailability.forEach(element => { %>
+                                    <%if ( avail[i*7+j] == "yes") { %>
+                                    <th><input type="checkbox" id="check-avai" name="av" checked></th>
+                                    <% tmp = true %>
+                                    <% } %>
+                                    <% }) %>
+                                    <% if(!tmp){ %>
+
+                                    <th><input type="checkbox" id="check-avai" name="av"></th>
+                                    <% }%>
+                                    <%tmp = false %>
+                                    <% } %>
+                                </tr>
                                 <% } %>
-                            </tr>
-                            <% } %>
-                        </table>
+                            </table>
+                        </div>
                     </div>
+                    <br>
+                    <button class="submit-button sign-up-button center">Edit</button>
+                </form>
             </div>
-            <br>
-            <button class="submit-button sign-up-button center">Edit</button>
-            </form>
         </div>
     </div>
-    </div>
-
 
 
     <div class="big-bg">
@@ -290,8 +222,6 @@
                                 <td><%=result.city%></td>
                                 <td><%=result.rating%></td>
                                 <td><%=result.price%></td>
-                                <td><button class="deleteCourse-button" id='deleteCourseButton'><i class="fa fa-trash"
-                                            onclick="deleteCourse('<%= result.subject %>')"></i></button>
                                 </td>
                             </tr>
                         </form>
@@ -299,9 +229,6 @@
 
 
                     </table>
-
-                    <button class="addCourse-button be-right" id='addCourseButton' onclick="showAddCourse()">Add
-                        courses</button>
 
                 </div>
                 <div class="qual-box be-right">
@@ -320,18 +247,17 @@
                             <th>SAT</th>
                         </tr>
                         <% var day = ["Morning","Afternoon","After school","Evening"]%>
-                        <%var tmp = false %>
+                        <% var tmp = false %>
+                        <% var avail  %>
                         <% searchAvailability.forEach(element => { %>
+                        <%  avail = [element.sunMor,element.monMor,element.tueMor,element.wedMor,element.thuMor,element.friMor,element.satMor,element.sunAf,element.monAf,element.tueAf,element.wedAf,element.thuAf,element.friAf,element.satAf,element.sunAfSc,element.monAfSc,element.tueAfSc,element.wedAfSc,element.thuAfSc,element.friAfSc,element.satAfSc,element.sunEv,element.monEv,element.tueEv,element.wedEv,element.thuEv,element.friEv,element.satEv]%>
                         <% }) %>
                         <% for(var i=0; i<4; i++) {%>
                         <tr>
-                            <% for(var j=0; j<8; j++) {%>
-                            <%if (j == 0 ) { %>
                             <th><%= day[i]%></th>
-                            <% tmp = true%>
-                            <% } %>
+                            <% for(var j=0; j<7; j++) {%>
                             <% searchAvailability.forEach(element => { %>
-                            <%if ( element.class_day == j-1 && element.class_time == i) { %>
+                            <%if ( avail[i*7+j] == "yes") { %>
                             <th><img class="nav-img-user center" src="/img/notavailable.png" style="height: 1.5em;">
                             </th>
                             <% tmp = true %>
@@ -371,8 +297,8 @@
                             </span>
                         </div>
 
-                        <a class="deleteComment-button" id="deleteCommentButton" href="<%= each._id%>/delete_comment"><i
-                                class="fa fa-trash"></i></a>
+                        <button class="deleteComment-button" id="deleteCommentButton"><i class="fa fa-trash"
+                                onclick="deleteComment('<%= each.subject %>')"></i></button>
 
                     </div>
                     <% }} %>
@@ -505,6 +431,7 @@
                     checkbox_this.attr('value', '0');
                 }
             })
+            closeEditAvaiButton()
         })
 
         //Animation edit profile modal

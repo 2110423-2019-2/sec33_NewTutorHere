@@ -50,34 +50,27 @@ router.get('/profile_admin/:username', function (req, res, next) {
         assert.equal(null, err);
         const db = client.db(dbName);
         var query_username = {
-            "username": username
-        };
-        var query_tutor_username = {
-            "tutor_username": username
+			"username": username
+		};
+		var query_tutor_username = {
+			"tutor_username": username
 
-        };
-        var query_tutor_availability = {
-            "tutor_username": username,
-            "status": "accepted"
-        };
-        var query_student_availability = {
-            "student_username": username,
-            "status": "accepted"
-        };
-        var comment = {
-            "commentatee": username,
-        };
+		};
+		var query_availability = {
+			"username": username
+		};
+		var comment = {
+			"commentatee": username,
+		};
+	
         const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
-        var result_availability;
-        if (result_user[0]["position"] == "student") {
-            result_availability = await db.collection('ContractData').find(query_student_availability).toArray();
-        }
-        else {
-            result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
-        }
-        const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
 
-        const result_comment = await db.collection('CommentController').find(comment).toArray();
+		const result_availability = await db.collection('AvailabilityController').find(query_availability).toArray();
+		
+		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
+		
+		const result_comment = await db.collection('CommentController').find(comment).toArray();
+
         // The search added the results to the locals, access them in home.ejs and show the results there
         console.log(result_availability);
         res.render('profile_admin', {

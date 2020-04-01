@@ -54,8 +54,7 @@
   </div>
 
   <!-- add comment-form -->
-    <% accepted.forEach(element => { %>
-    <div class="big-bg popup" id="addComment-form-popup" >
+    <div class="big-bg addComment-form-popup" id="addComment-form-popup" >
         <div class="form-bg color-lightgreen center" id="addComment-form-popup-bg">
             <button class="close-button be-right"><i class="fa fa-close" onclick="closeAddCommentButton()"></i></button>
 
@@ -72,7 +71,7 @@
             <!-- TODO add comment to db -->
             <div class="form-information-bg">
                 <!-- <form class="form" action=/home/profile method="POST" id="addComment-form"> -->
-                <form class="form" id="addComment-form" action="/home/terminate_contract/<%= element._id %>" method="POST">
+                <form class="form" id="addCommentForm" action="" method="POST">
                     
                     <div class="rating">
                         <input type="radio" id="star-5" name="ratingcomment" value="5"><label for="star-5" title="Great">5 stars</label>
@@ -87,14 +86,14 @@
                         <div class="form-input">
                             <div class="textwrapper"><textarea id="comment" name="comment" cols="2" rows="6"
                                 placeholder=" Comment"></textarea></div>
-                        <button class="submit-button sign-up-button center" onclick="addComment()">Submit</button>
+                        <button class="submit-button sign-up-button center">Submit</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <% }) %>
+    
 
   <div class="big-bg">
     <!-- Content -->
@@ -111,7 +110,7 @@
         <br />
         <!-- <button class="addComment-button be-right" id='addComment' onclick="showAddComment()">Add comment</button> -->
         <!-- <a class="view2-button search-button be-right" href="terminate_contract/<%= element._id %>" >Terminate</a> -->
-        <button class="view2-button search-button be-right" id='addComment' onclick="showAddComment()">Terminate</button>
+        <button class="view2-button search-button be-right" id='addComment' onclick="showAddComment('/home/terminate_contract/<%= element._id %>')">Terminate</button>
         <a class="view2-button search-button be-right" href="view_contract/<%= element.student_username %>">View</a>
       </div>
       <% }) %>
@@ -173,21 +172,6 @@
       document.getElementById("message").innerHTML = r[tmp].message;
       // document.getElementById("id").innerHTML = r[tmp]._id;
       document.cookie = "_id= " + r[tmp]._id;
-    }
-    function acceptContractPopupButton() {
-      ViewContractModalAnimationReversed();
-    }
-    function rejectContractPopupButton() {
-      ViewContractModalAnimationReversed();
-    }
-
-    function closeAddCommentButton() {
-      AddCommentModalAnimationReversed();
-    }
-
-    function showAddComment(url) {
-      $("#addComment-form-popup").css("display", "flex");
-      AddCommentModalAnimation();
     }
 
     //Animation page
@@ -260,6 +244,16 @@
           $("#addComment-form-popup").css("display", "none");
         }, 500);
       }
+    }
+
+    function closeAddCommentButton() {
+      AddCommentModalAnimationReversed();
+    }
+
+    function showAddComment(actionURL) {
+      $("#addComment-form-popup").css("display", "flex");
+      document.getElementById("addCommentForm").action = actionURL;
+      AddCommentModalAnimation();
     }
 
   </script>

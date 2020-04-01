@@ -937,6 +937,7 @@ button:hover.editAva-button {
 }
 
 button.sendcontract-button {
+    display: block;
     width: 50%;
     background-color: #86916E;
     padding: 7px 0px 7px 0px;

@@ -13,6 +13,7 @@ const dbName = 'SEproject'
 // home page
 router.get('/', function (req, res, next) {
     var query
+    res.cookie('role', 'admin');
     if (Object.keys(req.query).length !== 0) {
         if (req.query.position == "") {
             query = {

@@ -131,6 +131,37 @@ router.post('/register', [], function (req, res) {
 			gender: req.body.gender,
 			is_premium : 'no'
 		});
+		db.collection('AvailabilityController').insertOne({
+			username:req.body.username,
+			sunMor 		: 'no',
+			sunAf   	: 'no',
+			sunAfSc 	: 'no',
+			sunEv 		: 'no',
+			monMor		: 'no',
+			monAf		: 'no',
+			monAfSc		: 'no',
+			monEv		: 'no',
+			tueMor		: 'no',
+			tueAf		: 'no',
+			tueAfSc		: 'no',
+			tueEv		: 'no',
+			wedMor		: 'no',
+			wedAf		: 'no',
+			wedAfSc		: 'no',
+			wedEv		: 'no',
+			thuMor		: 'no',
+			thuAf		: 'no',
+			thuAfSc		: 'no',
+			thuEv		: 'no',
+			friMor		: 'no',
+			friAf		: 'no',
+			friAfSc		: 'no',
+			friEv		: 'no',
+			satMor		: 'no',
+			satAf		: 'no',
+			satAfSc		: 'no',
+			satEv		: 'no'
+		});
 		res.cookie('auth', req.body.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 		res.cookie('firstn', req.body.firstname);
 		res.cookie('role', req.body.position);

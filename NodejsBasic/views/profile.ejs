@@ -360,13 +360,14 @@
                     <div class="pfdetail-box be-right">
                         <span class="name-contract">
                             <button class="editpf-button be-right" id="editbut" onclick="showEditProfileForm()">Edit Profile</button>
-                            <p id="profile-firstname"> <%= pf.firstname%> </p>
-                            <p id="profile-lastname"><%=pf.lastname %></p>
+                            <p id="profile-firstname"> <%= pf.firstname%></p>
+                            <p id="profile-lastname"><%=pf.lastname %>&nbsp;&nbsp;</p>
                             <% if (pf.is_premium == 'yes') {%>
                                 <img class="nav-img-user" src="/img/crown.png" style="height: 1.2em;" />
                             <% }%>    
                             
                             <br />
+                            <p>&nbsp;&nbsp;&nbsp;</p>
                             <img class="nav-img-user" src="/img/placeholder.png" style="height: 1.1em;" />
                             <a id='profile-location'><%= pf.location %></a>
                             <br />
@@ -390,6 +391,7 @@
                             <th>City</th>
                             <th>Rating</th>
                             <th>Price</th>
+                            <th></th>
                         </tr>
                     
                         <%if (typeof searchCourse!= 'undefined') { %>
@@ -485,6 +487,7 @@
                     <% }} %>
                 </div>
                 <button class="sendcontract-button" id='sentContractButton' onclick="showSentContract()">Send a contract</button>
+                <br><br>
             </div>
         </div>
     </div>
@@ -497,6 +500,7 @@
 
             var names = "firstn=";
             var tod;
+            var check_role = "";
             var ca = document.cookie.split(';');
             for (var i = 0; i < ca.length; i++) {
                 var c = ca[i];
@@ -509,7 +513,8 @@
             }
             
             // is viewer
-            if (tod != document.getElementById("profile-firstname").innerText) {
+            if (tod != document.getElementById("profile-firstname").innerText ||
+                 check_role != 'admin') {
 
                 $("#editbut").css("display", "none");
                 $("#addCourseButton").css("display", "none");

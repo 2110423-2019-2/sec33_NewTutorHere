@@ -259,8 +259,41 @@ router.get('/profile', function (req, res, next) {
 	});
 
 });
+router.post('/profile/edit_availability ', [], function (req, res) {
 
-//sendContract
+	//if(req.cookies.auth == req.body.username)
+	console.log("IN PROFILE EDIT");
+	client.connect(async function (err) {
+		//checks for connection error
+		assert.equal(null, err);
+
+		//once connected, add a doc to collection 'UserData'
+		const db = client.db(dbName);
+
+		db.collection('UserData').update(
+			{
+				username: req.cookies.auth	//find the user you wanna change here
+			},
+			{
+				$set: {
+					'firstname': req.body.firstname,
+					'lastname': req.body.lastname,
+					'phone': req.body.phone,
+					'location':req.body.location,
+					'email': req.body.email,
+					'gender': req.body.gender,
+					'bio': req.body.bio
+				}
+			}
+		);
+		res.cookie('firstn', req.body.firstname);
+		const result = await db.collection('UserData').find({ username: req.cookies.auth }).limit(1).toArray();
+		console.log(result);
+		res.redirect('/home/profile');
+	});
+
+});
+//sendContract /profile/edit_availability 
 router.post('/profile', [], function (req, res) {
 	var use = req.cookies.auth;
 	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }

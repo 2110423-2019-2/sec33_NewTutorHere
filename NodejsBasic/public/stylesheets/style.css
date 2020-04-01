@@ -1321,3 +1321,37 @@ div.search-user-box {
     background-color: rgba(0, 0, 0, 0.5);
 
 }
+a.view3-button {
+    width: 30%;
+    /*height: 32pt;*/
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    /*margin-top: 10px;
+    margin-bottom: 20px;*/
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    letter-spacing: 0.06em;
+    margin-right: 2%;
+    text-align: center;
+    text-decoration: none;
+}
+button.view3-button {
+    width: 30%;
+    /*height: 32pt;*/
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    /*margin-top: 10px;
+    margin-bottom: 20px;*/
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    letter-spacing: 0.06em;
+    margin-right: 2%;
+}
+
+button:hover.view3-button {
+    background-color: #879437;
+}

@@ -328,6 +328,7 @@ router.post('/profile/edit_availability/:id', [], function (req, res) {
 		var username = {
 			"username": req.params.id
 		};
+		console.log(test + " WtF is going on here");
 		for(var i = 0;i<28;i++){
 		if(test[i]== 1){
 		db.collection('AvailabilityController').update(

@@ -182,6 +182,20 @@ router.post('/delete_course', function (req, res, next) {
 		res.redirect('/home/profile');
 	})
 });
+router.post('/delete_comment', function (req, res, next) {
+	
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		var query = {
+			"_id" : ObjectID(req.cookies.sub_comment)
+		};
+		
+		await db.collection('CommentController').remove(query);
+		
+		res.redirect('/home/profile');
+	})
+});
 
 // schedule page
 router.get('/schedule', function (req, res, next) {

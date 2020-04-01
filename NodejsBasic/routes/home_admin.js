@@ -123,10 +123,47 @@ router.post('/profile_admin/:username/edit_profile', [], function (req, res) {
 
 
 router.post('/profile_admin/:username/edit_availability', [], function (req, res) {
+    console.log("eeeeeeeee")
+    var test = req.body.av;
+    var day = ["sunMor", "monMor", "tueMor", "wedMor", "thuMor", "friMor", "satMor",
+        "sunAf", "monAf", "tueAf", "wedAf", "thuAf", "friAf",
+        "satAf", "sunAfSc", "monAfSc", "tueAfSc", "wedAfSc", "thuAfSc", "friAfSc", "satAfSc", "sunEv",
+        "monEv", "tueEv", "wedEv", "thuEv", "friEv", "satEv"];
+    console.log(req.params.username)
+    console.log(test)
 
-    //edit availability using req.params.username here
+    client.connect(async function (err) {
+        assert.equal(null, err);
+        const db = client.db(dbName);
+        var username = {
+            "username": req.params.username
+        };
+        for (var i = 0; i < 28; i++) {
+            if (test[i] == 1) {
+                db.collection('AvailabilityController').update(
+                    username,
+                    {
+                        $set: {
+                            [day[i]]: "yes"
+                        }
+                    }
+                );
+            }
+            else {
+                db.collection('AvailabilityController').update(
+                    username,
+                    {
+                        $set: {
+                            [day[i]]: "no"
+                        }
+                    }
+                );
+            }
+        }
+        res.redirect('back');
+    });
 
-    res.redirect('back');
+
 });
 
 
@@ -134,14 +171,14 @@ var ObjectID = require('mongodb').ObjectID;
 
 router.get('/profile_admin/:id/delete_comment', [], function (req, res) {
     client.connect(async function (err) {
-		assert.equal(null, err);
-		const db = client.db(dbName);
-		console.log("deleting " + req.params.id);
-		var query = {
-			"_id": ObjectID(req.params.id)
-		};
-		await db.collection('CommentController').findOneAndDelete(query, {});
-	})
+        assert.equal(null, err);
+        const db = client.db(dbName);
+        console.log("deleting " + req.params.id);
+        var query = {
+            "_id": ObjectID(req.params.id)
+        };
+        await db.collection('CommentController').findOneAndDelete(query, {});
+    })
     res.redirect('back');
 });
 

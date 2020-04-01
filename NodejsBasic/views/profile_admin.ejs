@@ -487,8 +487,8 @@
                             </span>
                         </div>
 
-                        <button class="deleteComment-button" id="deleteCommentButton"><i class="fa fa-trash"
-                                onclick="deleteComment('<%= each.subject %>')"></i></button>
+                        <a class="deleteComment-button" id="deleteCommentButton" href="<%= each._id%>/delete_comment"><i class="fa fa-trash"
+                                onclick="deleteComment('<%= each.subject %>')"></i></a>
 
                     </div>
                     <% }} %>

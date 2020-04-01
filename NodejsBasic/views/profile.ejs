@@ -461,7 +461,6 @@
 
             var names = "firstn=";
             var tod;
-            var check_role = <%= role %>;
             var ca = document.cookie.split(';');
             for (var i = 0; i < ca.length; i++) {
                 var c = ca[i];
@@ -474,7 +473,7 @@
             }
             
             // is viewer
-            if (tod != document.getElementById("profile-firstname").innerText && check_role != 'admin') {
+            if (tod != document.getElementById("profile-firstname").innerText) {
 
                 $("#editbut").css("display", "none");
                 $("#addCourseButton").css("display", "none");

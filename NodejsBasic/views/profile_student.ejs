@@ -347,42 +347,8 @@
                         </span>
                     </div>
                 </div>
-                <div class="ratesum-box">
-                    <span class="name-contract">
-                        <c>Courses</c>
-                    </span>
-                    <table id='courses-table'>
-                        <tr>
-                            <th></th>
-                            <th>City</th>
-                            <th>Rating</th>
-                            <th>Price</th>
-                            <th></th>
-                        </tr>
 
-                        <%if (typeof searchCourse!= 'undefined') { %>
-                        <%for(result of searchCourse) {%>
-                        <form action="/home/delete_course" method="POST">
-                            <tr>
-                                <td><%=result.subject%></td>
-                                <td><%=result.city%></td>
-                                <td><%=result.rating%></td>
-                                <td><%=result.price%></td>
-                                <td><button class="deleteCourse-button" id='deleteCourseButton'><i class="fa fa-trash"
-                                            onclick="deleteCourse('<%= result.subject %>')"></i></button>
-                                </td>
-                            </tr>
-                        </form>
-                        <% }} %>
-
-
-                    </table>
-
-                    <button class="addCourse-button be-right" id='addCourseButton' onclick="showAddCourse()">Add
-                        courses</button>
-
-                </div>
-                <div class="qual-box be-right">
+                <div class="studentqual-box center">
                     <span class="name-contract">
                         <c>Availability</c>
                     </span>
@@ -473,7 +439,6 @@
     <script>
         var names = "firstn=";
         var tod;
-        var check_role = < %= role % > ;
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
             var c = ca[i];
@@ -486,7 +451,7 @@
         }
 
         // is viewer
-        if (tod != document.getElementById("profile-firstname").innerText && check_role != 'admin') {
+        if (tod != document.getElementById("profile-firstname").innerText) {
 
             $("#editbut").css("display", "none");
             $("#addCourseButton").css("display", "none");

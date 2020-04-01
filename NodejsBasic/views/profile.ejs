@@ -481,7 +481,7 @@
                                 </div>
 
                                 <button class="deleteComment-button" id="deleteCommentButton"><i class="fa fa-trash"
-                                    onclick="deleteComment('<%= result.subject %>')"></i></button>
+                                    onclick="deleteComment('<%= each.subject %>')"></i></button>
 
                             </div>
                     <% }} %>
@@ -496,11 +496,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
         
+        
+
         <script>
 
             var names = "firstn=";
             var tod;
-            var check_role = "";
+            var check_role = <%= role %>;
             var ca = document.cookie.split(';');
             for (var i = 0; i < ca.length; i++) {
                 var c = ca[i];
@@ -513,8 +515,7 @@
             }
             
             // is viewer
-            if (tod != document.getElementById("profile-firstname").innerText ||
-                 check_role != 'admin') {
+            if (tod != document.getElementById("profile-firstname").innerText && check_role != 'admin') {
 
                 $("#editbut").css("display", "none");
                 $("#addCourseButton").css("display", "none");

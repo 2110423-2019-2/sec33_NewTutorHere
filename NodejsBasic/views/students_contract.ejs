@@ -56,9 +56,10 @@
   </div>
 
   <!-- add comment-form -->
-  <div class="big-bg popup" id="addComment-form-popup">
-    <div class="form-bg color-lightgreen center" id="addComment-form-popup-bg">
-      <button class="close-button be-right"><i class="fa fa-close" onclick="closeAddCommentButton()"></i></button>
+  <% accepted.forEach(element => { %>
+  <div class="big-bg addComment-form-popup" id="<%= element._id %>">
+    <div class="form-bg color-lightgreen center" id="<%= element._id %>-bg">
+      <button class="close-button be-right"><i class="fa fa-close" onclick="closeAddCommentButton<%= element._id %>()"></i></button>
 
       <span class="form-name">
         <p>Thank you!</p>
@@ -93,14 +94,14 @@
             <div class="form-input">
               <div class="textwrapper"><textarea id="comment" name="comment" cols="2" rows="6"
                   placeholder=" Comment"></textarea></div>
-              <button class="submit-button sign-up-button center" onclick="addComment()">Submit</button>
+              <button class="submit-button sign-up-button center">Submit</button>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-
+  <% }) %>
 
   <div class="big-bg">
     <!-- Content -->
@@ -117,7 +118,7 @@
         </span>
         <br />
         <!-- <a class="view2-button search-button be-right" href="terminate_contract/<%= element._id %>" >Terminate</a> -->
-        <button class="view2-button search-button be-right" id='addComment' onclick="showAddComment()">Terminate</button>
+        <button class="view2-button search-button be-right" id='addComment' onclick="showAddComment<%= element._id %>()">Terminate</button>
         <a class="view2-button search-button be-right" href="view_contract/<%= element.tutor_username%>">View</a>
       </div>
       <% }) %>
@@ -181,17 +182,6 @@
       $("#contract-popup").css("display", "none");
     }
 
-    function closeAddCommentButton() {
-      AddCommentModalAnimationReversed();
-    }
-
-    function showAddComment(url) {
-      $("#addComment-form-popup").css("display", "flex");
-      AddCommentModalAnimation();
-    }
-
-
-
     //Animation page
     function Animation(reverse = false) {
       const tl = new TimelineLite({
@@ -212,13 +202,14 @@
 
 
     //Animation add comment modal
-    function AddCommentModalAnimationReversed() {
-      AddCommentModalAnimation(true);
+    <% accepted.forEach(element => { %>
+    function AddCommentModalAnimationReversed<%= element._id %>() {
+      AddCommentModalAnimation<%= element._id %>(true);
     }
 
-    function AddCommentModalAnimation(reversed = false) {
-      const modal = document.getElementById('addComment-form-popup');
-      const modal_body = document.getElementById('addComment-form-popup-bg');
+    function AddCommentModalAnimation<%= element._id %>(reversed = false) {
+      const modal = document.getElementById('<%= element._id %>');
+      const modal_body = document.getElementById('<%= element._id %>-bg');
       const tl2 = new TimelineLite({ easeIn: Power3.easeOut });
       tl2.fromTo(modal, 0.20, { opacity: 0 }, { opacity: 1 }, 0)
       tl2.fromTo(modal_body, 0.20, {
@@ -231,10 +222,20 @@
       if (reversed) {
         tl2.reverse(0.3);
         setTimeout(function () {
-          $("#addComment-form-popup").css("display", "none");
+          $("#<%= element._id %>").css("display", "none");
         }, 500);
       }
     }
+
+    function closeAddCommentButton<%= element._id %>() {
+      AddCommentModalAnimationReversed<%= element._id %>();
+    }
+
+    function showAddComment<%= element._id %>() {
+      $("#<%= element._id %>").css("display", "flex");
+      AddCommentModalAnimation<%= element._id %>();
+    }
+    <% }) %>
     
   </script>
 

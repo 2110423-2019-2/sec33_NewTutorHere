@@ -7,12 +7,6 @@ const { check, validationResult } = require('express-validator');
 
 const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-	//const collection = client.db("SEproject").collection("usernamePassword");
-	// perform actions on the collection object
-	console.log("Successfully connected to online database");
-	client.close();
-});
 
 const dbName = 'SEproject'
 

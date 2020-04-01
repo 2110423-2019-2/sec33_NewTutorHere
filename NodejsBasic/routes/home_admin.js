@@ -80,9 +80,43 @@ router.get('/profile_admin/:username', function (req, res, next){
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(result_availability);
-		res.render('profile', { pf: result_user[0], searchCourse: result_course,
+		res.render('profile_admin', { pf: result_user[0], searchCourse: result_course,
 			 searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
 	});
+});
+
+
+router.post('/profile_admin/:username/edit_profile', [], function (req, res) {
+
+	client.connect(async function (err) {
+		//checks for connection error
+		assert.equal(null, err);
+
+		//once connected, add a doc to collection 'UserData'
+		const db = client.db(dbName);
+
+		db.collection('UserData').update(
+			{
+				username: req.params.username	//find the user you wanna change here
+			},
+			{
+				$set: {
+					'firstname': req.body.firstname,
+					'lastname': req.body.lastname,
+					'phone': req.body.phone,
+					'location':req.body.location,
+					'email': req.body.email,
+					'gender': req.body.gender,
+					'bio': req.body.bio
+				}
+			}
+		);
+		res.cookie('firstn', req.body.firstname);
+		const result = await db.collection('UserData').find({ username: req.cookies.auth }).limit(1).toArray();
+		console.log(result);
+		res.redirect('back');
+	});
+
 });
 
 module.exports = router;

@@ -54,10 +54,9 @@
   </div>
 
   <!-- add comment-form -->
-    <% accepted.forEach(element => { %>
-    <div class="big-bg addComment-form-popup" id="<%= element._id %>" >
-        <div class="form-bg color-lightgreen center" id="<%= element._id %>-bg">
-            <button class="close-button be-right"><i class="fa fa-close" onclick="closeAddCommentButton<%= element._id %>()"></i></button>
+    <div class="big-bg addComment-form-popup" id="addComment-form-popup" >
+        <div class="form-bg color-lightgreen center" id="addComment-form-popup-bg">
+            <button class="close-button be-right"><i class="fa fa-close" onclick="closeAddCommentButton()"></i></button>
 
             <span class="form-name">
                 <p>Thank you!</p>
@@ -72,7 +71,7 @@
             <!-- TODO add comment to db -->
             <div class="form-information-bg">
                 <!-- <form class="form" action=/home/profile method="POST" id="addComment-form"> -->
-                <form class="form" action="/home/terminate_contract/<%= element._id %>" method="POST">
+                <form class="form" id="addCommentForm" action="" method="POST">
                     
                     <div class="rating">
                         <input type="radio" id="star-5" name="ratingcomment" value="5"><label for="star-5" title="Great">5 stars</label>
@@ -94,7 +93,7 @@
             </div>
         </div>
     </div>
-    <% }) %>
+    
 
   <div class="big-bg">
     <!-- Content -->
@@ -111,7 +110,7 @@
         <br />
         <!-- <button class="addComment-button be-right" id='addComment' onclick="showAddComment()">Add comment</button> -->
         <!-- <a class="view2-button search-button be-right" href="terminate_contract/<%= element._id %>" >Terminate</a> -->
-        <button class="view2-button search-button be-right" id='addComment' onclick="showAddComment<%= element._id %>()">Terminate</button>
+        <button class="view2-button search-button be-right" id='addComment' onclick="showAddComment('/home/terminate_contract/<%= element._id %>')">Terminate</button>
         <a class="view2-button search-button be-right" href="view_contract/<%= element.student_username %>">View</a>
       </div>
       <% }) %>
@@ -229,14 +228,13 @@
     }
 
     //Animation add comment modal
-    <% accepted.forEach(element => { %>
-    function AddCommentModalAnimationReversed<%= element._id %>() {
-      AddCommentModalAnimation<%= element._id %>(true);
+    function AddCommentModalAnimationReversed() {
+      AddCommentModalAnimation(true);
     }
 
-    function AddCommentModalAnimation<%= element._id %>(reversed = false) {
-      const modal = document.getElementById('<%= element._id %>');
-      const modal_body = document.getElementById('<%= element._id %>-bg');
+    function AddCommentModalAnimation(reversed = false) {
+      const modal = document.getElementById('addComment-form-popup');
+      const modal_body = document.getElementById('addComment-form-popup-bg');
       const tl2 = new TimelineLite({ easeIn: Power3.easeOut });
       tl2.fromTo(modal, 0.20, { opacity: 0 }, { opacity: 1 }, 0)
       tl2.fromTo(modal_body, 0.20, {
@@ -249,20 +247,20 @@
       if (reversed) {
         tl2.reverse(0.3);
         setTimeout(function () {
-          $("#<%= element._id %>").css("display", "none");
+          $("#addComment-form-popup").css("display", "none");
         }, 500);
       }
     }
 
-    function closeAddCommentButton<%= element._id %>() {
-      AddCommentModalAnimationReversed<%= element._id %>();
+    function closeAddCommentButton() {
+      AddCommentModalAnimationReversed();
     }
 
-    function showAddComment<%= element._id %>() {
-      $("#<%= element._id %>").css("display", "flex");
-      AddCommentModalAnimation<%= element._id %>();
+    function showAddComment(actionURL) {
+      $("#addComment-form-popup").css("display", "flex");
+      document.getElementById("addCommentForm").action = actionURL;
+      AddCommentModalAnimation();
     }
-    <% }) %>
 
   </script>
 

@@ -7,6 +7,12 @@ const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+	//const collection = client.db("SEproject").collection("usernamePassword");
+	// perform actions on the collection object
+	console.log("Successfully connected to online database");
+	client.close();
+});
 
 const dbName = 'SEproject'
 
@@ -238,25 +244,17 @@ router.get('/profile', function (req, res, next) {
 			"tutor_username": use
 
 		};
-		var query_tutor_availability = {
-			"tutor_username": use,
-			"status": "accepted"
-		};
-		var query_student_availability = {
-			"student_username": use,
-			"status": "accepted"
+		var query_availability = {
+			"username": use
 		};
 		var comment = {
 			"commentatee": use,
 		};
+	
 		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
-		var result_availability ;
-		if(result_user[0]["position"] =="student"){
-		    result_availability = await db.collection('ContractData').find(query_student_availability).toArray();
-		}
-		else{
-			result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
-		}
+
+		const result_availability = await db.collection('AvailabilityController').find(query_availability).toArray();
+		
 		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
 		
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
@@ -270,7 +268,7 @@ router.get('/profile', function (req, res, next) {
 router.post('/profile/edit_availability ', [], function (req, res) {
 
 	//if(req.cookies.auth == req.body.username)
-	console.log("IN PROFILE EDIT");
+	console.log("IN AVAILABILITY EDIT");
 	client.connect(async function (err) {
 		//checks for connection error
 		assert.equal(null, err);

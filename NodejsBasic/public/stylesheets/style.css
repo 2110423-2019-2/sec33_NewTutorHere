@@ -270,6 +270,13 @@ div.form-bg {
     text-align: left;
 }
 
+.form-name-thankyou p{
+    font-size: 2.5em;
+    color: #4C5F21;
+    padding-bottom: 0.3em;
+    text-align: center;
+}
+
 .form-sub p {
     font-size: 1em;
     color: #4C5F21;
@@ -521,6 +528,12 @@ button.search-button {
 	-moz-filter: saturate(1);
     -o-filter:saturate(1);
 	
+}
+
+div.rating-box {
+    width: 100%;
+    text-align: center;
+    /* background-color: black; */
 }
 
 /*Contract*/
@@ -990,6 +1003,15 @@ button:hover.sendcontract-button {
     background-color: white;
     margin-bottom: 1em;
 }
+
+.admin-box {
+    /*padding: 0px 0px 10px 0px;*/
+    width: 85%;
+    /* height: 8em; */
+    /* background-color: white; */
+    margin-bottom: 1em;
+}
+
 div.tutors-box {
     width: 70%;
     height: auto;
@@ -1208,6 +1230,11 @@ button:hover.view2-button {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+.form-information-bg b {
+    letter-spacing: 0.03em;
+    color: #4C5F21; 
+}
+
 /* premium */
 div.premium-box {
     width: 70%;
@@ -1216,7 +1243,7 @@ div.premium-box {
     padding: 30px 5% 0px 5%;
 }
 div.blockpremi {
-    width: 50%;
+    width: 22em;
     height: 30em;
     border: none;
     border-radius: 25px;
@@ -1254,7 +1281,7 @@ div.blockpremi .premi-detail{
     width: 70%;
     height: 8em;
     border: none;
-    margin-left: 24%;
+    margin-left: 18%;
 }
 button.prem-button {
     width: 50%;
@@ -1293,4 +1320,38 @@ div.search-user-box {
     padding-bottom: 1em;
     background-color: rgba(0, 0, 0, 0.5);
 
+}
+a.view3-button {
+    width: 20%;
+    /*height: 32pt;*/
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    /*margin-top: 10px;
+    margin-bottom: 20px;*/
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    letter-spacing: 0.06em;
+    margin-right: 2%;
+    text-align: center;
+    text-decoration: none;
+}
+button.view3-button {
+    width: 20%;
+    /*height: 32pt;*/
+    background-color: #86916E;
+    padding: 5px 0px 5px 0px;
+    /*margin-top: 10px;
+    margin-bottom: 20px;*/
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8em;
+    letter-spacing: 0.06em;
+    margin-right: 2%;
+}
+
+button:hover.view3-button {
+    background-color: #879437;
 }

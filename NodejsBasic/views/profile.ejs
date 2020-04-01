@@ -272,7 +272,7 @@
                                     <th>FRI</th>
                                     <th>SAT</th>
                                 </tr>
-                            <% var day = ["Morning","Afternoon","After school","Evening"]%>
+                            <!-- <% var day = ["Morning","Afternoon","After school","Evening"]%>
                             <% var tmp = false %>
                             <% searchAvailability.forEach(element => { %>
                             <% }) %>
@@ -291,6 +291,29 @@
                                     <% }) %> 
                                     <% if(!tmp){ %>
                                         <th><input type="checkbox" id="check-avai" name="check-avai"></th>
+                                    <% }%>
+                                    <%tmp = false %>
+                                <% } %>
+                                </tr>
+                            <% } %> -->
+                            <% var day = ["Morning","Afternoon","After school","Evening"]%>
+                            <% var tmp = false %>
+                            <% var avail  %>
+                            <% searchAvailability.forEach(element => { %>
+                            <%  avail = [element.sunMor,element.monMor,element.tueMor,element.wedMor,element.thuMor,element.friMor,element.satMor,element.sunAf,element.monAf,element.tueAf,element.wedAf,element.thuAf,element.friAf,element.satAf,element.sunAfSc,element.monAfSc,element.tueAfSc,element.wedAfSc,element.thuAfSc,element.friAfSc,element.satAfSc,element.sunEv,element.monEv,element.tueEv,element.wedEv,element.thuEv,element.friEv,element.satEv]%>
+                            <% }) %>
+                            <% for(var i=0; i<4; i++) {%>
+                                <tr>
+                                    <th><%= day[i]%></th> 
+                                <% for(var j=0; j<7; j++) {%>
+                                <% searchAvailability.forEach(element => { %>
+                                    <%if ( avail[i*7+j] == "yes") { %>
+                                        <th><img class="nav-img-user center" src="../img/notavailable.png" style="height: 1.5em;" align="left"></th>
+                                        <% tmp = true %>
+                                         <% } %>
+                                    <% }) %> 
+                                    <% if(!tmp){ %>
+                                        <th><img class="nav-img-user center" src="/img/available.png" style="height: 1.5em;"></th>
                                     <% }%>
                                     <%tmp = false %>
                                 <% } %>
@@ -389,7 +412,8 @@
                             <th>FRI</th>
                             <th>SAT</th>
                         </tr>
-                    <% var day = ["Morning","Afternoon","After school","Evening"]%>
+
+                    <!-- <% var day = ["Morning","Afternoon","After school","Evening"]%>
                     <%var tmp = false %>
                     <% searchAvailability.forEach(element => { %>
                     <% }) %>
@@ -402,6 +426,29 @@
                                 <% } %>
                         <% searchAvailability.forEach(element => { %>
                             <%if ( element.class_day == j-1 && element.class_time == i) { %>
+                                <th><img class="nav-img-user center" src="/img/notavailable.png" style="height: 1.5em;"></th> 
+                                <% tmp = true %>
+                                 <% } %>
+                            <% }) %> 
+                            <% if(!tmp){ %>
+                                <th><img class="nav-img-user center" src="/img/available.png" style="height: 1.5em;"></th>
+                            <% }%>
+                            <%tmp = false %>
+                        <% } %>
+                        </tr>
+                    <% } %> -->
+                    <% var day = ["Morning","Afternoon","After school","Evening"]%>
+                    <% var tmp = false %>
+                    <% var avail  %>
+                    <% searchAvailability.forEach(element => { %>
+                    <%  avail = [element.sunMor,element.monMor,element.tueMor,element.wedMor,element.thuMor,element.friMor,element.satMor,element.sunAf,element.monAf,element.tueAf,element.wedAf,element.thuAf,element.friAf,element.satAf,element.sunAfSc,element.monAfSc,element.tueAfSc,element.wedAfSc,element.thuAfSc,element.friAfSc,element.satAfSc,element.sunEv,element.monEv,element.tueEv,element.wedEv,element.thuEv,element.friEv,element.satEv]%>
+                    <% }) %>
+                    <% for(var i=0; i<4; i++) {%>
+                        <tr>
+                            <th><%= day[i]%></th> 
+                        <% for(var j=0; j<7; j++) {%>
+                        <% searchAvailability.forEach(element => { %>
+                            <%if ( avail[i*7+j] == "yes") { %>
                                 <th><img class="nav-img-user center" src="/img/notavailable.png" style="height: 1.5em;"></th> 
                                 <% tmp = true %>
                                  <% } %>

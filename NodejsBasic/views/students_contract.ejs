@@ -33,8 +33,8 @@
 <script>var student_username;</script>
 
   <!-- contract popup -->
-  <div class="big-bg popup" id="contract-popup" >
-    <div class="form-bg color-lightgreen center" id="contract-popup-bg">
+  <div class="big-bg popup" id="viewContract-popup" >
+    <div class="form-bg color-lightgreen center" id="viewContract-popup-bg">
       <button class="close-button be-right"><i class="fa fa-close" onclick="closeContractPopupButton()"></i></button>
       <span class="form-name">
         <p>Contract</p>
@@ -56,7 +56,7 @@
   </div>
 
   <!-- add comment-form -->
-  <div class="big-bg popup" id="addComment-form-popup">
+  <div class="big-bg addComment-form-popup" id="addComment-form-popup">
     <div class="form-bg color-lightgreen center" id="addComment-form-popup-bg">
       <button class="close-button be-right"><i class="fa fa-close" onclick="closeAddCommentButton()"></i></button>
 
@@ -73,19 +73,14 @@
       <!-- TODO add comment to db -->
       <div class="form-information-bg">
         <!-- <form class="form" action=/home/profile method="POST" id="addComment-form"> -->
-        <form class="form" id="addComment-form" action=/home/profile/add_comment method="POST">
+        <form class="form" id="addCommentForm" action="" method="POST">
 
           <div class="rating">
-            <input type="radio" id="star-5" name="ratingcomment" value="5"><label for="star-5" title="Great">5
-              stars</label>
-            <input type="radio" id="star-4" name="ratingcomment" value="4"><label for="star-4" title="Good">4
-              stars</label>
-            <input type="radio" id="star-3" name="ratingcomment" value="3"><label for="star-3" title="Okay">3
-              stars</label>
-            <input type="radio" id="star-2" name="ratingcomment" value="2"><label for="star-2" title="Bad">2
-              stars</label>
-            <input type="radio" id="star-1" name="ratingcomment" value="1"><label for="star-1" title="Very Bad">1
-              star</label>
+            <input type="radio" id="star-5" name="ratingcomment" value="5"><label for="star-5" title="Great">5 stars</label>
+            <input type="radio" id="star-4" name="ratingcomment" value="4"><label for="star-4" title="Good">4 stars</label>
+            <input type="radio" id="star-3" name="ratingcomment" value="3"><label for="star-3" title="Okay">3 stars</label>
+            <input type="radio" id="star-2" name="ratingcomment" value="2"><label for="star-2" title="Bad">2 stars</label>
+            <input type="radio" id="star-1" name="ratingcomment" value="1"><label for="star-1" title="Very Bad">1 star</label>
           </div>
           <br><br>
 
@@ -93,14 +88,13 @@
             <div class="form-input">
               <div class="textwrapper"><textarea id="comment" name="comment" cols="2" rows="6"
                   placeholder=" Comment"></textarea></div>
-              <button class="submit-button sign-up-button center" onclick="addComment()">Submit</button>
+              <button class="submit-button sign-up-button center">Submit</button>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-
 
   <div class="big-bg">
     <!-- Content -->
@@ -117,7 +111,7 @@
         </span>
         <br />
         <!-- <a class="view2-button search-button be-right" href="terminate_contract/<%= element._id %>" >Terminate</a> -->
-        <button class="view2-button search-button be-right" id='addComment' onclick="showAddComment()">Terminate</button>
+        <button class="view2-button search-button be-right" id='addComment' onclick="showAddComment('/home/terminate_contract/<%= element._id %>')">Terminate</button>
         <a class="view2-button search-button be-right" href="view_contract/<%= element.tutor_username%>">View</a>
       </div>
       <% }) %>
@@ -161,11 +155,13 @@
 
     // generateContract();
     function closeContractPopupButton() {
-      $("#contract-popup").css("display", "none");
+      ViewContractModalAnimationReversed();
     
     }
     function showContractPopup(tmp) {
-      $("#contract-popup").css("display", "flex");
+      $("#viewContract-popup").css("display", "flex");
+      ViewContractModalAnimation();
+
       document.getElementById("subject").innerHTML = r[tmp].course_name;
       document.getElementById("eduLevel").innerHTML = r[tmp].edu_level;
       document.getElementById("classDay").innerHTML = r[tmp].class_day;
@@ -174,23 +170,6 @@
       // document.getElementById("id").innerHTML = r[tmp]._id;
       document.cookie = "_id= " + r[tmp]._id;
     }
-    function acceptContractPopupButton() {
-      $("#contract-popup").css("display", "none");
-    }
-    function rejectContractPopupButton() {
-      $("#contract-popup").css("display", "none");
-    }
-
-    function closeAddCommentButton() {
-      AddCommentModalAnimationReversed();
-    }
-
-    function showAddComment(url) {
-      $("#addComment-form-popup").css("display", "flex");
-      AddCommentModalAnimation();
-    }
-
-
 
     //Animation page
     function Animation(reverse = false) {
@@ -209,6 +188,35 @@
       })
     }
     Animation();
+
+    //Animation view contract modal
+    function ViewContractModalAnimationReversed() {
+      ViewContractModalAnimation(true);
+    }
+
+    function ViewContractModalAnimation(reversed = false) {
+      const modal = document.getElementById('viewContract-popup');
+      const modal_body = document.getElementById('viewContract-popup-bg');
+      const tl2 = new TimelineLite({ easeIn: Power3.easeOut });
+      tl2.fromTo(modal, 0.20, { 
+        opacity: 0 
+      }, { 
+        opacity: 1 
+      }, 0)
+      tl2.fromTo(modal_body, 0.20, {
+        scale: 0,
+        opacity: 0
+      }, {
+        scale: 1,
+        opacity: 1
+      }, 0);
+      if (reversed) {
+        tl2.reverse(0.3);
+        setTimeout(function () {
+          $("#viewContract-popup").css("display", "none");
+        }, 500);
+      }
+    }
 
 
     //Animation add comment modal
@@ -235,6 +243,17 @@
         }, 500);
       }
     }
+
+    function closeAddCommentButton() {
+      AddCommentModalAnimationReversed();
+    }
+
+    function showAddComment(actionURL) {
+      $("#addComment-form-popup").css("display", "flex");
+      document.getElementById("addCommentForm").action = actionURL;
+      AddCommentModalAnimation();
+    }
+  
     
   </script>
 

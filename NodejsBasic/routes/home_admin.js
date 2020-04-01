@@ -43,46 +43,106 @@ router.get('/', function (req, res, next) {
     }
 });
 
-router.get('/profile_admin/:username', function (req, res, next){
+router.get('/profile_admin/:username', function (req, res, next) {
     // res.send(req.params.username + "'s profile_admin")
     const username = req.params.username;
     client.connect(async function (err) {
+        assert.equal(null, err);
+        const db = client.db(dbName);
+        var query_username = {
+            "username": username
+        };
+        var query_tutor_username = {
+            "tutor_username": username
+
+        };
+        var query_tutor_availability = {
+            "tutor_username": username,
+            "status": "accepted"
+        };
+        var query_student_availability = {
+            "student_username": username,
+            "status": "accepted"
+        };
+        var comment = {
+            "commentatee": username,
+        };
+        const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
+        var result_availability;
+        if (result_user[0]["position"] == "student") {
+            result_availability = await db.collection('ContractData').find(query_student_availability).toArray();
+        }
+        else {
+            result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
+        }
+        const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
+
+        const result_comment = await db.collection('CommentController').find(comment).toArray();
+        // The search added the results to the locals, access them in home.ejs and show the results there
+        console.log(result_availability);
+        res.render('profile_admin', {
+            pf: result_user[0], searchCourse: result_course,
+            searchAvailability: result_availability, comment: result_comment, role: req.cookies.role
+        });
+    });
+});
+
+
+router.post('/profile_admin/:username/edit_profile', [], function (req, res) {
+
+    client.connect(async function (err) {
+        //checks for connection error
+        assert.equal(null, err);
+
+        //once connected, add a doc to collection 'UserData'
+        const db = client.db(dbName);
+
+        db.collection('UserData').update(
+            {
+                username: req.params.username
+            },
+            {
+                $set: {
+                    'firstname': req.body.firstname,
+                    'lastname': req.body.lastname,
+                    'phone': req.body.phone,
+                    'location': req.body.location,
+                    'email': req.body.email,
+                    'gender': req.body.gender,
+                    'bio': req.body.bio
+                }
+            }
+        );
+        res.cookie('firstn', req.body.firstname);
+        const result = await db.collection('UserData').find({ username: req.cookies.auth }).limit(1).toArray();
+        console.log(result);
+        res.redirect('back');
+    });
+
+});
+
+
+router.post('/profile_admin/:username/edit_availability', [], function (req, res) {
+
+    //edit availability using req.params.username here
+
+    res.redirect('back');
+});
+
+
+var ObjectID = require('mongodb').ObjectID;
+
+router.get('/profile_admin/:id/delete_comment', [], function (req, res) {
+    client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
-		var query_username = {
-			"username": username
+		console.log("deleting " + req.params.id);
+		var query = {
+			"_id": ObjectID(req.params.id)
 		};
-		var query_tutor_username = {
-			"tutor_username": username
-
-		};
-		var query_tutor_availability = {
-			"tutor_username": username,
-			"status": "accepted"
-		};
-		var query_student_availability = {
-			"student_username": username,
-			"status": "accepted"
-		};
-		var comment = {
-			"commentatee": username,
-		};
-		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
-		var result_availability ;
-		if(result_user[0]["position"] =="student"){
-		    result_availability = await db.collection('ContractData').find(query_student_availability).toArray();
-		}
-		else{
-			result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
-		}
-		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
-		
-		const result_comment = await db.collection('CommentController').find(comment).toArray();
-		// The search added the results to the locals, access them in home.ejs and show the results there
-		console.log(result_availability);
-		res.render('profile', { pf: result_user[0], searchCourse: result_course,
-			 searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
-	});
+		await db.collection('CommentController').findOneAndDelete(query, {});
+	})
+    res.redirect('back');
 });
 
 module.exports = router;

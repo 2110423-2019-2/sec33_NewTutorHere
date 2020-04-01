@@ -36,7 +36,7 @@
   <div class="big-bg popup" id="viewContract-popup" >
     <div class="form-bg color-lightgreen center" id="viewContract-popup-bg">
       <button class="close-button be-right"><i class="fa fa-close" onclick="closeContractPopupButton()"></i></button>
-      <span class="form-name">
+      <span class="form-name-thankyou">
         <p>Contract</p>
       </span><br>
       <div class="form-information-bg">
@@ -59,35 +59,36 @@
   <div class="big-bg addComment-form-popup" id="addComment-form-popup">
     <div class="form-bg color-lightgreen center" id="addComment-form-popup-bg">
       <button class="close-button be-right"><i class="fa fa-close" onclick="closeAddCommentButton()"></i></button>
-
+      <br>
       <span class="form-name">
         <p>Thank you!</p>
       </span><br>
 
       <span class="form-sub">
-        <p>We hope you have enjoyed our course.</p>
-        <p>For comments, compliments or suggestions,</p>
-        <p>please write to us below.</p>
-      </span><br>
+        <p align="center">We hope you have enjoyed our course.</p>
+        <p align="center">For comments, compliments or suggestions,</p>
+        <p align="center">please write to us below.</p>
+      </span><br><br>
 
       <!-- TODO add comment to db -->
       <div class="form-information-bg">
         <!-- <form class="form" action=/home/profile method="POST" id="addComment-form"> -->
         <form class="form" id="addCommentForm" action="" method="POST">
-
-          <div class="rating">
-            <input type="radio" id="star-5" name="ratingcomment" value="5"><label for="star-5" title="Great">5 stars</label>
-            <input type="radio" id="star-4" name="ratingcomment" value="4"><label for="star-4" title="Good">4 stars</label>
-            <input type="radio" id="star-3" name="ratingcomment" value="3"><label for="star-3" title="Okay">3 stars</label>
-            <input type="radio" id="star-2" name="ratingcomment" value="2"><label for="star-2" title="Bad">2 stars</label>
-            <input type="radio" id="star-1" name="ratingcomment" value="1"><label for="star-1" title="Very Bad">1 star</label>
+          <div class="rating-box">
+            <div class="rating">
+              <input type="radio" id="star-5" name="ratingcomment" value="5"><label for="star-5" title="Great">5 stars</label>
+              <input type="radio" id="star-4" name="ratingcomment" value="4"><label for="star-4" title="Good">4 stars</label>
+              <input type="radio" id="star-3" name="ratingcomment" value="3"><label for="star-3" title="Okay">3 stars</label>
+              <input type="radio" id="star-2" name="ratingcomment" value="2"><label for="star-2" title="Bad">2 stars</label>
+              <input type="radio" id="star-1" name="ratingcomment" value="1"><label for="star-1" title="Very Bad">1 star</label>
+            </div>
           </div>
           <br><br>
 
           <div class="form-group">
             <div class="form-input">
               <div class="textwrapper"><textarea id="comment" name="comment" cols="2" rows="6"
-                  placeholder=" Comment"></textarea></div>
+                  placeholder=" Comment"></textarea></div><br>
               <button class="submit-button sign-up-button center">Submit</button>
             </div>
           </div>

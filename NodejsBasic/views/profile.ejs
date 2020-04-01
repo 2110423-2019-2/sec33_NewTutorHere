@@ -443,12 +443,12 @@
                                 <% } %>
                         <% searchAvailability.forEach(element => { %>
                             <%if ( element.class_day == j-1 && element.class_time == i) { %>
-                                <th><img class="nav-img-user center" src="../img/notavailable.png" style="height: 1.5em;"></th> 
+                                <th><img class="nav-img-user center" src="/img/notavailable.png" style="height: 1.5em;"></th> 
                                 <% tmp = true %>
                                  <% } %>
                             <% }) %> 
                             <% if(!tmp){ %>
-                                <th><img class="nav-img-user center" src="../img/available.png" style="height: 1.5em;"></th>
+                                <th><img class="nav-img-user center" src="/img/available.png" style="height: 1.5em;"></th>
                             <% }%>
                             <%tmp = false %>
                         <% } %>
@@ -466,7 +466,7 @@
                         <%for( each of comment) {%>
                             <div class="comment-box center">
                                 <div class="pfphoto-box">
-                                    <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
+                                    <img class="nav-img-user center" src="/img/user.png" style="height: 6em;" />
                                     <div class="profile-rating">
                                         <script>
                                            showStars('<%= each.rating %>');

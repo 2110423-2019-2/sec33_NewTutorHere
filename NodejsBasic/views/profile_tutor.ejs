@@ -430,7 +430,7 @@
                     </span>
                     <%if (typeof comment!= 'undefined') { %>
                     <%for( each of comment) {%>
-                    <div class="comment-box center">
+                    <div id="<%= each.commentator %>" class="comment-box center">
                         <div class="pfphoto-box">
                             <img class="nav-img-user center" src="/img/user.png" style="height: 6em;" />
                             <div class="profile-rating">
@@ -440,13 +440,13 @@
                             </div>
                         </div>
 
-                        <div class="qual-item">
+                        <div id="<%= each.commentator %>Comment" class="qual-item">
                             <span class="comment">
                                 <p><%=each.comment%></p>
                             </span>
                         </div>
 
-                        <button class="deleteComment-button" id="deleteCommentButton"><i class="fa fa-trash"
+                        <button class="deleteComment-button" id="<%= each.commentator %>DeleteButton"><i class="fa fa-trash"
                                 onclick="deleteComment('<%= each.subject %>')"></i></button>
 
                     </div>
@@ -469,7 +469,10 @@
 
     <script>
         var names = "firstn=";
+        var usernamex = "auth=";
         var tod;
+        var username;
+        // get first name
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
             var c = ca[i];
@@ -480,7 +483,19 @@
                 tod = c.substring(names.length, c.length);
             }
         }
-
+        
+        // get username
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1, c.length);
+            }
+            if (c.indexOf(usernamex) == 0) {
+                username = c.substring(usernamex.length, c.length);
+            }
+        }
+        
         // is viewer
         if (tod != document.getElementById("profile-firstname").innerText) {
 
@@ -513,6 +528,15 @@
 
             $("#sentContractButton").css("display", "none");
 
+        }
+
+        //is owner of this comment
+        if (document.getElementById(username) != null) {
+            console.log("display owner comment bin");
+            var comment = document.getElementById(username.concat("Comment"));
+            var deleteButton = document.getElementById(username.concat("DeleteButton"));
+            comment.css("margin-right", "0.5vw")
+            deleteButton.css("display", "flex")
         }
 
         var bdate = document.getElementById("bdate-editpf");
@@ -580,21 +604,6 @@
             document.cookie = "sub= " + subject;
 
         }
-
-        // TODO delete comment
-        //function deleteComment(subject) {
-        //    document.cookie = "sub= " + subject;
-
-        //}
-
-        //TODO check comment owner
-        //if (not owner of this comment) {
-        //    $(".deleteComment-button").css("display", "none");
-        //    $(".qual-item").css("margin-right", "1vw");
-        //}
-        //else if (is owner of this comment) {
-        //    $(".deleteComment-button").css("display", "flex");
-        //}
 
         function delete_cookie(name) {
             document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";

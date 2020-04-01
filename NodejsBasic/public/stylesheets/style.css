@@ -113,6 +113,7 @@ img.main-logo {
 }
 
 .deleteComment-button {
+    display: none;
     background-color: transparent;
     border: none;
     padding: 5px;
@@ -1168,7 +1169,7 @@ th, td {
     padding: 2% 5% 2% 5% ;
     margin-top: 2%;
     margin-bottom: 2%;
-    margin-right: 0.5vw;
+    margin-right: 1vw;
 }
 .conlog-item{
     width: 85%;

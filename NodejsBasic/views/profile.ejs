@@ -390,26 +390,28 @@
                     </span>
                     <%if (typeof comment!= 'undefined') { %>
                         <%for( each of comment) {%>
-                            <div class="comment-box center">
-                                <div class="pfphoto-box">
-                                    <img class="nav-img-user center" src="/img/user.png" style="height: 6em;" />
-                                    <div class="profile-rating">
-                                        <script>
-                                           showStars('<%= each.rating %>');
-                                        </script>
+                            <form action="/home/delete_comment" method="POST">
+                                <div class="comment-box center">
+                                    <div class="pfphoto-box">
+                                        <img class="nav-img-user center" src="/img/user.png" style="height: 6em;" />
+                                        <div class="profile-rating">
+                                            <script>
+                                            showStars('<%= each.rating %>');
+                                            </script>
+                                        </div>
                                     </div>
+
+                                    <div class="qual-item">
+                                        <span class="comment">
+                                            <p><%=each.comment%></p>
+                                        </span>
+                                    </div>
+
+                                    <button class="deleteComment-button" id="deleteCommentButton"><i class="fa fa-trash"
+                                        onclick="deleteComment('<%= each._id %>')"></i></button>
+
                                 </div>
-
-                                <div class="qual-item">
-                                    <span class="comment">
-                                        <p><%=each.comment%></p>
-                                    </span>
-                                </div>
-
-                                <button class="deleteComment-button" id="deleteCommentButton"><i class="fa fa-trash"
-                                    onclick="deleteComment('<%= each.subject %>')"></i></button>
-
-                            </div>
+                            </form>
                     <% }} %>
                 </div>
                 <button class="sendcontract-button" id='sentContractButton' onclick="showSentContract()">Send a contract</button>
@@ -536,10 +538,10 @@
             }
 
             // TODO delete comment
-            //function deleteComment(subject) {
-            //    document.cookie = "sub= " + subject;
+            function deleteComment(subject) {
+               document.cookie = "sub_comment= " + subject;
 
-            //}
+            }
 
             //TODO check comment owner
             //if (not owner of this comment) {

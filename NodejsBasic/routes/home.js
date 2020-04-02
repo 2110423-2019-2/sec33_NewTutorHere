@@ -288,7 +288,7 @@ router.get('/profile', function (req, res, next) {
 			"username": use
 		};
 		var comment = {
-			"commentator": use,
+			"commentatee": use,
 		};
 	
 		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();

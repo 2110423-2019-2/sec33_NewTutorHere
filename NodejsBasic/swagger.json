@@ -11,31 +11,80 @@
     "host": "simple.api",
     "basePath": "/openapi101",
     "paths": {
-        "/persons": {
+        "/home": {
             "get": {
-                "summary": "Gets some persons",
-                "description": "Returns a list containing all persons.",
-                "responses": {
-                    "200": {
-                        "description": "A list of Person",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "firstName": {
-                                        "type": "string"
-                                    },
-                                    "lastName": {
-                                        "type": "string"
-                                    },
-                                    "username": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                "summary": "Gets homepage",
+                "description": "Gets homepage"
+            }
+        },
+        "/register": {
+            "post": {
+                "summary": "Registers new user",
+                "description": "Registers new user"
+            }
+        },
+        "/home_admin": {
+            "get": {
+                "summary": "Gets homepage for admin",
+                "description": "Gets homepage for admin"
+            }
+        },
+        "/profile": {
+            "get": {
+                "summary": "Gets user's profile page",
+                "description": "Gets user's profile page"
+            },
+            "post": {
+                "summary": "Gets user's profile page",
+                "description": "Gets user's profile page"
+            }
+        },
+        "/edit_profile": {
+            "post": {
+                "summary": "Edits user's profile page",
+                "description": "Edits user's profile page"
+            }
+        },
+        "/schedule": {
+            "get": {
+                "summary": "Gets user's schedule",
+                "description": "Gets user's schedule"
+            }
+        },
+        "/profile/edit_availability/:id": {
+            "post": {
+                "summary": "Edits availability",
+                "description": "Edits availability of the user currently logged in"
+            }
+        },
+        "/profile/add_course": {
+            "post": {
+                "summary": "Adds new course",
+                "description": "-"
+            }
+        },
+        "delete_comment": {
+            "post": {
+                "summary": "Deletes comment",
+                "description": "-"
+            }
+        },
+        "delete_course": {
+            "post": {
+                "summary": "Deletes course",
+                "description": "-"
+            }
+        },
+        "accept_contract": {
+            "get": {
+                "summary": "Accepts contract",
+                "description": "-"
+            }
+        },
+        "reject_contract": {
+            "post": {
+                "summary": "Rejects contract",
+                "description": "-"
             }
         }
     }

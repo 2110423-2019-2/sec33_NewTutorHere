@@ -63,27 +63,45 @@
                 "description": "-"
             }
         },
-        "delete_comment": {
+        "/delete_comment": {
             "post": {
                 "summary": "Deletes comment",
                 "description": "-"
             }
         },
-        "delete_course": {
+        "/delete_course": {
             "post": {
                 "summary": "Deletes course",
                 "description": "-"
             }
         },
-        "accept_contract": {
+        "/accept_contract": {
             "get": {
                 "summary": "Accepts contract",
                 "description": "-"
             }
         },
-        "reject_contract": {
+        "/reject_contract": {
             "post": {
                 "summary": "Rejects contract",
+                "description": "-"
+            }
+        },
+        "/premium": {
+            "get": {
+                "summary": "Gets premium page",
+                "description": "-"
+            }
+        },
+        "/buy_premium": {
+            "post": {
+                "summary": "Buys premium",
+                "description": "-"
+            }
+        },
+        "/cancel_premium": {
+            "post": {
+                "summary": "Cancels premium",
                 "description": "-"
             }
         }

@@ -22,7 +22,7 @@ module.exports = {
         });
     },
     create: function (recipientID, messageType) {
-        var message;
+        var message = "";
         const MongoClient = require('mongodb').MongoClient;
         const dbName = 'SEproject'
         const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
@@ -38,7 +38,7 @@ module.exports = {
             const db = client.db(dbName);
             db.collection("NotifyController").insertOne({
                 "username": recipientID,
-                "message": [message],
+                "message": [message][0],
                 "status": 0
             });
 

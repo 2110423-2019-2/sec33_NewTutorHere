@@ -3,7 +3,7 @@ var router = express.Router();
 //connect to allFunction.js
 
 const assert = require('assert');
-
+var noti = require('./notificationManager.js');
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });

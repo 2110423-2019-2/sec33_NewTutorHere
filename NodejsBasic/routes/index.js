@@ -4,7 +4,7 @@ var crypto = require('crypto');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const { check, validationResult } = require('express-validator');
-
+var noti = require('./notificationManager.js');
 const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 

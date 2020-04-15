@@ -1356,3 +1356,75 @@ button.view3-button {
 button:hover.view3-button {
     background-color: #879437;
 }
+
+/* Notification */
+.dropdownn{
+	width: 350px;
+	height: auto;
+	background: #fff;
+	border-radius: 5px;
+	box-shadow: 2px 2px 3px rgba(0,0,0,0.125);
+	margin: 15px auto 0;
+	padding: 15px;
+	position: relative;
+	display: none;
+}
+
+.dropdownn .notify_item{
+	display: flex;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom: 1px solid #dbdaff;
+}
+
+.dropdownn .notify_item:last-child{
+	border-bottom: 0px;
+}
+
+.dropdownn .notify_item .notify_img{
+	margin-right: 15px;
+}
+
+.dropdownn .notify_item .notify_info p{
+	margin-bottom: 5px;
+}
+
+.dropdownn .notify_item .notify_info p span{
+	color: #605dff;
+	margin-left: 5px;
+}
+
+.dropdownn .notify_item .notify_info .notify_time{
+	color: #c5c5e6;
+	font-size: 12px;
+}
+
+.dropdownn:before{
+	content: "";
+	position: absolute;
+	top: -30px;
+	left: 50%;
+	transform: translateX(-50%);
+	border: 15px solid;
+	border-color: transparent transparent #fff transparent;
+}
+
+.dropdownn.active{
+	display: block;
+}
+.notification_icon{
+	position: relative;
+	width: 30px;
+	height: 30px;
+	font-size: 20px;
+	margin: 0 auto;
+	text-align: center;
+	color: white;
+}
+.notification_icon .fa-bell{
+	cursor: pointer;
+}
+notify-item lii{
+    line-height: auto;
+    float: left;
+}

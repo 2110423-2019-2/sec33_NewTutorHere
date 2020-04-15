@@ -1382,11 +1382,12 @@ button:hover.view3-button {
 }
 
 .dropdownn .notify_item .notify_img{
-	margin-right: 15px;
+    margin-right: 5px;
 }
 
 .dropdownn .notify_item .notify_info p{
-	margin-bottom: 5px;
+    margin-bottom: 5px;
+    bottom: 1.2em;
 }
 
 .dropdownn .notify_item .notify_info p span{
@@ -1394,10 +1395,6 @@ button:hover.view3-button {
 	margin-left: 5px;
 }
 
-.dropdownn .notify_item .notify_info .notify_time{
-	color: #c5c5e6;
-	font-size: 12px;
-}
 
 .dropdownn:before{
 	content: "";
@@ -1410,7 +1407,8 @@ button:hover.view3-button {
 }
 
 .dropdownn.active{
-	display: block;
+    display: block;
+    z-index: 999;
 }
 .notification_icon{
 	position: relative;

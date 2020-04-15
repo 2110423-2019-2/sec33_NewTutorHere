@@ -1370,7 +1370,7 @@ button:hover.view3-button {
 	display: none;
 }
 
-.dropdownn .notify_item{
+.notify_item{
 	display: flex;
 	align-items: center;
 	padding: 10px 0;
@@ -1387,7 +1387,6 @@ button:hover.view3-button {
 
 .dropdownn .notify_item .notify_info p{
     margin-bottom: 5px;
-    bottom: 1.2em;
 }
 
 .dropdownn .notify_item .notify_info p span{
@@ -1422,7 +1421,14 @@ button:hover.view3-button {
 .notification_icon .fa-bell{
 	cursor: pointer;
 }
-notify-item lii{
-    line-height: auto;
-    float: left;
-}
+
+.badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 2px 7px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    font-size: small;
+  }

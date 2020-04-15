@@ -4,20 +4,19 @@ var crypto = require('crypto');
 var databaseInterface = require('./database.js');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
-
-function notify(recipientID, messageType){
+module.exports = {
+notify:function(recipientID, messageType){
     databaseInterface.create(recipientID,messageType);
 }
-
-function toggleSeen( notificationID ){
+,
+toggleSeen:function ( notificationID ){
     databaseInterface.update(notificationID);
 }
-
-function getNotificationForUser(userId ){
+,
+getNotificationForUser:function (userId ){
     databaseInterface.find(userId);
-}
-function deleteNotificationForUser(notificationID ){
+},
+deleteNotificationForUser:function(notificationID ){
     databaseInterface.deleteNoti(userId);
 }
-
-
+}

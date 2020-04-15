@@ -154,6 +154,7 @@ router.post('/terminate_contract/:id', function (req, res, next) {
 			'rating' : req.body.ratingcomment,
 			'comment': req.body.comment
 		});
+		noti.notify( accepted[0].student_username,3);
 		res.redirect('/home/tutors_contract');
 	})
 });
@@ -192,6 +193,7 @@ router.get('/accept_contract', function (req, res, next) {
 				[tmp] : "yes"
 			}
 		});
+		noti.notify(accepted[0].student_username,1);
 		res.redirect('/home');
 	})
 });
@@ -210,6 +212,8 @@ router.get('/reject_contract', function (req, res, next) {
 				"status": "rejected"
 			}
 		});
+		rejected = await db.collection('ContractData').find(query).toArray();
+		noti.notify(rejected[0].student_username,2);
 		res.redirect('/home');
 	})
 });
@@ -236,7 +240,8 @@ router.post('/delete_comment', function (req, res, next) {
 		var query = {
 			"_id" : ObjectID(req.cookies.sub_comment)
 		};
-		
+		tmp = await db.collection('CommentController').find(query).toArray();
+		noti.notify(tmp[0].commentator,4);
 		await db.collection('CommentController').remove(query);
 		
 		res.redirect('/home/profile');

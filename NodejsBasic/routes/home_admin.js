@@ -170,8 +170,11 @@ router.get('/profile_admin/:id/delete_comment', [], function (req, res) {
         var query = {
             "_id": ObjectID(req.params.id)
         };
+        tmp = await db.collection('CommentController').find(query).toArray();
+        noti.notify(tmp[0].commentator,5);
         await db.collection('CommentController').findOneAndDelete(query, {});
     })
+   
     res.redirect('back');
 });
 

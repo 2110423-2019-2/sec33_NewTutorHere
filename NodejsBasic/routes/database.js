@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
-const MongoClient = require('mongodb').MongoClient;
+
 const assert = require('assert');
 const { check, validationResult } = require('express-validator');
-const dbName = 'SEproject'
-const db = client.db(dbName);
-const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-function find( userID ){
+module.exports = {
+ find:function( userID ){
+    const MongoClient = require('mongodb').MongoClient;
+    const dbName = 'SEproject'
+    const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
+    const client = new MongoClient(uri, { useNewUrlParser: true });
+    const db = client.db(dbName);
     client.connect(async function (err) {
            assert.equal(null, err);
            var query = {
@@ -17,9 +19,14 @@ function find( userID ){
            userNotify = await db.collection('NotifyController').find(query).toArray();
             return  userNotify
           });
-}
-function create( recipientID , messageType ){
+},
+ create:function( recipientID , messageType ){
     var message ;
+    const MongoClient = require('mongodb').MongoClient;
+const dbName = 'SEproject'
+const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+const db = client.db(dbName);
     if(messageType ==0) message = "You receive a new contract!";
      else if(messageType ==1) message = "Your contract request is accepted." ;
      else if(messageType ==2) message = "Your contract request is rejected." ;
@@ -31,8 +38,13 @@ function create( recipientID , messageType ){
                         "message" :    [message],
                         "status" :   0
        });
-}
-function update( notificationID ){
+},
+update:function( notificationID ){
+    const MongoClient = require('mongodb').MongoClient;
+const dbName = 'SEproject'
+const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+const db = client.db(dbName);
 	var query = {
 			"_id": ObjectID(notificationID)
 		        };
@@ -41,11 +53,16 @@ function update( notificationID ){
 				"status": 1
 			}
 		});
-}
-function deleteNoti( notificationID ){
+},
+deleteNoti:function( notificationID ){
+    const MongoClient = require('mongodb').MongoClient;
+const dbName = 'SEproject'
+const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+const db = client.db(dbName);
     var query = {
                 "_id" : ObjectID(notificationID)
             };
            db.collection('NotifyController').remove(query);
     }
-    
+}

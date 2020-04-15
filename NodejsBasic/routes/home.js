@@ -146,8 +146,9 @@ router.post('/terminate_contract/:id', function (req, res, next) {
 				[tmp] : "no"
 			}
 		});
-		commentator = tutor[0]['tutor_username'];
-		commentatee = tutor[0]['student_username'];
+		commentator = req.cookies.username;
+		if(tutor[0]['student_username'] == commentator) commentatee = tutor[0]['student_username'];
+		else commentatee = tutor[0]['tutor_username'];
 		db.collection('CommentController').insertOne({
 			'commentator': commentator,
 			'commentatee': commentatee,

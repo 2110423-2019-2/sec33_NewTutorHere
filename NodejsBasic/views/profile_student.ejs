@@ -397,6 +397,7 @@
                     </span>
                     <%if (typeof comment!= 'undefined') { %>
                     <%for( each of comment) {%>
+                        <form action="/home/delete_comment" method="POST"></form>
                     <div class="comment-box center <%= each.commentator %>">
                         <div class="pfphoto-box">
                             <img class="nav-img-user center" src="/img/user.png" style="height: 6em;" />
@@ -417,6 +418,7 @@
                                 onclick="deleteComment('<%= each.subject %>')"></i></button>
 
                     </div>
+                </form>
                     <% }} %>
                 </div>
                 <button class="sendcontract-button" id='sentContractButton' onclick="showSentContract()">Send a

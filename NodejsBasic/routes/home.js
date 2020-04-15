@@ -391,6 +391,7 @@ router.post('/profile', [], function (req, res) {
 			message: req.body.bio
 
 		});
+		noti.notify(req.cookies.nextpf,0);
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 

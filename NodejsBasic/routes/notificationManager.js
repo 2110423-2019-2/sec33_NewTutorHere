@@ -9,7 +9,8 @@ toggleSeen:function ( notificationID ){
 }
 ,
 getNotificationForUser:function (userId ){
-    databaseInterface.find(userId);
+    console.log("getNotiTITITIITI!!!!!");
+    return databaseInterface.find(userId);
 },
 deleteNotificationForUser:function(notificationID ){
     databaseInterface.deleteNoti(userId);

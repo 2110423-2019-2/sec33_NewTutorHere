@@ -29,39 +29,29 @@
                     <li><a href="/" onclick="out()">Log Out</a></li>
                 </ul>
             </li>
-            <!-- Notification -->
+            <!-- Notification (only shows in Home navbar)-->
+            <% if (typeof(is_home) != 'undefined') { %>
             <li class='text'>
-                <a href="#"><div class="notification_icon">
-                    <i class="fas fa-bell"></i>
-                    <span class="badge">3</span>
-                </div></a>
+                <a href="#">
+                    <div class="notification_icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge"> <%= notification_data.length %> </span>
+                    </div>
+                </a>
                 <div class="dropdownn">
+                    <% notification_data.forEach(element => { %>
                     <div class="notify_item">
                         <div class="notify_img">
                             <img src="../img/user.png" style="width: 50px">
                         </div>
                         <div class="notify_info">
-                            <p><strong>Palinee</strong> sent you a contract.</p>
+                            <p><strong>[]</strong> <%= element.msg %> </p>
                         </div>
                     </div>
-                    <div class="notify_item">
-                        <div class="notify_img">
-                            <img src="../img/user.png" style="width: 50px">
-                        </div>
-                        <div class="notify_info">
-                            <p><strong>Isaree</strong> sent you a contract.</p>
-                        </div>
-                    </div>
-                    <div class="notify_item">
-                        <div class="notify_img">
-                            <img src="../img/user.png" style="width: 50px">
-                        </div>
-                        <div class="notify_info">
-                            <p><strong>Ping</strong> sent you a comment.</p>
-                        </div>
-                    </div>
+                    <% }) %>
                 </div>
             </li>
+            <% } %>
 
 
 

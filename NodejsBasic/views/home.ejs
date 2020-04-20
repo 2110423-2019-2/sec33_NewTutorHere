@@ -23,9 +23,9 @@
   <div class="nav-container">
     <%if (typeof role!= 'undefined') { %>
       <% if (role == 'student') { %>
-        <%- include navbar_student %>
+        <%- include("navbar_student.ejs", {notification_data: notification_data, is_home: true}); %>
       <% } else if (role == 'tutor') {%>
-        <%- include navbar_tutor %>
+        <%- include("navbar_tutor.ejs", {notification_data: notification_data, is_home: true}); %>
       <% } else if (role == 'admin') {%>
         <%- include navbar_admin %>
       <% } %> 

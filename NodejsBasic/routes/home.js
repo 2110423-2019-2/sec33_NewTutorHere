@@ -47,7 +47,21 @@ router.get('/', function (req, res, next) {
 		const result_premium = await db.collection('CourseData').find(premium).limit(10).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(result_premium);
-		res.render('home', { searchResults: result , searchPremium: result_premium, role:req.cookies.role});
+
+		// Find noti data and pass to the template
+		var use = req.cookies.auth;
+		// var notification_data = noti.getNotificationForUser(use);
+		var notification_data = [
+			{
+				msg: "A"
+			},
+			{
+				msg: "B"
+			}
+		]
+
+
+		res.render('home', { searchResults: result, searchPremium: result_premium, role: req.cookies.role, notification_data: notification_data });
 	});
 
 	//TODO: Handle db connection failed error

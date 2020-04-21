@@ -4,22 +4,27 @@ var crypto = require('crypto');
 var ObjectID = require('mongodb').ObjectID;
 const assert = require('assert');
 const { check, validationResult } = require('express-validator');
+
 module.exports = {
-    find: function (userID) {
+    find: async function (userID) {
         const MongoClient = require('mongodb').MongoClient;
         const dbName = 'SEproject'
         const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true });
 
-        client.connect(async function (err) {
-            assert.equal(null, err);
-            const db = client.db(dbName);
-            var query = {
-                "username": userID
-            };
-            userNotify = await db.collection('NotifyController').find(query).toArray();
-            return userNotify
-        });
+        var userNotify;
+
+        await client.connect();
+        
+        const db = client.db(dbName);
+        var query = {
+            "username": userID
+        };
+        userNotify = await db.collection('NotifyController').find(query).toArray();
+
+        console.log("userNotify = ", userNotify);
+        return userNotify
+
     },
     create: function (recipientID, messageType) {
         var message = "";

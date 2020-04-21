@@ -17,54 +17,44 @@ client.connect(err => {
 const dbName = 'SEproject'
 
 // home page
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res, next) {
 	console.log("Loaded home.js")
 
-	client.connect(async function (err) {
-		assert.equal(null, err);
-		const db = client.db(dbName);
-		var query = {
-			'subject': new RegExp(req.query.subject),
-			'educational_level': new RegExp(req.query.level),
-			'city': new RegExp(req.query.city),
-			'rating': new RegExp(req.query.rating),
-			'price': new RegExp(req.query.minprice), //Change this to price range please
-			'is_premium' : 'no'
-			//'tutor_id': new RegExp(req.query.tutor_id)
-		};
-		var premium = {
-			'subject': new RegExp(req.query.subject),
-			'educational_level': new RegExp(req.query.level),
-			'city': new RegExp(req.query.city),
-			'rating': new RegExp(req.query.rating),
-			'price': new RegExp(req.query.minprice),
-			'is_premium' : 'yes'
-		}
-		//TODO: This search uses RegEx, consider changing it to something else later.
-		// ** Not completed due to time constraints
-		// Look into col.find() and how to use its find operators
-		const result = await db.collection('CourseData').find(query).limit(10).toArray();
-		const result_premium = await db.collection('CourseData').find(premium).limit(10).toArray();
-		// The search added the results to the locals, access them in home.ejs and show the results there
-		console.log(result_premium);
+	await client.connect();
 
-		// Find noti data and pass to the template
-		var use = req.cookies.auth;
-		// var notification_data = noti.getNotificationForUser(use);
-		var notification_data = [
-			{
-				msg: "A"
-			},
-			{
-				msg: "B"
-			}
-		]
+	const db = client.db(dbName);
+	var query = {
+		'subject': new RegExp(req.query.subject),
+		'educational_level': new RegExp(req.query.level),
+		'city': new RegExp(req.query.city),
+		'rating': new RegExp(req.query.rating),
+		'price': new RegExp(req.query.minprice), //Change this to price range please
+		'is_premium': 'no'
+		//'tutor_id': new RegExp(req.query.tutor_id)
+	};
+	var premium = {
+		'subject': new RegExp(req.query.subject),
+		'educational_level': new RegExp(req.query.level),
+		'city': new RegExp(req.query.city),
+		'rating': new RegExp(req.query.rating),
+		'price': new RegExp(req.query.minprice),
+		'is_premium': 'yes'
+	}
+	//TODO: This search uses RegEx, consider changing it to something else later.
+	// ** Not completed due to time constraints
+	// Look into col.find() and how to use its find operators
+	const result = await db.collection('CourseData').find(query).limit(10).toArray();
+	const result_premium = await db.collection('CourseData').find(premium).limit(10).toArray();
+	// The search added the results to the locals, access them in home.ejs and show the results there
+	console.log(result_premium);
 
 
-		res.render('home', { searchResults: result, searchPremium: result_premium, role: req.cookies.role, notification_data: notification_data });
-	});
+	// Find noti data and pass to the template
+	var user = req.cookies.auth;
+	var notification_data = await noti.getNotificationForUser(user);
 
-	//TODO: Handle db connection failed error
+	res.render('home', { searchResults: result, searchPremium: result_premium, role: req.cookies.role, notification_data: notification_data });
+
 });
 
 // tutor's contract page
@@ -116,7 +106,7 @@ router.get('/students_contract', function (req, res, next) {
 		console.log(accepted);
 
 
-		res.render('students_contract', { requested: requested, accepted: accepted, role:req.cookies.role });
+		res.render('students_contract', { requested: requested, accepted: accepted, role: req.cookies.role });
 
 	});
 
@@ -138,38 +128,38 @@ router.post('/terminate_contract/:id', function (req, res, next) {
 				"status": "terminated"
 			}
 		});
-		
+
 		tutor = await db.collection('ContractData').find(query).toArray();
 		accepted = await db.collection('ContractData').find(query).toArray();
-		var query1  = {
+		var query1 = {
 			"username": accepted[0].tutor_username
 		}
-		var query2  = {
+		var query2 = {
 			"username": accepted[0].student_username
 		}
-		var day = ["sunMor","monMor","tueMor","wedMor","thuMor","friMor","satMor","sunAf","monAf","tueAf","wedAf","thuAf","friAf","satAf","sunAfSc","monAfSc","tueAfSc","wedAfSc","thuAfSc","friAfSc","satAfSc","sunEv","monEv","tueEv","wedEv","thuEv","friEv","satEv"];
+		var day = ["sunMor", "monMor", "tueMor", "wedMor", "thuMor", "friMor", "satMor", "sunAf", "monAf", "tueAf", "wedAf", "thuAf", "friAf", "satAf", "sunAfSc", "monAfSc", "tueAfSc", "wedAfSc", "thuAfSc", "friAfSc", "satAfSc", "sunEv", "monEv", "tueEv", "wedEv", "thuEv", "friEv", "satEv"];
 		var time = parseInt(accepted[0].class_time) * 7 + parseInt(accepted[0].class_day);
-		const tmp  = day[time];
+		const tmp = day[time];
 		await db.collection('AvailabilityController').updateOne(query1, {
 			$set: {
-				[tmp] : "no"
+				[tmp]: "no"
 			}
 		});
 		await db.collection('AvailabilityController').updateOne(query2, {
 			$set: {
-				[tmp] : "no"
+				[tmp]: "no"
 			}
 		});
 		commentator = req.cookies.username;
-		if(tutor[0]['student_username'] == commentator) commentatee = tutor[0]['student_username'];
+		if (tutor[0]['student_username'] == commentator) commentatee = tutor[0]['student_username'];
 		else commentatee = tutor[0]['tutor_username'];
 		db.collection('CommentController').insertOne({
 			'commentator': commentator,
 			'commentatee': commentatee,
-			'rating' : req.body.ratingcomment,
+			'rating': req.body.ratingcomment,
 			'comment': req.body.comment
 		});
-		noti.notify( accepted[0].student_username,3);
+		noti.notify(accepted[0].student_username, 3);
 		res.redirect('/home/tutors_contract');
 	})
 });
@@ -178,7 +168,7 @@ router.get('/accept_contract', function (req, res, next) {
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
-		console.log("accepting " );
+		console.log("accepting ");
 		console.log(req.cookies._id);
 		var query = {
 			"_id": ObjectID(req.cookies._id)
@@ -189,26 +179,26 @@ router.get('/accept_contract', function (req, res, next) {
 			}
 		});
 		accepted = await db.collection('ContractData').find(query).toArray();
-		var query1  = {
+		var query1 = {
 			"username": accepted[0].tutor_username
 		}
-		var query2  = {
+		var query2 = {
 			"username": accepted[0].student_username
 		}
-		var day = ["sunMor","monMor","tueMor","wedMor","thuMor","friMor","satMor","sunAf","monAf","tueAf","wedAf","thuAf","friAf","satAf","sunAfSc","monAfSc","tueAfSc","wedAfSc","thuAfSc","friAfSc","satAfSc","sunEv","monEv","tueEv","wedEv","thuEv","friEv","satEv"];
+		var day = ["sunMor", "monMor", "tueMor", "wedMor", "thuMor", "friMor", "satMor", "sunAf", "monAf", "tueAf", "wedAf", "thuAf", "friAf", "satAf", "sunAfSc", "monAfSc", "tueAfSc", "wedAfSc", "thuAfSc", "friAfSc", "satAfSc", "sunEv", "monEv", "tueEv", "wedEv", "thuEv", "friEv", "satEv"];
 		var time = parseInt(accepted[0].class_time) * 7 + parseInt(accepted[0].class_day);
-		const tmp  = day[time];
+		const tmp = day[time];
 		await db.collection('AvailabilityController').updateOne(query1, {
 			$set: {
-				[tmp] : "yes"
+				[tmp]: "yes"
 			}
 		});
 		await db.collection('AvailabilityController').updateOne(query2, {
 			$set: {
-				[tmp] : "yes"
+				[tmp]: "yes"
 			}
 		});
-		noti.notify(accepted[0].student_username,1);
+		noti.notify(accepted[0].student_username, 1);
 		res.redirect('/home');
 	})
 });
@@ -217,7 +207,7 @@ router.get('/reject_contract', function (req, res, next) {
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
-		console.log("rejecting" );
+		console.log("rejecting");
 		console.log(req.cookies._id);
 		var query = {
 			"_id": ObjectID(req.cookies._id)
@@ -228,37 +218,37 @@ router.get('/reject_contract', function (req, res, next) {
 			}
 		});
 		rejected = await db.collection('ContractData').find(query).toArray();
-		noti.notify(rejected[0].student_username,2);
+		noti.notify(rejected[0].student_username, 2);
 		res.redirect('/home');
 	})
 });
 router.post('/delete_course', function (req, res, next) {
-	
+
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
 		var query = {
-			"tutor_username" : req.cookies.auth,
+			"tutor_username": req.cookies.auth,
 			"subject": req.cookies.sub
 		};
-		
+
 		await db.collection('CourseData').remove(query);
-		
+
 		res.redirect('/home/profile');
 	})
 });
 router.post('/delete_comment', function (req, res, next) {
-	
+
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
 		var query = {
-			"_id" : ObjectID(req.cookies.sub_comment)
+			"_id": ObjectID(req.cookies.sub_comment)
 		};
 		tmp = await db.collection('CommentController').find(query).toArray();
-		noti.notify(tmp[0].commentator,4);
+		noti.notify(tmp[0].commentator, 4);
 		await db.collection('CommentController').remove(query);
-		
+
 		res.redirect('/home/profile');
 	})
 });
@@ -310,22 +300,26 @@ router.get('/profile', function (req, res, next) {
 		var comment = {
 			"commentatee": use,
 		};
-	
+
 		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
 
 		const result_availability = await db.collection('AvailabilityController').find(query_availability).toArray();
-		
+
 		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
-		
+
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		if(result_user[0]['position'] == 'tutor'){
-			res.render('profile_tutor', { pf: result_user[0], searchCourse: result_course,
-				searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
+		if (result_user[0]['position'] == 'tutor') {
+			res.render('profile_tutor', {
+				pf: result_user[0], searchCourse: result_course,
+				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role
+			});
 		}
 		else {
-			res.render('profile_student', { pf: result_user[0], searchCourse: result_course,
-				searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
+			res.render('profile_student', {
+				pf: result_user[0], searchCourse: result_course,
+				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role
+			});
 		}
 	});
 
@@ -335,10 +329,10 @@ router.post('/profile/edit_availability/:id', [], function (req, res) {
 	//if(req.cookies.auth == req.body.username)
 	console.log("IN AVAILABILITY EDIT");
 	var test = req.body.av;
-	var day = ["sunMor","monMor","tueMor","wedMor","thuMor","friMor","satMor",
-	"sunAf","monAf","tueAf","wedAf","thuAf","friAf",
-	"satAf","sunAfSc","monAfSc","tueAfSc","wedAfSc","thuAfSc","friAfSc","satAfSc","sunEv",
-	"monEv","tueEv","wedEv","thuEv","friEv","satEv"];
+	var day = ["sunMor", "monMor", "tueMor", "wedMor", "thuMor", "friMor", "satMor",
+		"sunAf", "monAf", "tueAf", "wedAf", "thuAf", "friAf",
+		"satAf", "sunAfSc", "monAfSc", "tueAfSc", "wedAfSc", "thuAfSc", "friAfSc", "satAfSc", "sunEv",
+		"monEv", "tueEv", "wedEv", "thuEv", "friEv", "satEv"];
 
 	client.connect(async function (err) {
 		//checks for connection error
@@ -349,28 +343,28 @@ router.post('/profile/edit_availability/:id', [], function (req, res) {
 			"username": req.params.id
 		};
 		console.log(test + " WtF is going on here");
-		for(var i = 0;i<28;i++){
-		if(test[i]== 1){
-		db.collection('AvailabilityController').update(
-			username,
-			{
-				$set: {
-					[day[i]] : "yes"
-				}
-			}
-		);	
-		}
-		else{
-			db.collection('AvailabilityController').update(
-				username,
-				{
-					$set: {
-						[day[i]] : "no"
+		for (var i = 0; i < 28; i++) {
+			if (test[i] == 1) {
+				db.collection('AvailabilityController').update(
+					username,
+					{
+						$set: {
+							[day[i]]: "yes"
+						}
 					}
-				}
-			);	
+				);
+			}
+			else {
+				db.collection('AvailabilityController').update(
+					username,
+					{
+						$set: {
+							[day[i]]: "no"
+						}
+					}
+				);
+			}
 		}
-	}
 		res.redirect('/home/profile');
 	});
 
@@ -411,7 +405,7 @@ router.post('/profile', [], function (req, res) {
 			message: req.body.bio
 
 		});
-		noti.notify(req.cookies.nextpf,0);
+		noti.notify(req.cookies.nextpf, 0);
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 
@@ -439,7 +433,7 @@ router.post('/profile/edit_profile', [], function (req, res) {
 					'firstname': req.body.firstname,
 					'lastname': req.body.lastname,
 					'phone': req.body.phone,
-					'location':req.body.location,
+					'location': req.body.location,
 					'email': req.body.email,
 					'gender': req.body.gender,
 					'bio': req.body.bio
@@ -474,21 +468,21 @@ router.post('/profile/add_course', [], function (req, res) {
 			"tutor_username": use,
 			"status": "accepted"
 		};
-		const result_user = await db.collection('UserData').find({ username: req.cookies.auth}).limit(1).toArray();
+		const result_user = await db.collection('UserData').find({ username: req.cookies.auth }).limit(1).toArray();
 		db.collection('CourseData').insertOne({
 			'subject': req.body.subject,
 			'educational_level': req.body.level,
 			'city': req.body.city,
 			'rating': req.body.rating,
 			'price': req.body.price,
-			'tutor_username' : req.cookies.auth,
-			'is_premium' : result_user[0]['is_premium']
+			'tutor_username': req.cookies.auth,
+			'is_premium': result_user[0]['is_premium']
 
 		});
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 
-		
+
 		res.redirect('/home/profile');
 
 	});
@@ -507,14 +501,14 @@ router.get('/premium', function (req, res, next) {
 		var query_username = {
 			"username": req.cookies.auth
 		};
-	
+
 		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
 
-		
+
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		res.render('premium' ,{role:req.cookies.role , pf : result_user[0]});
+		res.render('premium', { role: req.cookies.role, pf: result_user[0] });
 	});
-	
+
 });
 router.post('/buy_premium', function (req, res, next) {
 	console.log("Haaaaaaaaaaaaaaaaaaaaaaaa");
@@ -592,40 +586,44 @@ router.get('/profile_student', function (req, res, next) {
 });
 
 router.get('/view_contract/:id', function (req, res, next) {
-    var use = req.params.id;
-    client.connect(async function (err) {
-        assert.equal(null, err);
-        const db = client.db(dbName);
-        var query_username = {
-            "username": use
-        };
-        var query_tutor_username = {
-            "tutor_username": use
- 
-        };
-        var query_tutor_availability = {
-            "tutor_username": use,
-            "status": "accepted"
-        };
-        const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
-        const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
+	var use = req.params.id;
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		var query_username = {
+			"username": use
+		};
+		var query_tutor_username = {
+			"tutor_username": use
+
+		};
+		var query_tutor_availability = {
+			"tutor_username": use,
+			"status": "accepted"
+		};
+		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
+		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
 		const result_availability = await db.collection('ContractData').find(query_tutor_availability).toArray();
 		var comment = {
 			"commentatee": use,
 		};
 		res.cookie('nextpf', result_user[0]["username"]);
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
-        // The search added the results to the locals, access them in home.ejs and show the results there
-        console.log(result_availability);
-		if(result_user[0]['position'] == 'tutor'){
-			res.render('profile_tutor', { pf: result_user[0], searchCourse: result_course,
-				searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
+		// The search added the results to the locals, access them in home.ejs and show the results there
+		console.log(result_availability);
+		if (result_user[0]['position'] == 'tutor') {
+			res.render('profile_tutor', {
+				pf: result_user[0], searchCourse: result_course,
+				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role
+			});
 		}
 		else {
-			res.render('profile_student', { pf: result_user[0], searchCourse: result_course,
-				searchAvailability: result_availability ,comment:result_comment, role:req.cookies.role});
+			res.render('profile_student', {
+				pf: result_user[0], searchCourse: result_course,
+				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role
+			});
 		}
-    });
+	});
 });
 
 module.exports = router;

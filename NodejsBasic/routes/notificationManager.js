@@ -8,10 +8,12 @@ toggleSeen:function ( notificationID ){
     databaseInterface.update(notificationID);
 }
 ,
-getNotificationForUser:function (userId ){
+getNotificationForUser: async function (userId ){
     console.log("getNotiTITITIITI!!!!!");
-    return databaseInterface.find(userId);
+    var result = await databaseInterface.find(userId);
+    return result;
 },
+    
 deleteNotificationForUser:function(notificationID ){
     databaseInterface.deleteNoti(userId);
 }

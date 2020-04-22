@@ -18,6 +18,7 @@
   <script type="text/javascript" src="/scripts/mustache.js"></script>
   <script type="text/javascript" src="/scripts/modal.js"></script>
   <script type="text/javascript" src="/scripts/custom.js"></script>
+  <script type="text/javascript" src="/scripts/function.js"></script>
 </head>
 
 <body>
@@ -169,11 +170,11 @@
     function showContractPopup(tmp) {
       $("#viewContract-popup").css("display", "flex");
       ViewContractModalAnimation();
-
+      var eduLevel
       document.getElementById("subject").innerHTML = r[tmp].course_name;
-      document.getElementById("eduLevel").innerHTML = r[tmp].edu_level;
-      document.getElementById("classDay").innerHTML = r[tmp].class_day;
-      document.getElementById("classTime").innerHTML = r[tmp].class_time;
+      document.getElementById("eduLevel").innerHTML = showEdu(r[tmp].edu_level);
+      document.getElementById("classDay").innerHTML = showDay(r[tmp].class_day);
+      document.getElementById("classTime").innerHTML = showTime(r[tmp].class_time);
       document.getElementById("message").innerHTML = r[tmp].message;
       // document.getElementById("id").innerHTML = r[tmp]._id;
       document.cookie = "_id= " + r[tmp]._id;

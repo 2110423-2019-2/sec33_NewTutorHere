@@ -2,12 +2,22 @@
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
-          $(document).ready(function(){
-              $(".notification_icon .fa-bell").click(function(){
-                  $(".dropdownn").toggleClass("active");
-              })
-          });
-      </script>
+        $(document).ready(function(){
+            $(".notification_container").click(function(){
+                $(".dropdownn").toggleClass("active");
+            })
+        });
+
+        window.onclick = function(event) {
+            if (!event.target.matches('#notification'))
+            {
+                var dropdowns = document.getElementById("notification_list");
+                if (dropdowns.classList.contains('active')) {
+                    dropdowns.classList.remove('active');
+                }
+            }
+        }
+    </script>
    
    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -29,16 +39,17 @@
                     <li><a href="/" onclick="out()">Log Out</a></li>
                 </ul>
             </li>
+
             <!-- Notification (only shows in Home navbar)-->
             <% if (typeof(notification_data) != 'undefined') { %> 
-            <li class='text noti_container'>
-                <a href="#">
-                    <div class="notification_icon">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge"> <%= notification_data.length %> </span>
+            <li class='text notification_container' id="notification">
+                <a id="notification" href="#">
+                    <div class="notification_icon" id="notification">
+                        <i class="fas fa-bell" id="notification"></i>
+                        <span class="badge" id="notification"> <%= notification_data.length %> </span>
                     </div>
                 </a>
-                <div class="dropdownn">
+                <div class="dropdownn" id="notification_list">
                     <a href="/home" class="color-lightgreen center" style="text-align: center;">Mark All as Read</a>
                     <% notification_data.forEach(element => { %>
                     <div class="notify_item">
@@ -46,15 +57,13 @@
                             <img src="../img/user.png" style="width: 50px">
                         </div>
                         <div class="notify_info">
-                            <p><%= element.message %></p>
+                            <p><%= element.message %> </p>
                         </div>
                     </div>
                     <% }) %>
                 </div>
             </li>
             <% } %>
-
-
 
             <!-- <li class='text'><a href="/home/schedule">Schedule</a></li> -->
             <li class='text'><a href="/home/students_contract">Contracts</a></li>

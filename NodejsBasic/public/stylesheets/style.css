@@ -1371,7 +1371,7 @@ button:hover.view3-button {
 	display: none;
 }
 
-.noti_container {
+.notification_container {
     position: relative;
     display: inline-block;
 }

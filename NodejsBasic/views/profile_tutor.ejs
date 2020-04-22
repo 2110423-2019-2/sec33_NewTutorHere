@@ -349,7 +349,9 @@
                         <form action="/home/delete_course" method="POST">
                             <tr>
                                 <td><%=result.subject%></td>
-                                <td><%=result.educational_level%></td>
+                                <td id='edu-level'>
+                                    <script>showEduLevel('<%=result.educational_level%>');</script>
+                                </td>     
                                 <td><%=result.city%></td>
                                 <td><%=result.price%></td>
                                 <td><button class="deleteCourse-button" id='deleteCourseButton'><i class="fa fa-trash"

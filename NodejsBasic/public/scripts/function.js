@@ -35,3 +35,14 @@ function showStars(rating) {
   } 
   document.write(`<div class="tutor-rating">${innerHtml}</div>`);
 }
+
+function showEduLevel(eduNum) {
+  var eduLevel = "";
+  if (eduNum == '0') eduLevel = "Any Level";
+  else if (eduNum == '1') eduLevel = "Pre-School";
+  else if (eduNum == '2') eduLevel = "Elementary-School";
+  else if (eduNum == '3') eduLevel = "Middle-School";
+  else if (eduNum == '4') eduLevel = "High-School";
+  else if (eduNum == '5') eduLevel = "Bachelor";
+  document.write(eduLevel);
+}

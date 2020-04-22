@@ -110,7 +110,9 @@
               <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
               <div class="tutor-rating">
                   <script>
-                    showStars('<%= result.rating %>');
+                    if('<%= result.rating %>' != 0){
+                      showStars('<%= result.rating %>');
+                    }
                   </script>
               </div>
             </div>
@@ -138,7 +140,9 @@
               <img class="nav-img-user center" src="../img/user.png" style="height: 6em;" />
               <div class="tutor-rating">
                   <script>
-                    showStars('<%= result.rating %>');
+                    if('<%= result.rating %>' != 0){
+                      showStars('<%= result.rating %>');
+                    }
                   </script>
               </div>
             </div>

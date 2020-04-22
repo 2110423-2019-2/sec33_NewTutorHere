@@ -69,14 +69,14 @@ router.get('/tutors_contract', function (req, res, next) {
 			"status": 'requested',
 		};
 		requested = await db.collection('ContractData').find(query).toArray();
-		console.log(requested);
+		
 
 		query = {
 			"tutor_username": use,
 			"status": 'accepted',
 		};
 		accepted = await db.collection('ContractData').find(query).toArray();
-		console.log(accepted);
+		
 
 		var user = req.cookies.auth;
 		var notification_data = await noti.getNotificationForUser(user);
@@ -152,15 +152,40 @@ router.post('/terminate_contract/:id', function (req, res, next) {
 				[tmp]: "no"
 			}
 		});
-		commentator = req.cookies.username;
-		if (tutor[0]['student_username'] == commentator) commentatee = tutor[0]['student_username'];
-		else commentatee = tutor[0]['tutor_username'];
+		var commentator = req.cookies.auth;
+		
+		var commentatee = tutor[0].tutor_username;
 		db.collection('CommentController').insertOne({
 			'commentator': commentator,
 			'commentatee': commentatee,
 			'rating': req.body.ratingcomment,
 			'comment': req.body.comment
 		});
+		// calculate averrage rating and update to all course
+		var query3 = {
+			'commentatee': commentatee
+		}
+		AllComment = await db.collection('CommentController').find(query3).toArray();
+		console.log(AllComment);
+		var AvgRating = 0;
+		for(var i = 0;i<AllComment.length;i++){
+			AvgRating += parseInt(AllComment[i].rating) ;
+		}
+		AvgRating /= AllComment.length;
+		AvgRating = ~~AvgRating; 
+		console.log(AvgRating);
+		console.log(AllComment.toString());
+		db.collection('CourseData').updateMany(
+			{
+				'tutor_username': commentatee
+			},
+			{
+				$set: {
+					'rating': AvgRating.toString()
+				}
+			}
+		);
+
 		noti.notify(accepted[0].student_username, 3);
 		res.redirect('/home/tutors_contract');
 	})
@@ -477,7 +502,7 @@ router.post('/profile/add_course', [], function (req, res) {
 			'subject': req.body.subject,
 			'educational_level': req.body.level,
 			'city': req.body.city,
-			'rating': req.body.rating,
+			'rating': '0',
 			'price': req.body.price,
 			'tutor_username': req.cookies.auth,
 			'is_premium': result_user[0]['is_premium']

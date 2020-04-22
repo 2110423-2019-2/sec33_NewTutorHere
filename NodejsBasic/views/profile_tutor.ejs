@@ -119,6 +119,7 @@
     <div class="big-bg popup" id="addCourse-form">
         <div class="form-bg color-lightgreen center" id="addCourse-form-bg">
             <button class="close-button be-right"><i class="fa fa-close" onclick="closeAddCourseButton()"></i></button>
+            <br>
             <span class="form-name">
                 <p>Add New Course</p>
             </span><br>
@@ -143,38 +144,22 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <div class="form-input">
-                            <input type="text" id="addCourse-city" name="city" placeholder="City">
-                        </div>
-
-                    </div>
                     <div class="half-box be-left">
-                        <label class="control-label">Rating</label>
-                        <br>
                         <div class="form-group">
-                            <div class="rating">
-                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"
-                                    title="Great">5 stars</label>
-                                <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="Good">4
-                                    stars</label>
-                                <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="Okay">3
-                                    stars</label>
-                                <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="Bad">2
-                                    stars</label>
-                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"
-                                    title="Very Bad">1 star</label>
+                            <div class="form-input">
+                                <input type="text" id="addCourse-city" name="city" placeholder="City">
+                            </div>
+                        </div>  
+                    </div>
+
+                    <div class="half-box be-right">       
+                        <div class="form-group">
+                            <div class="form-input">
+                                <input type="text" id="addCourse-price" name="price" placeholder="Price">
                             </div>
                         </div>
-                        </br>
                     </div>
-
-                    <div class="form-group">
-                        <div class="form-input">
-                            <input type="text" id="addCourse-price" name="price" placeholder="Price">
-                        </div>
-                    </div>
-
+                    <br><br><br>
                     <button class="submit-button sign-up-button center">Submit</button>
                 </form>
             </div>
@@ -305,7 +290,7 @@
                         </div>
                     </div>
                     <br>
-                    <button class="submit-button sign-up-button center">Edit</button>
+                    <button class="submit-button sign-up-button center">Save</button>
                 </form>
             </div>
         </div>
@@ -353,8 +338,8 @@
                     <table id='courses-table'>
                         <tr>
                             <th></th>
+                            <th>Level</th>
                             <th>City</th>
-                            <th>Rating</th>
                             <th>Price</th>
                             <th></th>
                         </tr>
@@ -364,8 +349,10 @@
                         <form action="/home/delete_course" method="POST">
                             <tr>
                                 <td><%=result.subject%></td>
+                                <td id='edu-level'>
+                                    <script>showEduLevel('<%=result.educational_level%>');</script>
+                                </td>     
                                 <td><%=result.city%></td>
-                                <td><%=result.rating%></td>
                                 <td><%=result.price%></td>
                                 <td><button class="deleteCourse-button" id='deleteCourseButton'><i class="fa fa-trash"
                                             onclick="deleteCourse('<%= result.subject %>')"></i></button>

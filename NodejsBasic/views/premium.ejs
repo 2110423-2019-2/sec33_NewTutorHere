@@ -28,9 +28,40 @@
           <%- include navbar_admin %>
         <% } %> 
       <% } %>
+
+    <!-- payment -->
+    <div class="big-bg popup" id="viewPayment-popup" >
+        <div class="form-bg color-lightgreen center" id="viewPayment-popup-bg">
+        <button class="close-button be-right"><i class="fa fa-close" onclick="closePaymentPopupButton()"></i></button>
+        <br><br>
+        <span class="form-name-thankyou">
+            <p>Payment</p>
+        </span><br>
+        <div class="form-information-bg">
+            <form class="form" id="payment" action="/home/buy_premium" method="POST">
+                <center>
+                <b>Upgrade to Premium</b><br>
+                <p>Before we upgrade your premium,</p>
+                <p>let's make sure we've got the right</p>
+                <p>billing details.</p><br />
+                <p>As always, you can cancel online</p>
+                <p>at any time.</p>
+                <br /><br /><br>
+                </center>
+                <div class="rating-box" style="width: 69%;">
+                    <button class="view2-button search-button be-right">Confirm</button>
+                    <a class="view2-button search-button be-right" onclick="closePaymentPopupButton()">Not Now</a>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    
+
     <div class="big-bg">
         <% if(pf.is_premium == 'no'){%>
-        <form action="/home/buy_premium" method="POST">
+        <form>
+        <!-- <form action="/home/buy_premium" method="POST"> -->
             <% }else{  %>
                 <form action="/home/cancel_premium" method="POST">
                 <%}%>
@@ -58,7 +89,8 @@
                             </div>
                         </span><br>
                         <% if(pf.is_premium == 'no'){%>
-                        <button class="prem-button center">Get Premium</button>
+                        <!-- <a class="prem-button center" onclick="showPaymentPopup()">View contract</a> -->
+                        <button class="prem-button center" onclick="showPaymentPopup()">Get Premium</button>
                         <% }else{  %>
                         <button class="prem-button center">Cancel Premium</button>
                         <%}%>
@@ -67,6 +99,51 @@
             </div>
         </form>
     </div>
+
+    <!-- Animation library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
+    <script>
+        function closePaymentPopupButton() {
+            ViewPaymentModalAnimationReversed();
+        }
+        function showPaymentPopup() {
+            $("#viewPayment-popup").css("display", "flex");
+            ViewPaymentModalAnimation();
+        }
+
+        //Animation view payment modal
+        function ViewPaymentModalAnimationReversed() {
+            ViewPaymentModalAnimation(true);
+        }
+
+        function ViewPaymentModalAnimation(reversed = false) {
+        const modal = document.getElementById('viewPayment-popup');
+        const modal_body = document.getElementById('viewPayment-popup-bg');
+        const tl2 = new TimelineLite({ easeIn: Power3.easeOut });
+        tl2.fromTo(modal, 0.20, { 
+            opacity: 0 
+        }, { 
+            opacity: 1 
+        }, 0)
+        tl2.fromTo(modal_body, 0.20, {
+            scale: 0,
+            opacity: 0
+        }, {
+            scale: 1,
+            opacity: 1
+        }, 0);
+        if (reversed) {
+            tl2.reverse(0.3);
+            setTimeout(function () {
+            $("#viewPayment-popup").css("display", "none");
+            }, 500);
+        }
+        }
+    </script>
+
+
+
 </body>
 
 </html>

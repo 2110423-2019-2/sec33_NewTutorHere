@@ -49,18 +49,18 @@ module.exports = {
 
         });
     },
-    update: function (notificationID) {
+    update: function (userID) {
         const MongoClient = require('mongodb').MongoClient;
         const dbName = 'SEproject'
         const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true });
 
         var query = {
-            "_id": ObjectID(notificationID)
+            "username": userID
         };
         client.connect(async function (err) {
             const db = client.db(dbName);
-            db.collection('NotificationController').updateOne(query, {
+            db.collection('NotificationController').updateMany(query, {
                 $set: {
                     "status": 1
                 }

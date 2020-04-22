@@ -4,12 +4,12 @@ notify:function(recipientID, messageType){
     databaseInterface.create(recipientID,messageType);
 }
 ,
-toggleSeen:function ( notificationID ){
-    databaseInterface.update(notificationID);
+toggleSeen:function ( userID ){
+    databaseInterface.update(userID);
 }
 ,
 getNotificationForUser: async function (userId ){
-    console.log("getNotiTITITIITI!!!!!");
+    //console.log("getNotiTITITIITI!!!!!");
     var result = await databaseInterface.find(userId);
     return result;
 },

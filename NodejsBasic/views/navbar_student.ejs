@@ -39,14 +39,14 @@
                     </div>
                 </a>
                 <div class="dropdownn">
-                    <a href="/home"><p>Mark All as Read</p></a>
+                    <a href="/home" class="color-lightgreen center" align="right">Mark All as Read</a>
                     <% notification_data.forEach(element => { %>
                     <div class="notify_item">
                         <div class="notify_img">
                             <img src="../img/user.png" style="width: 50px">
                         </div>
                         <div class="notify_info">
-                            <p><strong><%= element.message %></strong></p>
+                            <p><%= element.message %></p>
                         </div>
                     </div>
                     <% }) %>

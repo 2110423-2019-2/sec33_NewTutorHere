@@ -31,7 +31,7 @@
             </li>
             <!-- Notification (only shows in Home navbar)-->
             <% if (typeof(notification_data) != 'undefined') { %> 
-            <li class='text'>
+            <li class='text noti_container'>
                 <a href="#">
                     <div class="notification_icon">
                         <i class="fas fa-bell"></i>
@@ -39,7 +39,7 @@
                     </div>
                 </a>
                 <div class="dropdownn">
-                    <a href="/home" class="color-lightgreen center" align="right">Mark All as Read</a>
+                    <a href="/home" class="color-lightgreen center" style="text-align: center;">Mark All as Read</a>
                     <% notification_data.forEach(element => { %>
                     <div class="notify_item">
                         <div class="notify_img">

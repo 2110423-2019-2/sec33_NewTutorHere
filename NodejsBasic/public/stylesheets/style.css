@@ -1371,6 +1371,11 @@ button:hover.view3-button {
 	display: none;
 }
 
+.noti_container {
+    position: relative;
+    display: inline-block;
+}
+
 .notify_item{
 	display: flex;
 	align-items: center;
@@ -1400,7 +1405,7 @@ button:hover.view3-button {
 	content: "";
 	position: absolute;
 	top: -30px;
-	left: 50%;
+	right: 0;
 	transform: translateX(-50%);
 	border: 15px solid;
 	border-color: transparent transparent #fff transparent;
@@ -1408,8 +1413,9 @@ button:hover.view3-button {
 
 .dropdownn.active{
     display: block;
+    position: absolute;
     z-index: 999;
-    width: fit-content;
+    right: 0;
 }
 .notification_icon{
 	position: relative;

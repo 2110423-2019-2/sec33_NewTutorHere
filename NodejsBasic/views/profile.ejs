@@ -24,15 +24,15 @@
 
 <body>
     <div class="nav-container">
-    <%if (typeof role!= 'undefined') { %>
-      <% if (role == 'student') { %>
-        <%- include navbar_student %>
-      <% } else if (role == 'tutor') {%>
-        <%- include navbar_tutor %>
-      <% } else if (role == 'admin') {%>
-        <%- include navbar_admin %>
-      <% } %> 
-    <% } %>
+        <%if (typeof role!= 'undefined') { %>
+            <% if (role == 'student') { %>
+              <%- include("navbar_student.ejs", {notification_data: notification_data}); %>
+            <% } else if (role == 'tutor') {%>
+              <%- include("navbar_tutor.ejs", {notification_data: notification_data}); %>
+            <% } else if (role == 'admin') {%>
+              <%- include navbar_admin %>
+            <% } %> 
+          <% } %>
   </div>
 
     <!-- edit-profile-form -->

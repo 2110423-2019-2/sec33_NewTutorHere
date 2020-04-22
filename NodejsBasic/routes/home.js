@@ -78,8 +78,9 @@ router.get('/tutors_contract', function (req, res, next) {
 		accepted = await db.collection('ContractData').find(query).toArray();
 		console.log(accepted);
 
-
-		res.render('tutors_contract', { requested: requested, accepted: accepted, role: req.cookies.role });
+		var user = req.cookies.auth;
+		var notification_data = await noti.getNotificationForUser(user);
+		res.render('tutors_contract', { requested: requested, accepted: accepted, role: req.cookies.role ,notification_data:notification_data});
 
 	});
 });
@@ -105,8 +106,9 @@ router.get('/students_contract', function (req, res, next) {
 		accepted = await db.collection('ContractData').find(query).toArray();
 		console.log(accepted);
 
-
-		res.render('students_contract', { requested: requested, accepted: accepted, role: req.cookies.role });
+		var user = req.cookies.auth;
+		var notification_data = await noti.getNotificationForUser(user);
+		res.render('students_contract', { requested: requested, accepted: accepted, role: req.cookies.role ,notification_data:notification_data});
 
 	});
 
@@ -308,17 +310,19 @@ router.get('/profile', function (req, res, next) {
 		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
 
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
+		var user = req.cookies.auth;
+		var notification_data = await noti.getNotificationForUser(user);
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		if (result_user[0]['position'] == 'tutor') {
 			res.render('profile_tutor', {
 				pf: result_user[0], searchCourse: result_course,
-				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role
+				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role,notification_data:notification_data
 			});
 		}
 		else {
 			res.render('profile_student', {
 				pf: result_user[0], searchCourse: result_course,
-				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role
+				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role,notification_data:notification_data
 			});
 		}
 	});
@@ -503,10 +507,11 @@ router.get('/premium', function (req, res, next) {
 		};
 
 		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
-
+		var user = req.cookies.auth;
+		var notification_data = await noti.getNotificationForUser(user);
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		res.render('premium', { role: req.cookies.role, pf: result_user[0] });
+		res.render('premium', { role: req.cookies.role, pf: result_user[0], notification_data:notification_data });
 	});
 
 });
@@ -609,18 +614,20 @@ router.get('/view_contract/:id', function (req, res, next) {
 		};
 		res.cookie('nextpf', result_user[0]["username"]);
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
+		var user = req.cookies.auth;
+		var notification_data = await noti.getNotificationForUser(user);
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(result_availability);
 		if (result_user[0]['position'] == 'tutor') {
 			res.render('profile_tutor', {
 				pf: result_user[0], searchCourse: result_course,
-				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role
+				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role,notification_data:notification_data
 			});
 		}
 		else {
 			res.render('profile_student', {
 				pf: result_user[0], searchCourse: result_course,
-				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role
+				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role, notification_data:notification_data
 			});
 		}
 	});

@@ -45,15 +45,17 @@ router.get('/', async function (req, res, next) {
 	// Look into col.find() and how to use its find operators
 	const result = await db.collection('CourseData').find(query).limit(10).toArray();
 	const result_premium = await db.collection('CourseData').find(premium).limit(10).toArray();
+	
 	// The search added the results to the locals, access them in home.ejs and show the results there
 	console.log(result_premium);
 
 
 	// Find noti data and pass to the template
 	var user = req.cookies.auth;
+	const resultLength =  await noti.getNotificationLength(user);
 	var notification_data = await noti.getNotificationForUser(user);
 
-	res.render('home', { searchResults: result, searchPremium: result_premium, role: req.cookies.role, notification_data: notification_data });
+	res.render('home', { searchResults: result, searchPremium: result_premium, role: req.cookies.role, notification_data: notification_data,resultLength:resultLength });
 
 });
 
@@ -77,10 +79,10 @@ router.get('/tutors_contract', function (req, res, next) {
 		};
 		accepted = await db.collection('ContractData').find(query).toArray();
 		
-
+		const resultLength = await noti.getNotificationLength(user);
 		var user = req.cookies.auth;
 		var notification_data = await noti.getNotificationForUser(user);
-		res.render('tutors_contract', { requested: requested, accepted: accepted, role: req.cookies.role ,notification_data:notification_data});
+		res.render('tutors_contract', { requested: requested, accepted: accepted, role: req.cookies.role ,notification_data:notification_data,resultLength:resultLength});
 
 	});
 });
@@ -107,8 +109,9 @@ router.get('/students_contract', function (req, res, next) {
 		console.log(accepted);
 
 		var user = req.cookies.auth;
+		const resultLength = await noti.getNotificationLength(user);
 		var notification_data = await noti.getNotificationForUser(user);
-		res.render('students_contract', { requested: requested, accepted: accepted, role: req.cookies.role ,notification_data:notification_data});
+		res.render('students_contract', { requested: requested, accepted: accepted, role: req.cookies.role ,notification_data:notification_data,resultLength,resultLength});
 
 	});
 
@@ -537,6 +540,14 @@ router.get('/premium', function (req, res, next) {
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		res.render('premium', { role: req.cookies.role, pf: result_user[0], notification_data:notification_data });
+	});
+
+});
+router.get('/allseen', function (req, res, next) {
+	client.connect(async function (err) {
+		noti.toggleSeen(req.cookies.auth);
+		// The search added the results to the locals, access them in home.ejs and show the results there
+		res.redirect('/home')
 	});
 
 });

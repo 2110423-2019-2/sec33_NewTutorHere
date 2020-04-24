@@ -16,5 +16,9 @@ getNotificationForUser: async function (userId ){
     
 deleteNotificationForUser:function(notificationID ){
     databaseInterface.deleteNoti(userId);
+},
+getNotificationLength: async function(userId){
+    var result = await databaseInterface.findUnseen(userId);
+    return result;
 }
 }

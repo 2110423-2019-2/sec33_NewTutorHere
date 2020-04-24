@@ -17,13 +17,32 @@ module.exports = {
         await client.connect();
         
         const db = client.db(dbName);
-        var query = {
+        var query1 = {
             "username": userID
         };
-        userNotify = await db.collection('NotifyController').find(query).toArray();
-
+        userNotify = await db.collection('NotifyController').find(query1).toArray();
         console.log("userNotify = ", userNotify);
-        return userNotify
+        return userNotify;
+
+    },
+    findUnseen: async function (userID) {
+        const MongoClient = require('mongodb').MongoClient;
+        const dbName = 'SEproject'
+        const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
+        const client = new MongoClient(uri, { useNewUrlParser: true });
+
+
+
+        await client.connect();
+        
+        const db = client.db(dbName);
+        var query2 = {
+            "username": userID,
+            "status" : 0
+        };
+        s = await db.collection('NotifyController').find(query2).toArray();
+        console.log("list = " +s + "  ;");
+        return s;
 
     },
     create: function (recipientID, messageType) {
@@ -54,13 +73,13 @@ module.exports = {
         const dbName = 'SEproject'
         const uri = "mongodb+srv://malzano:019236055@seproject-zbimx.mongodb.net/test?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true });
-
+console.log("status=1");
         var query = {
             "username": userID
         };
         client.connect(async function (err) {
             const db = client.db(dbName);
-            db.collection('NotificationController').updateMany(query, {
+            db.collection('NotifyController').updateMany(query, {
                 $set: {
                     "status": 1
                 }

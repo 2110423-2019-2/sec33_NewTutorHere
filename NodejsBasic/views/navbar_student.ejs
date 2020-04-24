@@ -46,11 +46,11 @@
                 <a id="notification" href="#">
                     <div class="notification_icon" id="notification">
                         <i class="fas fa-bell" id="notification"></i>
-                        <span class="badge" id="notification"> <%= notification_data.length %> </span>
+                        <span class="badge" id="notification"> <%= resultLength.length%> </span>
                     </div>
                 </a>
                 <div class="dropdownn" id="notification_list">
-                    <a href="/home" class="color-lightgreen center" style="text-align: center;">Mark All as Read</a>
+                    <a href="/home/allseen" class="color-lightgreen center" style="text-align: center;">Mark All as Read</a>
                     <% notification_data.forEach(element => { %>
                     <div class="notify_item">
                         <div class="notify_img">

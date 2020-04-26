@@ -120,7 +120,7 @@ router.get('/students_contract', function (req, res, next) {
 
 var ObjectID = require('mongodb').ObjectID;
 
-router.post('/terminate_contract/:id', function (req, res, next) {
+router.post('/terminate_student_contract/:id', function (req, res, next) {
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
@@ -190,6 +190,53 @@ router.post('/terminate_contract/:id', function (req, res, next) {
 		);
 
 		noti.notify(accepted[0].student_username, 3);
+		res.redirect('/home/students_contract');
+	})
+});
+router.post('/terminate_tutor_contract/:id', function (req, res, next) {
+	client.connect(async function (err) {
+		assert.equal(null, err);
+		const db = client.db(dbName);
+		console.log("terminating " + req.params.id);
+		var query = {
+			"_id": ObjectID(req.params.id)
+		};
+		await db.collection('ContractData').updateOne(query, {
+			$set: {
+				"status": "terminated"
+			}
+		});
+
+		tutor = await db.collection('ContractData').find(query).toArray();
+		accepted = await db.collection('ContractData').find(query).toArray();
+		var query1 = {
+			"username": accepted[0].tutor_username
+		}
+		var query2 = {
+			"username": accepted[0].student_username
+		}
+		var day = ["sunMor", "monMor", "tueMor", "wedMor", "thuMor", "friMor", "satMor", "sunAf", "monAf", "tueAf", "wedAf", "thuAf", "friAf", "satAf", "sunAfSc", "monAfSc", "tueAfSc", "wedAfSc", "thuAfSc", "friAfSc", "satAfSc", "sunEv", "monEv", "tueEv", "wedEv", "thuEv", "friEv", "satEv"];
+		var time = parseInt(accepted[0].class_time) * 7 + parseInt(accepted[0].class_day);
+		const tmp = day[time];
+		await db.collection('AvailabilityController').updateOne(query1, {
+			$set: {
+				[tmp]: "no"
+			}
+		});
+		await db.collection('AvailabilityController').updateOne(query2, {
+			$set: {
+				[tmp]: "no"
+			}
+		});
+		var commentator = req.cookies.auth;
+		
+		var commentatee = tutor[0].student_username;
+		db.collection('CommentController').insertOne({
+			'commentator': commentator,
+			'commentatee': commentatee,
+			'rating': req.body.ratingcomment,
+			'comment': req.body.comment
+		});
 		res.redirect('/home/tutors_contract');
 	})
 });

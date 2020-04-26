@@ -1,0 +1,385 @@
+swagger: "2.0"
+info:
+    version: 1.0.0
+    title: NewTutorHere
+schemes:
+    - http
+host: localhost:3000/
+basePath:
+paths:
+    /:
+        get:
+            summary: Gets main page
+            description: Gets main page
+            responses:
+                "200":
+                    description: main page
+            tags:
+                - main
+        post:
+            summary: Logs a user in
+            description: Logs a user in
+            parameters:
+                - in: path
+                  name: username
+                  type: string
+                  required: true
+                - in: path
+                  name: password
+                  type: string
+                  required: true
+            responses:
+                "200":
+                    description: successfully logged in
+            tags:
+                - main
+
+    /register:
+        post:
+            summary: Registers a user in
+            description: Registers a user in
+            parameters:
+                - in: path
+                  name: position
+                  type: string
+                  required: true
+                - in: path
+                  name: firstname
+                  type: string
+                  required: true
+                - in: path
+                  name: lastname
+                  type: string
+                  required: true
+                - in: path
+                  name: username
+                  type: string
+                  required: true
+                - in: path
+                  name: password
+                  type: string
+                  required: true
+                - in: path
+                  name: location
+                  type: string
+                  required: true
+                - in: path
+                  name: phone
+                  type: string
+                  required: true
+                - in: path
+                  name: email
+                  type: string
+                  required: true
+                - in: path
+                  name: gender
+                  type: string
+                  required: true
+            responses:
+                "200":
+                    description: successfully registerred
+            tags:
+                - main
+
+    /home:
+        get:
+            summary: Gets homepage
+            description: Gets homepage
+            responses:
+                "200":
+                    description: Homepage
+            tags:
+                - normal home
+
+    /home/tutors_contract:
+        get:
+            summary: Gets tutors contract
+            description: Gets tutors contract
+            responses:
+                "200":
+                    description: tutors contract
+            tags:
+                - normal home
+
+    /home/students_contract:
+        get:
+            summary: Gets students contract
+            description: Gets students contract
+            responses:
+                "200":
+                    description: students contract
+            tags:
+                - normal home
+
+    /home/view_contract/{id}:
+        get:
+            summary: Gets contract with id
+            description: Gets contract with id
+            parameters:
+                - in: path
+                  name: id
+                  type: integer
+                  required: true
+            responses:
+                "200":
+                    description: successfully retrieved
+            tags:
+                - normal home
+
+    /home/terminate_contract/{id}:
+        post:
+            summary: Terminates contract with id
+            description: Terminates contract with id
+            parameters:
+                - in: path
+                  name: id
+                  type: integer
+                  required: true
+            responses:
+                "200":
+                    description: successfully removed
+            tags:
+                - normal home
+
+    /home/accept_contract:
+        get:
+            summary: Accept contract with id
+            description: Accept contract with id
+            parameters:
+                - in: path
+                  name: id
+                  type: integer
+                  required: true
+            responses:
+                "200":
+                    description: successfully accepted
+            tags:
+                - normal home
+
+    /home/reject_contract:
+        get:
+            summary: Reject contract with id
+            description: Reject contract with id
+            parameters:
+                - in: path
+                  name: id
+                  type: integer
+                  required: true
+            responses:
+                "200":
+                    description: successfully rejected
+            tags:
+                - normal home
+
+    /home/delete_course:
+        post:
+            summary: Delete course
+            description: Delete course
+            parameters:
+                - in: path
+                  name: id
+                  type: integer
+                  required: true
+            responses:
+                "200":
+                    description: Delete course
+            tags:
+                - normal home
+
+    /home/delete_comment:
+        post:
+            summary: Delete comment
+            description: Delete comment
+            parameters:
+                - in: path
+                  name: id
+                  type: integer
+                  required: true
+            responses:
+                "200":
+                    description: Delete comment
+            tags:
+                - normal home
+
+    /home/schedule:
+        get:
+            summary: Gets schedule
+            description: Gets schedule
+            responses:
+                "200":
+                    description: Gets schedule
+            tags:
+                - normal home
+
+    /home/profile:
+        get:
+            summary: Gets profile
+            description: Gets profile
+            responses:
+                "200":
+                    description: Gets profile
+            tags:
+                - normal home
+        post:
+            summary: Gets profile
+            description: Gets profile
+            responses:
+                "200":
+                    description: Gets profile
+            tags:
+                - normal home
+
+    /home/profile/edit_availability/{id}:
+        post:
+            summary: Update availability
+            description: Update availability
+            parameters:
+                - in: path
+                  name: id
+                  type: integer
+                  required: true
+            responses:
+                "200":
+                    description: Update availability
+            tags:
+                - normal home
+
+    /home/profile/edit_profile:
+        post:
+            summary: Edits profile
+            description: Edits profile
+            responses:
+                "200":
+                    description: Edits profile
+            tags:
+                - normal home
+
+    /home/profile/add_course:
+        post:
+            summary: Adds profile
+            description: Adds profile
+            responses:
+                "200":
+                    description: Adds profile
+            tags:
+                - normal home
+
+    /home/premium:
+        get:
+            summary: Gets premium page
+            description: Gets premium page
+            responses:
+                "200":
+                    description: Gets premium page
+            tags:
+                - normal home
+
+    /home/buy_premium:
+        post:
+            summary: Handles premium purchase
+            description: Handles premium purchase
+            responses:
+                "200":
+                    description: Success
+            tags:
+                - normal home
+
+    /home/cancel_premium:
+        post:
+            summary: Handles premium cancellation
+            description: Handles premium cancellation
+            responses:
+                "200":
+                    description: Success
+            tags:
+                - normal home
+
+    /home/allseen:
+        get:
+            summary: Handles notification seen
+            description: Handles notification seen
+            responses:
+                "200":
+                    description: Success
+            tags:
+                - normal home
+
+    /home_admin:
+        get:
+            summary: Gets homepage for admin
+            description: Gets homepage for admin
+            responses:
+                "200":
+                    description: Homepage for admin
+            tags:
+                - admin
+
+    /home_admin/profile_admin/{username}:
+        get:
+            summary: Gets user profile page for admin
+            description: Gets user profile page for admin
+            parameters:
+                - in: path
+                  name: username
+                  type: string
+                  required: true
+            responses:
+                "200":
+                    description: User profile for admin
+            tags:
+                - admin
+
+    /home_admin/profile_admin/{username}/edit_profile:
+        post:
+            summary: Edits user profile page for admin
+            description: Edits user profile page for admin
+            parameters:
+                - in: path
+                  name: firstname
+                  type: string
+                  required: true
+                - in: path
+                  name: lastname
+                  type: string
+                  required: true
+                - in: path
+                  name: phone
+                  type: string
+                  required: true
+                - in: path
+                  name: location
+                  type: string
+                  required: true
+                - in: path
+                  name: email
+                  type: string
+                  required: true
+                - in: path
+                  name: gender
+                  type: string
+                  required: true
+                - in: path
+                  name: bio
+                  type: string
+                  required: true
+
+            responses:
+                "200":
+                    description: Edits profile for admin
+            tags:
+                - admin
+
+    /home_admin/profile_admin/{username}/edit_availability:
+        post:
+            summary: Edits user availability page for admin
+            description: Edits user availability page for admin
+            parameters:
+                - in: path
+                  name: username
+                  type: string
+                  required: true
+            responses:
+                "200":
+                    description: Edits user availability page for admin
+            tags:
+                - admin

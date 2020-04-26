@@ -433,7 +433,7 @@
                     </span>
                     <%if (typeof comment!= 'undefined') { %>
                     <%for( each of comment) {%>
-                        <form action="/home/delete_comment" method="POST"></form>
+                        <form action="/home/delete_comment" method="POST">
                     <div class="comment-box center <%= each.commentator %>">
                         <div class="pfphoto-box">
                             <img class="nav-img-user center" src="/img/user.png" style="height: 6em;" />
@@ -451,7 +451,7 @@
                         </div>
 
                         <button class="deleteComment-button <%= each.commentator %>DeleteButton"><i class="fa fa-trash"
-                                onclick="deleteComment('<%= each.subject %>')"></i></button>
+                                onclick="deleteComment('<%= each._id %>')"></i></button>
 
                     </div>
                 </form>
@@ -500,7 +500,6 @@
                 username = c.substring(usernamex.length, c.length);
             }
         }
-        
         // is viewer
         if (tod != document.getElementById("profile-firstname").innerText) {
 
@@ -513,6 +512,7 @@
                 // cols[i].style.backgroundColor = color;
                 cols[i].style.visibility = "hidden";
             }
+            // hidden comment button
             var comment = document.getElementsByClassName("deleteComment-button");
             for (i = 0; i < comment.length; i++) {
                 // cols[i].style.backgroundColor = color;
@@ -609,6 +609,11 @@
         // delete course
         function deleteCourse(subject) {
             document.cookie = "sub= " + subject;
+
+        }
+        // delete comment
+        function deleteComment(subject) {
+               document.cookie = "sub_comment= " + subject;
 
         }
 

@@ -350,7 +350,7 @@
                                 </div>
 
                                 <button class="deleteComment-button <%= each.commentator %>DeleteButton" id="deleteCommentButton"><i class="fa fa-trash"
-                                        onclick="deleteComment('<%= each.subject %>')"></i></button>
+                                        onclick="deleteComment('<%= each._id %>')"></i></button>
 
                             </div>
                         </form>
@@ -508,6 +508,11 @@
         // delete course
         function deleteCourse(subject) {
             document.cookie = "sub= " + subject;
+
+        }
+        // delete comment
+        function deleteComment(subject) {
+               document.cookie = "sub_comment= " + subject;
 
         }
 

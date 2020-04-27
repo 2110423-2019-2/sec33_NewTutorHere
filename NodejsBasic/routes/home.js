@@ -18,12 +18,24 @@ client.connect(err => {
 const dbName = 'SEproject'
 
 // home page
-router.get('/', async function (req, res, next) {
+router.get('/',
+	async function (req, res, next) {
 	console.log("Loaded home.js")
-
 	await client.connect();
-
 	const db = client.db(dbName);
+	// var errors = result.errors;
+	// if (!result.isEmpty()) {
+	// 	console.log("FUCKTHISLIFE");
+	// 	res.cookie("HomeError", errors[0].msg , { httpOnly: true });
+	// 	res.redirect('/home');
+	// 	// send  error.msg if error 
+	// }
+	// else{
+	if( !isNaN(req.query.minprice) ){
+		
+			console.log(req.query.minprice + " its a number		");
+		
+		
 	var query = {
 		'subject': new RegExp(req.query.subject),
 		'educational_level': new RegExp(req.query.level),
@@ -55,9 +67,47 @@ router.get('/', async function (req, res, next) {
 	var user = req.cookies.auth;
 	const resultLength =  await noti.getNotificationLength(user);
 	var notification_data = await noti.getNotificationForUser(user);
-
+	
+	
 	res.render('home', { searchResults: result, searchPremium: result_premium, role: req.cookies.role, notification_data: notification_data,resultLength:resultLength });
+	
+	
+ }
+ else{
+	var query = {
+		'subject': new RegExp(req.query.subject),
+		'educational_level': new RegExp(req.query.level),
+		'city': new RegExp(req.query.city),
+		'rating': new RegExp(req.query.rating),
+		'is_premium': 'no'
+		//'tutor_id': new RegExp(req.query.tutor_id)
+	};
+	var premium = {
+		'subject': new RegExp(req.query.subject),
+		'educational_level': new RegExp(req.query.level),
+		'city': new RegExp(req.query.city),
+		'rating': new RegExp(req.query.rating),
+		'is_premium': 'yes'
+	}
+	//TODO: This search uses RegEx, consider changing it to something else later.
+	// ** Not completed due to time constraints
+	// Look into col.find() and how to use its find operators
+	const result = await db.collection('CourseData').find(query).limit(10).toArray();
+	const result_premium = await db.collection('CourseData').find(premium).limit(10).toArray();
+	
+	// The search added the results to the locals, access them in home.ejs and show the results there
+	console.log(result_premium);
 
+
+	// Find noti data and pass to the template
+	var user = req.cookies.auth;
+	const resultLength =  await noti.getNotificationLength(user);
+	var notification_data = await noti.getNotificationForUser(user);
+	
+	
+	res.render('home', { searchResults: result, searchPremium: result_premium, role: req.cookies.role, notification_data: notification_data,resultLength:resultLength,context:"yes" });
+	
+ }
 });
 
 // tutor's contract page

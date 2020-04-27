@@ -31,7 +31,7 @@ router.get('/',
 	// 	// send  error.msg if error 
 	// }
 	// else{
-	if( !isNaN(req.query.minprice) ){
+	if( !isNaN(req.query.minprice) || !req.query.minprice  ){
 		
 			console.log(req.query.minprice + " its a number		");
 		
@@ -74,6 +74,7 @@ router.get('/',
 	
  }
  else{
+	 console.log( req.query.minprice+ "is not a number bro!!!");
 	var query = {
 		'subject': new RegExp(req.query.subject),
 		'educational_level': new RegExp(req.query.level),
@@ -162,6 +163,7 @@ router.get('/students_contract', function (req, res, next) {
 		var user = req.cookies.auth;
 		const resultLength = await noti.getNotificationLength(user);
 		var notification_data = await noti.getNotificationForUser(user);
+	    
 		res.render('students_contract', { requested: requested, accepted: accepted, role: req.cookies.role ,notification_data:notification_data,resultLength,resultLength});
 
 	});
@@ -171,11 +173,22 @@ router.get('/students_contract', function (req, res, next) {
 
 var ObjectID = require('mongodb').ObjectID;
 
-router.post('/terminate_student_contract/:id', function (req, res, next) {
+router.post('/terminate_student_contract/:id',[
+	check('ratingcomment',"").isLength({ min: 1})
+], function (req, res, next) {
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
 		console.log("terminating " + req.params.id);
+		const result = validationResult(req);
+	var errors = result.errors;
+	if (!result.isEmpty()) {
+		console.log("FUCKTHISLIFE  dfsdkfjlsdkjflksdjlfkl sldfkjsdl kfjlsdk jflsdkj flks");
+		res.cookie("error", errors[0].msg , { httpOnly: true });
+		res.redirect('/home/profile');
+		// send  error.msg if error 
+	}
+	else{
 		var query = {
 			"_id": ObjectID(req.params.id)
 		};
@@ -242,13 +255,24 @@ router.post('/terminate_student_contract/:id', function (req, res, next) {
 
 		noti.notify(accepted[0].student_username, 3);
 		res.redirect('/home/students_contract');
+	}
 	})
 });
-router.post('/terminate_tutor_contract/:id', function (req, res, next) {
+router.post('/terminate_tutor_contract/:id',[
+	check('ratingcomment',"").isLength({ min: 1})
+] ,function (req, res, next) {
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
 		console.log("terminating " + req.params.id);
+		var errors = result.errors;
+	if (!result.isEmpty()) {
+		console.log("FUCKTHISLIFE  dfsdkfjlsdkjflksdjlfkl sldfkjsdl kfjlsdk jflsdkj flks");
+		res.cookie("error", errors[0].msg , { httpOnly: true });
+		res.redirect('/home/profile');
+		// send  error.msg if error 
+	}
+	else{
 		var query = {
 			"_id": ObjectID(req.params.id)
 		};
@@ -288,7 +312,7 @@ router.post('/terminate_tutor_contract/:id', function (req, res, next) {
 			'rating': req.body.ratingcomment,
 			'comment': req.body.comment
 		});
-		res.redirect('/home/tutors_contract');
+		res.redirect('/home/tutors_contract');}
 	})
 });
 router.get('/accept_contract', function (req, res, next) {

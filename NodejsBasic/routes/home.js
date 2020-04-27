@@ -467,9 +467,22 @@ router.post('/profile/edit_availability/:id', [], function (req, res) {
 
 });
 //sendContract /profile/edit_availability 
-router.post('/profile', [], function (req, res) {
+router.post('/profile', [	
+	check('subject',"").isLength({ min: 1}),
+	check('time',"").isLength({ min: 1}),
+	check('day',"").isLength({ min: 1}),
+], function (req, res) {
 	var use = req.cookies.auth;
 	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	const result = validationResult(req);
+	var errors = result.errors;
+	if (!result.isEmpty()) {
+		console.log("FUCKTHISLIFE  dfsdkfjlsdkjflksdjlfkl sldfkjsdl kfjlsdk jflsdkj flks");
+		res.cookie("error", errors[0].msg , { httpOnly: true });
+		res.redirect('/home/profile');
+		// send  error.msg if error 
+	}
+	else{
 	//if(req.cookies.auth == req.body.username)
 	console.log("IN SendconTract!");
 
@@ -508,6 +521,7 @@ router.post('/profile', [], function (req, res) {
 
 		res.redirect('/home/profile');
 	});
+}
 });
 // edit-profile-form
 router.post('/profile/edit_profile', [	

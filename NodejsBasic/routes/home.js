@@ -585,9 +585,10 @@ router.get('/premium', function (req, res, next) {
 		const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
 		var user = req.cookies.auth;
 		var notification_data = await noti.getNotificationForUser(user);
+		const resultLength = await noti.getNotificationLength(user);
 
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		res.render('premium', { role: req.cookies.role, pf: result_user[0], notification_data:notification_data });
+		res.render('premium', { role: req.cookies.role, pf: result_user[0], notification_data: notification_data, resultLength: resultLength });
 	});
 
 });

@@ -550,7 +550,7 @@ check('emailR',"Email is invalid").not().isEmail()]
 			}
 		);
 	
-		console.log("Cannot be here!!!!! ! ! ! ! ! ");
+		//console.log("Cannot be here!!!!! ! ! ! ! ! ");
 		res.clearCookie("firstn");
 		res.cookie('firstn', req.body.firstname);
 		const result = await db.collection('UserData').find({ username: req.cookies.auth }).limit(1).toArray();
@@ -560,10 +560,22 @@ check('emailR',"Email is invalid").not().isEmail()]
 }
 
 });
-router.post('/profile/add_course', [], function (req, res) {
+router.post('/profile/add_course', [	
+	check('subject',"Subject name can not be empty").isLength({ min: 1}),
+	check('price',"price must be an integer").isNumeric(),
+	],
+	 function (req, res) {
 	var use = req.cookies.auth;
 	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
-
+	const result = validationResult(req);
+	var errors = result.errors;
+	if (!result.isEmpty()) {
+		console.log("FUCKTHISLIFE  dfsdkfjlsdkjflksdjlfkl sldfkjsdl kfjlsdk jflsdkj flks");
+		res.cookie("error", errors[0].msg , { httpOnly: true });
+		res.redirect('/home/profile');
+		// send  error.msg if error 
+	}
+	else{
 	client.connect(async function (err) {
 		//checks for connection error
 		assert.equal(null, err);
@@ -599,6 +611,7 @@ router.post('/profile/add_course', [], function (req, res) {
 		res.redirect('/home/profile');
 
 	});
+}
 });
 
 router.get('/testfunction', function (req, res, next) {

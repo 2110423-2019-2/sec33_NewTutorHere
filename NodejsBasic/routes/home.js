@@ -700,18 +700,19 @@ router.get('/view_contract/:id', function (req, res, next) {
 		const result_comment = await db.collection('CommentController').find(comment).toArray();
 		var user = req.cookies.auth;
 		var notification_data = await noti.getNotificationForUser(user);
+		const resultLength = await noti.getNotificationLength(user);
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		console.log(result_availability);
 		if (result_user[0]['position'] == 'tutor') {
 			res.render('profile_tutor', {
 				pf: result_user[0], searchCourse: result_course,
-				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role,notification_data:notification_data
+				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role, notification_data: notification_data, resultLength: resultLength
 			});
 		}
 		else {
 			res.render('profile_student', {
 				pf: result_user[0], searchCourse: result_course,
-				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role, notification_data:notification_data
+				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role, notification_data: notification_data, resultLength: resultLength
 			});
 		}
 	});

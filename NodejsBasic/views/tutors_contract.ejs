@@ -18,7 +18,6 @@
   <script type="text/javascript" src="/scripts/mustache.js"></script>
   <script type="text/javascript" src="/scripts/modal.js"></script>
   <script type="text/javascript" src="/scripts/custom.js"></script>
-  <script type="text/javascript" src="/scripts/function.js"></script>
 </head>
 
 <body>
@@ -115,7 +114,7 @@
         <br />
         <!-- <button class="addComment-button be-right" id='addComment' onclick="showAddComment()">Add comment</button> -->
         <!-- <a class="view2-button search-button be-right" href="terminate_contract/<%= element._id %>" >Terminate</a> -->
-        <button class="view2-button search-button be-right" id='addComment' onclick="showAddComment('/home/terminate_tutor_contract/<%= element._id %>')">Terminate</button>
+        <button class="view2-button search-button be-right" id='addComment' onclick="showAddComment('/home/terminate_contract/<%= element._id %>')">Terminate</button>
         <a class="view2-button search-button be-right" href="view_contract/<%= element.student_username %>">View</a>
       </div>
       <% }) %>
@@ -171,9 +170,9 @@
       ViewContractModalAnimation();
 
       document.getElementById("subject").innerHTML = r[tmp].course_name;
-      document.getElementById("eduLevel").innerHTML = showEdu(r[tmp].educational_level);
-      document.getElementById("classDay").innerHTML = showDay(r[tmp].class_day);
-      document.getElementById("classTime").innerHTML = showTime(r[tmp].class_time);
+      document.getElementById("eduLevel").innerHTML = r[tmp].edu_level;
+      document.getElementById("classDay").innerHTML = r[tmp].class_day;
+      document.getElementById("classTime").innerHTML = r[tmp].class_time;
       document.getElementById("message").innerHTML = r[tmp].message;
       // document.getElementById("id").innerHTML = r[tmp]._id;
       document.cookie = "_id= " + r[tmp]._id;

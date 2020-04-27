@@ -389,8 +389,24 @@ router.get('/profile', function (req, res, next) {
 		var user = req.cookies.auth;
 		var notification_data = await noti.getNotificationForUser(user);
 		const resultLength =  await noti.getNotificationLength(user);
+		var context = req.cookies["error"];
+		  res.clearCookie("error", { httpOnly: true });
+		if(context){
+			if (result_user[0]['position'] == 'tutor') {
+				res.render('profile_tutor', {
+					pf: result_user[0], searchCourse: result_course,
+					searchAvailability: result_availability, comment: result_comment, role: req.cookies.role,notification_data:notification_data , resultLength:resultLength,context:context
+				});
+			}
+			else {
+				res.render('profile_student', {
+					pf: result_user[0], searchCourse: result_course,
+					searchAvailability: result_availability, comment: result_comment, role: req.cookies.role,notification_data:notification_data , resultLength:resultLength,context:context
+				});
+			}
+		}
 		// The search added the results to the locals, access them in home.ejs and show the results there
-		if (result_user[0]['position'] == 'tutor') {
+	    else if (result_user[0]['position'] == 'tutor') {
 			res.render('profile_tutor', {
 				pf: result_user[0], searchCourse: result_course,
 				searchAvailability: result_availability, comment: result_comment, role: req.cookies.role,notification_data:notification_data , resultLength:resultLength
@@ -494,10 +510,22 @@ router.post('/profile', [], function (req, res) {
 	});
 });
 // edit-profile-form
-router.post('/profile/edit_profile', [], function (req, res) {
-
-	//if(req.cookies.auth == req.body.username)
-	console.log("IN PROFILE EDIT");
+router.post('/profile/edit_profile', [	
+check('firstname',"Firstname length is not between 1-20").isLength({ min: 1 ,max:20}),
+check('lastname',"Lastname length is not between 1-20").isLength({ min: 1 ,max:20}),
+check('phone',"Phone-number length is not between 9-19").isLength({ min: 9 ,max:19}),
+check('phone',"Phone-number must contain only number").isNumeric(),
+check('emailR',"Email is invalid").not().isEmail()]
+, function (req, res) {
+	const result = validationResult(req);
+	var errors = result.errors;
+	if (!result.isEmpty()) {
+		console.log("FUCKTHISLIFE  dfsdkfjlsdkjflksdjlfkl sldfkjsdl kfjlsdk jflsdkj flks");
+		res.cookie("error", errors[0].msg , { httpOnly: true });
+		res.redirect('/home/profile');
+		// send  error.msg if error 
+	}
+	else {
 	client.connect(async function (err) {
 		//checks for connection error
 		assert.equal(null, err);
@@ -521,11 +549,15 @@ router.post('/profile/edit_profile', [], function (req, res) {
 				}
 			}
 		);
+	
+		console.log("Cannot be here!!!!! ! ! ! ! ! ");
+		res.clearCookie("firstn");
 		res.cookie('firstn', req.body.firstname);
 		const result = await db.collection('UserData').find({ username: req.cookies.auth }).limit(1).toArray();
 		console.log(result);
 		res.redirect('/home/profile');
 	});
+}
 
 });
 router.post('/profile/add_course', [], function (req, res) {

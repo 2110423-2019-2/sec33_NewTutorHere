@@ -77,6 +77,9 @@ router.post('/', [
 			const validate = await db.collection('UserData').findOne({
 				'username': req.body.username,
 			});
+			if(!validate){
+				res.render('index', {wrong: "Wrong username or passwrod"});
+			}
 			var passwordData = sha512(req.body.password, validate.salt);
 			const user = await db.collection('UserData').findOne({
 				'username': req.body.username,
@@ -106,8 +109,40 @@ router.post('/', [
 	}
 });
 
-router.post('/register', [], function (req, res) {
+router.post('/register', [
+	check("usernameR", "Enter username").not().isEmpty(),
+	check("passwordR", "Enter password").not().isEmpty(),
+	check("usernameR", "Username must not contain any special character").matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, "i"),
+	check('passwordR',"password length is not between 5-16").isLength({ min: 5 ,max:16}),
+	check('usernameR',"Username length is not between 5-16").isLength({ min: 6 , max:16 }),
+	check('firstname',"Firstname length is not between 1-20").isLength({ min: 1 ,max:20}),
+	check('lastname',"Lastname length is not between 1-20").isLength({ min: 1 ,max:20}),
+	check('phone',"Phone-number length is not between 9-19").isLength({ min: 9 ,max:19}),
+	check('phone',"Phone-number must contain only number").isNumeric(),
+	check('emailR',"Email is invalid").not().isEmail()
+], function (req, res) {
 
+
+	const result = validationResult(req);
+	var errors = result.errors;
+
+	//var custom = require('./custom.js')
+// 	var testspecial = /^[a-zA-Z0-9\\.;,:' ]{1,100}$/g( req.body.usernameR );  
+ 
+//   if( testspecial )
+//   {
+//     res.render('index',{wrong:"Username must not contain any special character"}); 
+//   }
+	
+	if (!result.isEmpty()) {
+		// username/password empty
+		//res.send(errors[0]['msg']);
+		res.render('index', {wrong: errors[0].msg});
+		// send  error.msg if error 
+	}
+	else if(req.body.passwordR != req.body.confirmed-password){
+		res.render('index',{wrong:"password and re-password must be the same"});
+	}
 	//TODO: Check if the password and confirmed password match
 	//TODO: Check inputs in general (blank, invalid, etc.) It should also be able to configure from the frontend side.
 	password = saltHashPassword(req.body.password);

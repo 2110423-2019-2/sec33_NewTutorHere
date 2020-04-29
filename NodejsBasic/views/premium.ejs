@@ -102,6 +102,7 @@
     <!-- Animation library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
+    
     <script>
         function closePaymentPopupButton() {
             ViewPaymentModalAnimationReversed();
@@ -110,6 +111,24 @@
             $("#viewPayment-popup").css("display", "flex");
             ViewPaymentModalAnimation();
         }
+
+
+        //Animation page
+        function Animation(reverse = false) {
+            const tl = new TimelineLite({
+                ease: Expo.easeOut
+            });
+            const premiumBox = document.querySelector('.premium-box');
+
+            tl.fromTo(premiumBox, 1.5, {
+                opacity: 0,
+                y: -40
+            }, {
+                opacity: 1,
+                y: 0
+            })
+        }
+        Animation();
 
         //Animation view payment modal
         function ViewPaymentModalAnimationReversed() {

@@ -54,10 +54,8 @@ function saltHashPassword(userpassword) {
 	};
 }
 router.post('/', [
-	check("username", "Enter username").not().isEmpty(),
-	check("password", "Enter password").not().isEmpty(),
-	check('password').isLength({ min: 5 }),
-	check('username').isLength({ min: 6 })
+	check('username', "Username is invalid.").isLength({ min: 5, max: 16 }),
+	check('password', "Password is invalid.").isLength({ min: 5, max: 16 })
 ], function (req, res) {
 	const result = validationResult(req);
 	var errors = result.errors;
@@ -67,7 +65,7 @@ router.post('/', [
 	if (!result.isEmpty()) {
 		// username/password empty
 		//res.send(errors[0]['msg']);
-		res.render('index', {wrong: errors[0].param +" is invalid"});
+		res.render('index', {wrong: errors[0].msg});
 		// send  error.msg if error 
 	} else {
 		client.connect(async function (err) {
@@ -103,21 +101,19 @@ router.post('/', [
 				}
 			}
 			else {
-				res.render('index', {wrong: "Wrong username or passwrod"});
+				res.render('index', {wrong: "Wrong username or password"});
 			}
 		});
 	}
 });
 
 router.post('/register', [
-	check("usernameR", "Username should not be empty, minimum eight characters, maximum sixteen characters and no special character.").not().isEmpty(),
-	check('usernameR', "Username should not be empty, minimum eight characters, maximum sixteen characters and no special character.").isLength({ min: 5, max: 16 }),
-	check("usernameR", "Username should not be empty, minimum eight characters, maximum sixteen characters and no special character.").matches(/^(?=.*[0-9A-Za-z])[0-9a-zA-Z]{5,16}$/, "i"),
-	check("passwordR", "Password should not be empty, minimum eight characters and maximum sixteen characters.").not().isEmpty(),
-	check('passwordR', "Password should not be empty, minimum eight characters and maximum sixteen characters.").isLength({ min: 5, max: 16 }),
-	check("passwordR", "Password should not be empty, minimum eight characters and maximum sixteen characters.").matches(/^(?=.*[0-9A-Za-z@$.!%*#?&])[0-9a-zA-Z@$.!%*#?&]{5,16}$/, "i"),
 	check('firstname',"Firstname length should be between 1-20 characters.").isLength({ min: 1 ,max:20}),
 	check('lastname',"Lastname length should be between 1-20 characters.").isLength({ min: 1 ,max:20}),
+	check('usernameR', "Username should not be empty, minimum eight characters, maximum sixteen characters and no special character.").isLength({ min: 5, max: 16 }),
+	check("usernameR", "Username should not be empty, minimum eight characters, maximum sixteen characters and no special character.").matches(/^(?=.*[0-9A-Za-z])[0-9a-zA-Z]{5,16}$/, "i"),
+	check('passwordR', "Password should not be empty, minimum eight characters and maximum sixteen characters.").isLength({ min: 5, max: 16 }),
+	check("passwordR", "Password should not be empty, minimum eight characters and maximum sixteen characters.").matches(/^(?=.*[0-9A-Za-z@$.!%*#?&])[0-9a-zA-Z@$.!%*#?&]{5,16}$/, "i"),
 	check('phone',"Phone-number length should be between 9-19 and must contain only number.").isLength({ min: 9 ,max:19}),
 	check('phone',"Phone-number length should be between 9-19 and must contain only number.").isNumeric(),
 	check('emailR',"Email is invalid.").isEmail()
@@ -125,10 +121,7 @@ router.post('/register', [
 
 
 	const result = validationResult(req);
-	console.log(result);
 	var errors = result.errors;
-	console.log(req.body.passwordR);
-	console.log(req.body);
 
 	//var custom = require('./custom.js')
 // 	var testspecial = /^[a-zA-Z0-9\\.;,:' ]{1,100}$/g( req.body.usernameR );  

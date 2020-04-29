@@ -125,7 +125,10 @@ router.post('/register', [
 
 
 	const result = validationResult(req);
+	console.log(result);
 	var errors = result.errors;
+	console.log(req.body.passwordR);
+	console.log(req.body);
 
 	//var custom = require('./custom.js')
 // 	var testspecial = /^[a-zA-Z0-9\\.;,:' ]{1,100}$/g( req.body.usernameR );  
@@ -146,7 +149,7 @@ router.post('/register', [
 	}
 	//TODO: Check if the password and confirmed password match
 	//TODO: Check inputs in general (blank, invalid, etc.) It should also be able to configure from the frontend side.
-	password = saltHashPassword(req.body.password);
+	password = saltHashPassword(req.body.passwordR);
 	client.connect(function (err) {
 		//checks for connection error
 		assert.equal(null, err);

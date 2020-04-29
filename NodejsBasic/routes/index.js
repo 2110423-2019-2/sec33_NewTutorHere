@@ -120,7 +120,7 @@ router.post('/register', [
 	check('lastname',"Lastname length should be between 1-20 characters.").isLength({ min: 1 ,max:20}),
 	check('phone',"Phone-number length should be between 9-19 and must contain only number.").isLength({ min: 9 ,max:19}),
 	check('phone',"Phone-number length should be between 9-19 and must contain only number.").isNumeric(),
-	check('emailR',"Email is invalid.").not().isEmail()
+	check('emailR',"Email is invalid.").isEmail()
 ], function (req, res) {
 
 
@@ -141,15 +141,19 @@ router.post('/register', [
 	if (!result.isEmpty()) {
 		// username/password empty
 		//res.send(errors[0]['msg']);
+		console.log("error is = " + errors[0]['msg']);
 		res.render('index', {wrong: errors[0].msg});
 		// send  error.msg if error 
 	}
-	else if(req.body.passwordR != req.body.confirmed-password){
+	else if(req.body.passwordR !== req.body.confirmedpassword){
+		console.log("why u here!!!");
 		res.render('index',{wrong:"password and re-password must be the same"});
 	}
+	else{
 	//TODO: Check if the password and confirmed password match
 	//TODO: Check inputs in general (blank, invalid, etc.) It should also be able to configure from the frontend side.
-	password = saltHashPassword(req.body.passwordR);
+	passwordz = saltHashPassword(req.body.passwordR);
+	console.log("passwordz complete");
 	client.connect(function (err) {
 		//checks for connection error
 		assert.equal(null, err);
@@ -162,8 +166,8 @@ router.post('/register', [
 			firstname: req.body.firstname,
 			lastname: req.body.lastname,
 			username: req.body.username,
-			password: password.passwordHash,
-			salt : password.salt,
+			password: passwordz.passwordHash,
+			salt : passwordz.salt,
 			location: req.body.location,
 			phone: req.body.phone,
 			email: req.body.email,
@@ -201,13 +205,14 @@ router.post('/register', [
 			satAfSc		: 'no',
 			satEv		: 'no'
 		});
+		console.log("U almost success!");
 		res.cookie('auth', req.body.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 		res.cookie('firstn', req.body.firstname);
 		res.cookie('role', req.body.position);
 		res.redirect('/home');
 	});
 
-	
+	}
 });
 
 

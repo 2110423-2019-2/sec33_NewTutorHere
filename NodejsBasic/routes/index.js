@@ -110,16 +110,17 @@ router.post('/', [
 });
 
 router.post('/register', [
-	check("usernameR", "Enter username").not().isEmpty(),
-	check("passwordR", "Enter password").not().isEmpty(),
-	check("usernameR", "Username must not contain any special character").matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, "i"),
-	check('passwordR',"password length is not between 5-16").isLength({ min: 5 ,max:16}),
-	check('usernameR',"Username length is not between 5-16").isLength({ min: 6 , max:16 }),
-	check('firstname',"Firstname length is not between 1-20").isLength({ min: 1 ,max:20}),
-	check('lastname',"Lastname length is not between 1-20").isLength({ min: 1 ,max:20}),
-	check('phone',"Phone-number length is not between 9-19").isLength({ min: 9 ,max:19}),
-	check('phone',"Phone-number must contain only number").isNumeric(),
-	check('emailR',"Email is invalid").not().isEmail()
+	check("usernameR", "Username should not be empty, minimum eight characters, maximum sixteen characters and no special character.").not().isEmpty(),
+	check('usernameR', "Username should not be empty, minimum eight characters, maximum sixteen characters and no special character.").isLength({ min: 5, max: 16 }),
+	check("usernameR", "Username should not be empty, minimum eight characters, maximum sixteen characters and no special character.").matches(/^(?=.*[0-9A-Za-z])[0-9a-zA-Z]{5,16}$/, "i"),
+	check("passwordR", "Password should not be empty, minimum eight characters and maximum sixteen characters.").not().isEmpty(),
+	check('passwordR', "Password should not be empty, minimum eight characters and maximum sixteen characters.").isLength({ min: 5, max: 16 }),
+	check("passwordR", "Password should not be empty, minimum eight characters and maximum sixteen characters.").matches(/^(?=.*[0-9A-Za-z@$.!%*#?&])[0-9a-zA-Z@$.!%*#?&]{5,16}$/, "i"),
+	check('firstname',"Firstname length should be between 1-20 characters.").isLength({ min: 1 ,max:20}),
+	check('lastname',"Lastname length should be between 1-20 characters.").isLength({ min: 1 ,max:20}),
+	check('phone',"Phone-number length should be between 9-19 and must contain only number.").isLength({ min: 9 ,max:19}),
+	check('phone',"Phone-number length should be between 9-19 and must contain only number.").isNumeric(),
+	check('emailR',"Email is invalid.").not().isEmail()
 ], function (req, res) {
 
 

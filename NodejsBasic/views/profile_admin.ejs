@@ -28,6 +28,7 @@
         <%- include navbar_admin %>
     </div>
 
+
     <!-- edit-profile-form -->
     <div class="big-bg popup" id="edit-profile-form">
         <div class="form-bg color-lightgreen center" id="edit-profile-form-bg">
@@ -168,6 +169,29 @@
         </div>
     </div>
 
+    <!-- edit-profile-pic-form -->
+    <div class="big-bg popup" id="edit-profile-pic-form">
+        <div class="form-bg color-lightgreen center" id="edit-profile-pic-form-bg">
+            <button class="close-button be-right"><i class="fa fa-close"
+                    onclick="closeEditProfilePicForm()"></i></button>
+            <span class="form-name">
+                <p>Edit profile picture</p>
+            </span>
+            <div class="form-information-bg">
+                <form class="form" action="<%= pf.username%>/edit_profile_pic" id="edit-profile-pic" method="POST">
+                    <div class="form-group">
+                        <div class="half-box be-left">
+                            <div class="form-input">
+                                <input type="text" id="profilepic" name="profilepic" placeholder="Link to profile pic">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="submit-button sign-up-button center">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <div class="big-bg">
         <!-- Content -->
@@ -175,7 +199,12 @@
             <div class="profile-box color-lightgreen center" id="contract-form">
                 <div class="pf-box center">
                     <div class="pfphoto-box">
-                        <img class="nav-img-user center" src="/img/user.png" style="height: 7em;" />
+
+                        <img class="nav-img-user center" src=<%= pf.profilepic ? pf.profilepic : "/img/user.png" %>
+                            style="height: 7em;" />
+                        <button class="editpf-button" id="editpicbut" onclick="showEditProfilePicForm()"><i
+                                class="fa fa-gear"></i></button>
+
                     </div>
                     <div class="pfdetail-box be-right">
                         <span class="name-contract">
@@ -298,9 +327,7 @@
                             </span>
                         </div>
 
-                        <button class="deleteComment-button" id="deleteCommentButton"><i class="fa fa-trash"
-                                onclick="deleteComment('<%= each.subject %>')"></i></button>
-
+                        <a id="deleteCommentButton" href="<%= each._id%>/delete_comment"><i class="fa fa-trash"></i></a>
                     </div>
                     <% }} %>
                 </div>
@@ -324,6 +351,8 @@
 
 
         $("#editbut").css("display", "block");
+        $("#editpicbut").css("display", "block");
+
         $("#addCourseButton").css("display", "block");
         $(".deleteCourse-button").css("display", "block");
         $("#verifyDocButton").css("display", "block");
@@ -362,6 +391,18 @@
             document.getElementById("bio-editpf").value = '<%= pf.bio %>';
             document.getElementById("gender-editpf").value = '<%= pf.gender %>';
 
+        }
+
+
+        function closeEditProfilePicForm() {
+            console.log("Closed")
+            $("#edit-profile-pic-form").css("display", "none");
+        }
+        function showEditProfilePicForm() {
+            $("#edit-profile-pic-form").css("display", "flex");
+
+            //set initial value
+            document.getElementById("profilepic").value = '<%= pf.profilepic%>';
         }
 
         function closeContractButton() {

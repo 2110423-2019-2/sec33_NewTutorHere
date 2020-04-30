@@ -853,4 +853,28 @@ router.get('/view_contract/:id', function (req, res, next) {
 	});
 });
 
+
+router.post('/:username/edit_profile_pic', [], function (req, res) {
+
+    client.connect(async function (err) {
+        //checks for connection error
+        assert.equal(null, err);
+
+        //once connected, add a doc to collection 'UserData'
+        const db = client.db(dbName);
+
+        db.collection('UserData').update(
+            {
+                username: req.params.username
+            },
+            {
+                $set: {
+                    'profilepic': req.body.profilepic,
+                }
+            }
+        );
+        res.redirect('back');
+    });
+});
+
 module.exports = router;

@@ -22,25 +22,25 @@
     <script type="text/javascript" src="/scripts/function.js"></script>
     <script type="text/javascript" src="/scripts/function1.js"></script>
     <%if (typeof context != 'undefined') { %>
-        <script type="text/javascript">
-          alert("Input incorrect");
-            </script>
-        <%}%>
+    <script type="text/javascript">
+        alert("Input incorrect");
+    </script>
+    <%}%>
 </head>
 
 <body>
     <div class="nav-container">
         <%if (typeof role!= 'undefined') { %>
-            <% if (role == 'student') { %>
-              <%- include("navbar_student.ejs", {notification_data: notification_data,resultLength:resultLength}); %>
-            
-            <% } else if (role == 'tutor') {%>
-              <%- include("navbar_tutor.ejs"  , {notification_data: notification_data , resultLength:resultLength}); %>
-              
-            <% } else if (role == 'admin') {%>
-              <%- include navbar_admin %>
-            <% } %> 
-          <% } %>
+    <% if (role == 'student') { %>
+    <%- include("navbar_student.ejs", {notification_data: notification_data,resultLength:resultLength}); %>
+
+    <% } else if (role == 'tutor') {%>
+    <%- include("navbar_tutor.ejs"  , {notification_data: notification_data , resultLength:resultLength}); %>
+
+    <% } else if (role == 'admin') {%>
+    <%- include navbar_admin %>
+    <% } %>
+    <% } %>
     </div>
 
     <!-- edit-profile-form -->
@@ -160,7 +160,7 @@
                         </div>
                     </div>
 
-                    <div class="half-box be-right">       
+                    <div class="half-box be-right">
                         <div class="form-group">
                             <div class="form-input">
                                 <input type="text" id="addCourse-price" name="price" placeholder="Price">
@@ -258,6 +258,8 @@
             <div class="form-information-bg">
                 <form class="form" action="/home/profile/edit_availability/<%=pf.username%>" method="POST"
                     id="edit-availability-form">
+                    <button class="editpf-button" id="editpicbut" onclick="showEditProfilePicForm()"><i
+                            class="fa fa-gear"></i></button>
                     <div class="form-group">
                         <div class="form-input">
                             <table>
@@ -305,6 +307,29 @@
         </div>
     </div>
 
+    <!-- edit-profile-pic-form -->
+    <div class="big-bg popup" id="edit-profile-pic-form">
+        <div class="form-bg color-lightgreen center" id="edit-profile-pic-form-bg">
+            <button class="close-button be-right"><i class="fa fa-close"
+                    onclick="closeEditProfilePicForm()"></i></button>
+            <span class="form-name">
+                <p>Edit profile picture</p>
+            </span>
+            <div class="form-information-bg">
+                <form class="form" action="<%= pf.username%>/edit_profile_pic" id="edit-profile-pic" method="POST">
+                    <div class="form-group">
+                        <div class="half-box be-left">
+                            <div class="form-input">
+                                <input type="text" id="profilepic" name="profilepic" placeholder="Link to profile pic">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="submit-button sign-up-button center">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 
     <div class="big-bg">
@@ -313,7 +338,10 @@
             <div class="profile-box color-lightgreen center" id="contract-form">
                 <div class="pf-box center">
                     <div class="pfphoto-box">
-                        <img class="nav-img-user center" src="/img/user.png" style="height: 7em;" />
+                        <img class="nav-img-user center" src=<%= pf.profilepic ? pf.profilepic : "/img/user.png" %>
+                            style="height: 7em;" />
+                        <button class="editpf-button" id="editpicbut" onclick="showEditProfilePicForm()"><i
+                                class="fa fa-gear"></i></button>
                     </div>
                     <div class="pfdetail-box be-right">
                         <span class="name-contract">
@@ -360,7 +388,7 @@
                                 <td><%=result.subject%></td>
                                 <td id='edu-level'>
                                     <script>showEduLevel('<%=result.educational_level%>');</script>
-                                </td> 
+                                </td>
                                 <td><%=result.city%></td>
                                 <td><%=result.price%></td>
                                 <td><button class="deleteCourse-button" id='deleteCourseButton'><i class="fa fa-trash"
@@ -427,28 +455,28 @@
                     </span>
                     <%if (typeof comment!= 'undefined') { %>
                     <%for( each of comment) {%>
-                        <form action="/home/delete_comment" method="POST">
-                    <div class="comment-box center <%= each.commentator %>">
-                        <div class="pfphoto-box">
-                            <img class="nav-img-user center" src="/img/user.png" style="height: 6em;" />
-                            <div class="profile-rating">
-                                <script>
-                                    showStars('<%= each.rating %>');
-                                </script>
+                    <form action="/home/delete_comment" method="POST">
+                        <div class="comment-box center <%= each.commentator %>">
+                            <div class="pfphoto-box">
+                                <img class="nav-img-user center" src="/img/user.png" style="height: 6em;" />
+                                <div class="profile-rating">
+                                    <script>
+                                        showStars('<%= each.rating %>');
+                                    </script>
+                                </div>
                             </div>
+
+                            <div class="qual-item <%= each.commentator %>Comment">
+                                <span class="comment">
+                                    <p><%=each.comment%></p>
+                                </span>
+                            </div>
+
+                            <button class="deleteComment-button <%= each.commentator %>DeleteButton"><i
+                                    class="fa fa-trash" onclick="deleteComment('<%= each._id %>')"></i></button>
+
                         </div>
-
-                        <div class="qual-item <%= each.commentator %>Comment">
-                            <span class="comment">
-                                <p><%=each.comment%></p>
-                            </span>
-                        </div>
-
-                        <button class="deleteComment-button <%= each.commentator %>DeleteButton"><i class="fa fa-trash"
-                                onclick="deleteComment('<%= each._id %>')"></i></button>
-
-                    </div>
-                </form>
+                    </form>
                     <% }} %>
                 </div>
                 <button class="sendcontract-button" id='sentContractButton' onclick="showSentContract()">Send a
@@ -467,6 +495,7 @@
 
 
     <script>
+
         var names = "firstn=";
         var usernamex = "auth=";
         var tod;
@@ -482,7 +511,7 @@
                 tod = c.substring(names.length, c.length);
             }
         }
-        
+
         // get username
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
@@ -498,6 +527,7 @@
         if (tod != document.getElementById("profile-firstname").innerText) {
 
             $("#editbut").css("display", "none");
+            $("#editpicbut").css("display", "none");
             $("#addCourseButton").css("display", "none");
             $("#verifyDocButton").css("display", "none");
             $("#editAvailButton").css("display", "none");
@@ -513,6 +543,8 @@
         else {
 
             $("#editbut").css("display", "block");
+            $("#editpicbut").css("display", "block");
+
             $("#addCourseButton").css("display", "block");
             $(".deleteCourse-button").css("display", "block");
             $("#verifyDocButton").css("display", "block");
@@ -522,6 +554,7 @@
 
         }
 
+
         //is owner of this comment
         if (document.getElementsByClassName(username) != null) {
             console.log("display owner comment bin");
@@ -529,8 +562,8 @@
             var deleteButton = document.getElementById(username.concat("DeleteButton"));
             //comment.css("margin-right", "0.5vw")
             //deleteButton.css("display", "flex")
-            $((".".concat(username,"Comment"))).css("margin-right", "0.5vw")
-            $((".".concat(username,"DeleteButton"))).css("display", "flex")
+            $((".".concat(username, "Comment"))).css("margin-right", "0.5vw")
+            $((".".concat(username, "DeleteButton"))).css("display", "flex")
         }
 
         var bdate = document.getElementById("bdate-editpf");
@@ -566,6 +599,18 @@
 
         }
 
+        function closeEditProfilePicForm() {
+            console.log("Closed")
+            $("#edit-profile-pic-form").css("display", "none");
+        }
+        function showEditProfilePicForm() {
+            $("#edit-profile-pic-form").css("display", "flex");
+
+            //set initial value
+            document.getElementById("profilepic").value = '<%= pf.profilepic%>';
+        }
+
+
         function closeContractButton() {
             SentContractModalAnimationReversed();
         }
@@ -600,7 +645,7 @@
         }
         // delete comment
         function deleteComment(subject) {
-               document.cookie = "sub_comment= " + subject;
+            document.cookie = "sub_comment= " + subject;
 
         }
 
@@ -738,6 +783,6 @@
         }
     </script>
 
-</body>
+    </body>
 
 </html>

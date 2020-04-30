@@ -50,26 +50,26 @@ router.get('/profile_admin/:username', function (req, res, next) {
         assert.equal(null, err);
         const db = client.db(dbName);
         var query_username = {
-			"username": username
-		};
-		var query_tutor_username = {
-			"tutor_username": username
+            "username": username
+        };
+        var query_tutor_username = {
+            "tutor_username": username
 
-		};
-		var query_availability = {
-			"username": username
-		};
-		var comment = {
-			"commentatee": username,
-		};
-	
+        };
+        var query_availability = {
+            "username": username
+        };
+        var comment = {
+            "commentatee": username,
+        };
+
         const result_user = await db.collection('UserData').find(query_username).limit(1).toArray();
 
-		const result_availability = await db.collection('AvailabilityController').find(query_availability).toArray();
-		
-		const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
-		
-		const result_comment = await db.collection('CommentController').find(comment).toArray();
+        const result_availability = await db.collection('AvailabilityController').find(query_availability).toArray();
+
+        const result_course = await db.collection('CourseData').find(query_tutor_username).toArray();
+
+        const result_comment = await db.collection('CommentController').find(comment).toArray();
 
         // The search added the results to the locals, access them in home.ejs and show the results there
         console.log(result_availability);
@@ -171,11 +171,34 @@ router.get('/profile_admin/:id/delete_comment', [], function (req, res) {
             "_id": ObjectID(req.params.id)
         };
         tmp = await db.collection('CommentController').find(query).toArray();
-        noti.notify(tmp[0].commentator,5);
+        noti.notify(tmp[0].commentator, 5);
         await db.collection('CommentController').findOneAndDelete(query, {});
     })
-   
+
     res.redirect('back');
+});
+
+router.post('/profile_admin/:username/edit_profile_pic', [], function (req, res) {
+
+    client.connect(async function (err) {
+        //checks for connection error
+        assert.equal(null, err);
+
+        //once connected, add a doc to collection 'UserData'
+        const db = client.db(dbName);
+
+        db.collection('UserData').update(
+            {
+                username: req.params.username
+            },
+            {
+                $set: {
+                    'profilepic': req.body.profilepic,
+                }
+            }
+        );
+        res.redirect('back');
+    });
 });
 
 module.exports = router;

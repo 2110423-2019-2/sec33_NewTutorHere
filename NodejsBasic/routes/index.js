@@ -165,7 +165,7 @@ router.post('/register', [
 			position: req.body.position,
 			firstname: req.body.firstname,
 			lastname: req.body.lastname,
-			username: req.body.username,
+			username: req.body.usernameR,
 			password: passwordz.passwordHash,
 			salt : passwordz.salt,
 			location: req.body.location,
@@ -175,7 +175,7 @@ router.post('/register', [
 			is_premium : 'no'
 		});
 		db.collection('AvailabilityController').insertOne({
-			username:req.body.username,
+			username:req.body.usernameR,
 			sunMor 		: 'no',
 			sunAf   	: 'no',
 			sunAfSc 	: 'no',
@@ -206,7 +206,7 @@ router.post('/register', [
 			satEv		: 'no'
 		});
 		console.log("U almost success!");
-		res.cookie('auth', req.body.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
+		res.cookie('auth', req.body.usernameR);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 		res.cookie('firstn', req.body.firstname);
 		res.cookie('role', req.body.position);
 		res.redirect('/home');

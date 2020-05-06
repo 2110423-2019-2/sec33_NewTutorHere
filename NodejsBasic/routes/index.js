@@ -79,6 +79,7 @@ router.post('/', [
 				res.render('index', {wrong: "Wrong username or passwrod"});
 			}
 			var passwordData = sha512(req.body.password, validate.salt);
+			var checker = sha512(req.body.username,"check");
 			const user = await db.collection('UserData').findOne({
 				'username': req.body.username,
 				'password': passwordData.passwordHash
@@ -90,6 +91,7 @@ router.post('/', [
 				res.cookie('auth', user.username);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 				res.cookie('firstn', user.firstname);
 				res.cookie('role', user.position);
+				res.cookie('check',checker.passwordHash);
 				if(user.position == 'admin') console.log(user.position);
 				if(user.position == 'admin'){
 					const UserData = await db.collection('UserData').find({}).toArray();
@@ -146,6 +148,7 @@ router.post('/register', [
 	//TODO: Check if the password and confirmed password match
 	//TODO: Check inputs in general (blank, invalid, etc.) It should also be able to configure from the frontend side.
 	passwordz = saltHashPassword(req.body.passwordR);
+	var checker = sha512(req.body.usernameR,"check");
 	console.log("passwordz complete");
 	client.connect(function (err) {
 		//checks for connection error
@@ -202,6 +205,7 @@ router.post('/register', [
 		res.cookie('auth', req.body.usernameR);  // <-- This can be used to authenticate user later if needed (e.g. profile edit page)
 		res.cookie('firstn', req.body.firstname);
 		res.cookie('role', req.body.position);
+		res.cookie('check',checker.passwordHash);
 		res.redirect('/home');
 	});
 

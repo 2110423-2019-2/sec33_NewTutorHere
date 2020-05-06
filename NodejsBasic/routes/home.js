@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 //connect to allFunction.js
-
+var crypto = require('crypto');
 const assert = require('assert');
 var noti = require('./notificationManager.js');
 const { check, validationResult } = require('express-validator');
@@ -16,13 +16,24 @@ client.connect(err => {
 });
 
 const dbName = 'SEproject'
-
+var sha512 = function(password, salt){
+    var hash = crypto.createHmac('sha512', salt); /** Hashing algorithm sha512 */
+    hash.update(password);
+    var value = hash.digest('hex');
+    return {
+        salt:salt,
+        passwordHash:value
+    };
+};
 // home page
 router.get('/',
 	async function (req, res, next) {
 	console.log("Loaded home.js")
 	await client.connect();
 	const db = client.db(dbName);
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
 	// var errors = result.errors;
 	// if (!result.isEmpty()) {
 	// 	console.log("FUCKTHISLIFE");
@@ -31,6 +42,7 @@ router.get('/',
 	// 	// send  error.msg if error 
 	// }
 	// else{
+	else{
 	if( !isNaN(req.query.minprice) || !req.query.minprice  ){
 		
 			console.log(req.query.minprice + " its a number		");
@@ -109,10 +121,14 @@ router.get('/',
 	res.render('home', { searchResults: result, searchPremium: result_premium, role: req.cookies.role, notification_data: notification_data,resultLength:resultLength,context:"yes" });
 	
  }
-});
+}});
 
 // tutor's contract page
 router.get('/tutors_contract', function (req, res, next) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	var use = req.cookies.auth;
 	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	client.connect(async function (err) {
@@ -137,10 +153,14 @@ router.get('/tutors_contract', function (req, res, next) {
 		res.render('tutors_contract', { requested: requested, accepted: accepted, role: req.cookies.role ,notification_data:notification_data,resultLength:resultLength});
 
 	});
-});
+}});
 
 // student's contract page
 router.get('/students_contract', function (req, res, next) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	var use = req.cookies.auth;
 	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	client.connect(async function (err) {
@@ -168,7 +188,7 @@ router.get('/students_contract', function (req, res, next) {
 
 	});
 
-});
+}});
 
 
 var ObjectID = require('mongodb').ObjectID;
@@ -176,12 +196,17 @@ var ObjectID = require('mongodb').ObjectID;
 router.post('/terminate_student_contract/:id',[
 	check('ratingcomment',"").isLength({ min: 1})
 ], function (req, res, next) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
 		console.log("terminating " + req.params.id);
 		const result = validationResult(req);
 	var errors = result.errors;
+	
 	if (!result.isEmpty()) {
 		console.log("FUCKTHISLIFE  dfsdkfjlsdkjflksdjlfkl sldfkjsdl kfjlsdk jflsdkj flks");
 		res.cookie("error", errors[0].msg , { httpOnly: true });
@@ -257,10 +282,14 @@ router.post('/terminate_student_contract/:id',[
 		res.redirect('/home/students_contract');
 	}
 	})
-});
+}});
 router.post('/terminate_tutor_contract/:id',[
 	check('ratingcomment',"").isLength({ min: 1})
 ] ,function (req, res, next) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
@@ -314,9 +343,13 @@ router.post('/terminate_tutor_contract/:id',[
 		});
 		res.redirect('/home/tutors_contract');}
 	})
-});
+}});
 router.get('/accept_contract', function (req, res, next) {
 	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
@@ -353,9 +386,13 @@ router.get('/accept_contract', function (req, res, next) {
 		noti.notify(accepted[0].student_username, 1);
 		res.redirect('/home');
 	})
-});
+}});
 router.get('/reject_contract', function (req, res, next) {
 	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
@@ -373,9 +410,12 @@ router.get('/reject_contract', function (req, res, next) {
 		noti.notify(rejected[0].student_username, 2);
 		res.redirect('/home');
 	})
-});
+}});
 router.post('/delete_course', function (req, res, next) {
-
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
@@ -388,9 +428,12 @@ router.post('/delete_course', function (req, res, next) {
 
 		res.redirect('/home/profile');
 	})
-});
+}});
 router.post('/delete_comment', function (req, res, next) {
-
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
@@ -403,11 +446,14 @@ router.post('/delete_comment', function (req, res, next) {
 
 		res.redirect('/home/profile');
 	})
-});
+}});
 
 // schedule page
 router.get('/schedule', function (req, res, next) {
-	// res.render('schedule');
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 
 
 	var use = req.cookies.auth;
@@ -429,10 +475,14 @@ router.get('/schedule', function (req, res, next) {
 		res.render('schedule', { schedule: results });
 
 	});
-});
+}});
 
 // profile page
 router.get('/profile', function (req, res, next) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	console.log("profile!!");
 	var use = req.cookies.auth;
 	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
@@ -494,9 +544,12 @@ router.get('/profile', function (req, res, next) {
 		}
 	});
 
-});
+}});
 router.post('/profile/edit_availability/:id', [], function (req, res) {
-
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	//if(req.cookies.auth == req.body.username)
 	console.log("IN AVAILABILITY EDIT");
 	var test = req.body.av;
@@ -539,13 +592,17 @@ router.post('/profile/edit_availability/:id', [], function (req, res) {
 		res.redirect('/home/profile');
 	});
 
-});
+}});
 //sendContract /profile/edit_availability 
 router.post('/profile', [	
 	check('subject',"").isLength({ min: 1}),
 	check('time',"").isLength({ min: 1}),
 	check('day',"").isLength({ min: 1}),
 ], function (req, res) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	var use = req.cookies.auth;
 	if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	const result = validationResult(req);
@@ -596,7 +653,7 @@ router.post('/profile', [
 		res.redirect('/home/profile');
 	});
 }
-});
+}});
 // edit-profile-form
 router.post('/profile/edit_profile', [	
 check('firstname',"Firstname length is not between 1-20").isLength({ min: 1 ,max:20}),
@@ -605,6 +662,10 @@ check('phone',"Phone-number length is not between 9-19").isLength({ min: 9 ,max:
 check('phone',"Phone-number must contain only number").isNumeric(),
 check('emailR',"Email is invalid").not().isEmail()]
 , function (req, res) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	const result = validationResult(req);
 	var errors = result.errors;
 	if (!result.isEmpty()) {
@@ -647,12 +708,16 @@ check('emailR',"Email is invalid").not().isEmail()]
 	});
 }
 
-});
+}});
 router.post('/profile/add_course', [	
 	check('subject',"Subject name can not be empty").isLength({ min: 1}),
 	check('price',"price must be an integer").isNumeric(),
 	],
 	 function (req, res) {
+		if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+			res.redirect('/');
+		}
+		else{
 	var use = req.cookies.auth;
 	//if (typeof req.cookies.nextpf != 'undefined') { use = req.cookies.nextpf; }
 	const result = validationResult(req);
@@ -700,7 +765,7 @@ router.post('/profile/add_course', [
 
 	});
 }
-});
+	 }});
 
 router.get('/testfunction', function (req, res, next) {
 	//use function like this
@@ -709,6 +774,10 @@ router.get('/testfunction', function (req, res, next) {
 
 // premium
 router.get('/premium', function (req, res, next) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	client.connect(async function (err) {
 		assert.equal(null, err);
 		const db = client.db(dbName);
@@ -725,16 +794,24 @@ router.get('/premium', function (req, res, next) {
 		res.render('premium', { role: req.cookies.role, pf: result_user[0], notification_data: notification_data, resultLength: resultLength });
 	});
 
-});
+}});
 router.get('/allseen', function (req, res, next) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	client.connect(async function (err) {
 		noti.toggleSeen(req.cookies.auth);
 		// The search added the results to the locals, access them in home.ejs and show the results there
 		res.redirect('/home')
 	});
 
-});
+}});
 router.post('/buy_premium', function (req, res, next) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	console.log("Haaaaaaaaaaaaaaaaaaaaaaaa");
 	client.connect(async function (err) {
 		//checks for connection error
@@ -765,8 +842,12 @@ router.post('/buy_premium', function (req, res, next) {
 		);
 		res.redirect('/home/profile');
 	});
-});
+}});
 router.post('/cancel_premium', function (req, res, next) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	console.log("Haaaaaaaaaaaaaaaaaaaaaaaa");
 	client.connect(async function (err) {
 		//checks for connection error
@@ -797,7 +878,7 @@ router.post('/cancel_premium', function (req, res, next) {
 		);
 		res.redirect('/home/profile');
 	});
-});
+}});
 
 // profile_tutor
 router.get('/profile_tutor', function (req, res, next) {
@@ -810,6 +891,10 @@ router.get('/profile_student', function (req, res, next) {
 });
 
 router.get('/view_contract/:id', function (req, res, next) {
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
 	var use = req.params.id;
 	client.connect(async function (err) {
 		assert.equal(null, err);
@@ -851,11 +936,14 @@ router.get('/view_contract/:id', function (req, res, next) {
 			});
 		}
 	});
-});
+}});
 
 
 router.post('/:username/edit_profile_pic', [], function (req, res) {
-
+	if(sha512(req.cookies.auth,'check').passwordHash !== req.cookies.check){
+		res.redirect('/');
+	}
+	else{
     client.connect(async function (err) {
         //checks for connection error
         assert.equal(null, err);
@@ -875,6 +963,6 @@ router.post('/:username/edit_profile_pic', [], function (req, res) {
         );
         res.redirect('back');
     });
-});
+}});
 
 module.exports = router;
